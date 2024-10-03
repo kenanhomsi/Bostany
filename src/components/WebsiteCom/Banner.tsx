@@ -1,4 +1,4 @@
-import websiteBannerImage from '../../../public/Images/Website_SuBiM.png'
+import websiteBannerImage from '/Images/Website_SuBiM.png'
 const Banner = () => {
     return (
         <div className="w-full flex flex-col items-center justify-center gap-10 overflow-hidden relative text-white   min-h-[500px] rounded-[52px] bg-BaserPrimary">
