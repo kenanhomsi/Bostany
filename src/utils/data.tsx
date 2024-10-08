@@ -4,22 +4,27 @@ import youtube from "/Icons/youtube.png";
 import snapchat from "/Icons/snapchat.png";
 import instegram from "/Icons/instegram.png";
 import LinkedIn from "/Icons/LinkedIn.png";
-import allWorkIcon from "/Icons/All-Duotone.png";
-import BagIcon from "/Icons/Bag-Duotone.png";
-import HelpIcon from "/Icons/Help-Duotone.png";
-import LawIcon from "/Icons/Law-Duotone.png";
-import LeadIcon from "/Icons/Lead-Duotone.png";
-import LearnIcon from "/Icons/Learn-uotone.png";
-import MathIcon from "/Icons/Math-Duotone.png";
-import MedicineIcon from "/Icons/Medicine-Duotone.png";
-import PentoolIcon from "/Icons/Pentool-Duotone.png";
-import TechIcon from "/Icons/Tech-Duotone.png";
 import CardAvatarImage from "/Images/Avatars.png";
 import ClockImage from "/Icons/Clock.png";
 import SketchLogoImage from "/Icons/SketchLogo.png";
 import MagnifyingGlassImage from "/Icons/MagnifyingGlass.png";
 import SquaresFourImage from "/Icons/SquaresFour.png";
-
+import { PiScalesDuotone } from "react-icons/pi";
+import { PiPillDuotone } from "react-icons/pi";
+import { PiGraphDuotone } from "react-icons/pi";
+import { PiBriefcaseDuotone } from "react-icons/pi";
+import { PiPencilRulerDuotone } from "react-icons/pi";
+import { PiPenNibStraightDuotone } from "react-icons/pi";
+import { PiCrownSimpleDuotone } from "react-icons/pi";
+import { PiStudentDuotone } from "react-icons/pi";
+import { PiHandHeartDuotone } from "react-icons/pi";
+import { PiSquaresFourDuotone } from "react-icons/pi";
+import { WorlSpaceDataType } from "../Types";
+import { PiHouseFill } from "react-icons/pi";
+import { PiMagnifyingGlass } from "react-icons/pi";
+import { PiPlant } from "react-icons/pi";
+import { PiHeart } from "react-icons/pi";
+import { PiWallet } from "react-icons/pi";
 export const WebsiteNavData = [
   {
     name: "الرئيسية",
@@ -68,11 +73,12 @@ export const socialIcons = [
     path: "/",
   },
 ];
-export const WorkSpaceData = [
+
+export const WorkSpaceData: WorlSpaceDataType[] = [
   {
     id: 1,
     name: "الكل",
-    icon: allWorkIcon,
+    icon: <PiSquaresFourDuotone />,
     types: [
       "محتوى مرئي",
       "قيادة إعلامية",
@@ -91,62 +97,62 @@ export const WorkSpaceData = [
   {
     id: 2,
     name: "أعمال",
-    icon: BagIcon,
+    icon: < PiBriefcaseDuotone />,
     types: ["محتوى مرئي", "قيادة إعلامية", "رقمي إداري", "إعلام مرئي"],
   },
   {
     id: 3,
     name: "الفنون",
-    icon: PentoolIcon,
+    icon: < PiPenNibStraightDuotone />,
     types: ["كتابة إبداعية", "تصميم", "محتوى مرئي"],
   },
   {
     id: 4,
     name: "التقنية",
-    icon: TechIcon,
+    icon: < PiGraphDuotone />,
     types: ["برمجة", "رقمي", "كتابة إبداعية", "تصميم"],
   },
   {
     id: 5,
     name: "التطوع",
-    icon: HelpIcon,
+    icon: < PiHandHeartDuotone />,
     types: ["تصميم", "محتوى مرئي", "قيادة إعلامية", "رقمي إداري", "إعلام مرئي"],
   },
   {
     id: 6,
     name: "التعليم",
-    icon: LearnIcon,
+    icon: < PiStudentDuotone />,
     types: ["قيادة إعلامية", "رقمي إداري"],
   },
   {
     id: 7,
     name: "القانون",
-    icon: LawIcon,
+    icon: < PiScalesDuotone />,
     types: ["قيادة إعلامية"],
   },
   {
     id: 8,
     name: "الطب",
-    icon: MedicineIcon,
+    icon: < PiPillDuotone />,
     types: ["قيادة إعلامية", "رقمي إداري"],
   },
   {
     id: 9,
     name: "التسويق",
-    icon: TechIcon,
+    icon: < PiGraphDuotone />,
     types: ["تصميم", "محتوى مرئي", "قيادة إعلامية", "رقمي إداري", "إعلام مرئي"],
   },
   {
     id: 10,
     name: "الهندسة",
-    icon: MathIcon,
+    icon: < PiPencilRulerDuotone />,
     types: ["برمجة", "رقمي", "كتابة إبداعية", "تصميم"],
   },
   {
     id: 11,
     name: "القيادة",
-    icon: LeadIcon,
-    types: ["برمجة", "رقمي", "كتابة إبداعية", "تصميم"],
+    icon: < PiCrownSimpleDuotone />,
+    types: ["برمجة", "رقمي", "كتابة إبداعية", " 22تصميم"],
   },
 ];
 
@@ -641,3 +647,30 @@ export const AboutCardsData = [
     description: "جلسات استشارية عصفية فورية ختصرة لتطوير وتنمية الأفكار",
   },
 ];
+export const BaserSidbarData = [
+  {
+    name: 'الرئيسية',
+    icone: <PiHouseFill />,
+    link: '/Baser'
+  },
+  {
+    name: 'البحث',
+    icone: <PiMagnifyingGlass />,
+    link: '/Baser/search'
+  },
+  {
+    name: 'بذوري',
+    icone: <PiPlant />,
+    link: '/Baser/seeds'
+  },
+  {
+    name: 'المفضلين',
+    icone: <PiHeart />,
+    link: '/Baser/favorite'
+  },
+  {
+    name: 'المحفظة',
+    icone: <PiWallet />,
+    link: '/Baser/wallet'
+  },
+]

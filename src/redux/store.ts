@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import authReducer from "./Slices/UserSlice";
 import HomeCardReducer from "./Slices/HomeCardSlice";
+import RegisterReducer from "./Slices/RegisterSlice";
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     homeCard: HomeCardReducer,
+    register: RegisterReducer,
   },
 });
 
