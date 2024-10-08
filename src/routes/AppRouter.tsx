@@ -2,26 +2,24 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PublicRoutes from "./PublicRoutes";
 import WebsiteLayout from "../layout/WebsiteLayout";
-// import WebsiteLayout from "../layout/WebsiteLayout";
-// import UserRoutes from "./UserDashRoutes";
-// import AdminRoutes from "./AdminDashRoutes";
-// import UserDashboardLayout from "../layout/UserDashboardLayout";
-// import AdminDashboardLayout from "../layout/AdminDashboardLayout";
-// import AuthLayout from "../layout/AuthLayout";
-// import AuthRoutes from "./AuthRoutes";
+import AuthLayout from "../layout/AuthLayout";
+import AuthRoutes from "./AuthRoutes";
+import BaserDashboardLayout from "../layout/BaserDashboardLayout";
+import BaserRoutes from "./BaserRoutes";
+
 
 const AppRoutes: React.FC = () => {
     return (
         <Router>
             <Routes>
-                {/* <Route
+                <Route
                     path="/auth/*"
                     element={
                         <AuthLayout>
                             <AuthRoutes />
                         </AuthLayout>
                     }
-                /> */}
+                />
                 <Route
                     path="/*"
                     element={
@@ -30,14 +28,14 @@ const AppRoutes: React.FC = () => {
                         </WebsiteLayout>
                     }
                 />
-                {/* <Route
+                <Route
                     path="/Baser/*"
                     element={
                         <BaserDashboardLayout>
                             <BaserRoutes />
                         </BaserDashboardLayout>
                     }
-                /> */}
+                />
                 {/* <Route
                     path="/Bostany/*"
                     element={

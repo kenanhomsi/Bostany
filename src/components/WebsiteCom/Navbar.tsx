@@ -18,7 +18,7 @@ const Navbar = () => {
                 }
             </div>
             <div className=" flex gap-5 items-center text-base  font-normal">
-                <Link to='/' className=" bg-BaserPrimary px-5 py-3 text-white rounded-full">انشاء حساب</Link >
+                <Link to='/auth/register' className=" bg-BaserPrimary px-5 py-3 text-white rounded-full">انشاء حساب</Link >
                 <Link to='/'>تسجيل دخول</Link >
             </div>
         </div>

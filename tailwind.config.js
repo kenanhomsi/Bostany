@@ -13,11 +13,14 @@ export default {
         BaserSurfaceDarker: "#F6EDFF",
         BaserOutline: "#938F94",
         BaserOnSurfase: "#1D1B1E",
+        BaserOnSurfaseVarient: "#444846",
         dark: "#48464A",
         GeneralSuccessContainer: "#36C450",
         GeneralWarningContainer: "#FFCE22",
         BaserTertiary: "#808080",
         BaserSurfaceContainerHige: "#E6E1E6",
+        BaserPrimaryContainer: "#D2BCFF",
+        BaserFoshiy: "#4C00AA",
       },
       spacing: {
         lg: "6rem",
@@ -34,5 +37,9 @@ export default {
       },
     },
   },
-  plugins: [flowbite.plugin(), require("tailwind-scrollbar-hide")],
+  plugins: [
+    require("flowbite/plugin"),
+    flowbite.plugin(),
+    require("tailwind-scrollbar-hide"),
+  ],
 };

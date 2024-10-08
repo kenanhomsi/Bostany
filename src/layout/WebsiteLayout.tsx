@@ -1,10 +1,9 @@
 import Footer from "../components/WebsiteCom/Footer";
 import Navbar from "../components/WebsiteCom/Navbar";
+import { LayoutProps } from "../Types";
 
-interface WebsiteLayoutProps {
-    children: React.ReactNode;
-}
-const WebsiteLayout: React.FC<WebsiteLayoutProps> = ({ children }) => {
+
+const WebsiteLayout: React.FC<LayoutProps> = ({ children }) => {
     return (
         <div dir="rtl" className=" font-alexandria">
             <Navbar />
