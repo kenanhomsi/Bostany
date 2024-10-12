@@ -9,7 +9,7 @@ import Button_VideoIcon from '/Icons/Button_Video.png'
 import { ProfileCardProps } from "../../Types"
 const ProfileCard = ({ CardShap, data }: ProfileCardProps) => {
     return (
-        <div className={`flex  relative  bg-BaserSurface ${CardShap == 'col' ? 'flex-col 2xl:w-[22.6rem] w-[18rem]' : ' flex-row w-full pl-3 '}  rounded-[32px] `}>
+        <div className={`flex  relative  bg-BaserSurface ${CardShap == 'col' ? 'flex-col 2xl:max-w-[22.6rem] max-w-[18rem]  flex-1' : ' flex-row w-full pl-3 '}  rounded-[32px] `}>
             <div className={`${CardShap == 'col' ? '' : 'p-4'}`}>
                 <button className={`${CardShap == 'col' ? 'top-0 right-0' : 'top-2 right-2'} w-6 h-6 z-10 rounded-full bg-GeneralWarningContainer absolute `}></button>
                 <img src={data.image} alt={data.image} className={` ${CardShap == 'col' ? '2xl:w-[22.6rem] 2xl:h-[18rem] h-[14rem]  w-[18rem]' : 'w-[208px] h-[205px] rounded-2xl'} `} />

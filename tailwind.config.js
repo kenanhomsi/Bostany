@@ -21,9 +21,11 @@ export default {
         BaserSurfaceContainerHige: "#E6E1E6",
         BaserPrimaryContainer: "#D2BCFF",
         BaserFoshiy: "#4C00AA",
+        GeneralError: "#DE3730",
       },
       spacing: {
         lg: "6rem",
+        section: "80px",
       },
       fontWeight: {
         light: 300,

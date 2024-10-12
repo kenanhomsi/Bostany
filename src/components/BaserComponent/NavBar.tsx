@@ -7,18 +7,18 @@ const NavBar = () => {
     const pathname = useLocation().pathname
     const Title = BaserSidbarData.filter((ele) => ele.link == pathname)[0]
     const NotificationDataList = [
-        // {
-        //     image: avaterImage,
-        //     seedStatus: 'تم قبول البذرة',
-        //     seedOwner: 'مهند فارس',
-        //     time: 'منذ ساعة'
-        // },
-        // {
-        //     image: avaterImage,
-        //     seedStatus: 'تم قبول البذرة',
-        //     seedOwner: 'مهند فارس',
-        //     time: 'منذ ساعة'
-        // }
+        {
+            image: avaterImage,
+            seedStatus: 'تم قبول البذرة',
+            seedOwner: 'مهند فارس',
+            time: 'منذ ساعة'
+        },
+        {
+            image: avaterImage,
+            seedStatus: 'تم قبول البذرة',
+            seedOwner: 'مهند فارس',
+            time: 'منذ ساعة'
+        }
     ]
     return (
         <div className="px-10 py-6   fixed  top-0  z-[500] pr-[280px]  w-full right-0  bg-BaserbodyLigh flex h-20 justify-between items-center">
@@ -26,9 +26,10 @@ const NavBar = () => {
             <div className=" flex gap-6 items-center  text-2xl">
                 <Dropdown
                     inline
-                    renderTrigger={() => <PiBell className=" cursor-pointer w-6 h-6" />}
+                    renderTrigger={() => <p className="relative"><PiBell className=" cursor-pointer w-6 h-6" /><span className={`w-3 h-3 absolute ${NotificationDataList.length == 0 ? 'hidden' : ' block'}   rounded-full bg-red-500 top-0 right-0`}></span> </p>
+                    }
                     label=''
-                    className="w-[40%] p-7 rounded-[40px] mt-20 ml-10 DropDownShadow"
+                    className="w-[40%] p-7 rounded-[40px] mt-5   DropDownShadow"
                 >
                     <div className="flex justify-between w-full mb-5">
                         <span className="text-[22px] font-semibold text-BaserOnSurfase">الاشعارات</span>

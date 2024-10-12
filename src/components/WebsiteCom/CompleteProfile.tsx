@@ -72,7 +72,7 @@ const CompleteProfile = () => {
         console.log(CompleteProfileStep)
         if (RegisterAs == 'Baser') {
             if (CompleteProfileStep < 2) return SetCompleteProfileStep((pre) => pre + 1)
-            navigate('/');
+            navigate('/Baser');
         } else {
             if (CompleteProfileStep < 5) return SetCompleteProfileStep((pre) => pre + 1)
             navigate('/');
@@ -98,7 +98,7 @@ const CompleteProfile = () => {
                 CompleteProfileStep == 3 && <Step3 FormData={FormData} SetFormData={SetFormData} />
             }
             {
-                CompleteProfileStep == 4 && <Step4 FormData={FormData} SetFormData={SetFormData} />
+                CompleteProfileStep == 4 && <Step4 />
             }
             {
                 CompleteProfileStep == 5 && <Step5 FormData={FormData} SetFormData={SetFormData} />
@@ -106,7 +106,7 @@ const CompleteProfile = () => {
             {CompleteProfileStep < 5 &&
                 <>
                     <button onClick={handleContinousBtn} disabled={!PassState} className={` ${!PassState ? " text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]" : `text-white cursor-pointer  ${RegisterAs == 'Baser' ? 'bg-BaserPrimary' : 'bg-BostanyPrimary'}`} w-full   rounded-full p-3  text-base font-medium`}> {CompleteProfileStep < 3 ? 'إتمام التسجيل' : 'التالي'}</button>
-                    <Link to='/' className="font-medium self-center mb-5">تخطي</Link>
+                    <Link to={RegisterAs == 'Baser' ? '/Baser' : '/'} className="font-medium self-center mb-5">تخطي</Link>
                 </>
             }
             {CompleteProfileStep == 5 &&

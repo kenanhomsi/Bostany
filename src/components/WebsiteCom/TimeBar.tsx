@@ -4,7 +4,9 @@ import { daysOfWeek } from "../../utils/data";
 import { useDraggable } from "react-use-draggable-scroll";
 import { TimeBarProps } from "../../Types";
 import useSticky from "../../Hooks/useSticky";
+import { useLocation } from "react-router-dom";
 const TimeBar = ({ TimeSelected, setTimeSelected }: TimeBarProps) => {
+    const pathname = useLocation().pathname
     const { sticky, stickyRef } = useSticky();
     const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
     const { events } = useDraggable(ref);
@@ -28,11 +30,11 @@ const TimeBar = ({ TimeSelected, setTimeSelected }: TimeBarProps) => {
         setTimeSelected(date)
     }
     return (
-        <div ref={stickyRef} className={classNames(' beforsticky ', { sticky })}>
-            <div
+        <>
+            {pathname == '/' ? <div
                 ref={ref}
                 {...events}
-                className={` gap-5 flex w-full space-x-3 overflow-x-scroll scrollbar-hide  pr-[210px]`}
+                className={` gap-5 flex w-full space-x-3 overflow-x-scroll scrollbar-hide  `}
             >
                 {DateArray.map((dateItem, index) => (
                     <div onClick={() => handleClick(dateItem.Fulldate)}
@@ -42,8 +44,25 @@ const TimeBar = ({ TimeSelected, setTimeSelected }: TimeBarProps) => {
                     </div>
                 ))
                 }
-            </div>
-        </div>
+            </div> : <div ref={stickyRef}
+                className={classNames(' beforsticky ', { sticky })} >
+                <div
+                    ref={ref}
+                    {...events}
+                    className={` gap-5 flex w-full space-x-3 overflow-x-scroll scrollbar-hide  pr-[210px]`}
+                >
+                    {DateArray.map((dateItem, index) => (
+                        <div onClick={() => handleClick(dateItem.Fulldate)}
+                            className="flex flex-col gap-2 items-center  " key={index}>
+                            <p className={` ${TimeSelected == dateItem.Fulldate ? 'bg-BaserPrimary text-white ' : ''} cursor-pointer text-xl  rounded-full w-10 h-10 flex items-center justify-center`}>{dateItem.dayNumber}</p>
+                            <p className={`${TimeSelected == dateItem.Fulldate ? 'text-BaserPrimary' : ''} cursor-pointer text-sm font-normal`}>{today.getDate() == dateItem.dayNumber ? 'اليوم' : dateItem.dayName}</p>
+                        </div>
+                    ))
+                    }
+                </div>
+
+            </div>}
+        </>
     )
 }
 

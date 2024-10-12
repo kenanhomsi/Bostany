@@ -1,6 +1,9 @@
+import BuyingCoinsPopUp from "../components/BaserComponent/BuyingCoinsPopUp"
 import Footer from "../components/BaserComponent/Footer"
 import NavBar from "../components/BaserComponent/NavBar"
 import SideBar from "../components/BaserComponent/SideBar"
+import PopUpModal from "../components/General/PopUpModal"
+import { CloseBuyingCoinsPop } from "../redux/Slices/PopUpSlice"
 import { LayoutProps } from "../Types"
 
 const BaserDashboardLayout: React.FC<LayoutProps> = ({ children }) => {
@@ -14,6 +17,14 @@ const BaserDashboardLayout: React.FC<LayoutProps> = ({ children }) => {
                 </main>
                 <Footer />
             </div>
+            <PopUpModal
+                title='شراء'
+                type="BuyingCoinsPop"
+                PopSize="lg"
+                closeAction={CloseBuyingCoinsPop}
+            >
+                <BuyingCoinsPopUp />
+            </PopUpModal>
         </div>
     )
 }

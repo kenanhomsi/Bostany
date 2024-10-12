@@ -34,6 +34,7 @@ export interface DropDownSelectionTypes {
   handleClick?: () => void;
 }
 export interface qualificationType {
+  id: number;
   educational_institution: string;
   Academic_degree: string;
   Specialization: string;
@@ -63,4 +64,50 @@ export interface WorlSpaceDataType {
   name: string;
   icon: React.ReactNode;
   types: string[];
+}
+export interface PopUpParams {
+  title: React.ReactNode;
+  closeAction?: any;
+  children: React.ReactNode;
+  type: "BuyingCoinsPop";
+
+  PopSize:
+    | "sm"
+    | "md"
+    | "lg"
+    | "xl"
+    | "2xl"
+    | "3xl"
+    | "4xl"
+    | "5xl"
+    | "6xl"
+    | "7xl";
+}
+export type UserCardProfileType = {
+  image: string;
+  name: string;
+  likes: number;
+  specialization: string;
+  Rate: number;
+  BaserCount: number;
+  Price: number;
+  FreeTime: { from: number; to: number }[];
+  checkMark: boolean;
+};
+export interface SeedsCardData {
+  image: string;
+  title: string;
+  time: { from: string; to: string };
+  name: string;
+  workSpaceID: number;
+  type: string;
+  date: {
+    month: string;
+    day: string;
+  };
+}
+export interface SeedsCardProps {
+  data: SeedsCardData;
+  index: number;
+  From?: string;
 }
