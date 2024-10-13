@@ -1,4 +1,4 @@
-import SeedsCard from "../../components/BaserComponent/SeedsCard"
+import SeedsCard from "./SeedsCard"
 import SeedsEmpty from "./SeedsEmpty"
 import CardAvatarImage from "/Images/Avatars.png";
 

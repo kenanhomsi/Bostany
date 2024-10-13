@@ -5,6 +5,7 @@ import { useAppSelector } from "../../redux/store";
 
 const PopUpModal: React.FC<PopUpParams> = ({
     title,
+    closeIconState,
     closeAction,
     children,
     PopSize,
@@ -27,11 +28,11 @@ const PopUpModal: React.FC<PopUpParams> = ({
             className="self-center   !px-8 !py-5 z-[100000] "
             theme={{
                 content: {
-                    inner: ' rounded-[40px] relative flex max-h-[90dvh] flex-col bg-white shadow dark:bg-gray-700'
+                    inner: ' rounded-[40px] relative flex  flex-col bg-white shadow dark:bg-gray-700'
                 },
                 header: {
                     close: {
-                        base: "mr-auto inline-flex items-center rounded-full bg-transparent p-1.5 text-xl  text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white",
+                        base: `${closeIconState && ' !hidden'}   mr-auto inline-flex items-center rounded-full bg-transparent p-1.5 text-xl  text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white`,
                         icon: "h-6 w-6"
                     }
                 }

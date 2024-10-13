@@ -1,4 +1,4 @@
-import SeedsEmpty from "../../pages/BaserDashboard/SeedsEmpty"
+import SeedsEmpty from "./SeedsEmpty"
 import SeedsCard from "./SeedsCard";
 import CardAvatarImage from "/Images/Avatars.png";
 

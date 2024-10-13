@@ -69,8 +69,8 @@ export interface PopUpParams {
   title: React.ReactNode;
   closeAction?: any;
   children: React.ReactNode;
-  type: "BuyingCoinsPop";
-
+  closeIconState?: boolean;
+  type: "BuyingCoinsPop" | "Buycredit";
   PopSize:
     | "sm"
     | "md"
@@ -110,4 +110,15 @@ export interface SeedsCardProps {
   data: SeedsCardData;
   index: number;
   From?: string;
+}
+export interface FinancialTransactionCardProps {
+  data: {
+    type: string;
+    status: string;
+    title: string;
+    user: { name: string; image: string };
+    fullDate: string;
+    time: string;
+    amount: number;
+  };
 }

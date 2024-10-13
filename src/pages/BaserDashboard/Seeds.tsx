@@ -1,7 +1,7 @@
 import { Tabs } from "flowbite-react"
 import ComingSeeds from "../../components/BaserComponent/ComingSeeds"
-import FinishedSeeds from "./FinishedSeeds"
-import CanceledSeeds from "./CanceledSeeds"
+import CanceledSeeds from "../../components/BaserComponent/CanceledSeeds"
+import FinishedSeeds from "../../components/BaserComponent/FinishedSeeds"
 
 const Seeds = () => {
     return (

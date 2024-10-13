@@ -618,6 +618,84 @@ export const CardsBastanyData = [
     checkMark: true,
   },
 ];
+export const FavoriteBostanies = [
+
+  {
+    image: CardAvatarImage,
+    name: "سارة الكعبي",
+    likes: 22,
+    specialization: "محامية",
+    Rate: 4.5,
+    BaserCount: 18,
+    Price: 20,
+    FreeTime: [
+      { from: 8, to: 10 },
+      { from: 12, to: 15 },
+      { from: 17, to: 18 },
+    ],
+    checkMark: false,
+  },
+  {
+    image: CardAvatarImage,
+    name: "محمد العتيبي",
+    likes: 30,
+    specialization: "مبرمج",
+    Rate: 4.8,
+    BaserCount: 25,
+    Price: 25,
+    FreeTime: [
+      { from: 10, to: 12 },
+      { from: 14, to: 17 },
+      { from: 19, to: 20 },
+    ],
+    checkMark: true,
+  },
+  {
+    image: CardAvatarImage,
+    name: "فاطمة الزهراء",
+    likes: 12,
+    specialization: "معلمة",
+    Rate: 3.9,
+    BaserCount: 10,
+    Price: 12,
+    FreeTime: [
+      { from: 9, to: 11 },
+      { from: 13, to: 15 },
+      { from: 18, to: 19 },
+    ],
+    checkMark: false,
+  },
+  {
+    image: CardAvatarImage,
+    name: "خالد السعدي",
+    likes: 18,
+    specialization: "مهندس معماري",
+    Rate: 4.1,
+    BaserCount: 14,
+    Price: 18,
+    FreeTime: [
+      { from: 8, to: 10 },
+      { from: 12, to: 14 },
+      { from: 16, to: 17 },
+    ],
+    checkMark: true,
+  },
+  {
+    image: CardAvatarImage,
+    name: "ريم الشمري",
+    likes: 25,
+    specialization: "مصممة",
+    Rate: 4.6,
+    BaserCount: 22,
+    Price: 22,
+    FreeTime: [
+      { from: 10, to: 12 },
+      { from: 14, to: 16 },
+      { from: 18, to: 19 },
+    ],
+    checkMark: true,
+  },
+]
 export const AboutCardsData = [
   {
     MainTitle: "حدد ميعاد",
@@ -674,3 +752,15 @@ export const BaserSidbarData = [
     link: '/Baser/wallet'
   },
 ]
+export const FinancialTransaction = [
+  { type: 'puy', status: 'قيد التنفيذ', title: 'دفع فاتورة كهرباء', user: { name: 'سارة علي', image: CardAvatarImage }, fullDate: '10/12/2024', time: '09:30', amount: 100 },
+  { type: 'deposit', status: 'مكتلمة', title: 'شراء مواد بقالة', user: { name: 'علي الحسن', image: CardAvatarImage }, fullDate: '10/11/2024', time: '14:45', amount: 50 },
+  { type: 'puy', status: 'مرفوضة', title: 'سداد رسوم جامعية', user: { name: 'أحمد السالم', image: CardAvatarImage }, fullDate: '10/10/2024', time: '16:20', amount: 500 },
+  { type: 'puy', status: 'قيد التنفيذ', title: 'شراء كتب دراسية', user: { name: 'ليلى ناصر', image: CardAvatarImage }, fullDate: '10/09/2024', time: '13:00', amount: 70 },
+  { type: 'deposit', status: 'مكتملة', title: 'دفع رسوم إنترنت', user: { name: 'محمد الفهد', image: CardAvatarImage }, fullDate: '10/08/2024', time: '10:15', amount: 40 },
+  { type: 'puy', status: 'مكتملة', title: 'تجديد اشتراك نادي', user: { name: 'نورة عبدالعزيز', image: CardAvatarImage }, fullDate: '10/07/2024', time: '12:30', amount: 200 },
+  { type: 'deposit', status: 'مرفوضة', title: 'حجز موعد طبي', user: { name: 'خالد الزهراني', image: CardAvatarImage }, fullDate: '10/13/2024', time: '08:00', amount: 150 },
+  { type: 'puy', status: 'قيد التنفيذ', title: 'شراء تذاكر سفر', user: { name: 'فاطمة سعيد', image: CardAvatarImage }, fullDate: '10/13/2024', time: '11:45', amount: 250 },
+  { type: 'deposit', status: 'مكتملة', title: 'دفع فاتورة هاتف', user: { name: 'يوسف العتيبي', image: CardAvatarImage }, fullDate: '10/13/2024', time: '18:30', amount: 60 },
+  { type: 'deposit', status: 'قيد التنفيذ', title: 'اشتراك في دورة تدريبية', user: { name: 'مريم الحسني', image: CardAvatarImage }, fullDate: '10/03/2024', time: '17:00', amount: 80 },
+];
