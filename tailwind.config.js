@@ -20,10 +20,18 @@ export default {
         BaserTertiary: "#808080",
         BaserSurfaceContainerHige: "#E6E1E6",
         BaserPrimaryContainer: "#D2BCFF",
+        BaserSurfaceContainer: "#F4F7F3",
         BaserFoshiy: "#4C00AA",
+        GeneralError: "#DE3730",
+        GeneralStable: "#FF4500",
+        BostanySurfaceContainer: "#F4F7F3",
+        BostanyPrimaryContainer: "#B8FFEA",
+        BostanyOnPrimaryContainer: "#004437",
+        BostanyOnSurface: "#191C1B",
       },
       spacing: {
         lg: "6rem",
+        section: "80px",
       },
       fontWeight: {
         light: 300,

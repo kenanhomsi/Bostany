@@ -1,10 +1,18 @@
 import { Link } from 'react-router-dom'
 import logo from '/Logo.png'
-import { socialIcons } from '../../utils/data'
+import { socialIconsForBazer, socialIconsForBostany } from '../../utils/data'
 import appleLogo from '/Icons/Apple.png'
 import Playstore from '/Icons/Playstore.png'
 
 const GeneralFooter = ({ path }: { path: string }) => {
+    const Dashboard = path.slice(1)
+    let linksList
+    if (Dashboard == 'Baser') {
+        linksList = socialIconsForBazer
+    }
+    {
+        linksList = socialIconsForBostany
+    }
     return (
         <div className="flex justify-between">
             <div className="flex  flex-col w-[25%] gap-5">
@@ -14,7 +22,7 @@ const GeneralFooter = ({ path }: { path: string }) => {
                 <p className='text-dark text-base font-medium'>في بستن، البستانيون مستعدون لمساعدتك في زراعة أفكارك وتطويرها</p>
                 <label htmlFor="">النشرة الإخبارية</label>
                 <input type='email' name="email" id="email" placeholder='البريد الاكتروني' className=' border-none bg-BaserSurface p-4 rounded-3xl' />
-                <button className=" bg-BaserPrimary px-5 py-3 text-white rounded-full">أشتراك</button>
+                <button className={` ${Dashboard == 'Baser' ? 'bg-BaserPrimary' : ' bg-BostanyPrimary'}  px-5 py-3 text-white rounded-full`}>أشتراك</button>
             </div>
             <div className="flex w-[45%] justify-between">
                 <div className=" flex flex-col gap-6">
@@ -38,8 +46,8 @@ const GeneralFooter = ({ path }: { path: string }) => {
             <div className="w-[15%] flex flex-col gap-12">
                 <div className=" grid  grid-cols-3 gap-5">
                     {
-                        socialIcons.map((ele, index) => (
-                            <Link to={ele.path} className=" border border-BaserPrimary  rounded-full w-fit p-2" key={index}>
+                        linksList.map((ele, index) => (
+                            <Link to={ele.path} className={` border ${Dashboard == 'Baser' ? ' border-BaserPrimary' : ' border-BostanyPrimary'}  rounded-full w-fit p-2`} key={index}>
                                 <img src={ele.icon} alt={ele.icon} className='w-6 h-6' />
                             </Link>
                         ))

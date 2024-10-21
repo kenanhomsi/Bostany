@@ -6,6 +6,8 @@ import AuthLayout from "../layout/AuthLayout";
 import AuthRoutes from "./AuthRoutes";
 import BaserDashboardLayout from "../layout/BaserDashboardLayout";
 import BaserRoutes from "./BaserRoutes";
+import BostanyLayout from "../layout/BostanyLayout";
+import BostanyRoutes from "./BostanyRoutes";
 
 
 const AppRoutes: React.FC = () => {
@@ -36,14 +38,14 @@ const AppRoutes: React.FC = () => {
                         </BaserDashboardLayout>
                     }
                 />
-                {/* <Route
+                <Route
                     path="/Bostany/*"
                     element={
-                        <BostanyDashboardLayout>
+                        <BostanyLayout>
                             <BostanyRoutes />
-                        </BostanyDashboardLayout>
+                        </BostanyLayout>
                     }
-                /> */}
+                />
             </Routes>
         </Router>
     );

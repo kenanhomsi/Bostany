@@ -1,21 +1,27 @@
 import bostanyImage from '/Images/bostanyImage.png'
 import baserImage from '/Images/baserImage.png'
 import { WorkSpaceData } from '../../utils/data'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useDraggable } from "react-use-draggable-scroll";
 import TimeBar from '../WebsiteCom/TimeBar';
 import CardsGrid from './CardsGrid';
 import { useDispatch } from 'react-redux';
 import { changeCardShapState } from '../../redux/Slices/HomeCardSlice';
 import logosGroup from '/Icons/LogosGroup.png'
+import { CardsBastanyData } from "../../utils/data"
+import { PutBookingDayFromTimeBar } from '../../redux/Slices/BookingSlice';
+
 const MainHomeContent = ({ place }: { place: string }) => {
+    const dispatch = useDispatch();
     const [WorkSpaceSelected, setWorkSpaceSelected] = useState({
         id: 0,
         name: ''
     })
     const [WorkTypeSelected, setWorkTypeSelected] = useState('')
-    const [TimeSelected, setTimeSelected] = useState('')
-    const dispatch = useDispatch();
+    const [TimeSelected, setTimeSelected] = useState(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`)
+    useEffect(() => {
+        dispatch(PutBookingDayFromTimeBar(TimeSelected))
+    }, [TimeSelected, dispatch])
     const handleWorkSpaceClick = (selected: { id: number, name: string }) => {
         if (selected.name == 'الكل') {
             dispatch(changeCardShapState('col'))
@@ -31,10 +37,10 @@ const MainHomeContent = ({ place }: { place: string }) => {
     const { events } = useDraggable(ref);
 
     return (
-        <div className={`flex flex-col items-center gap-16 overflow-hidden ${place == 'website' ? 'py-24' : 'pt-40 pb-24'}  w-full  `}>
+        <div className={`flex flex-col items-center  overflow-hidden ${place == 'website' ? 'py-24' : 'pt-40 pb-24'}  w-full  `}>
             {
                 place == 'website' &&
-                <>
+                <div className='flex flex-col gap-8 items-center'>
                     <div className=" bg-BaserSurfaceDarker flex gap-2 items-center w-fit  rounded-full p-3">
                         <span className=" bg-BaserPrimary p-2 px-4 text-white rounded-full">بستن</span>
                         ماذا يمكنك أن تزرع في 10 دقائق؟
@@ -49,7 +55,7 @@ const MainHomeContent = ({ place }: { place: string }) => {
                         وراقب أفكارك تنمو وتزدهر!
                     </div>
                     <p className=' text-center w-[50%] font-medium text-base text-dark'>هل لديك فكرة وتحتاج إلى توجيه متخصص لتنميتها؟ في بستن، البستانيون مستعدون لمساعدتك في زراعة أفكارك وتطويرها. احصل على جلسات استشارية عصفية، فورية ومختصرة، لتحويل بذور أفكارك إلى إبداعات ناجحة</p>
-                </>
+                </div>
 
             }
             {
@@ -59,7 +65,7 @@ const MainHomeContent = ({ place }: { place: string }) => {
                     ماذا يمكنك أن تنمي في 10 دقائق؟!
                 </div>
             }
-            <div className=" flex  items-center w-full justify-around">
+            <div className=" flex  items-center  mt-8  w-full justify-around">
                 {WorkSpaceData &&
                     WorkSpaceData.map((ele, index) => (
                         <button key={index} onClick={() => handleWorkSpaceClick({ id: ele.id, name: ele.name })} className='flex flex-col  items-center gap-3'>
@@ -72,7 +78,7 @@ const MainHomeContent = ({ place }: { place: string }) => {
                 }
             </div>
             <div ref={ref}    {...events}
-                className="flex w-full space-x-3 overflow-x-scroll scrollbar-hide"
+                className="flex w-full space-x-3  my-6 overflow-x-scroll scrollbar-hide"
             >
                 <div className=" flex w-fit  gap-2">
                     {
@@ -88,8 +94,7 @@ const MainHomeContent = ({ place }: { place: string }) => {
                 </div>
             </div>
             <TimeBar TimeSelected={TimeSelected} setTimeSelected={setTimeSelected} />
-            <CardsGrid FromWhere={place} />
-
+            <CardsGrid FromWhere={place} data={CardsBastanyData} />
         </div>
     )
 }
