@@ -11,6 +11,40 @@ import { useAppSelector } from "../../redux/store";
 import baserIcon from '/Icons/Baser.png'
 import { useDispatch } from "react-redux";
 import { changeRegisterAsState } from "../../redux/Slices/RegisterSlice";
+export const CountryDataFlags = [{
+    id: 1,
+    name: 'السعودية',
+    icon: KSAFlag,
+    suffix: '+963'
+
+},
+{
+    id: 2,
+    name: 'مصر',
+    icon: EgyptFlag,
+    suffix: '+55'
+},
+{
+    id: 3,
+    name: 'فلسطين',
+    icon: PalastenFlag,
+    suffix: '+66'
+
+},
+{
+    id: 4,
+    name: 'قطر',
+    icon: QatterFlag,
+    suffix: '+32'
+
+},
+{
+    id: 5,
+    name: 'العراق',
+    icon: KSAFlag,
+    suffix: '+222232'
+
+},]
 const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) => {
     const RegisterAs = useAppSelector((state) => state.register.RegisterAs)
     const [DropDownValue, setDropDownValue] = useState(0)
@@ -18,40 +52,7 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
     const handleClick = () => {
         setStep(2);
     }
-    const data = [{
-        id: 1,
-        name: 'السعودية',
-        icon: KSAFlag,
-        suffix: '+963'
 
-    },
-    {
-        id: 2,
-        name: 'مصر',
-        icon: EgyptFlag,
-        suffix: '+55'
-    },
-    {
-        id: 3,
-        name: 'فلسطين',
-        icon: PalastenFlag,
-        suffix: '+66'
-
-    },
-    {
-        id: 4,
-        name: 'قطر',
-        icon: QatterFlag,
-        suffix: '+32'
-
-    },
-    {
-        id: 5,
-        name: 'العراق',
-        icon: KSAFlag,
-        suffix: '+222232'
-
-    },]
     // const SelectedValue = data.filter((ele) => {
     //     if (ele.id == DropDownValue) {
     //         return ele.id
@@ -75,7 +76,7 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
             <div className="flex flex-col gap-4 w-full">
                 <div className="flex flex-col gap-1">
                     <span className="font-medium text-base  text-[#191C1B]">الدولة</span>
-                    <CountrySelect data={data} DropDownValue={DropDownValue}
+                    <CountrySelect data={CountryDataFlags} DropDownValue={DropDownValue}
                         setDropDownValue={setDropDownValue} />
                 </div>
                 <div className=" flex flex-col gap-1">

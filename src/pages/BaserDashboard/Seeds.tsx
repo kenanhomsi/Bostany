@@ -5,7 +5,7 @@ import FinishedSeeds from "../../components/BaserComponent/FinishedSeeds"
 
 const Seeds = () => {
     return (
-        <div className="mt-section py-14 px-10 w-full min-h-[70vh]">
+        <div className="mt-section py-14 px-16 w-full min-h-[70vh]">
             <Tabs aria-label="Tabs with underline" variant="underline"
                 theme={{
                     tablist: {

@@ -7,12 +7,44 @@ import Button_ChatIcon from '/Icons/Button_Chat.png'
 import Button_BookIcon from '/Icons/Button_Book.png'
 import Button_VideoIcon from '/Icons/Button_Video.png'
 import { ProfileCardProps } from "../../Types"
+import { Link, useLocation } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { OpenBookingConfirmPop, OpenBookingTimePop } from '../../redux/Slices/PopUpSlice'
+import { PutBookingBostanyId, PutBookingData } from '../../redux/Slices/BookingSlice'
+import { useAppSelector } from '../../redux/store'
 const ProfileCard = ({ CardShap, data }: ProfileCardProps) => {
+    const pathname = useLocation().pathname
+    const dispatch = useDispatch()
+    const BookingData = useAppSelector((state) => state.booking.BookingData)
+    const BookingDayFromTimeBar = useAppSelector((state) => state.booking.BookingDayFromTimeBar)
+    const handleYellowCirculClick = () => {
+        if (pathname != '/') {
+            dispatch(OpenBookingTimePop());
+            dispatch(PutBookingBostanyId(data.id))
+        }
+    }
+    const HandleFreetimeClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        dispatch(PutBookingBostanyId(data.id))
+        dispatch(PutBookingData({
+            ...BookingData,
+            SelectedDay: BookingDayFromTimeBar,
+            SelectTime: e.currentTarget.id
+        }))
+        dispatch(OpenBookingConfirmPop());
+    }
+    const HandleBookingIconClick = () => {
+        if (pathname != '/') {
+            dispatch(OpenBookingTimePop());
+            dispatch(PutBookingBostanyId(data.id))
+        }
+    }
     return (
         <div className={`flex  relative  bg-BaserSurface ${CardShap == 'col' ? 'flex-col 2xl:max-w-[22.6rem] max-w-[18rem]  flex-1' : ' flex-row w-full pl-3 '}  rounded-[32px] `}>
             <div className={`${CardShap == 'col' ? '' : 'p-4'}`}>
-                <button className={`${CardShap == 'col' ? 'top-0 right-0' : 'top-2 right-2'} w-6 h-6 z-10 rounded-full bg-GeneralWarningContainer absolute `}></button>
-                <img src={data.image} alt={data.image} className={` ${CardShap == 'col' ? '2xl:w-[22.6rem] 2xl:h-[18rem] h-[14rem]  w-[18rem]' : 'w-[208px] h-[205px] rounded-2xl'} `} />
+                <button onClick={handleYellowCirculClick} className={`${CardShap == 'col' ? 'top-0 right-0' : 'top-2 right-2'} w-6 h-6 z-10 rounded-full bg-GeneralWarningContainer absolute `}></button>
+                <Link to={pathname != '/' ? `/Baser/bostanyProfile/${data.id}` : '/#'}>
+                    <img src={data.image} alt={data.image} className={` ${CardShap == 'col' ? '2xl:w-[22.6rem] 2xl:h-[18rem] h-[14rem]  w-[18rem]' : 'w-[208px] h-[205px] rounded-2xl'} `} />
+                </Link>
             </div>
             <div className={` flex w-full ${CardShap == 'col' ? 'flex-col' : ' flex-row justify-between'}  p-4`}>
                 <div className={` flex flex-col ${CardShap == 'col' ? '' : 'justify-between'}  gap-4 w-full my-3 `}>
@@ -45,20 +77,19 @@ const ProfileCard = ({ CardShap, data }: ProfileCardProps) => {
                         <div className="flex gap-2 items-center">
                             <img src={WalletIcon} alt={WalletIcon} className=" w-[32px] h-[32px]" />
                             <p className="flex gap-1 text-base text-BaserTertiary"> <span>{data.Price}</span>ر.س</p>
-
                         </div>
                     </div>
                     {/* Free time for booking */}
                     <div className=" flex flex-wrap gap-1 w-full">
                         {data.FreeTime.map((time, index) => (
-                            <div className={`${index == 0 ? 'bg-GeneralSuccessContainer' : index == 1 ? 'bg-GeneralWarningContainer' : 'bg-BaserTertiary'}  p-2 rounded-full text-white text-xs font-medium`}><span>{time.to}:00</span>-<span>{time.from}:00</span> صباحًا </div>
+                            <button key={index} id={`${time.to!}-${time.from!}`} onClick={HandleFreetimeClick} className={`${index == 0 ? 'bg-GeneralSuccessContainer' : index == 1 ? 'bg-GeneralWarningContainer' : 'bg-BaserTertiary'}  p-2 rounded-full text-white text-xs font-medium`}><span>{time.to}:00</span>-<span>{time.from}:00</span> صباحًا </button>
                         ))}
                     </div>
                 </div>
                 <div className={`${CardShap == 'col' ? 'w-full' : ' self-end  left-5 absolute'}`}>
                     <div className={`${CardShap == 'col' ? 'w-full' : ' w-[252px] '}  flex h-[64px]   justify-around rounded-xl rounded-tl-sm bg-BaserSurfaceContainerHige`}>
                         <button><img className="w-14 h-14" src={Button_ChatIcon} alt={Button_ChatIcon} /></button>
-                        <button><img className="w-14 h-14" src={Button_BookIcon} alt={Button_BookIcon} /></button>
+                        <button onClick={HandleBookingIconClick}><img className="w-14 h-14" src={Button_BookIcon} alt={Button_BookIcon} /></button>
                         <button><img className="w-14 h-14" src={Button_VideoIcon} alt={Button_VideoIcon} /></button>
                     </div>
                 </div>

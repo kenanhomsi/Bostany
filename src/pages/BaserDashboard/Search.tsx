@@ -80,7 +80,7 @@ const Search = () => {
     const listData = CardsBastanyData.slice(0, 7)
 
     return (
-        <div className="mt-section pt-14  pb-6 h-full flex gap-5 justify-between ">
+        <div className="mt-section pt-14  pb-6 h-full flex gap-5 justify-between px-5 ">
             <div className=" h-full w-full flex flex-col gap-7">
                 <div className=" relative">
                     <input type="text" className="w-full  text-right  text-lg font-medium px-14 py-4 bg-BaserSurface text-dark  rounded-full border-none" placeholder="إبحث عن البستانيون " name="SearchBar" />

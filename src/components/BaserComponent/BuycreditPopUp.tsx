@@ -5,8 +5,10 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { PiCreditCard } from "react-icons/pi";
 import { PiInfo } from "react-icons/pi";
+import { useLocation } from "react-router-dom";
 
 const BuycreditPopUp = () => {
+    const Dashboard = useLocation().pathname.split('/')[1]
     const BuyCreditSchema = Yup.object().shape({
         name: Yup.string().required('اسم صاحب البطاقة مطلوب'),
         creditCardNumber: Yup.number().required('رقم البطاقة مطلوب'),
@@ -113,8 +115,8 @@ const BuycreditPopUp = () => {
                                 />
                             </div>
                             <div className="w-full flex gap-5 px-4 border-t border-[#938F94] pt-5 mt-5  ">
-                                <Button onClick={handleBuying} className="bg-BaserPrimary text-white rounded-full hover:!bg-BaserFoshiy w-full" >{isSubmitting ? '..Loading' : 'تاكيد الدفع'}</Button>
-                                <Button onClick={HandleCancel} className=" w-full rounded-full text-[#9966FF]" color="light">الغاء</Button>
+                                <Button onClick={handleBuying} className={` ${Dashboard == 'Baser' ? 'bg-BaserPrimary hover:!bg-BaserFoshiy' : 'bg-BostanyPrimary hover:!bg-BostanyOnPrimaryContainer'} text-white rounded-full  w-full`} >{isSubmitting ? '..Loading' : 'تاكيد الدفع'}</Button>
+                                <Button onClick={HandleCancel} className={` ${Dashboard == 'Baser' ? 'text-BaserPrimary' : ' text-BostanyPrimary'} w-full rounded-full `} color="light">الغاء</Button>
                             </div>
                         </Form>
                     )}

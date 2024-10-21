@@ -5,6 +5,7 @@ import HomeCardReducer from "./Slices/HomeCardSlice";
 import RegisterReducer from "./Slices/RegisterSlice";
 import PopUpReducer from "./Slices/PopUpSlice";
 import QualificationDataReducer from "./Slices/QualificationData";
+import BookingReducer from "./Slices/BookingSlice";
 export const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -12,6 +13,7 @@ export const store = configureStore({
     register: RegisterReducer,
     popUpState: PopUpReducer,
     qualificationData: QualificationDataReducer,
+    booking: BookingReducer,
   },
 });
 

@@ -1,13 +1,22 @@
 import { FinancialTransactionCardProps } from "../../Types"
 import { PiHandArrowDownDuotone } from "react-icons/pi";
 import { PiHandArrowUpDuotone } from "react-icons/pi";
+import { useLocation } from "react-router-dom";
+import { PiHandArrowUpFill } from "react-icons/pi";
+import { PiHandArrowDownFill } from "react-icons/pi";
 
 const FinancialTransactionCard = ({ data }: FinancialTransactionCardProps) => {
+    const Dashboard = useLocation().pathname.split('/')[1]
     return (
-        <div className="flex  justify-between px-6 py-4 bg-BaserSurface rounded-2xl">
+        <div className={` flex  justify-between px-6 py-4 ${Dashboard == 'Baser' ? 'bg-BaserSurface' : 'bg-BostanySurfaceContainer'}   rounded-2xl`}>
             <div className="flex items-center gap-3">
-                <div className=" w-20 h-20 bg-[#D2BCFF] text-[32px] text-[#4C00AA] rounded-full flex items-center justify-center">
-                    {data.type == 'puy' ? <PiHandArrowUpDuotone /> : <PiHandArrowDownDuotone />}
+                <div className={`w-20 h-20 ${Dashboard == 'Baser' ? 'bg-[#D2BCFF] text-[#4C00AA]' : ' bg-BostanyPrimaryContainer text-BostanyOnPrimaryContainer'}  text-[32px]  rounded-full flex items-center justify-center`}>
+                    {
+                        Dashboard == 'Baser' ?
+                            data.type == 'puy' ? <PiHandArrowUpDuotone /> : <PiHandArrowDownDuotone />
+                            :
+                            data.type == 'puy' ? <PiHandArrowUpFill /> : <PiHandArrowDownFill />
+                    }
                 </div>
                 <div className="flex gap-4 flex-col">
                     <span className="text-xs font-medium text-dark">{data.status}</span>

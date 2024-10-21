@@ -5,7 +5,7 @@ import { FavoriteBostanies } from "../../utils/data"
 const Favorite = () => {
 
     return (
-        <div className="mt-section">
+        <div className="mt-section px-5">
             {
                 FavoriteBostanies.length == 0 &&
                 <EmptyFavoritePage />

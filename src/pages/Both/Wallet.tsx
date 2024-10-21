@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import moneyBagImage from '/Images/money_bag_high_contrast 1.png'
+import BostanyMoneyBagImage from '/Images/Bostany_money_bag_high_contrast.png'
 import EmptyWalletOp from '../../components/BaserComponent/EmptyWalletOp';
 import { FinancialTransaction } from '../../utils/data';
 import FinancialTransactionCard from '../../components/BaserComponent/FinancialTransactionCard';
@@ -7,9 +8,13 @@ import PopUpModal from '../../components/General/PopUpModal';
 import { CloseBuycredit, OpenBuycredit } from '../../redux/Slices/PopUpSlice';
 import { useDispatch } from 'react-redux';
 import BuycreditPopUp from '../../components/BaserComponent/BuycreditPopUp';
+import { useLocation } from 'react-router-dom';
 const Wallet = () => {
+    const Dashboard = useLocation().pathname.split('/')[1]
     const [MonyAamount] = useState(0.01);
     const dispatch = useDispatch();
+    // let FinancialTransaction = []
+
     const FinancialTransactionForToday = FinancialTransaction?.filter((chat) => +chat.fullDate.split('/')[1] == new Date().getDate());
     const FinancialTransactionForYesterday = FinancialTransaction?.filter((chat) => +chat.fullDate.split('/')[1] == new Date().getDate() - 1)
     const FinancialTransactionForWeakAgo = FinancialTransaction?.filter((chat) => +chat.fullDate.split('/')[1] < new Date().getDate() - 1)
@@ -17,16 +22,22 @@ const Wallet = () => {
         dispatch(OpenBuycredit())
     }
     return (
-        <div className="mt-section py-14 px-10 ">
+        <div className="mt-section py-14 px-16 ">
             <div className="flex justify-between items-center py-4 px-6">
                 <div className="flex items-center gap-4">
-                    <img src={moneyBagImage} alt={moneyBagImage} className='w-24 h-24' />
+                    <img src={Dashboard == 'Baser' ? moneyBagImage : BostanyMoneyBagImage} alt={Dashboard == 'Baser' ? moneyBagImage : BostanyMoneyBagImage} className='w-24 h-24' />
                     <div className="flex flex-col">
                         <p className=' text-sm font-medium text-dark'>متوسط الرصيد</p>
                         <p className='font-bold text-[34px] text-BaserOnSurfase'><span>{MonyAamount}</span> ر.س</p>
                     </div>
                 </div>
-                <button onClick={handleBuycredit} className='w-80 bg-BaserPrimary py-3 text-white rounded-full'>شحن رصيد</button>
+                <div className=" flex flex-col gap-2">
+                    <button onClick={handleBuycredit} className={`w-80 ${Dashboard == 'Baser' ? 'bg-BaserPrimary' : ' bg-BostanyPrimary'}  py-3 text-white rounded-full`}>شحن رصيد</button>
+                    {
+                        Dashboard == 'Bostany' &&
+                        <button className=' py-3 border-[#8E918F] border bg-white rounded-full w-80 text-BostanyPrimary' >أخراج المال</button>
+                    }
+                </div>
             </div>
             <div className="">
                 {

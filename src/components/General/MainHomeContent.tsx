@@ -1,7 +1,7 @@
 import bostanyImage from '/Images/bostanyImage.png'
 import baserImage from '/Images/baserImage.png'
 import { WorkSpaceData } from '../../utils/data'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useDraggable } from "react-use-draggable-scroll";
 import TimeBar from '../WebsiteCom/TimeBar';
 import CardsGrid from './CardsGrid';
@@ -9,15 +9,19 @@ import { useDispatch } from 'react-redux';
 import { changeCardShapState } from '../../redux/Slices/HomeCardSlice';
 import logosGroup from '/Icons/LogosGroup.png'
 import { CardsBastanyData } from "../../utils/data"
+import { PutBookingDayFromTimeBar } from '../../redux/Slices/BookingSlice';
 
 const MainHomeContent = ({ place }: { place: string }) => {
+    const dispatch = useDispatch();
     const [WorkSpaceSelected, setWorkSpaceSelected] = useState({
         id: 0,
         name: ''
     })
     const [WorkTypeSelected, setWorkTypeSelected] = useState('')
-    const [TimeSelected, setTimeSelected] = useState('')
-    const dispatch = useDispatch();
+    const [TimeSelected, setTimeSelected] = useState(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`)
+    useEffect(() => {
+        dispatch(PutBookingDayFromTimeBar(TimeSelected))
+    }, [TimeSelected, dispatch])
     const handleWorkSpaceClick = (selected: { id: number, name: string }) => {
         if (selected.name == 'الكل') {
             dispatch(changeCardShapState('col'))

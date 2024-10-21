@@ -42,7 +42,7 @@ const CanceledSeeds = () => {
                 data &&
                 <div className={`flex flex-col gap-5 my-2 w-full`}>
                     {data.map((card) => (
-                        <SeedsCard data={card} index={-1} From='Canceled' />
+                        <SeedsCard Dashboard="Baser" data={card} index={-1} From='Canceled' />
                     ))
                     }
                 </div >

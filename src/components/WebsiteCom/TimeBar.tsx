@@ -49,7 +49,7 @@ const TimeBar = ({ TimeSelected, setTimeSelected }: TimeBarProps) => {
                 <div
                     ref={ref}
                     {...events}
-                    className={` gap-5 flex w-full space-x-3 overflow-x-scroll scrollbar-hide  pr-[210px]`}
+                    className={` gap-5 flex w-full space-x-3 overflow-x-scroll scrollbar-hide  `}
                 >
                     {DateArray.map((dateItem, index) => (
                         <div onClick={() => handleClick(dateItem.Fulldate)}

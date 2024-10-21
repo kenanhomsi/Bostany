@@ -1,8 +1,25 @@
 export interface TimeBarProps {
   TimeSelected: string;
+  FromProfile?: boolean;
   setTimeSelected: (value: string) => void;
 }
 export interface ProfileDateType {
+  id: number;
+  Ratings: {
+    total: string;
+    SeedOwner: string;
+    ProfessionalismInDealing: string;
+    QualityOfDealing: string;
+    SessionQuality: string;
+    SeedExperience: string;
+  }[];
+  Experiences: {
+    number: number;
+    name: string;
+    status: string;
+  }[];
+  WorkSpace: string[];
+  otherSpecialization: string[];
   image: string;
   name: string;
   likes: number;
@@ -10,6 +27,12 @@ export interface ProfileDateType {
   Rate: number;
   BaserCount: number;
   Price: number;
+  Certificates: {
+    id: number;
+    title: string;
+    university: string;
+    year: string;
+  }[];
   FreeTime: { from: number; to: number }[];
   checkMark: boolean;
 }
@@ -70,7 +93,13 @@ export interface PopUpParams {
   closeAction?: any;
   children: React.ReactNode;
   closeIconState?: boolean;
-  type: "BuyingCoinsPop" | "Buycredit";
+  type:
+    | "BuyingCoinsPop"
+    | "Buycredit"
+    | "BookingTimePop"
+    | "BookingConfirmPop"
+    | "BookingSuccessPop"
+    | "SwitchToBaser";
   PopSize:
     | "sm"
     | "md"
@@ -84,6 +113,28 @@ export interface PopUpParams {
     | "7xl";
 }
 export type UserCardProfileType = {
+  id: number;
+  WorkSpace: string[];
+  Certificates: {
+    id: number;
+    title: string;
+    university: string;
+    year: string;
+  }[];
+  Experiences: {
+    number: number;
+    name: string;
+    status: string;
+  }[];
+  otherSpecialization: string[];
+  Ratings: {
+    total: string;
+    SeedOwner: string;
+    ProfessionalismInDealing: string;
+    QualityOfDealing: string;
+    SessionQuality: string;
+    SeedExperience: string;
+  }[];
   image: string;
   name: string;
   likes: number;
@@ -110,6 +161,7 @@ export interface SeedsCardProps {
   data: SeedsCardData;
   index: number;
   From?: string;
+  Dashboard: string;
 }
 export interface FinancialTransactionCardProps {
   data: {
@@ -121,4 +173,25 @@ export interface FinancialTransactionCardProps {
     time: string;
     amount: number;
   };
+}
+export interface SideBarListType {
+  name: string;
+  icone: JSX.Element;
+  link: string;
+}
+export interface BAS10ChartType {
+  day: string;
+  Tree: number;
+}
+export interface StatisticsBodyProps {
+  Trees: {
+    day: string;
+    Tree: number;
+  }[];
+  TotalTreesCount: number;
+  RatingAvg: number;
+  BaserTimeAvg: number;
+  NewTreesCount: number;
+  CancelRate: number;
+  BenefitAVg: number;
 }
