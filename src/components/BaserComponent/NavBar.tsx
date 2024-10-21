@@ -3,10 +3,18 @@ import { BaserSidbarData } from "../../utils/data"
 import { PiBell } from "react-icons/pi";
 import { Avatar, Dropdown } from "flowbite-react";
 import avaterImage from '/Images/Avatars.png'
+
+type NotificationDummyItem = {
+    image: string
+    seedStatus: string
+    seedOwner: string
+    time: string
+}
+
 const NavBar = () => {
     const pathname = useLocation().pathname
     const Title = BaserSidbarData.filter((ele) => ele.link == pathname)[0]
-    const NotificationDataList = [
+    const NotificationDataList: NotificationDummyItem[] = [
         // {
         //     image: avaterImage,
         //     seedStatus: 'تم قبول البذرة',
