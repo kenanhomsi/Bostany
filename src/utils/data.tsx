@@ -3757,7 +3757,6 @@ export const StatisticsDataForMounth = {
 }
 
 const now = new Date();
-import Icons from '/Icons/Apple.png'
 import AppointmentChap from '../components/BostanyComponents/AppointmentChap';
 export const events = [
   {

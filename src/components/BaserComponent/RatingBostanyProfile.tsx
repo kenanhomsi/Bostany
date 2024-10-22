@@ -8,8 +8,9 @@ const RatingBostanyProfile = ({ BostanyData }: { BostanyData: ProfileDateType })
             <div className="p-6 rounded-3xl bg-BaserSurface text-base font-medium flex flex-col gap-4">
                 <div className=" flex gap-3 items-end">
                     <PiFlowerFill className=" text-BaserPrimary w-10 h-10" />
-                    <p className="text-BaserOnSurfase mb-2 text-[22px] font-semibold "><span>5 /</span> {BostanyData.Ratings.reduce((accumulator, item) => accumulator + +item.total, 0) / BostanyData.Ratings.length} </p>
-                    <p className=" text-base font-medium text-dark"><span>{BostanyData.Ratings.length}</span> <span>بذور</span></p>
+                    <p className="text-BaserOnSurfase mb-2 text-[22px] font-semibold "><span>5 /</span>
+                        {(BostanyData.Ratings?.reduce((accumulator, item) => accumulator + +item.total, 0) ?? 0) / (BostanyData.Ratings?.length ?? 1)} </p>
+                    <p className=" text-base font-medium text-dark"><span>{BostanyData.Ratings?.length ?? 0}</span> <span>بذور</span></p>
                 </div>
                 <div className="flex flex-col gap-2  text-baser font-medium text-dark">
                     <div className="flex justify-between items-center">
@@ -47,7 +48,7 @@ const RatingBostanyProfile = ({ BostanyData }: { BostanyData: ProfileDateType })
                 </div>
             </div>
             {
-                BostanyData.Ratings.map((Rate) => (
+                BostanyData.Ratings?.map((Rate) => (
                     <div className="p-6 rounded-3xl bg-BaserSurface text-base font-medium flex flex-col gap-4">
                         <div className=" flex gap-3 items-end">
                             <p>{Rate.SeedOwner}</p>

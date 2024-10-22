@@ -9,7 +9,7 @@ import { PiCheckCircleLight } from "react-icons/pi";
 
 
 const Search = () => {
-    const [DropDownData, setDropDownData] = useState(WorkSpaceData[0].types);
+    const [DropDownData] = useState(WorkSpaceData[0].types);
     const [FormToSearch, SetFormToSearch] = useState({
         Space: '',
         text: '',
@@ -34,6 +34,7 @@ const Search = () => {
         gender: ''
     });
     const handleWorkSpaceClick = (id: number, name: string) => {
+        console.log(id)
         SetFormToSearch({
             ...FormToSearch,
             Space: name
@@ -57,25 +58,25 @@ const Search = () => {
             specialization: e.target.value
         })
     }
-    const handleFilterBtns = (e) => {
-        const arr = FormToSearch.FilterBy.map((ele) => {
-            if (ele.name == e.target.id) {
-                console.log(e.target.value)
-                return {
-                    ...ele,
-                    state: !ele.state
-                }
-            }
-            else {
-                return ele
-            }
+    const handleFilterBtns = () => {
+        // const arr = FormToSearch.FilterBy.map((ele) => {
+        //     if (ele.name == e.target.id) {
+        //         console.log(e.target.value)
+        //         return {
+        //             ...ele,
+        //             state: !ele.state
+        //         }
+        //     }
+        //     else {
+        //         return ele
+        //     }
 
-        })
-        console.log(arr)
-        SetFormToSearch({
-            ...FormToSearch,
-            FilterBy: arr
-        })
+        // })
+        // console.log(arr)
+        // SetFormToSearch({
+        //     ...FormToSearch,
+        //     FilterBy: arr
+        // })
     }
     const listData = CardsBastanyData.slice(0, 7)
 

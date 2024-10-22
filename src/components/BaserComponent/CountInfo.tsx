@@ -10,7 +10,7 @@ const CountInfo = () => {
     const Dashboard = useLocation().pathname.split('/')[1]
     const [CountryDropDownValue, setCountryDropDownValue] = useState(0)
     const [BirthDataValue, setBirthDataValue] = useState(ProfileData.birthData)
-    const [imageFile, setImageFile] = useState<File | null>(null);
+    const [, setImageFile] = useState<File | null>(null);
     const [imageFileUrl, setImageFileUrl] = useState<string | null>(null);
     const [currentImage, setCurrentImage] = useState<string | null>(ProfileData.img);
     const filePickerRef = useRef<HTMLInputElement>(null);
@@ -65,7 +65,7 @@ const CountInfo = () => {
                             <span>{BirthDataValue}</span>
                         </Label>
                         <Datepicker
-                            onChange={handleDateChange}
+                            onChange={(date) => handleDateChange(date ?? new Date())}
                             name="ToDatePicker" id="ToDatePicker"
                             style={{ backgroundColor: '#faf5f9', width: '100%', border: '0', borderRadius: '30px', padding: '15px 40px', fontSize: '16px', fontWeight: 'normal' }}
                             theme={{

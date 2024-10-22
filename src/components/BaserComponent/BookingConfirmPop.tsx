@@ -11,8 +11,8 @@ import { PutBookingData } from "../../redux/Slices/BookingSlice";
 const BookingConfirmPop = () => {
     const dispatch = useDispatch();
     const [BazerTitle, setBazerTitle] = useState('');
-    const [, setAttechedFile] = useState(null);
-    const [, setAttechedAudio] = useState(null);
+    const [, setAttechedFile] = useState<File | undefined>(undefined);
+    const [, setAttechedAudio] = useState<File | undefined>(undefined);
     const BookingData = useAppSelector((state) => state.booking.BookingData)
     const BostanyId = useAppSelector((state) => state.booking.BostanyId)
     const BostanyData = CardsBastanyData.filter((ele) => ele.id == BostanyId)[0]
