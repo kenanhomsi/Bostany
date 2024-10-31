@@ -1,21 +1,28 @@
 import { WorkSpaceData } from "../../../utils/data"
 import { CompleteProfileStepProps } from "../../../Types"
-
-
+import { useEffect, useState } from "react"
+import { useGetSpecialitiestList } from "../../../utils/api/select/useGetspecialities"
+import { useGetCategoriestList } from "../../../utils/api/select/useGetCategories"
 const Step3 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
-    const handleWorkSpaceClick = (id: number, name: string) => {
+    const { data } = useGetSpecialitiestList();
+    const [SelectedCategory, setSelectedCategory] = useState(data?.data[0].id)
+    const { data: categories, refetch } = useGetCategoriestList({
+        queryKey: ["Categories", SelectedCategory]
+    });
+    useEffect(() => {
+        refetch()
+    }, [SelectedCategory, refetch])
+    const handleWorkSpaceClick = (id: number) => {
+        setSelectedCategory(id)
         SetFormData({
             ...FormData,
-            WorkSpace: {
-                id,
-                name
-            }
+            specialities: FormData.specialities.includes(id) ? FormData.specialities.filter((ele) => ele !== id) : [...FormData.specialities, id]
         })
     }
-    const handleWorkTypeClick = (type: string) => {
+    const handleWorkTypeClick = (id: number) => {
         SetFormData({
             ...FormData,
-            WorkType: type
+            category: FormData.category.includes(id) ? FormData.category.filter((ele) => ele !== id) : [...FormData.category, id],
         })
     }
     return (
@@ -23,15 +30,16 @@ const Step3 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
             <div className="flex flex-col gap-2">
                 <span className="font-medium text-base  text-[#191C1B]">اختيار المجال</span>
                 <div className=" grid  grid-cols-5  gap-4   w-full  ">
-                    {WorkSpaceData &&
-                        WorkSpaceData.map((ele, index) => {
+                    {data &&
+                        data.data.map((ele, index) => {
                             if (ele.id != 1) {
-
-                                return <button key={index} onClick={() => handleWorkSpaceClick && handleWorkSpaceClick(ele.id, ele.name)} className='flex flex-col  items-center gap-3'>
-                                    <div className={` text-[46px] ${FormData.WorkSpace.name == ele.name && 'text-BostanyPrimary'}  `}>
-                                        {ele.icon}
+                                return <button key={index} onClick={() => handleWorkSpaceClick && handleWorkSpaceClick(ele.id)} className='flex flex-col  items-center gap-3'>
+                                    <div className={` text-[46px] ${ele.id == SelectedCategory && 'text-BostanyPrimary'}  `}>
+                                        {WorkSpaceData &&
+                                            WorkSpaceData.filter((work) => work.name === ele.text)[0]?.icon
+                                        }
                                     </div>
-                                    <p className='text-xs font-medium text-dark'>{ele.name}</p>
+                                    <p className='text-xs font-medium text-dark'>{ele.text}</p>
                                 </button>
                             }
                         }
@@ -43,12 +51,13 @@ const Step3 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
                 <span className="font-medium text-base  text-[#191C1B]">اختيار التخصص</span>
                 <div className="flex flex-wrap  w-full  gap-2">
                     {
-                        WorkSpaceData && WorkSpaceData[FormData.WorkSpace.id - 1].types.map((type: string, index) => (
+                        categories && categories.data.map((ele) => (
                             <div
-                                key={index}
-                                onClick={() => handleWorkTypeClick && handleWorkTypeClick(type)}
-                                className={` ${FormData.WorkType == type ? 'bg-BostanyPrimary text-white' : 'text-BaserOnSurfase bg-white'}   text-center text-sm font-medium  py-2 border-[2px] w-[115px] cursor-pointer border-BaserOutline  rounded-full`}>
-                                {type}
+                                key={ele.id}
+                                onClick={() => handleWorkTypeClick && handleWorkTypeClick(ele.id)}
+                                className={` ${FormData.category.includes(ele.id) ? 'bg-BostanyPrimary text-white' : 'text-BaserOnSurfase bg-white'}   text-center text-sm font-medium  py-2 border-[2px] w-[115px] cursor-pointer border-BaserOutline  rounded-full`}
+                            >
+                                {ele.text}
                             </div>
                         ))
                     }

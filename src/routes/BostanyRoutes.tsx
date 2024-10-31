@@ -4,11 +4,11 @@ import Statistics from "../pages/BostanyDashboard/Statistics"
 import Table from "../pages/BostanyDashboard/Table"
 import Messages from "../pages/BostanyDashboard/Messages"
 import Profile from "../pages/Both/Profile"
-import ProfileNotification from "../components/BaserComponent/ProfileNotification"
-import CountInfo from "../components/BaserComponent/CountInfo"
-import ProfilePrevice from "../components/BaserComponent/ProfilePrevice"
-import ProfileHelp from "../components/BaserComponent/ProfileHelp"
-import ProfileAboutBostany from "../components/BaserComponent/ProfileAboutBostany"
+import ProfileNotification from "../components/General/ProfileNotification"
+import ProfileInfo from "../components/General/ProfileInfo"
+import ProfilePrevice from "../components/General/ProfilePrevice"
+import ProfileHelp from "../components/General/ProfileHelp"
+import ProfileAboutBostany from "../components/General/ProfileAboutBostany"
 import Wallet from "../pages/Both/Wallet"
 
 const BostanyRoutes = () => {
@@ -20,7 +20,7 @@ const BostanyRoutes = () => {
             <Route path="/messages" element={<Messages />} />
             <Route path="/wallet" element={<Wallet />} />
             <Route path="/profile/*" element={<Profile />} >
-                <Route path="countInfo" element={<CountInfo />} />
+                <Route path="countInfo" element={<ProfileInfo />} />
                 <Route path="notification" element={<ProfileNotification />} />
                 <Route path="previce" element={<ProfilePrevice />} />
                 <Route path="help" element={<ProfileHelp />} />

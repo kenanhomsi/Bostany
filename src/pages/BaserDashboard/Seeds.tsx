@@ -2,8 +2,10 @@ import { Tabs } from "flowbite-react"
 import ComingSeeds from "../../components/BaserComponent/ComingSeeds"
 import CanceledSeeds from "../../components/BaserComponent/CanceledSeeds"
 import FinishedSeeds from "../../components/BaserComponent/FinishedSeeds"
+import { useGetUserProfile } from "../../utils/api/User/useGetUserProfile"
 
 const Seeds = () => {
+    const { data: userData } = useGetUserProfile();
     return (
         <div className="mt-section py-14 px-16 w-full min-h-[70vh]">
             <Tabs aria-label="Tabs with underline" variant="underline"
@@ -26,13 +28,13 @@ const Seeds = () => {
                     }
                 }}
             >
-                <Tabs.Item active title={`قادمة (${6})`} >
+                <Tabs.Item active title={`قادمة (${userData?.data.counts.waiting_projects})`} >
                     <ComingSeeds />
                 </Tabs.Item>
-                <Tabs.Item title={`ثماري (${6})`}  >
+                <Tabs.Item title={`ثماري (${userData?.data.counts.completed_projects})`}  >
                     <FinishedSeeds />
                 </Tabs.Item>
-                <Tabs.Item title={`ملغية (${6})`}  >
+                <Tabs.Item title={`ملغية (${userData?.data.counts.cancelled_projects})`}  >
                     <CanceledSeeds />
                 </Tabs.Item>
             </Tabs>

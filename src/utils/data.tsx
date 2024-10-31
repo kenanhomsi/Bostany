@@ -1,4 +1,5 @@
 import avaterImage from '/Images/Avatars.png'
+
 import { PiUserCircleFill } from "react-icons/pi";
 import { PiBellFill } from "react-icons/pi";
 import { PiLockFill } from "react-icons/pi";
@@ -31,7 +32,6 @@ import { PiPenNibStraightDuotone } from "react-icons/pi";
 import { PiCrownSimpleDuotone } from "react-icons/pi";
 import { PiStudentDuotone } from "react-icons/pi";
 import { PiHandHeartDuotone } from "react-icons/pi";
-import { PiSquaresFourDuotone } from "react-icons/pi";
 import { WorlSpaceDataType } from "../Types";
 import { PiHouseFill } from "react-icons/pi";
 import { PiMagnifyingGlass } from "react-icons/pi";
@@ -118,25 +118,25 @@ export const socialIconsForBostany = [
   },
 ];
 export const WorkSpaceData: WorlSpaceDataType[] = [
-  {
-    id: 1,
-    name: "الكل",
-    icon: <PiSquaresFourDuotone />,
-    types: [
-      "محتوى مرئي",
-      "قيادة إعلامية",
-      "رقمي إداري",
-      "إعلام مرئي",
-      "برمجة",
-      "رقمي",
-      "كتابة إبداعية",
-      "تصميم",
-      "2محتوى مرئي",
-      "2قيادة إعلامية",
-      "2رقمي إداري",
-      "2إعلام مرئي",
-    ],
-  },
+  // {
+  //   id: 1,
+  //   name: "الكل",
+  //   icon: <PiSquaresFourDuotone />,
+  //   types: [
+  //     "محتوى مرئي",
+  //     "قيادة إعلامية",
+  //     "رقمي إداري",
+  //     "إعلام مرئي",
+  //     "برمجة",
+  //     "رقمي",
+  //     "كتابة إبداعية",
+  //     "تصميم",
+  //     "2محتوى مرئي",
+  //     "2قيادة إعلامية",
+  //     "2رقمي إداري",
+  //     "2إعلام مرئي",
+  //   ],
+  // },
   {
     id: 2,
     name: "أعمال",
@@ -145,7 +145,7 @@ export const WorkSpaceData: WorlSpaceDataType[] = [
   },
   {
     id: 3,
-    name: "الفنون",
+    name: "فنون",
     icon: < PiPenNibStraightDuotone />,
     types: ["كتابة إبداعية", "تصميم", "محتوى مرئي"],
   },
@@ -3757,7 +3757,6 @@ export const StatisticsDataForMounth = {
 }
 
 const now = new Date();
-import Icons from '/Icons/Apple.png'
 import AppointmentChap from '../components/BostanyComponents/AppointmentChap';
 export const events = [
   {
@@ -3947,3 +3946,176 @@ export const events = [
     end: new Date(2024, 9, 21, 19, 0, 0),
   },
 ];
+
+export const Chats = [
+  {
+    "Person": {
+      "name": "سارة الشمري",
+      "image": avaterImage
+    },
+    "Messages": [
+      {
+        "From": "Him",
+        "text": "المعرفة قوة، وهي تفتح الأبواب التي كانت مغلقة.",
+        "date": {
+          "hour": 15,
+          "minute": 10,
+          "day": 22,
+          "mounth": 10,
+          "year": 2024
+        },
+        "received": true,
+        "readed": true
+      },
+      {
+        "From": "me",
+        "text": "بالضبط، التعلم المستمر هو المفتاح.",
+        "date": {
+          "hour": 15,
+          "minute": 15,
+          "day": 22,
+          "mounth": 10,
+          "year": 2024
+        },
+        "received": true,
+        "readed": true
+      }
+    ]
+  },
+  {
+    "Person": {
+      "name": "محمد القحطاني",
+      "image": avaterImage
+    },
+    "Messages": [
+      {
+        "From": "Him",
+        "text": "أحببت فيلم الأمس، كانت القصة مؤثرة جداً.",
+        "date": {
+          "hour": 16,
+          "minute": 20,
+          "day": 22,
+          "mounth": 10,
+          "year": 2024
+        },
+        "received": true,
+        "readed": true
+      },
+      {
+        "From": "me",
+        "text": "نعم، كانت لحظات مؤثرة بالفعل.",
+        "date": {
+          "hour": 16,
+          "minute": 25,
+          "day": 22,
+          "mounth": 10,
+          "year": 2024
+        },
+        "received": true,
+        "readed": false
+      }
+    ]
+  },
+  {
+    "Person": {
+      "name": "فاطمة العتيبي",
+      "image": avaterImage
+    },
+    "Messages": [
+      {
+        "From": "Him",
+        "text": "تذكر أن الأهداف الصغيرة تؤدي إلى إنجازات كبيرة.",
+        "date": {
+          "hour": 17,
+          "minute": 5,
+          "day": 22,
+          "mounth": 10,
+          "year": 2024
+        },
+        "received": true,
+        "readed": false
+      },
+      {
+        "From": "me",
+        "text": "هذا هو السر، التركيز على التفاصيل.",
+        "date": {
+          "hour": 17,
+          "minute": 10,
+          "day": 22,
+          "mounth": 10,
+          "year": 2024
+        },
+        "received": true,
+        "readed": false
+      }
+    ]
+  },
+  {
+    "Person": {
+      "name": "يوسف العمري",
+      "image": avaterImage
+    },
+    "Messages": [
+      {
+        "From": "Him",
+        "text": "هل جربت الطبخ الجديد؟ إنه لذيذ!",
+        "date": {
+          "hour": 18,
+          "minute": 15,
+          "day": 22,
+          "mounth": 10,
+          "year": 2024
+        },
+        "received": true,
+        "readed": false
+      },
+      {
+        "From": "me",
+        "text": "لا، لكنني سأجربه قريبًا.",
+        "date": {
+          "hour": 18,
+          "minute": 20,
+          "day": 22,
+          "mounth": 10,
+          "year": 2024
+        },
+        "received": true,
+        "readed": false
+      }
+    ]
+  },
+  {
+    "Person": {
+      "name": "نورة السالم",
+      "image": avaterImage
+    },
+    "Messages": [
+      {
+        "From": "Him",
+        "text": "أحببت حديثنا عن الكتب، لدي اقتراحات رائعة.",
+        "date": {
+          "hour": 19,
+          "minute": 30,
+          "day": 22,
+          "mounth": 10,
+          "year": 2024
+        },
+        "received": true,
+        "readed": true
+      },
+      {
+        "From": "me",
+        "text": "أنتظر اقتراحاتك بفارغ الصبر!",
+        "date": {
+          "hour": 19,
+          "minute": 35,
+          "day": 22,
+          "mounth": 10,
+          "year": 2024
+        },
+        "received": true,
+        "readed": false
+      }
+    ]
+  }
+]

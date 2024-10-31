@@ -12,7 +12,7 @@ const Step2 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
     const handleFromDateChange = (date: Date) => {
         SetFormData({
             ...FormData,
-            birthDate: date
+            birthDate: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDay()}`,//YYYY-MM-DD
         })
     };
     const handleGenderClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -40,11 +40,11 @@ const Step2 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
             </div>
             <div className="min-w-full flex  gap-3 " >
                 <button onClick={handleGenderClick} value='ذكر' className={` ${FormData.gender == 'ذكر' && `${RegisterAs == 'Baser' ? '!border-BaserPrimary' : '!border-BostanyPrimary'}`} border-2 border-BaserSurface flex-1 z-10 p-4 cursor-pointer bg-BaserSurface flex flex-col items-center gap-4 rounded-2xl`}>
-                    <img src={RegisterAs == 'Baser' ? BaserManIcon : BostanyManIcon} alt={RegisterAs == 'Baser' ? BaserManIcon : BostanyManIcon} className="w-20 h-20 " />
+                    <img src={RegisterAs == 'Baser' ? BaserManIcon : BostanyManIcon} alt={RegisterAs == 'Baser' ? BaserManIcon : BostanyManIcon} className="w-20 h-20  pointer-events-none" />
                     <p>ذكر</p>
                 </button>
                 <button onClick={handleGenderClick} value='أنثي' className={`${FormData.gender == 'أنثي' && `${RegisterAs == 'Baser' ? '!border-BaserPrimary' : '!border-BostanyPrimary'}`}  border-2 border-BaserSurface flex-1 p-4 cursor-pointer bg-BaserSurface flex flex-col items-center gap-4 rounded-2xl`}>
-                    <img src={RegisterAs == 'Baser' ? BaserfemaleIcon : BostanyfemaleIcon} alt={RegisterAs == 'Baser' ? BaserfemaleIcon : BostanyfemaleIcon} className="w-20 h-20 " />
+                    <img src={RegisterAs == 'Baser' ? BaserfemaleIcon : BostanyfemaleIcon} alt={RegisterAs == 'Baser' ? BaserfemaleIcon : BostanyfemaleIcon} className="w-20 h-20 pointer-events-none " />
                     <p>أنثي</p>
                 </button>
             </div>

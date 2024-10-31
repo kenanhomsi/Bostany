@@ -62,10 +62,12 @@ const SearchableDropdown = ({
                         <div
                             onClick={() => handleClick(option.id)}
                             key={`${id}-${index}`}
-                            className=" flex  bg-BaserSurface cursor-pointer p-4 rounded-xl justify-between items-center">
-                            <img src={option.icon} alt={option.icon} className="w-6 h-6" />
-                            <span>{option.name}</span>
-                            <span>{option.suffix}</span>
+                            className=" flex  bg-BaserSurface cursor-pointer p-4 rounded-xl   justify-between items-center">
+                            <div className=" flex items-center gap-6">
+                                <img src={option.flag} alt={option.flag} className="w-6 h-6 rounded-full" />
+                                <span>{option.name}</span>
+                            </div>
+                            <div className="">{option.key}</div>
                         </div>
                     );
                 })}

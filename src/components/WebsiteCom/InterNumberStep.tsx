@@ -2,71 +2,75 @@ import CountrySelect from "./CountrySelect"
 import { PiAppleLogoFill } from "react-icons/pi";
 import { FcGoogle } from "react-icons/fc";
 import { PiTreeFill } from "react-icons/pi";
-import { Dispatch, SetStateAction, useState } from "react";
-import KSAFlag from '/country/KAS.png'
-import EgyptFlag from '/country/eg.png'
-import PalastenFlag from '/country/ps.png'
-import QatterFlag from '/country/qa.png'
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useAppSelector } from "../../redux/store";
 import baserIcon from '/Icons/Baser.png'
 import { useDispatch } from "react-redux";
 import { changeRegisterAsState } from "../../redux/Slices/RegisterSlice";
-export const CountryDataFlags = [{
-    id: 1,
-    name: 'السعودية',
-    icon: KSAFlag,
-    suffix: '+963'
-
-},
-{
-    id: 2,
-    name: 'مصر',
-    icon: EgyptFlag,
-    suffix: '+55'
-},
-{
-    id: 3,
-    name: 'فلسطين',
-    icon: PalastenFlag,
-    suffix: '+66'
-
-},
-{
-    id: 4,
-    name: 'قطر',
-    icon: QatterFlag,
-    suffix: '+32'
-
-},
-{
-    id: 5,
-    name: 'العراق',
-    icon: KSAFlag,
-    suffix: '+222232'
-
-},]
+import useFetchCountries from "../../Hooks/useFetchAllCountreis";
+import { usePostLogin } from "../../utils/api/auth/usePostLogin";
+import { loginSuccess, User } from "../../redux/Slices/authSlice";
+import { useNavigate } from "react-router-dom";
+import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth'
+import { app } from '../../firebase'
 const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) => {
+    const auth = getAuth(app);
     const RegisterAs = useAppSelector((state) => state.register.RegisterAs)
-    const [DropDownValue, setDropDownValue] = useState(0)
+    const [RegisterData, setRegisterData] = useState({
+        phoneNumber: '',
+        type: RegisterAs,
+        phone_code: 'sy'
+    })
+    const { data, isSuccess, isLoading, isError, mutate } = usePostLogin();
+    const { allCountries } = useFetchCountries();
+    const [DropDownValue, setDropDownValue] = useState(1)
     const Dispatch = useDispatch();
-    const handleClick = () => {
-        setStep(2);
-    }
-
-    // const SelectedValue = data.filter((ele) => {
-    //     if (ele.id == DropDownValue) {
-    //         return ele.id
-    //     }
-    // })[0] || data[0]
-    const [numberValue, setNumberValue] = useState(0)
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (isSuccess) {
+            Dispatch(loginSuccess({
+                user: data?.data.data as User,
+                token: data?.data.token as string
+            }))
+            setStep(2)
+        }
+    }, [Dispatch, data, isSuccess, navigate, setStep])
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setNumberValue(+e.target.value);
+        setRegisterData({
+            ...RegisterData,
+            phoneNumber: e.target.value
+        });
     };
     const handleRegisterChange = () => {
         if (RegisterAs == 'Baser') {
             Dispatch(changeRegisterAsState('Bostany'))
         } else {
             Dispatch(changeRegisterAsState('Baser'))
+        }
+    }
+    const handleSubmit = () => {
+        const SelectedCountry = allCountries.filter((ele) => {
+            if (ele.id == DropDownValue) {
+                return ele.id
+            }
+        })[0]
+        mutate({
+            payload: {
+                username: RegisterData.phoneNumber.toString(),//or phone number
+                phone_code: SelectedCountry.code,
+                type: RegisterData.type == 'Baser' ? 'customer' : 'consultant',
+            }
+        })
+    }
+    const handleOuthClick = async () => {
+        // console.log('yess')
+        const provider = new GoogleAuthProvider();
+        provider.setCustomParameters({ prompt: 'select_account' })
+        try {
+            const resultFromGoogle = await signInWithPopup(auth, provider)
+            console.log(resultFromGoogle)
+        } catch (err) {
+            console.log(err)
         }
     }
     return (
@@ -76,15 +80,21 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
             <div className="flex flex-col gap-4 w-full">
                 <div className="flex flex-col gap-1">
                     <span className="font-medium text-base  text-[#191C1B]">الدولة</span>
-                    <CountrySelect data={CountryDataFlags} DropDownValue={DropDownValue}
-                        setDropDownValue={setDropDownValue} />
+                    {
+                        allCountries.length > 0 &&
+                        <CountrySelect data={allCountries} DropDownValue={DropDownValue}
+                            setDropDownValue={setDropDownValue} />
+                    }
                 </div>
                 <div className=" flex flex-col gap-1">
                     <span className="font-medium text-base  text-[#191C1B]">رقم الهاتف</span>
-                    <input type="number" onChange={handleChange} value={numberValue == 0 ? '' : numberValue} className="w-full bg-BaserSurface text-dark  rounded-2xl border-none p-4" placeholder="أدخل رقم الهاتف" />
+                    <input type="text" onChange={handleChange} value={RegisterData.phoneNumber == '' ? '' : RegisterData.phoneNumber} className="w-full bg-BaserSurface text-dark  rounded-2xl border-none p-4" placeholder="أدخل رقم الهاتف" />
                     <span className=" text-dark text-sm font-normal">سنرسل لك رمز تحقق عبر رسالة نصية</span>
                 </div>
-                <button onClick={handleClick} disabled={numberValue == 0} className={`  ${numberValue == 0 ? ` text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]` : ` cursor-pointer  text-white ${RegisterAs == 'Baser' ? 'bg-BaserPrimary' : 'bg-BostanyPrimary'} `} w-full   rounded-full p-3  text-base font-medium`}>استمرار</button>
+                <button onClick={handleSubmit} disabled={RegisterData.phoneNumber == ''} className={`  ${RegisterData.phoneNumber == '' ? ` text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]` : ` cursor-pointer  text-white ${RegisterAs == 'Baser' ? 'bg-BaserPrimary' : 'bg-BostanyPrimary'} `} w-full   rounded-full p-3  text-base font-medium`}>{isLoading ? '...loaging' : 'استمرار'}</button>
+                {
+                    isError && <p className=" text-GeneralError text-center my-3">هنالك خطا في البيانات الرجاء التاكد منها واعادة المحاولة</p>
+                }
             </div>
             <div className="flex relative">
                 <p className=" border-BaserOutline border-b w-full h-1 " ></p>
@@ -94,7 +104,7 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
                 <div className=" p-3 border border-BaserOutline rounded-full cursor-pointer">
                     <PiAppleLogoFill className="text-3xl" />
                 </div>
-                <div className=" p-3 border border-BaserOutline rounded-full cursor-pointer">
+                <div onClick={handleOuthClick} className=" p-3 border border-BaserOutline rounded-full cursor-pointer">
                     <FcGoogle className="text-3xl" />
                 </div>
             </div>
@@ -109,3 +119,5 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
 }
 
 export default InterNumberStep
+
+
