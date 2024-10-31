@@ -2,8 +2,11 @@ import { Tabs } from "flowbite-react"
 import BostanyComingSeeds from "../../components/BostanyComponents/BostanyComingSeeds"
 import TreesSeeds from "../../components/BostanyComponents/TreesSeeds"
 import RequestsSeeds from "../../components/BostanyComponents/RequestsSeeds"
+import { useAppSelector } from "../../redux/store"
 
 const BostanyHome = () => {
+    const UserData = useAppSelector((state) => state.auth.user)
+    console.log(UserData)
     return (
         <div className="mt-section">
             <div className="mt-section py-14 px-16 w-full min-h-[70vh]">

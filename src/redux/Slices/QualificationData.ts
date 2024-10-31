@@ -9,10 +9,10 @@ const initialState: intitstate = {
   QualificationDataArray: [
     {
       id: 0,
-      educational_institution: "",
-      Academic_degree: "",
-      Specialization: "",
-      Graduation_date: "",
+      issuer: "",
+      // Academic_degree: "البكالوريوس",
+      cartificate: "",
+      year: "",
     },
   ],
 };
@@ -24,10 +24,10 @@ const QualificationSlice = createSlice({
     AddNewQualificationData(state) {
       state.QualificationDataArray.push({
         id: state.QualificationDataArray.length,
-        educational_institution: "",
-        Academic_degree: "",
-        Specialization: "",
-        Graduation_date: "",
+        issuer: "",
+        // Academic_degree: "",
+        cartificate: "",
+        year: "",
       });
     },
     changeQualificationData(state, action) {
@@ -39,9 +39,23 @@ const QualificationSlice = createSlice({
         }
       });
     },
+    EmptyQualificationData(state) {
+      state.QualificationDataArray = [
+        {
+          id: 0,
+          issuer: "",
+          // Academic_degree: "البكالوريوس",
+          cartificate: "",
+          year: "",
+        },
+      ];
+    },
   },
 });
 
-export const { AddNewQualificationData, changeQualificationData } =
-  QualificationSlice.actions;
+export const {
+  AddNewQualificationData,
+  changeQualificationData,
+  EmptyQualificationData,
+} = QualificationSlice.actions;
 export default QualificationSlice.reducer;

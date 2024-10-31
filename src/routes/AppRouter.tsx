@@ -8,6 +8,8 @@ import BaserDashboardLayout from "../layout/BaserDashboardLayout";
 import BaserRoutes from "./BaserRoutes";
 import BostanyLayout from "../layout/BostanyLayout";
 import BostanyRoutes from "./BostanyRoutes";
+import Bst10 from "../pages/BostanyDashboard/Bst10";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 
 const AppRoutes: React.FC = () => {
@@ -34,7 +36,9 @@ const AppRoutes: React.FC = () => {
                     path="/Baser/*"
                     element={
                         <BaserDashboardLayout>
-                            <BaserRoutes />
+                            <ProtectedRoute roles={['customer']}>
+                                <BaserRoutes />
+                            </ProtectedRoute>
                         </BaserDashboardLayout>
                     }
                 />
@@ -42,10 +46,14 @@ const AppRoutes: React.FC = () => {
                     path="/Bostany/*"
                     element={
                         <BostanyLayout>
-                            <BostanyRoutes />
+                            <ProtectedRoute roles={['consultant']}>
+                                <BostanyRoutes />
+                            </ProtectedRoute>
                         </BostanyLayout>
                     }
                 />
+                <Route path="/Bostany/bst10" element={<Bst10 />} />
+
             </Routes>
         </Router>
     );

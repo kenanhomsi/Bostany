@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { IGetBostany } from "./api";
+
 export interface TimeBarProps {
   TimeSelected: string;
   FromProfile?: boolean;
@@ -39,17 +40,20 @@ export interface ProfileDateType {
 }
 export interface ProfileCardProps {
   CardShap: string;
-  data: ProfileDateType;
+  data: IGetBostany;
 }
 export interface LayoutProps {
   children: React.ReactNode;
 }
 export interface DropDownSelectionTypes {
   data: {
+    code: string;
+    currency: string;
+    flag: string;
     id: number;
+    is_default: boolean;
+    key: string;
     name: string;
-    icon: string;
-    suffix: string;
   }[];
   DropDownValue?: number;
   setDropDownValue?: (index: number) => void;
@@ -59,23 +63,20 @@ export interface DropDownSelectionTypes {
 }
 export interface qualificationType {
   id: number;
-  educational_institution: string;
-  Academic_degree: string;
-  Specialization: string;
-  Graduation_date: string;
+  issuer: string;
+  Academic_degree?: string;
+  cartificate: string;
+  year: string;
 }
 export interface CompleteProfileFormData {
   FullName: string;
   email: string;
   checkOne: boolean;
   checkTwo: boolean;
-  birthDate: Date | string;
+  birthDate: string;
   gender: string;
-  WorkType: string;
-  WorkSpace: {
-    id: number;
-    name: string;
-  };
+  specialities: number[];
+  category: number[];
   qualification: qualificationType[];
   DefinitiveWords: string;
 }
@@ -159,7 +160,34 @@ export interface SeedsCardData {
   };
 }
 export interface SeedsCardProps {
-  data: SeedsCardData;
+  data: {
+    id: number;
+    name: string;
+    description: string;
+    specialities: {
+      id: number;
+      name: string;
+    }[];
+    status: string;
+    status_localed: string;
+    stage: string;
+    stage_localed: string;
+    user: {
+      id: number;
+      name: string;
+      type: string;
+      avatar: string;
+      rating: {
+        avg: string;
+        count: number;
+      };
+      localed_type: string;
+      created_at: string;
+      created_at_formatted: string;
+    };
+    created_at: string;
+    created_at_formatted: string;
+  };
   index: number;
   From?: string;
   Dashboard: string;
@@ -195,4 +223,61 @@ export interface StatisticsBodyProps {
   NewTreesCount: number;
   CancelRate: number;
   BenefitAVg: number;
+}
+export interface chatType {
+  id: number;
+  Person: {
+    name: string;
+    image: string;
+  };
+  Messages: {
+    From: string;
+    text: string;
+    date: {
+      hour: number;
+      minute: number;
+      day: number;
+      mounth: number;
+      year: number;
+    };
+    received: boolean;
+    readed: boolean;
+  }[];
+}
+export interface ChatRoomProps {
+  SelectedChat: chatType;
+}
+export interface HistoryChatsProps {
+  Chats: chatType[];
+}
+export interface ProfileFormType {
+  name: string | undefined;
+  imageFile: File | null;
+  avatar: string | undefined;
+  birthdate: string | undefined;
+  avatarToken?: string;
+  country:
+    | {
+        id: number;
+        name: string;
+        code: string;
+        key: string;
+        is_default: boolean;
+        currency: string;
+        flag: string;
+      }
+    | undefined;
+  email: string | undefined;
+  phone: string | undefined;
+}
+export interface ProfileNotifiHandleSwitchProps {
+  notif: {
+    key: string;
+    name: string;
+    mail: boolean;
+    database: boolean;
+    webpush: boolean;
+    firebase: boolean;
+  };
+  value: boolean;
 }

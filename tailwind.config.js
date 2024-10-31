@@ -28,6 +28,7 @@ export default {
         BostanyPrimaryContainer: "#B8FFEA",
         BostanyOnPrimaryContainer: "#004437",
         BostanyOnSurface: "#191C1B",
+        BostanySurfaceContainerLow: "#FAFBF9",
       },
       spacing: {
         lg: "6rem",

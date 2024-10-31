@@ -8,17 +8,30 @@ import CardsGrid from './CardsGrid';
 import { useDispatch } from 'react-redux';
 import { changeCardShapState } from '../../redux/Slices/HomeCardSlice';
 import logosGroup from '/Icons/LogosGroup.png'
-import { CardsBastanyData } from "../../utils/data"
 import { PutBookingDayFromTimeBar } from '../../redux/Slices/BookingSlice';
+import { useGetConsultantsList } from '../../utils/api/select/useGetConsultants';
+import { PiSquaresFourDuotone } from "react-icons/pi";
+import { useGetSpecialitiestList } from '../../utils/api/select/useGetspecialities';
+import { useGetCategoriestList } from '../../utils/api/select/useGetCategories';
 
 const MainHomeContent = ({ place }: { place: string }) => {
+    const [TimeSelected, setTimeSelected] = useState('')
+    const { data: SpecialitiesList } = useGetSpecialitiestList();
+    const [SelectedSpecialities, setSelectedSpecialities] = useState(0)
+    const [SelectedCategory, setSelectedCategory] = useState<number[]>([])
+    const { data: categories, refetch } = useGetCategoriestList({
+        queryKey: ["Categories", SelectedSpecialities]
+    });
+    useEffect(() => {
+        refetch()
+    }, [SelectedSpecialities, refetch])
+    const { data, refetch: ConsultantsRefetch } = useGetConsultantsList({
+        queryKey: ["Filters", `${SelectedSpecialities != 0 ? `specialities=${SelectedSpecialities}` : ''}${SelectedCategory.length != 0 ? `&categories=${SelectedCategory}` : ''}${TimeSelected != '' ? `&date=${TimeSelected}` : ''}`]
+    });
+    useEffect(() => {
+        ConsultantsRefetch()
+    }, [SelectedSpecialities, SelectedCategory, TimeSelected, ConsultantsRefetch])
     const dispatch = useDispatch();
-    const [WorkSpaceSelected, setWorkSpaceSelected] = useState({
-        id: 0,
-        name: ''
-    })
-    const [WorkTypeSelected, setWorkTypeSelected] = useState('')
-    const [TimeSelected, setTimeSelected] = useState(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`)
     useEffect(() => {
         dispatch(PutBookingDayFromTimeBar(TimeSelected))
     }, [TimeSelected, dispatch])
@@ -28,14 +41,20 @@ const MainHomeContent = ({ place }: { place: string }) => {
         } else {
             dispatch(changeCardShapState('row'))
         }
-        setWorkSpaceSelected(selected)
+        setSelectedSpecialities(selected.id)
     }
-    const handleWorkTypeClick = (type: string) => {
-        setWorkTypeSelected(type)
+    const handleWorkTypeClick = (id: number) => {
+        setSelectedCategory((pre) => {
+            if (pre.includes(id)) {
+                return pre.filter((ele) => ele !== id)
+            } else {
+                return [...pre, id]
+            }
+        }
+        )
     }
     const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
     const { events } = useDraggable(ref);
-
     return (
         <div className={`flex flex-col items-center  overflow-hidden ${place == 'website' ? 'py-24' : 'pt-40 pb-24'}  w-full  `}>
             {
@@ -66,35 +85,48 @@ const MainHomeContent = ({ place }: { place: string }) => {
                 </div>
             }
             <div className=" flex  items-center  mt-8  w-full justify-around">
-                {WorkSpaceData &&
-                    WorkSpaceData.map((ele, index) => (
-                        <button key={index} onClick={() => handleWorkSpaceClick({ id: ele.id, name: ele.name })} className='flex flex-col  items-center gap-3'>
-                            <div className={` text-[46px] ${WorkSpaceSelected.name == ele.name && 'text-BaserPrimary'}  `}>
-                                {ele.icon}
+                <button onClick={() => handleWorkSpaceClick({ id: 0, name: 'الكل' })} className='flex flex-col  items-center gap-3'>
+                    <div className={` text-[46px] ${SelectedSpecialities == 0 && 'text-BaserPrimary'}  `}>
+                        <PiSquaresFourDuotone />
+                    </div>
+                    <p className='text-xs font-medium text-dark'>الكل</p>
+                </button>
+                {SpecialitiesList &&
+                    SpecialitiesList.data.map((ele, index) => {
+                        return <button key={index} onClick={() => handleWorkSpaceClick({ id: ele.id, name: ele.text })} className='flex flex-col  items-center gap-3'>
+                            <div className={` text-[46px] ${ele.id == SelectedSpecialities && 'text-BaserPrimary'}  `}>
+                                {WorkSpaceData &&
+                                    WorkSpaceData.filter((work) => work.name === ele.text)[0]?.icon
+                                }
                             </div>
-                            <p className='text-xs font-medium text-dark'>{ele.name}</p>
+                            <p className='text-xs font-medium text-dark'>{ele.text}</p>
                         </button>
-                    ))
+                    }
+                    )
                 }
             </div>
             <div ref={ref}    {...events}
                 className="flex w-full space-x-3  my-6 overflow-x-scroll scrollbar-hide"
             >
                 <div className=" flex w-fit  gap-2">
-                    {
-                        WorkSpaceData && WorkSpaceData[WorkSpaceSelected.id].types.map((type: string, index) => (
+                    {SelectedSpecialities != 0 &&
+                        categories && categories.data.map((ele) => (
                             <div
-                                key={index}
-                                onClick={() => handleWorkTypeClick(type)}
-                                className={` ${WorkTypeSelected == type ? 'bg-BaserPrimary text-white' : 'text-BaserOnSurfase bg-white'}   text-center text-sm font-medium  py-2 border-[2px] w-[115px] cursor-pointer border-BaserOutline  rounded-full`}>
-                                {type}
+                                key={ele.id}
+                                onClick={() => handleWorkTypeClick(ele.id)}
+                                className={` ${SelectedCategory.length > 0 && SelectedCategory.includes(ele.id) ? 'bg-BaserPrimary text-white' : 'text-BaserOnSurfase bg-white'}   text-center text-sm font-medium  py-2 border-[2px] w-[115px] cursor-pointer border-BaserOutline  rounded-full`}
+                            >
+                                {ele.text}
                             </div>
                         ))
                     }
                 </div>
             </div>
             <TimeBar TimeSelected={TimeSelected} setTimeSelected={setTimeSelected} />
-            <CardsGrid FromWhere={place} data={CardsBastanyData} />
+            {
+                data &&
+                <CardsGrid FromWhere={place} data={data} />
+            }
         </div>
     )
 }

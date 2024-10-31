@@ -1,103 +1,21 @@
 import SeedsEmpty from "./SeedsEmpty"
 import SeedsCard from "./SeedsCard";
-import CardAvatarImage from "/Images/Avatars.png";
+import { useGetProjects } from "../../utils/api/Projects/useGetProjects";
 
 const ComingSeeds = () => {
-    const data = [
-        {
-            image: CardAvatarImage,
-            title: 'إشكالية في تحديد نسبة الشراكة',
-            time: {
-                from: '13:00', to: '16:00'
-            },
-            name: "علي الحسن",
-            workSpaceID: 2,
-            type: 'المحتوي المرئي',
-            date: {
-                month: '7',
-                day: '15'
-            }
-        },
-        {
-            image: CardAvatarImage,
-            title: 'إشكالية في تحديد نسبة الشراكة',
-            time: {
-                from: '13:00', to: '16:00'
-            },
-            name: "علي الحسن",
-            workSpaceID: 2,
-            type: 'المحتوي المرئي',
-            date: {
-                month: '7',
-                day: '15'
-            }
-        },
-        {
-            image: CardAvatarImage,
-            title: 'إشكالية في تحديد نسبة الشراكة',
-            time: {
-                from: '13:00', to: '16:00'
-            },
-            name: "علي الحسن",
-            workSpaceID: 2,
-            type: 'المحتوي المرئي',
-            date: {
-                month: '7',
-                day: '15'
-            }
-        },
-        {
-            image: CardAvatarImage,
-            title: 'إشكالية في تحديد نسبة الشراكة',
-            time: {
-                from: '13:00', to: '16:00'
-            },
-            name: "علي الحسن",
-            workSpaceID: 2,
-            type: 'المحتوي المرئي',
-            date: {
-                month: '7',
-                day: '15'
-            }
-        },
-        {
-            image: CardAvatarImage,
-            title: 'إشكالية في تحديد نسبة الشراكة',
-            time: {
-                from: '13:00', to: '16:00'
-            },
-            name: "علي الحسن",
-            workSpaceID: 2,
-            type: 'المحتوي المرئي',
-            date: {
-                month: '7',
-                day: '15'
-            }
-        },
-        {
-            image: CardAvatarImage,
-            title: 'إشكالية في تحديد نسبة الشراكة',
-            time: {
-                from: '13:00', to: '16:00'
-            },
-            name: "علي الحسن",
-            workSpaceID: 2,
-            type: 'المحتوي المرئي',
-            date: {
-                month: '7',
-                day: '15'
-            }
-        },
-    ]
+    const { data } = useGetProjects({
+        queryKey: ["type", "waiting"]
+    })
+
     return (
         <div className="w-full h-full">
             {
-                !data || data.length == 0 && <SeedsEmpty />
+                !data || data.data.length == 0 && <SeedsEmpty />
             }
             {
-                data &&
+                data?.data != undefined && data.data.length > 0 &&
                 <div className={`flex flex-col gap-5 my-2 w-full`}>
-                    {data.map((card, index) => (
+                    {data.data.map((card, index) => (
                         <SeedsCard Dashboard="Baser" data={card} index={index} From="Comming" />
                     ))
                     }

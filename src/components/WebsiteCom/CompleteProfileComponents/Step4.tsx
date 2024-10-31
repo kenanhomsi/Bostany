@@ -12,12 +12,12 @@ const Step4 = () => {
     }
     return (
         <div className="flex flex-col gap-5  min-w-full">
-
-            {qualificationData && qualificationData.map((ele) => (
-                <Subspecialty index={ele.id} />
+            {qualificationData && qualificationData.map((ele, index) => (
+                <div className="" key={index}>
+                    <Subspecialty index={ele.id} />
+                </div>
             ))
             }
-
             <button onClick={handleAnotherqualification} className=" flex-row-reverse gap-2 text-bas font-medium text-BaserOnSurfase flex  items-center justify-center">
                 <p>أضافة مؤهل أخر</p> <FaPlus />
             </button>

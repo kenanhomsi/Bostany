@@ -17,7 +17,7 @@ const CountrySelect = ({ data, DropDownValue, setDropDownValue }: DropDownSelect
                 onClick={() => setDropDownState((pre) => !pre)}>
                 <div className="flex items-center gap-3">
                     <div className=" rounded-full  overflow-hidden">
-                        <img src={SelectedValue.icon} alt={SelectedValue.icon} className="w-8 h-8 " />
+                        <img src={SelectedValue.flag} alt={SelectedValue.flag} className="w-8 h-8 " />
                     </div>
                     <span>{SelectedValue.name}</span>
                 </div>

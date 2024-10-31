@@ -1,17 +1,17 @@
 import { PiMagnifyingGlass } from "react-icons/pi";
 import { WorkSpaceData } from "../../utils/data";
-import { useState } from "react";
-import { CardsBastanyData } from "../../utils/data"
+import { useEffect, useState } from "react";
 import ProfileCard from "../../components/General/ProfileCard";
 import { PiPlus } from "react-icons/pi";
 import { PiCheckCircleFill } from "react-icons/pi";
 import { PiCheckCircleLight } from "react-icons/pi";
-
+import { useGetConsultantsList } from "../../utils/api/select/useGetConsultants";
+import { useGetCategoriestList } from "../../utils/api/select/useGetCategories";
+import { useGetSpecialitiestList } from "../../utils/api/select/useGetspecialities";
 
 const Search = () => {
-    const [DropDownData] = useState(WorkSpaceData[0].types);
     const [FormToSearch, SetFormToSearch] = useState({
-        Space: '',
+        categories: 0,
         text: '',
         FilterBy: [
             {
@@ -30,14 +30,28 @@ const Search = () => {
                 state: false
             }
         ],
-        specialization: '',
+        specialization: 0,
         gender: ''
     });
-    const handleWorkSpaceClick = (id: number, name: string) => {
-        console.log(id)
+    const { data: SpecialitiesList } = useGetSpecialitiestList();
+    const { data: categories, refetch } = useGetCategoriestList({
+        queryKey: ["Categories", FormToSearch.specialization]
+    });
+    useEffect(() => {
+        refetch()
+    }, [FormToSearch.specialization, refetch])
+    const { data, refetch: ConsultantsRefetch } = useGetConsultantsList({
+        queryKey: ["Filters", `${FormToSearch.specialization != 0 ? `specialities=${FormToSearch.specialization}` : ''}${FormToSearch.categories != 0 ? `&categories=${FormToSearch.categories}` : ''}${FormToSearch.text != '' ? `&name=${FormToSearch.text}` : ''}`]
+    });
+    useEffect(() => {
+        ConsultantsRefetch()
+    }, [FormToSearch.specialization, FormToSearch.categories, FormToSearch.text, ConsultantsRefetch])
+    const [DropDownData] = useState(categories?.data);
+
+    const handleWorkSpaceClick = (id: number) => {
         SetFormToSearch({
             ...FormToSearch,
-            Space: name
+            specialization: id
         })
     }
     const handleCheckOneClick = () => {
@@ -55,7 +69,7 @@ const Search = () => {
     const HandleSpecialChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         SetFormToSearch({
             ...FormToSearch,
-            specialization: e.target.value
+            categories: +e.target.value
         })
     }
     const handleFilterBtns = () => {
@@ -78,32 +92,34 @@ const Search = () => {
         //     FilterBy: arr
         // })
     }
-    const listData = CardsBastanyData.slice(0, 7)
 
     return (
         <div className="mt-section pt-14  pb-6 h-full flex gap-5 justify-between px-5 ">
             <div className=" h-full w-full flex flex-col gap-7">
                 <div className=" relative">
-                    <input type="text" className="w-full  text-right  text-lg font-medium px-14 py-4 bg-BaserSurface text-dark  rounded-full border-none" placeholder="إبحث عن البستانيون " name="SearchBar" />
+                    <input type="text" value={FormToSearch.text} onChange={(e) => SetFormToSearch({
+                        ...FormToSearch,
+                        text: e.target.value
+                    })} className="w-full  text-right  text-lg font-medium px-14 py-4 bg-BaserSurface text-dark  rounded-full border-none" placeholder="إبحث عن البستانيون " name="SearchBar" />
                     <PiMagnifyingGlass className=" absolute top-4 right-5 w-6 h-6 " />
                 </div>
                 <div className=" flex flex-wrap  gap-4   w-full  ">
-                    {WorkSpaceData &&
-                        WorkSpaceData.map((ele, index) => {
-                            if (ele.id != 1) {
-                                return <button key={index} onClick={() => handleWorkSpaceClick && handleWorkSpaceClick(ele.id, ele.name)} className='flex  rounded-full border-[2px] py-2  px-3  items-center gap-2 border-[#8E918F]'>
-                                    <div className={` text-[24px] ${FormToSearch.Space == ele.name && 'text-BaserPrimary'}  `}>
-                                        {ele.icon}
-                                    </div>
-                                    <p className='text-xs font-medium  text-dark'>{ele.name}</p>
-                                </button>
-                            }
+                    {SpecialitiesList &&
+                        SpecialitiesList.data.map((ele, index) => {
+                            return <button key={index} onClick={() => handleWorkSpaceClick && handleWorkSpaceClick(ele.id)} className='flex  rounded-full border-[2px] py-2  px-3  items-center gap-2 border-[#8E918F]'>
+                                <div className={` text-[24px] ${FormToSearch.specialization == ele.id && 'text-BaserPrimary'}  `}>
+                                    {WorkSpaceData &&
+                                        WorkSpaceData.filter((work) => work.name === ele.text)[0]?.icon
+                                    }
+                                </div>
+                                <p className='text-xs font-medium text-dark'>{ele.text}</p>
+                            </button>
                         }
                         )
                     }
                 </div>
                 <div className={` grid grid-cols-3 gap-2 my-4 w-full`}>
-                    {listData.map((card) => (
+                    {data?.data.map((card) => (
                         <ProfileCard CardShap='col' data={card} />
                     ))
                     }
@@ -122,9 +138,9 @@ const Search = () => {
                 <div className="flex flex-col gap-4">
                     <p className="text-sm font-normal">اختار التخصص</p>
                     <select onChange={HandleSpecialChange} className="  bg-BaserSurface  rounded-full border-none py-4 px-6 text-sm font-normal text-dark">
-                        {
+                        {DropDownData &&
                             DropDownData.map((ele) => (
-                                <option value={ele} >{ele}</option>
+                                <option value={ele.id} >{ele.text}</option>
                             ))
                         }
                     </select>
