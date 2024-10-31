@@ -7,7 +7,7 @@ export interface TimeBarProps {
 }
 export interface ProfileDateType {
   id: number;
-  Ratings: {
+  Ratings?: {
     total: string;
     SeedOwner: string;
     ProfessionalismInDealing: string;
@@ -15,13 +15,13 @@ export interface ProfileDateType {
     SessionQuality: string;
     SeedExperience: string;
   }[];
-  Experiences: {
+  Experiences?: {
     number: number;
     name: string;
     status: string;
   }[];
-  WorkSpace: string[];
-  otherSpecialization: string[];
+  WorkSpace?: string[];
+  otherSpecialization?: string[];
   image: string;
   name: string;
   likes: number;
@@ -29,7 +29,7 @@ export interface ProfileDateType {
   Rate: number;
   BaserCount: number;
   Price: number;
-  Certificates: {
+  Certificates?: {
     id: number;
     title: string;
     university: string;

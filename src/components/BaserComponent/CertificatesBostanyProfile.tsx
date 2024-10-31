@@ -6,7 +6,7 @@ const CertificatesBostanyProfile = ({ BostanyData }: { BostanyData: ProfileDateT
         <div className="flex flex-col gap-4 text-BaserOnSurfase">
             <span className="text-[22px] font-semibold ">الشهادات</span>
             {
-                BostanyData.Certificates.map((certificate) => (
+                BostanyData.Certificates?.map((certificate) => (
                     <div className="p-6 rounded-3xl bg-BaserSurfaceContainer flex justify-between">
                         <div className="flex gap-4 items-center">
                             <PiCertificateFill className=" text-BostanyPrimary w-8 h-8" />

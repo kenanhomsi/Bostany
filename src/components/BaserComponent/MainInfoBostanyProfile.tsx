@@ -33,7 +33,7 @@ const MainInfoBostanyProfile = ({ BostanyData }: { BostanyData: ProfileDateType 
                     </div>
                     <div className=" flex flex-wrap gap-4">
                         {
-                            BostanyData.WorkSpace.map((ele, index) => (
+                            BostanyData.WorkSpace?.map((ele, index) => (
                                 <p key={index} className="flex w-fit  rounded-full border-[2px] py-2  px-4  items-center gap-2 border-[#8E918F]">
                                     <span className="text-xl text-BaserPrimary">{WorkSpaceData.filter((space) => space.name == ele)[0].icon}</span>
                                     <span className="text-sm font-medium text-BaserOnSurfase" >{ele}</span>
@@ -44,8 +44,8 @@ const MainInfoBostanyProfile = ({ BostanyData }: { BostanyData: ProfileDateType 
                     <div className=" flex flex-wrap text-base w-[400px] font-medium text-dark">
                         <span>{BostanyData.specialization} - </span>
                         {
-                            BostanyData.otherSpecialization.map((special, index) => (
-                                <span>{special} {BostanyData.otherSpecialization.length - 1 != index && <span> - </span>}</span>
+                            BostanyData.otherSpecialization?.map((special, index) => (
+                                <span>{special} {(BostanyData.otherSpecialization?.length ?? 0) - 1 != index && <span> - </span>}</span>
                             ))
                         }
                     </div>
