@@ -29,7 +29,7 @@ const Step2 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
                     <span>يوم / شهر / سنة</span>
                 </Label>}
                 <Datepicker
-                    onChange={handleFromDateChange}
+                    onChange={(val) => handleFromDateChange(val ?? new Date())}
                     name="ToDatePicker" id="ToDatePicker"
                     style={{ backgroundColor: '#faf5f9', width: '100%', border: '0', borderRadius: '30px', padding: '15px 40px', fontSize: '16px', fontWeight: 'normal' }}
                     theme={{
