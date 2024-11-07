@@ -1,18 +1,18 @@
 import { ToggleSwitch } from "flowbite-react"
-import { Link, Outlet, useLocation } from "react-router-dom"
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
-
 import {
     BaserProfilePageSideBar, BostanyProfilePageSideBar,
-    // ProfileData
 } from "../../utils/data";
 import { useDispatch } from "react-redux";
 import PopUpModal from "../../components/General/PopUpModal";
 import SwitchToBaserPopUp from "../../components/BostanyComponents/SwitchToBaserPopUp";
 import { CloseSwitchToBaser, OpenSwitchToBaser } from "../../redux/Slices/PopUpSlice";
 import { useGetUserProfile } from "../../utils/api/User/useGetUserProfile";
+import { logout } from "../../redux/Slices/authSlice";
 const Profile = () => {
     const pathname = useLocation().pathname
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const { data, isLoading } = useGetUserProfile();
     const Dashboard = pathname.split('/')[1]
@@ -35,6 +35,10 @@ const Profile = () => {
     } else {
         ProfileSideBar = BostanyProfilePageSideBar
 
+    }
+    const HandleLogOutCLick = () => {
+        dispatch(logout())
+        navigate('/');
     }
     return (
         <div className="flex gap-20  mt-section py-20 px-8  bg-[#FFFBFF]">
@@ -71,7 +75,7 @@ const Profile = () => {
                             </Link>
                         ))}
                     </div>
-                    <button className=" text-GeneralError border-none text-start px-5 text-lg font-medium">تسجيل الخروج</button>
+                    <button onClick={HandleLogOutCLick} className=" text-GeneralError border-none text-start px-5 text-lg font-medium">تسجيل الخروج</button>
                 </div>
             }
             <Outlet />

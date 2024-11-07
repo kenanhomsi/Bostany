@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useDraggable } from "react-use-draggable-scroll";
 import { TimeBarProps } from "../../Types";
 import { daysOfWeek } from "../../utils/data";
+import { formatTime } from "../../utils/Functions";
 
 const TimeBarProfile = ({ TimeSelected, setTimeSelected }: TimeBarProps) => {
     const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
@@ -17,7 +18,7 @@ const TimeBarProfile = ({ TimeSelected, setTimeSelected }: TimeBarProps) => {
         const yearNumber = date.getFullYear();
         DateArray.push({
             dayNumber: dayNumber,
-            Fulldate: `${yearNumber}-${monthNumber}-${dayNumber}`,
+            Fulldate: `${yearNumber}-${formatTime(monthNumber)}-${formatTime(dayNumber)}`,
             dayName: dayName
         });
     }
@@ -34,7 +35,7 @@ const TimeBarProfile = ({ TimeSelected, setTimeSelected }: TimeBarProps) => {
                 <div onClick={() => handleClick(dateItem.Fulldate)}
                     className={` ${TimeSelected == dateItem.Fulldate ? 'bg-BaserPrimary text-white ' : ' text-BaserOnSurfase border-[#9966FF]'} flex flex-col gap-1 items-center justify-center  rounded-full border !cursor-pointer   min-w-20 h-20 `} key={index}>
                     <p className={` text-sm font-medium`}>{today.getDate() == dateItem.dayNumber ? 'اليوم' : dateItem.dayName}</p>
-                    <p className={`  text-xs  font-normal `}>{dateItem.dayNumber}</p>
+                    <p className={`  text-xs  font-normal `}>{dateItem.dayNumber} / {dateItem.Fulldate.split('-')[1]} </p>
                 </div>
             ))
             }

@@ -3,22 +3,20 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { Methods } from "../../constant";
-import { EndPoints } from "../EndPoints";
-import { handleApiResponseErrors } from "../HandleAPIResponseErrors";
-import axiosInstance from "../axios";
-import { updateProfileInpust, updateProfileOutPut } from "../../../Types/api";
+import { Methods } from "../../../constant";
+import { handleApiResponseErrors } from "../../HandleAPIResponseErrors";
+import axiosInstance from "../../axios";
+import { RejectProjectType } from "../../../../Types/api";
+import { EndPoints } from "../../EndPoints";
 
-export const UpdateProfile = async (
-  payload: updateProfileInpust
-): Promise<updateProfileOutPut> => {
+export const RejectProject = async (
+  payload: RejectProjectType,
+  pojectId: number
+): Promise<RejectProjectType> => {
   try {
-    const response = await axiosInstance<
-      updateProfileInpust,
-      updateProfileOutPut
-    >({
-      method: Methods.PUT,
-      url: EndPoints.Profile,
+    const response = await axiosInstance<RejectProjectType, RejectProjectType>({
+      method: Methods.POST,
+      url: EndPoints.RejectProject.replace(":id", String(pojectId)),
       data: payload,
     });
     handleApiResponseErrors(response, "validation_error");
@@ -29,18 +27,19 @@ export const UpdateProfile = async (
   }
 };
 
-export const useUpdateProfile = (options = {}) => {
+export const useRejectProject = (options = {}) => {
   const queryClient = useQueryClient();
+
   const mutation: UseMutationResult<
-    updateProfileOutPut,
+    RejectProjectType,
     Error,
-    { payload: updateProfileInpust }
+    { payload: RejectProjectType; id: number }
   > = useMutation({
-    mutationFn: ({ payload }) => UpdateProfile(payload),
+    mutationFn: ({ payload, id }) => RejectProject(payload, id),
     ...options,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["User"],
+        queryKey: ["Projects"],
       });
     },
   });

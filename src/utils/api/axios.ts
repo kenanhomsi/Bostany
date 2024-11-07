@@ -37,7 +37,7 @@ axiosInstance.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       console.log(error.response.status);
       // Example: Redirect to login if unauthorized
-      window.location.href = "/login";
+      // window.location.href = "/auth/register";
     }
     return Promise.reject(error);
   }

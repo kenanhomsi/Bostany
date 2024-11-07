@@ -80,14 +80,14 @@ const CompleteProfile = () => {
     useEffect(() => {
         if (isSuccess && RegisterAs == 'Baser') {
             Dispatch(loginSuccess({
-                user: data?.data as User,
+                user: data?.data.data as User,
             }))
             navigate('/Baser');
         }
         else if (FinalSend && isSuccess && RegisterAs == 'Bostany' && CompleteProfileStep == 5) {
             console.log('yess')
             Dispatch(loginSuccess({
-                user: data?.data as User,
+                user: data?.data.data as User,
             }))
             Dispatch(EmptyQualificationData())
             navigate('/Bostany');

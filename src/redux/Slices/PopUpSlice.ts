@@ -6,6 +6,8 @@ interface PopUpModalState {
   BookingConfirmPop: boolean;
   BookingSuccessPop: boolean;
   SwitchToBaser: boolean;
+  Bst10Time: boolean;
+  Bst10Table: boolean;
 }
 
 const initialState: PopUpModalState = {
@@ -15,12 +17,26 @@ const initialState: PopUpModalState = {
   BookingConfirmPop: false,
   BookingSuccessPop: false,
   SwitchToBaser: false,
+  Bst10Time: false,
+  Bst10Table: false,
 };
 
 const PopUpModalSlice = createSlice({
   name: "PopUpModal",
   initialState,
   reducers: {
+    OpenBst10Table(state) {
+      state.Bst10Table = true;
+    },
+    CloseBst10Table(state) {
+      state.Bst10Table = false;
+    },
+    OpenBst10Time(state) {
+      state.Bst10Time = true;
+    },
+    CloseBst10Time(state) {
+      state.Bst10Time = false;
+    },
     OpenSwitchToBaser(state) {
       state.SwitchToBaser = true;
     },
@@ -71,6 +87,10 @@ export const {
   OpenBookingConfirmPop,
   CloseBookingConfirmPop,
   OpenBookingTimePop,
+  OpenBst10Table,
+  CloseBst10Table,
+  OpenBst10Time,
+  CloseBst10Time,
   CloseBookingTimePop,
 } = PopUpModalSlice.actions;
 export default PopUpModalSlice.reducer;

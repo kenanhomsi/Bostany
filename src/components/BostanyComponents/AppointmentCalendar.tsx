@@ -2,32 +2,35 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'moment/locale/ar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { useState } from "react";
-import { events } from "../../utils/data";
+import { useEffect, useState } from "react";
+import { useGetUserProfile } from '../../utils/api/User/useGetUserProfile';
+import { eventsDataType } from '../../Types';
 
 
 
 
 const AppointmentCalendar = () => {
+    const { data } = useGetUserProfile();
+    const [eventsData, seteventsData] = useState<eventsDataType[]>([]);
 
-    const [eventsData] = useState(events);
+    useEffect(() => {
+        if (data?.data.settings?.schedules) {
+            const events: eventsDataType[] = []
+            data.data.settings?.schedules.map((ele) => {
+                events.push({
+                    id: Math.random().toString(36).substring(2, 9),
+                    title: ` from  ${ele.from_time}  to ${ele.to_time} `,
+                    allDay: false,
+                    start: new Date(+ele.date.split('-')[0], +ele.date.split('-')[1] - 1, +ele.date.split('-')[2]),
+                    end: new Date(+ele.date.split('-')[0], +ele.date.split('-')[1] - 1, +ele.date.split('-')[2]),
+                })
+            })
+            seteventsData(events)
+        }
+    }, [data])
     const localizer = momentLocalizer(moment);
     moment.locale('ar');
-    // const handleSelect = ({ start, end }: { start: Date, end: Date }) => {
-    //     console.log(start);
-    //     console.log(end);
-    //     const title = window.prompt("New Event name");
-    //     if (title)
-    //         setEventsData([
-    //             ...eventsData,
-    //             {
-    //                 id: eventsData.length + 1,
-    //                 start,
-    //                 end,
-    //                 title
-    //             }
-    //         ]);
-    // };
+
 
     return (
         <div className="" style={{ minHeight: 580 }}>
@@ -41,8 +44,6 @@ const AppointmentCalendar = () => {
                 events={eventsData}
                 style={{ height: "110vh" }}
                 onSelectEvent={(event) => alert(event.title)}
-                // onSelectSlot={handleSelect}
-
                 formats={{
                     dayFormat: 'dddd',
                     dayHeaderFormat: 'dddd',
@@ -57,7 +58,6 @@ const AppointmentCalendar = () => {
                     work_week: 'أسبوع العمل',
                     day: 'يوم',
                     agenda: 'جدول الأعمال',
-
                 }}
             />
         </div>

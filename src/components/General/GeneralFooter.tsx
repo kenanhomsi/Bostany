@@ -9,8 +9,7 @@ const GeneralFooter = ({ path }: { path: string }) => {
     let linksList
     if (Dashboard == 'Baser') {
         linksList = socialIconsForBazer
-    }
-    {
+    } else {
         linksList = socialIconsForBostany
     }
     return (

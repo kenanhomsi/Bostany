@@ -6,11 +6,11 @@ const ComingSeeds = () => {
     const { data } = useGetProjects({
         queryKey: ["type", "waiting"]
     })
-
+    console.log(data)
     return (
         <div className="w-full h-full">
             {
-                !data || data.data.length == 0 && <SeedsEmpty />
+                !data || data.data.length == 0 && <SeedsEmpty From='Baser' />
             }
             {
                 data?.data != undefined && data.data.length > 0 &&

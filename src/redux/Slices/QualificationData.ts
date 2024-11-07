@@ -8,7 +8,7 @@ interface intitstate {
 const initialState: intitstate = {
   QualificationDataArray: [
     {
-      id: 0,
+      id: 1,
       issuer: "",
       // Academic_degree: "البكالوريوس",
       cartificate: "",
@@ -39,6 +39,9 @@ const QualificationSlice = createSlice({
         }
       });
     },
+    SetQualificationData(state, action) {
+      state.QualificationDataArray = action.payload;
+    },
     EmptyQualificationData(state) {
       state.QualificationDataArray = [
         {
@@ -57,5 +60,6 @@ export const {
   AddNewQualificationData,
   changeQualificationData,
   EmptyQualificationData,
+  SetQualificationData,
 } = QualificationSlice.actions;
 export default QualificationSlice.reducer;

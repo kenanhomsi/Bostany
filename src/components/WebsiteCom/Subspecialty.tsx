@@ -4,17 +4,18 @@ import { useDispatch } from "react-redux";
 import { changeQualificationData } from "../../redux/Slices/QualificationData";
 export interface SubspecialtyProps {
     index: number;
+    setCHangeHappend: (value: boolean) => void
 }
-const Subspecialty = ({ index }: SubspecialtyProps) => {
+const Subspecialty = ({ index, setCHangeHappend }: SubspecialtyProps) => {
     const dispatch = useDispatch()
     const qualificationDataArry = useAppSelector((state) => state.qualificationData.QualificationDataArray)
     const thisqualificationData = qualificationDataArry.filter((ele) => ele.id == index)[0]
     const [QualificationData, setQualificationData] = useState({
         id: thisqualificationData.id,
-        issuer: "",
+        issuer: thisqualificationData.issuer,
         // Academic_degree: 'البكالوريوس',
-        cartificate: '',
-        year: '',
+        cartificate: thisqualificationData.cartificate,
+        year: thisqualificationData.year,
     });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -22,15 +23,15 @@ const Subspecialty = ({ index }: SubspecialtyProps) => {
             ...QualificationData,
             [e.target.name]: e.target.value
         })
-
+        setCHangeHappend(true);
         dispatch(changeQualificationData({
             ...QualificationData,
             [e.target.name]: e.target.value
         }))
     }
     return (
-        <div className="flex flex-col gap-2" key={index} >
-            <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-4" key={index} >
+            <div className="flex flex-col gap-3">
                 <span className="font-medium text-base  text-[#191C1B]">اختيار المجال</span>
                 <input onChange={handleInputChange} value={QualificationData.issuer} type="text" name="issuer" className="w-full bg-BaserSurface text-dark  rounded-2xl border-none p-4" placeholder="اسم المؤسسة التعليمية" />
             </div>
