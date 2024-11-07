@@ -21,7 +21,7 @@ const SideBar = ({ DashBoard }: { DashBoard: string }) => {
         listData = BostanySidbarData
     }
     return (
-        <div className="bg-BaserbodyLigh z-[1000] py-6 px-4 w-[264px] flex h-screen flex-col   gap-10  fixed ">
+        <div className="bg-BaserbodyLigh z-[1100] py-6 px-4 w-[264px] flex h-screen flex-col   gap-10  fixed ">
             <Link to={`/${DashBoard}`} className="">
                 <img src={logo} alt="logo" className="w-[4.6rem] h-14" />
             </Link>

@@ -15,13 +15,12 @@ interface ProtectedRouteProps {
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, roles }) => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const currentUser = useSelector(selectCurrentUser);
-
   if (!ENABLE_AUTH) {
     return <>{children}</>;
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/auth/register" />;
   }
 
   if (roles && (!currentUser || !roles.includes(currentUser.type))) {

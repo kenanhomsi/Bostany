@@ -4,18 +4,13 @@ import { EndPoints } from "../EndPoints";
 import { LongStaleTime } from "../../constant";
 import { handleApiResponseErrors } from "../HandleAPIResponseErrors";
 import axiosInstance from "../axios";
-import { IGetProjects } from "../../../Types/api";
-import { QueryKey } from "react-query";
-export const GetProjects = async ({
-  queryKey,
-}: {
-  queryKey: QueryKey;
-}): Promise<IGetProjects> => {
-  const type = queryKey[1];
+import { IGetStatistics } from "../../../Types/api";
+
+export const GetMyStatistics = async (): Promise<IGetStatistics> => {
   try {
-    const response = await axiosInstance<IGetProjects>({
+    const response = await axiosInstance<IGetStatistics>({
       method: Methods.GET,
-      url: EndPoints.Projects.replace("all", String(type)),
+      url: EndPoints.Statistics,
     });
     handleApiResponseErrors(response, "validation_error");
     return response.data;
@@ -24,10 +19,10 @@ export const GetProjects = async ({
     throw error;
   }
 };
-export const useGetProjectsQuery = (options = {}) => {
+export const useGetMyStatisticsQuery = (options = {}) => {
   return useQuery({
-    queryKey: ["Projects"],
-    queryFn: GetProjects,
+    queryKey: ["MyStatistics"],
+    queryFn: GetMyStatistics,
     staleTime: LongStaleTime,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
@@ -36,7 +31,7 @@ export const useGetProjectsQuery = (options = {}) => {
   });
 };
 
-export const useGetProjects = (options = {}) => {
+export const useGetMyStatistics = (options = {}) => {
   const {
     data,
     error,
@@ -44,7 +39,7 @@ export const useGetProjects = (options = {}) => {
     isLoading,
     isSuccess,
     refetch,
-  }: UseQueryResult<IGetProjects> = useGetProjectsQuery(options);
+  }: UseQueryResult<IGetStatistics> = useGetMyStatisticsQuery(options);
 
   return { data, error, isError, isLoading, isSuccess, refetch };
 };

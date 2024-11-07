@@ -1,41 +1,67 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppSelector } from "../../redux/store"
-import { WorkSpaceData } from "../../utils/data"
 import { LiaPaperclipSolid } from "react-icons/lia";
 import { PiMicrophone } from "react-icons/pi";
 import { Button } from "flowbite-react";
 import { useDispatch } from "react-redux";
 import { CloseBookingConfirmPop, OpenBookingSuccessPop } from "../../redux/Slices/PopUpSlice";
 import { PutBookingData } from "../../redux/Slices/BookingSlice";
-import { useGetConsultantsList } from "../../utils/api/select/useGetConsultants";
+import { useUploadMedia } from "../../utils/api/Media/usePutUploadMedia";
+import { BookingFormType } from "../../Types";
+import { useCreateProject } from "../../utils/api/Projects/usePostCreateProject";
+import SpecialistList from "../General/SpecialistList";
+import { categorySelect, SpecialitiesType } from "../../Types/api";
+import CategoryList from "../General/CategoryList";
+import { useGetShowUser } from "../../utils/api/User/useGetShowUser";
 
 const BookingConfirmPop = () => {
     const dispatch = useDispatch();
-    const { data } = useGetConsultantsList();
-    const [BazerTitle, setBazerTitle] = useState('');
-    const [, setAttechedFile] = useState(null);
-    const [, setAttechedAudio] = useState(null);
-    const BookingData = useAppSelector((state) => state.booking.BookingData)
     const BostanyId = useAppSelector((state) => state.booking.BostanyId)
-    const BostanyData = data?.data.filter((ele) => ele.id == BostanyId)[0]
+    const { data } = useGetShowUser({
+        queryKey: ['id', BostanyId]
+    });
+    const [FormData, SetFormData] = useState<BookingFormType>({
+        Title: "",
+        FileAttchToken: [],
+        specialities: [],
+        category: [],
+    });
+    const [BazerTitle, setBazerTitle] = useState('');
+    const [BazerDescription, setBazerDescription] = useState('');
+    const [, setAttechedAudio] = useState<null | File>(null);
+    const { mutate, isError, isLoading, isSuccess, data: DataFromBooking } = useCreateProject();
+    const { mutate: MutateUploadMedia, data: uploadMediaData } = useUploadMedia();
+    const BookingData = useAppSelector((state) => state.booking.BookingData)
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (BazerTitle.length < 150) {
             setBazerTitle(e.target.value)
         }
     }
+    const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setBazerDescription(e.target.value)
+    }
     const audioPickerRef = useRef<HTMLInputElement>(null);
     const filePickerRef = useRef<HTMLInputElement>(null);
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
-        if (file) {
-            setAttechedFile(file)
-        }
+        MutateUploadMedia({
+            payload: {
+                file: file!,
+                collection: 'file',
+            }
+        })
     }
     const handleAudioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
             setAttechedAudio(file)
         }
+        // MutateUploadMedia({
+        //     payload: {
+        //         file: file!,
+        //         collection: 'file',
+        //     }
+        // })
     }
     const handleCancel = () => {
         dispatch(CloseBookingConfirmPop())
@@ -45,39 +71,80 @@ const BookingConfirmPop = () => {
             ...BookingData,
             Title: BazerTitle
         }))
-        dispatch(OpenBookingSuccessPop())
-        dispatch(CloseBookingConfirmPop())
+        console.log({
+            name: BazerTitle,
+            description: BazerDescription,
+            attachments: [FormData.FileAttchToken[0]],
+            consultants: [BostanyId],
+            start_at: `${BookingData.SelectTime.split('-')[1]}`,
+            specialities: FormData.specialities,
+        })
+        mutate({
+            payload: {
+                name: BazerTitle,
+                description: BazerDescription,
+                attachments: [FormData.FileAttchToken[0]],
+                consultants: [BostanyId],
+                start_at: `${BookingData.SelectTime.split('-')[1]}`,
+                specialities: FormData.specialities,
+            }
+        })
+
+    }
+    useEffect(() => {
+        if (isSuccess && DataFromBooking) {
+            dispatch(OpenBookingSuccessPop())
+            dispatch(CloseBookingConfirmPop())
+        }
+    }, [isSuccess, DataFromBooking])
+    useEffect(() => {
+        if (uploadMediaData) {
+            const newArray = FormData.FileAttchToken
+            newArray.push(uploadMediaData.data.token)
+            SetFormData({
+                ...FormData,
+                FileAttchToken: newArray
+            })
+        }
+
+    }, [uploadMediaData])
+    const handleSpecialitiesClick = (id: number) => {
+        SetFormData({
+            ...FormData,
+            specialities: FormData.specialities.includes(id) ? FormData.specialities.filter((ele) => ele !== id) : [...FormData.specialities, id]
+        })
+    }
+    const handleCategoryClick = (id: number) => {
+        SetFormData({
+            ...FormData,
+            category: FormData.category.includes(id) ? FormData.category.filter((ele) => ele !== id) : [...FormData.category, id]
+        })
     }
     const handleDisabled = BazerTitle == '' ? true : false
     return (
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col max-h-[76vh] overflow-y-scroll scrollbar-hide gap-5">
             <div className=" flex flex-col gap-4 p-4 rounded-2xl bg-BaserSurface">
-                <p className="flex  text-base flex-row-reverse w-full justify-between items-center"><span className="  font-medium text-BaserPrimary">{BostanyData?.name}</span> <span className="font-normal text-dark">مع</span></p>
+                <p className="flex  text-base flex-row-reverse w-full justify-between items-center"><span className="  font-medium text-BaserPrimary">{data?.data?.name}</span> <span className="font-normal text-dark">مع</span></p>
                 <p className="flex  text-base flex-row-reverse w-full justify-between items-center"><span className="  font-medium text-BaserPrimary">{BookingData.SelectedDay}</span> <span className="font-normal text-dark">التاريخ</span></p>
                 <p className="flex  text-base flex-row-reverse w-full justify-between items-center"><span className="  font-medium text-BaserPrimary">{BookingData.SelectTime}</span> <span className="font-normal text-dark">الوقت</span></p>
                 <p className="flex  text-base flex-row-reverse w-full justify-between items-center"><span className="  font-medium text-BaserPrimary">  10 ر.س  </span> <span className="font-normal text-dark">التكلفة</span></p>
             </div>
             <div className="flex flex-col gap-5">
                 <p className=" text-xl font-medium text-BaserOnSurfase">تفاصيل البذرة</p>
-                <div className=" flex flex-wrap gap-3 items-center">
-                    {
-                        BostanyData?.specialities.map((ele, index) => (
-                            <p key={index} className="flex w-fit  rounded-full border py-3  px-5  items-center gap-[10px] border-[#8E918F]">
-                                <span className="text-xl">{WorkSpaceData.filter((space) => space.name == ele.text)[0].icon}</span>
-                                <span className="text-base font-medium text-BaserOnSurfase" >{ele.text}</span>
-                            </p>
-                        ))
-                    }
-                </div>
-                <div className=" flex  flex-wrap gap-3 items-center">
-                    {BostanyData?.category.map((ele) => (<span className="flex w-fit text-sm font-medium text-BaserOnSurfase  rounded-full border-2 px-4 py-2  items-center  border-[#938F94]">{ele.text}</span>))}
-                </div>
+                <SpecialistList From="Baser" data={data?.data?.specialities as SpecialitiesType[]} handleWorkSpaceClick={handleSpecialitiesClick} SelectedSpecialitiest={FormData.specialities} />
+                <CategoryList From='Baser' CategoryList={FormData.category} handleCategoryClick={handleCategoryClick} Data={data?.data?.category as categorySelect[]} />
             </div>
             <div className="flex flex-col gap-3">
                 <p className=" text-xl font-medium text-BaserOnSurfase">عنوان بذرتك</p>
                 <div className="">
                     <input type="text" value={BazerTitle} onChange={handleTitleChange} className=" w-full py-4 px-6 rounded-3xl text-base font-normal text-dark bg-BaserSurface border-none" placeholder="ضع هنا عنوان لبذرتك" />
                     <p className="text-sm font-normal text-dark">150/{BazerTitle.length}</p>
+                </div>
+            </div>
+            <div className="flex flex-col gap-3">
+                <p className=" text-xl font-medium text-BaserOnSurfase">توصيف بذرتك</p>
+                <div className="">
+                    <input type="text" value={BazerDescription} onChange={handleDescriptionChange} className=" w-full py-4 px-6 rounded-3xl text-base font-normal text-dark bg-BaserSurface border-none" placeholder="ضع هنا وصف لبذرتك" />
                 </div>
             </div>
             <div className="flex items-center  gap-32 w-full" >
@@ -94,9 +161,12 @@ const BookingConfirmPop = () => {
                 </div>
             </div>
             <div className="w-full flex gap-5 items-center px-4 border-t border-[#938F94] pt-5 ">
-                <Button disabled={handleDisabled} onClick={HandleSubmit} className="bg-BaserPrimary text-white rounded-full hover:!bg-BaserFoshiy flex-1" >تاكيد</Button>
+                <Button disabled={handleDisabled} onClick={HandleSubmit} className="bg-BaserPrimary text-white rounded-full hover:!bg-BaserFoshiy flex-1" >{isLoading ? '...Loading' : 'تاكيد'}</Button>
                 <Button onClick={handleCancel} className="  text-base font-medium border-none rounded-full " color="light" >الغاء</Button>
             </div>
+            {
+                isError && <p className=" text-GeneralError">there is an error with submit</p>
+            }
         </div>
     )
 }

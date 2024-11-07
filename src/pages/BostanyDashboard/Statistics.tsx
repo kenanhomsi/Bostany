@@ -1,9 +1,10 @@
 import { Tabs } from "flowbite-react"
 import StatisticsBody from "../../components/BostanyComponents/StatisticsBody"
-import { StatisticsDataForMounth, StatisticsDataForToday, StatisticsDataForWeek } from "../../utils/data"
+// import { StatisticsDataForMounth, StatisticsDataForToday, StatisticsDataForWeek } from "../../utils/data"
+import { useGetMyStatistics } from "../../utils/api/User/useGetMyStatistics";
 
 const Statistics = () => {
-
+    const { data } = useGetMyStatistics();
     return (
         <div className="mt-section">
             <div className="mt-section py-14 px-16 w-full min-h-[70vh]">
@@ -28,16 +29,28 @@ const Statistics = () => {
                     }}
                 >
                     <Tabs.Item active title={`اليوم `} >
-                        <StatisticsBody data={StatisticsDataForToday} />
+                        {
+                            data &&
+                            <StatisticsBody data={data} />
+                        }
                     </Tabs.Item>
                     <Tabs.Item title={`الاسبوع `}  >
-                        <StatisticsBody data={StatisticsDataForWeek} />
+                        {
+                            data &&
+                            <StatisticsBody data={data} />
+                        }
                     </Tabs.Item>
                     <Tabs.Item title={`الشهر `}  >
-                        <StatisticsBody data={StatisticsDataForMounth} />
+                        {
+                            data &&
+                            <StatisticsBody data={data} />
+                        }
                     </Tabs.Item>
                     <Tabs.Item title={`كل الايام `}  >
-                        <StatisticsBody data={StatisticsDataForToday} />
+                        {
+                            data &&
+                            <StatisticsBody data={data} />
+                        }
                     </Tabs.Item>
                 </Tabs>
             </div>

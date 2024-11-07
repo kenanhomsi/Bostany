@@ -10,7 +10,7 @@ const FinishedSeeds = () => {
     return (
         <div className="w-full h-full">
             {
-                data?.data.length == 0 && <SeedsEmpty />
+                data?.data.length == 0 && <SeedsEmpty From='Baser' />
             }
             {
                 data &&

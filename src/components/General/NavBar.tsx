@@ -4,12 +4,15 @@ import { PiBell } from "react-icons/pi";
 import { Avatar, Dropdown } from "flowbite-react";
 import { SlArrowLeft } from "react-icons/sl";
 import Bas10Image from '/Icons/Bas10.png'
-import { useAppSelector } from "../../redux/store";
 import { useGetNotifications } from "../../utils/api/notifications/useGetNotificaions";
+import { useGetUserProfile } from "../../utils/api/User/useGetUserProfile";
+import { useDispatch } from "react-redux";
+import { OpenBst10Time } from "../../redux/Slices/PopUpSlice";
 const NavBar = ({ DashBoard }: { DashBoard: string }) => {
     const pathname = useLocation().pathname
+    const dispatch = useDispatch()
     const { data: Notification, isLoading } = useGetNotifications();
-    const UserData = useAppSelector((state) => state.auth.user)
+    const { data } = useGetUserProfile()
     let Title
     if (DashBoard == 'Baser') {
         if (pathname.split('/')[2] == 'bostanyProfile') {
@@ -33,8 +36,11 @@ const NavBar = ({ DashBoard }: { DashBoard: string }) => {
             }
         }
     }
+    const handleClick = () => {
+        dispatch(OpenBst10Time())
+    }
     return (
-        <div className="px-10 py-6    fixed  top-0  z-[500] pr-[280px]  w-full right-0  bg-BaserbodyLigh flex h-20 justify-between items-center">
+        <div className="px-10 py-6    fixed  top-0  z-[1000] pr-[280px]  w-full right-0  bg-BaserbodyLigh flex h-20 justify-between items-center">
             <div className="text-xl font-semibold text-dark pr-5">{Title}</div>
             <div className=" flex gap-6 items-center  text-2xl">
                 <Dropdown
@@ -42,12 +48,12 @@ const NavBar = ({ DashBoard }: { DashBoard: string }) => {
                     renderTrigger={() => <p className="relative">
                         <PiBell className=" cursor-pointer w-6 h-6" />
                         {
-                            <span className={`w-3 h-3 absolute ${UserData?.unread_notifications_count == 0 ? 'hidden' : ' block'}   rounded-full bg-red-500 top-0 right-0`}></span>
+                            <span className={`w-3 h-3 absolute ${data?.data.unread_notifications_count == 0 ? 'hidden' : ' block'}   rounded-full bg-red-500 top-0 right-0`}></span>
                         }
                     </p>
                     }
                     label=''
-                    className="w-[40%] p-7 rounded-[40px] mt-5   DropDownShadow"
+                    className="w-[40%] z-[1000] p-7 max-h-[50vh] scrollbar-hide overflow-y-scroll rounded-[40px] mt-5   DropDownShadow"
                 >
                     <div className="flex justify-between w-full mb-5">
                         <span className="text-[22px] font-semibold text-BaserOnSurfase">الاشعارات</span>
@@ -55,20 +61,20 @@ const NavBar = ({ DashBoard }: { DashBoard: string }) => {
                     </div>
                     {
                         !isLoading && Notification && Notification.data.length > 0 && Notification.data.map((not, index) => (
-                            <Dropdown.Item className="flex items-center my-3 gap-2 rounded-3xl" key={index}>
-                                <div className="flex justify-between items-center w-full">
+                            <Dropdown.Item className="flex items-center my-3 z-[999] gap-2 rounded-3xl" key={index}>
+                                <Link to={not.view} className="flex justify-between items-center w-full">
                                     <div className="flex gap-2 items-center">
-                                        {/* <img src={not.image} alt="Organization" className="w-[72px] h-[72px] rounded-full" /> */}
+                                        <img src={not.user.avatar} alt={not.user.avatar} className="w-[72px] h-[72px] rounded-full" />
                                         <div className="flex flex-col">
                                             <span className="font-medium text-base text-BaserOnSurfase">{not.title}</span>
-                                            <span className="font-medium text-sm text-[#48464A]">مع {not.body}</span>
+                                            <span className="font-medium text-sm text-[#48464A]">مع {not.user.name}</span>
                                         </div>
                                     </div>
                                     <div className=" flex flex-col items-end gap-4">
                                         <div className={` ${not.is_read ? 'bg-green-500' : ' bg-red-800 '} w-3 h-3 rounded-full`}></div>
                                         <span>{not.created_at_formated}</span>
                                     </div>
-                                </div>
+                                </Link>
 
                             </Dropdown.Item>
                         ))
@@ -83,17 +89,17 @@ const NavBar = ({ DashBoard }: { DashBoard: string }) => {
                 </Dropdown>
                 <Link to={`/${DashBoard}/profile/countInfo`}>
                     {
-                        UserData &&
-                        <Avatar img={UserData?.avatar} alt={UserData?.avatar} rounded className={`border-2 ${DashBoard == 'Baser' ? "border-BaserPrimary" : 'border-BostanyPrimary'}   cursor-pointer rounded-full`} />
+                        data?.data &&
+                        <Avatar img={data?.data.avatar} alt={data?.data.avatar} rounded className={`border-2 ${DashBoard == 'Baser' ? "border-BaserPrimary" : 'border-BostanyPrimary'}   cursor-pointer rounded-full`} />
                     }
                 </Link>
             </div>
             {
                 DashBoard == 'Bostany' &&
-                <Link to='/Bostany/bst10' className="flex absolute cursor-pointer left-[37%] items-center gap-3 bg-BostanyPrimary rounded-full border-none py-3 px-5">
+                <button onClick={handleClick} className="flex absolute cursor-pointer left-[37%] items-center gap-3 bg-BostanyPrimary rounded-full border-none py-3  px-5">
                     <img src={Bas10Image} alt={Bas10Image} className=" w-6 h-6" />
                     <p className="text-base font-medium text-white">بستن</p>
-                </Link>
+                </button>
             }
         </div>
     )

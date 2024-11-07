@@ -1,31 +1,40 @@
 import { Button } from "flowbite-react"
 import { useAppSelector } from "../../redux/store"
 import TimeBarProfile from "./TimeBarProfile"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import StopWatch from '/Icons/stopwatch_high_contrast 1.png'
 import { PiPlus } from "react-icons/pi";
 import { PiMinus } from "react-icons/pi";
 import { useDispatch } from "react-redux"
 import { CloseBookingTimePop, OpenBookingConfirmPop } from "../../redux/Slices/PopUpSlice"
-import { CardsBastanyData } from "../../utils/data"
 import { PutBookingData } from "../../redux/Slices/BookingSlice"
+import { calculateEndTime, formatTime } from "../../utils/Functions"
+import { useGetShowUser } from "../../utils/api/User/useGetShowUser"
+import { schedulesType } from "../../Types/api"
 
 const BookingTimePop = () => {
     const dispatch = useDispatch()
     const BostanyId = useAppSelector((state) => state.booking.BostanyId)
-    const BostanyData = CardsBastanyData.filter((ele) => ele.id == BostanyId)[0]
+    const { data } = useGetShowUser({
+        queryKey: ['id', BostanyId]
+    });
+    const [DayScheduleArray, setDayScheduleArray] = useState<schedulesType[]>([]);
+
     const [TimeSelected, setTimeSelected] = useState('')
     const [FromToTimeSelected, setFromToTimeSelected] = useState('')
-    const [DaySchedule] = useState(true);
     const [startOfMeeting, setstartOfMeeting] = useState(9)
     const [DurationOfMeeting, setDurationOfMeeting] = useState(10)
     const handleCancel = () => {
         dispatch(CloseBookingTimePop())
     }
+    useEffect(() => {
+        const ScheduleArray = data?.data.settings?.schedules.filter((ele) => ele.date == TimeSelected)
+        setDayScheduleArray(ScheduleArray!);
+    }, [TimeSelected])
     const HandleSubmit = () => {
         dispatch(PutBookingData({
             SelectedDay: TimeSelected,
-            SelectTime: FromToTimeSelected,
+            SelectTime: FromToTimeSelected == '' ? `${`${formatTime(startOfMeeting)}:00`}-${calculateEndTime(`${startOfMeeting}:00`, +DurationOfMeeting)}` : FromToTimeSelected,
             SelectedStartTime: startOfMeeting,
             SelectedDuration: DurationOfMeeting,
             Title: ''
@@ -33,19 +42,20 @@ const BookingTimePop = () => {
         dispatch(OpenBookingConfirmPop())
         dispatch(CloseBookingTimePop())
     }
-    const handleDisabled = TimeSelected == '' || FromToTimeSelected == '' ? true : false
+    const handleDisabled = TimeSelected == '' ? true : false
     const handleFromToTimeSelecet = (e: React.MouseEvent<HTMLButtonElement>) => {
         setFromToTimeSelected(e.currentTarget.id)
     }
+
     return (
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 overflow-x-hidden">
             <TimeBarProfile TimeSelected={TimeSelected} setTimeSelected={setTimeSelected} />
-            {DaySchedule ?
+            {DayScheduleArray.length > 0 ?
                 <>
-                    <div className=" flex gap-3">
+                    <div className=" flex gap-2">
                         {
-                            BostanyData.FreeTime.map((ele, index) => (
-                                <Button id={`${ele.to!}-${ele.from!}`} key={index} onClick={handleFromToTimeSelecet} className={`${index == 0 ? 'bg-GeneralSuccessContainer text-white border-2 hover:!bg-GeneralSuccessContainer  border-GeneralSuccessContainer' : 'bg-transparent text-black border-2 border-BaserPrimary hover:!bg-transparent'}  rounded-full  w-full`} ><span>{ele.from}:00</span> - <span>{ele.to}:00</span> </Button>
+                            DayScheduleArray.map((ele, index) => (
+                                <Button id={`${ele.to_time!}-${ele.from_time!}`} key={index} onClick={handleFromToTimeSelecet} className={`${index == 0 ? 'bg-GeneralSuccessContainer text-white border-2 hover:!bg-GeneralSuccessContainer  border-GeneralSuccessContainer' : 'bg-transparent text-black border-2 border-BaserPrimary hover:!bg-transparent'}  rounded-full  w-full`} ><span>{ele.from_time}</span>-<span>{ele.to_time}</span> </Button>
                             ))
                         }
                     </div>
@@ -74,16 +84,15 @@ const BookingTimePop = () => {
                 </div>
             }
             <div className="w-full flex gap-5 items-center px-4 border-t border-[#938F94] pt-5 ">
-                {
-                    DaySchedule ? <>
-                        <Button disabled={handleDisabled} onClick={HandleSubmit} className="bg-BaserPrimary text-white rounded-full hover:!bg-BaserFoshiy flex-1" >التالي</Button>
-                        <Button onClick={handleCancel} className="  text-base font-medium border-none rounded-full " color="light" >الغاء</Button>
-                    </> :
-                        <Button onClick={handleCancel} className="text-BaserPrimary  text-base font-medium border w-full rounded-full " color="light" >الغاء</Button>
+                {DayScheduleArray.length > 0 ? <>
+                    <Button disabled={handleDisabled} onClick={HandleSubmit} className="bg-BaserPrimary text-white rounded-full hover:!bg-BaserFoshiy flex-1" >التالي</Button>
+                    <Button onClick={handleCancel} className="  text-base font-medium border-none rounded-full " color="light" >الغاء</Button>
+                </> :
+                    <Button onClick={handleCancel} className="text-BaserPrimary  text-base font-medium border w-full rounded-full " color="light" >الغاء</Button>
                 }
 
             </div>
-        </div>
+        </div >
     )
 }
 

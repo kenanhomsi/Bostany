@@ -6,11 +6,10 @@ const CanceledSeeds = () => {
     const { data } = useGetProjects({
         queryKey: ["type", "cancelled"]
     })
-
     return (
         <div className="w-full h-full">
             {
-                !data || data.data.length == 0 && <SeedsEmpty />
+                !data || data.data.length == 0 && <SeedsEmpty From='Baser' />
             }
             {
                 data?.data &&

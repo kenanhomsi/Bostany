@@ -9,7 +9,6 @@ import { ProfileCardProps } from "../../Types"
 import { Link, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { PiHeart } from "react-icons/pi";
-
 import { OpenBookingConfirmPop, OpenBookingTimePop } from '../../redux/Slices/PopUpSlice'
 import { PutBookingBostanyId, PutBookingData } from '../../redux/Slices/BookingSlice'
 import { useAppSelector } from '../../redux/store'
@@ -43,14 +42,14 @@ const ProfileCard = ({ CardShap, data }: ProfileCardProps) => {
         })
     }
     return (
-        <div className={`flex  relative  bg-BaserSurface ${CardShap == 'col' ? 'flex-col 2xl:max-w-[22.6rem] max-w-[18rem]  flex-1' : ' flex-row w-full pl-3 '}  rounded-[32px] overflow-hidden `}>
+        <div className={`flex  relative  bg-BaserSurface ${CardShap == 'col' ? 'flex-col 2xl:max-w-[22.8rem] max-w-[18.1rem]  flex-1' : ' flex-row w-full pl-3 '}  rounded-[32px] overflow-hidden `}>
             <div className={`${CardShap == 'col' ? '' : 'p-4'}`}>
-                <button className={`${CardShap == 'col' ? 'top-2 right-2' : 'top-2 right-2'} w-6 h-6 z-10 rounded-full bg-GeneralWarningContainer absolute `}></button>
+                <button className={`${CardShap == 'col' ? 'top-2 right-2' : 'top-2 right-2'} w-6 h-6 z-10 rounded-full ${data.online_until ? 'bg-GeneralWarningContainer' : ' bg-GeneralError'}  absolute `}></button>
                 <Link to={pathname != '/' ? `/Baser/bostanyProfile/${data.id}` : '/#'}>
                     <img src={data.avatar} alt={data.avatar} className={` ${CardShap == 'col' ? '2xl:w-[22.6rem] 2xl:h-[18rem] h-[14rem]  w-[18rem]' : 'w-[208px] h-[205px] rounded-2xl'} `} />
                 </Link>
             </div>
-            <div className={` flex w-full ${CardShap == 'col' ? 'flex-col' : ' flex-row justify-between'}  p-4`}>
+            <div className={` flex w-full ${CardShap == 'col' ? 'flex-col' : ' flex-row justify-between'}  p-3`}>
                 <div className={` flex flex-col ${CardShap == 'col' ? '' : 'justify-between'}  gap-4 w-full my-3 `}>
                     {/* name and special */}
                     <div className=" flex justify-between">

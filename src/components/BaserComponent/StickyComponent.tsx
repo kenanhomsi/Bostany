@@ -5,17 +5,16 @@ import StopWatch from '/Icons/stopwatch_high_contrast 1.png'
 import { useDispatch } from 'react-redux';
 import { PutBookingBostanyId, PutBookingData } from '../../redux/Slices/BookingSlice';
 import { OpenBookingConfirmPop } from '../../redux/Slices/PopUpSlice';
-import { useLocation } from 'react-router-dom';
-import { CardsBastanyData } from '../../utils/data';
 import { useAppSelector } from '../../redux/store';
+import { IGetProfile, schedulesType } from '../../Types/api';
+import { formatTime } from '../../utils/Functions';
 
-const StickyScheduleComponent = () => {
-    const BostanyId = useLocation().pathname.split('/')[3]
-    const BostanyData = CardsBastanyData.filter((bostany) => bostany.id == +BostanyId)[0]
+const StickyScheduleComponent = ({ BostanyData }: { BostanyData: IGetProfile }) => {
     const BookingData = useAppSelector((state) => state.booking.BookingData)
-    const [TimeSelected, setTimeSelected] = useState(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`)
-    const [DaySchedule] = useState(true);
+    const [TimeSelected, setTimeSelected] = useState(`${new Date().getFullYear()}-${formatTime(new Date().getMonth() + 1)}-${formatTime(new Date().getDate())}`)
+    const [DayScheduleArray, setDayScheduleArray] = useState<schedulesType[]>([]);
     const [startOfMeeting, setstartOfMeeting] = useState(9)
+    const [TimeGetSelect, setTimeGetSelect] = useState(false);
     const [DurationOfMeeting, setDurationOfMeeting] = useState(10)
     const [isFixed, setIsFixed] = useState(false);
     const dispatch = useDispatch()
@@ -32,12 +31,13 @@ const StickyScheduleComponent = () => {
         }
     };
     const HandleFreetimeClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        dispatch(PutBookingBostanyId(BostanyData.id))
+        dispatch(PutBookingBostanyId(BostanyData.data.id))
         dispatch(PutBookingData({
             ...BookingData,
             SelectedDay: TimeSelected,
             SelectTime: e.currentTarget.id
         }))
+        setTimeGetSelect(true);
     }
     const handleSubmit = () => {
         dispatch(OpenBookingConfirmPop())
@@ -49,6 +49,11 @@ const StickyScheduleComponent = () => {
         };
     }, []);
 
+    useEffect(() => {
+        const ScheduleArray = BostanyData.data.settings?.schedules.filter((ele) => ele.date == TimeSelected)
+        setDayScheduleArray(ScheduleArray!);
+    }, [TimeSelected])
+    console.log(DayScheduleArray.length)
     return (
         <div
             style={{
@@ -59,14 +64,14 @@ const StickyScheduleComponent = () => {
                 zIndex: 30,
             }}
         >
-            <div className="flex flex-col h-fit max-w-[500px] bg-BaserSurface p-8 rounded-[32px] gap-5">
+            <div className="flex flex-col h-fit max-w-[480px] bg-BaserSurface p-8 rounded-[32px] gap-5">
                 <p className=" text-[22px] font-semibold text-BaserOnSurfase">جدول المواعيد</p>
                 <TimeBarProfile TimeSelected={TimeSelected} setTimeSelected={setTimeSelected} />
-                {DaySchedule ?
+                {DayScheduleArray.length > 0 ?
                     <>
                         <div className=" flex flex-col gap-6">
-                            {BostanyData.FreeTime.map((time, index) => (
-                                <Button key={index} id={`${time.to!}-${time.from!}`} onClick={HandleFreetimeClick} className={`${index == 0 ? 'bg-GeneralSuccessContainer hover:!bg-GeneralSuccessContainer  border-GeneralSuccessContainer text-white' : index == 1 ? 'bg-transparent  border-GeneralWarningContainer hover:!bg-transparent text-GeneralWarningContainer' : 'bg-transparent text-[#808080]  border-[#808080]  hover:!bg-transparent'}  border  rounded-full  w-full  `}><span>{time.to}:00</span>-<span>{time.from}:00</span> صباحًا </Button>
+                            {DayScheduleArray.map((time, index) => (
+                                <Button key={index} id={`${time.from_time} - ${time.to_time}`} onClick={HandleFreetimeClick} className={`${index == 0 ? 'bg-GeneralSuccessContainer hover:!bg-GeneralSuccessContainer  border-GeneralSuccessContainer text-white' : index == 1 ? 'bg-transparent  border-GeneralWarningContainer hover:!bg-transparent text-GeneralWarningContainer' : 'bg-transparent text-[#808080]  border-[#808080]  hover:!bg-transparent'}  border  rounded-full  w - full`}><span>{time.to_time}</span>-<span>{time.from_time}</span></Button>
                             ))}
                         </div>
                         {
@@ -97,7 +102,7 @@ const StickyScheduleComponent = () => {
                     </div>
                 }
                 <div className="w-full flex gap-5 items-center px-4 border-t border-[#938F94] pt-5 ">
-                    <Button onClick={handleSubmit} className="bg-BaserPrimary text-white rounded-full hover:!bg-BaserFoshiy w-[80%]" >بستن الآن</Button>
+                    <Button onClick={handleSubmit} disabled={DayScheduleArray.length == 0 || !TimeGetSelect} className={` ${!TimeGetSelect || DayScheduleArray.length == 0 && 'opacity-35'} bg-BaserPrimary text-white rounded-full hover:!bg-BaserFoshiy w-[80%]`} >بستن الآن</Button>
                     <p className=" flex gap-2">10 ر.س</p>
                 </div>
             </div>

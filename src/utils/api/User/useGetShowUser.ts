@@ -1,21 +1,21 @@
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
+import { QueryKey, UseQueryResult, useQuery } from "@tanstack/react-query";
 import { Methods } from "../../constant";
 import { EndPoints } from "../EndPoints";
 import { LongStaleTime } from "../../constant";
 import { handleApiResponseErrors } from "../HandleAPIResponseErrors";
 import axiosInstance from "../axios";
-import { IGetProjects } from "../../../Types/api";
-import { QueryKey } from "react-query";
-export const GetProjects = async ({
+import { IGetProfile } from "../../../Types/api";
+
+export const GetShowUser = async ({
   queryKey,
 }: {
   queryKey: QueryKey;
-}): Promise<IGetProjects> => {
-  const type = queryKey[1];
+}): Promise<IGetProfile> => {
   try {
-    const response = await axiosInstance<IGetProjects>({
+    const userId = queryKey[1];
+    const response = await axiosInstance<IGetProfile>({
       method: Methods.GET,
-      url: EndPoints.Projects.replace("all", String(type)),
+      url: EndPoints.ShowUser.replace(":id", String(userId)),
     });
     handleApiResponseErrors(response, "validation_error");
     return response.data;
@@ -24,10 +24,10 @@ export const GetProjects = async ({
     throw error;
   }
 };
-export const useGetProjectsQuery = (options = {}) => {
+export const useGetShowUserQuery = (options = {}) => {
   return useQuery({
-    queryKey: ["Projects"],
-    queryFn: GetProjects,
+    queryKey: ["ShowUser"],
+    queryFn: GetShowUser,
     staleTime: LongStaleTime,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
@@ -36,7 +36,7 @@ export const useGetProjectsQuery = (options = {}) => {
   });
 };
 
-export const useGetProjects = (options = {}) => {
+export const useGetShowUser = (options = {}) => {
   const {
     data,
     error,
@@ -44,7 +44,7 @@ export const useGetProjects = (options = {}) => {
     isLoading,
     isSuccess,
     refetch,
-  }: UseQueryResult<IGetProjects> = useGetProjectsQuery(options);
+  }: UseQueryResult<IGetProfile> = useGetShowUserQuery(options);
 
   return { data, error, isError, isLoading, isSuccess, refetch };
 };

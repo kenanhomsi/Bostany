@@ -1,4 +1,4 @@
-import { qualificationType } from ".";
+import { ExperiencesType, qualificationType } from ".";
 
 export interface LoginTypeInput {
   username: string;
@@ -123,43 +123,43 @@ export interface updateProfileInpust {
   birthdate?: string; //format: YYYY-MM-DD
   country_id?: string | number;
   city_id?: string;
-  cetificates?: qualificationType[];
-  experiences?: string[];
-  category?: number[];
+  certificates?: qualificationType[];
+  experiences?: ExperiencesType[];
+  categories?: number[];
   specialities?: number[];
 }
-
-export interface IGetSpecialities {
-  data: {
+export interface SpecialitiesType {
+  id: number;
+  text: string;
+  in_home: boolean;
+  color: string;
+  media: {
     id: number;
-    text: string;
-    in_home: boolean;
-    color: string;
-    media: {
-      id: number;
-      url: string;
-      preview: string;
-      name: string;
-      file_name: string;
-      type: string;
-      mime_type: string;
-      size: number;
-      human_readable_size: string;
-      details: {
-        width: number;
-        height: number;
-        ratio: number;
-      };
-      status: string;
-      progress: number;
-      links: {
-        delete: {
-          href: string;
-          method: string;
-        };
+    url: string;
+    preview: string;
+    name: string;
+    file_name: string;
+    type: string;
+    mime_type: string;
+    size: number;
+    human_readable_size: string;
+    details: {
+      width: number;
+      height: number;
+      ratio: number;
+    };
+    status: string;
+    progress: number;
+    links: {
+      delete: {
+        href: string;
+        method: string;
       };
     };
-  }[];
+  };
+}
+export interface IGetSpecialities {
+  data: SpecialitiesType[];
 }
 export interface IGetCategories {
   data: {
@@ -167,7 +167,7 @@ export interface IGetCategories {
     text: string;
   }[];
 }
-export interface IGetProfile {
+export interface IGetBaserProfile {
   data: {
     id: number;
     name: string;
@@ -185,6 +185,68 @@ export interface IGetProfile {
       name: string;
       code: string;
       key: string;
+      is_default: true;
+      currency: string;
+      flag: string;
+    };
+    city: {
+      id: number;
+      name: string;
+    };
+
+    rating: {
+      avg: number;
+      count: number;
+      professionalism: null | number;
+    };
+    counts: {
+      cancelled_projects: number;
+      waiting_projects: number;
+      completed_projects: number;
+    };
+    unread_notifications_count: number;
+    enable_2fa: boolean;
+    completed_profile: boolean;
+    created_at: string;
+    created_at_formatted: string;
+  };
+}
+export interface schedulesType {
+  date: string; // Format: year::mounth:minute
+  day_name: string;
+  from_time: string; // Format: H:i
+  to_time: string; // Format : H:i
+  repeat: boolean;
+  color?: number;
+}
+export interface IGetProfile {
+  data: {
+    id: number;
+    name: string;
+    email: string;
+    phone: string;
+    phone_code: string;
+    birthdate: string;
+    bio: string;
+    gender: string;
+    type: string;
+    avatar: string;
+    localed_type: string;
+    facebook?: string | null;
+    favoriters_count?: number;
+    followers_count?: number;
+    is_favorited?: boolean;
+    is_followed?: boolean;
+    is_online?: boolean;
+    linkedin?: string | null;
+    preferred_profile?: string;
+    twitter?: string | null;
+    online_until?: boolean;
+    country: {
+      id: number;
+      name: string;
+      code: string;
+      key: string;
       is_default: boolean;
       currency: string;
       flag: string;
@@ -193,16 +255,56 @@ export interface IGetProfile {
       id: number;
       name: string;
     };
-    rating: {
+    rating?: {
       avg: number;
       count: number;
-      professionalism: string | null;
+      professionalism: number | string | null;
+      communication: number;
+      experience: number;
+      quality: number;
     };
-    counts: {
-      cancelled_projects: number;
+    counts?: {
+      invitations_count: number;
       waiting_projects: number;
       completed_projects: number;
     };
+    settings?: {
+      accept_requests: null;
+      meeting_options: null;
+      poster_avatar: null;
+      poster_theme: null;
+      schedules: schedulesType[];
+      weekly_schedule: null;
+    };
+    projects: {
+      completed: number;
+      extension_percentage: number;
+      waiting: number;
+    };
+    statistics?: {
+      completed_projects_count: number;
+      invitations_count: number;
+      projects_count: number;
+      waitings_count: number;
+    };
+    category?: {
+      id: number;
+      text: string;
+    }[];
+    specialities?: {
+      id: number;
+      text: string;
+    }[];
+    experiences?: {
+      year: string;
+      job_title: string;
+      issuer: string;
+    }[];
+    cetificates?: {
+      year: string;
+      issuer: string;
+      cartificate: string;
+    }[];
     unread_notifications_count: number;
     completed_profile: boolean;
     enable_2fa: boolean;
@@ -210,13 +312,18 @@ export interface IGetProfile {
     created_at_formatted: string;
   };
 }
+
+export interface updateProfileOutPut {
+  data: IGetProfile;
+}
+
 export interface updateProfileSettingsInpust {
   poster_avatar?: File;
   poster_theme?: string;
   weekly_schedule?: string;
   // meeting_options?: string;
   accept_requests?: string;
-  // schedules?: string;
+  schedules: schedulesType[];
 }
 export interface IGetNotificationSettings {
   data: {
@@ -300,8 +407,11 @@ export interface IGetNotifications {
     read_at_formated: string;
     created_at: string;
     created_at_formated: string;
-    links: {
-      delete: string;
+    view: string;
+    user: {
+      avatar: string;
+      id: number;
+      name: string;
     };
   }[];
 }
@@ -448,12 +558,38 @@ export interface ToggleFavoriteOutput {
 }
 
 export interface IGetProject {
+  accepted_request: {
+    consultant: IGetBostany;
+    created_at: string;
+    created_at_formatted: string;
+    extension_request_id: string;
+    extension_requested: false;
+    id: number;
+    rating: null;
+    remaining_formatted: string;
+    remaining_hours: number;
+    start_at: string;
+  };
+  authorize: {
+    change_time: boolean;
+    reject: boolean;
+    report: boolean;
+    start_meeting: boolean;
+  };
   id: number;
   name: string;
   description: string;
+  invitation: {
+    end_at: string;
+    start_at: string;
+  };
+  is_closed: boolean;
+  is_favorited: boolean;
+  labels: string[];
+  participants_count: number;
   specialities: {
     id: number;
-    name: string;
+    text: string;
   }[];
   status: string;
   status_localed: string;
@@ -483,7 +619,7 @@ export interface IPostProjectOutPut {
 }
 export interface CreateProjectInput {
   name: string;
-  description: string;
+  description?: string;
   attachments: string[];
   consultants: number[];
   start_at: string; // Format: H:i
@@ -518,3 +654,15 @@ export interface CreateAttachmentOutPut {
     };
   };
 }
+export interface IGetStatistics {
+  completed_projects_count: number;
+  average_meeting_duration: number;
+  cancellation_rate: number;
+  invitations_count: number;
+  average_income: number;
+  average_rating: number;
+}
+export interface RejectProjectType {
+  message: string;
+}
+// export interface AcceptProjectType {}

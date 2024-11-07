@@ -2,10 +2,12 @@ import { Tabs } from "flowbite-react"
 import ComingSeeds from "../../components/BaserComponent/ComingSeeds"
 import CanceledSeeds from "../../components/BaserComponent/CanceledSeeds"
 import FinishedSeeds from "../../components/BaserComponent/FinishedSeeds"
-import { useGetUserProfile } from "../../utils/api/User/useGetUserProfile"
+import { useGetUserBaserProfile } from "../../utils/api/User/useGetUserProfileBaser"
 
 const Seeds = () => {
-    const { data: userData } = useGetUserProfile();
+    const { data: userData } = useGetUserBaserProfile();
+
+    console.log(userData)
     return (
         <div className="mt-section py-14 px-16 w-full min-h-[70vh]">
             <Tabs aria-label="Tabs with underline" variant="underline"

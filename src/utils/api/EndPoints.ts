@@ -3,6 +3,8 @@ export const EndPoints = {
   Countries: "/countries/?page=1",
   VerifyCode: "/verification/verify",
   Profile: "/profile",
+  UpdateProfileSettings: "/profile/settings",
+  Statistics: "/profile/statistics",
   Specialities: "/select/specialities?page=1",
   Categories: "/select/categories?speciality_id=1",
   notificationSettings: "/notifications/settings",
@@ -14,4 +16,7 @@ export const EndPoints = {
   Projects: "/projects?type=all",
   CreateProject: "/projects",
   CreateAttachment: "/projects/:id/attachments",
+  ShowUser: "/users/:id",
+  RejectProject: "/projects/:id/reject",
+  AcceptProject: "/projects/:id/invitation/accept",
 };

@@ -8,7 +8,6 @@ import BaserDashboardLayout from "../layout/BaserDashboardLayout";
 import BaserRoutes from "./BaserRoutes";
 import BostanyLayout from "../layout/BostanyLayout";
 import BostanyRoutes from "./BostanyRoutes";
-import Bst10 from "../pages/BostanyDashboard/Bst10";
 import ProtectedRoute from "../components/ProtectedRoute";
 
 
@@ -52,8 +51,6 @@ const AppRoutes: React.FC = () => {
                         </BostanyLayout>
                     }
                 />
-                <Route path="/Bostany/bst10" element={<Bst10 />} />
-
             </Routes>
         </Router>
     );

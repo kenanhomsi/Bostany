@@ -1,4 +1,4 @@
-import { IGetBostany } from "./api";
+import { categorySelect, IGetBostany, SpecialitiesType } from "./api";
 
 export interface TimeBarProps {
   TimeSelected: string;
@@ -61,6 +61,12 @@ export interface DropDownSelectionTypes {
   handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleClick?: () => void;
 }
+export interface ExperiencesType {
+  id?: number;
+  issuer: string;
+  job_title: string;
+  year: string;
+}
 export interface qualificationType {
   id: number;
   issuer: string;
@@ -101,7 +107,9 @@ export interface PopUpParams {
     | "BookingTimePop"
     | "BookingConfirmPop"
     | "BookingSuccessPop"
-    | "SwitchToBaser";
+    | "SwitchToBaser"
+    | "Bst10Time"
+    | "Bst10Table";
   PopSize:
     | "sm"
     | "md"
@@ -161,12 +169,38 @@ export interface SeedsCardData {
 }
 export interface SeedsCardProps {
   data: {
+    accepted_request: {
+      consultant: IGetBostany;
+      created_at: string;
+      created_at_formatted: string;
+      extension_request_id: string;
+      extension_requested: false;
+      id: number;
+      rating: null;
+      remaining_formatted: string;
+      remaining_hours: number;
+      start_at: string;
+    };
+    authorize: {
+      change_time: boolean;
+      reject: boolean;
+      report: boolean;
+      start_meeting: boolean;
+    };
     id: number;
     name: string;
     description: string;
+    invitation: {
+      end_at: string;
+      start_at: string;
+    };
+    is_closed: boolean;
+    is_favorited: boolean;
+    labels: string[];
+    participants_count: number;
     specialities: {
       id: number;
-      name: string;
+      text: string;
     }[];
     status: string;
     status_localed: string;
@@ -251,11 +285,19 @@ export interface HistoryChatsProps {
   Chats: chatType[];
 }
 export interface ProfileFormType {
+  avatarToken: string;
+  XUrl: string;
+  experiences: ExperiencesType[];
+  certificates: qualificationType[];
+  LinkedInUrl: string;
+  DefinitiveWords: string;
+  gender: string;
+  category: number[];
+  specialities: number[];
   name: string | undefined;
   imageFile: File | null;
   avatar: string | undefined;
   birthdate: string | undefined;
-  avatarToken?: string;
   country:
     | {
         id: number;
@@ -280,4 +322,34 @@ export interface ProfileNotifiHandleSwitchProps {
     firebase: boolean;
   };
   value: boolean;
+}
+export interface BookingFormType {
+  Title: string;
+  FileAttchToken: string[];
+  specialities: number[];
+  category: number[];
+}
+export interface CategoryListProps {
+  CategoryList: number[];
+  handleCategoryClick: (id: number) => void;
+  Data: categorySelect[];
+  From: string;
+}
+export interface SpecialistListProps {
+  handleWorkSpaceClick: (id: number) => void;
+  SelectedSpecialitiest: number[];
+  data: SpecialitiesType[];
+  From: string;
+}
+export interface timeToSelect {
+  dayNumber: number;
+  Fulldate: string;
+  dayName: string;
+}
+export interface eventsDataType {
+  id: string;
+  title: string;
+  allDay: boolean;
+  start: Date;
+  end: Date;
 }

@@ -18,7 +18,7 @@ export const UpdateProfileSettings = async (
       IGetProfile
     >({
       method: Methods.PATCH,
-      url: EndPoints.Profile,
+      url: EndPoints.UpdateProfileSettings,
       data: payload,
     });
     handleApiResponseErrors(response, "validation_error");
