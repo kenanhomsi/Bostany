@@ -72,25 +72,25 @@ const Search = () => {
             categories: +e.target.value
         })
     }
-    const handleFilterBtns = (e) => {
-        const arr = FormToSearch.FilterBy.map((ele) => {
-            if (ele.name == e.target.id) {
-                console.log(e.target.value)
-                return {
-                    ...ele,
-                    state: !ele.state
-                }
-            }
-            else {
-                return ele
-            }
+    const handleFilterBtns = () => {
+        // const arr = FormToSearch.FilterBy.map((ele) => {
+        //     if (ele.name == e.target.id) {
+        //         console.log(e.target.value)
+        //         return {
+        //             ...ele,
+        //             state: !ele.state
+        //         }
+        //     }
+        //     else {
+        //         return ele
+        //     }
 
-        })
-        console.log(arr)
-        SetFormToSearch({
-            ...FormToSearch,
-            FilterBy: arr
-        })
+        // })
+        // console.log(arr)
+        // SetFormToSearch({
+        //     ...FormToSearch,
+        //     FilterBy: arr
+        // })
     }
 
     return (

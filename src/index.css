@@ -7,9 +7,7 @@
   box-shadow: -4px 6px 100px 2px #0000001a;
 }
 .beforsticky {
-  width: 1500px;
   z-index: 100;
-  padding-right: 150px;
 }
 .sticky {
   position: fixed;
@@ -20,6 +18,7 @@
   padding-right: 210px;
   width: 1500px;
   background-color: #fdf8fd;
+  padding: 8px;
 }
 .fixed-scroll {
   position: fixed;
