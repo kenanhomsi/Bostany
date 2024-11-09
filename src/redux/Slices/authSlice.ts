@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IGetProfile } from "../../Types/api";
+import { AuthUser } from "../../Types/api";
 
 export interface User {
   id: number;
@@ -43,7 +43,7 @@ export interface User {
   created_at_formatted: string;
 }
 interface AuthState {
-  user: IGetProfile | null;
+  user: AuthUser | null;
   token: string | null;
   isAuthenticated: boolean;
 }
