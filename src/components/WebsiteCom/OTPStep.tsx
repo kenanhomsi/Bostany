@@ -39,7 +39,7 @@ const OTPStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) => 
                 <RiArrowRightSLine className="w-6 h-6" />
             </div>
             <h2 className="text-BaserOnSurfase text-3xl font-semibold ">إدخال رمز التحقق</h2>
-            <p className=" text-base font-medium text-dark">لقد أرسلنا رمز تحقق مكون من 4 أرقام إلى رقم هاتفك {UserData?.phone} الرجاء إدخال الرمز في الحقل أدناه لتأكيد رقم هاتفك.</p>
+            <p className=" text-base font-medium text-dark">لقد أرسلنا رمز تحقق مكون من 4 أرقام إلى رقم هاتفك {UserData?.data.phone} الرجاء إدخال الرمز في الحقل أدناه لتأكيد رقم هاتفك.</p>
             <div className="w-full otp_container" >
                 <OtpInput
                     value={OTPValue}

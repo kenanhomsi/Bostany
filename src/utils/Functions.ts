@@ -20,7 +20,7 @@ export function translateDayToEnglish(arabicDay: arabicDayType): string {
     السبت: "Saturday",
   };
 
-  return daysTranslation[arabicDay] || "Unknown day";
+  return daysTranslation[arabicDay.arabicDay] || "Unknown day";
 }
 export function calculateEndTime(startTime: string, duration: number) {
   const [hours, minutes] = startTime.split(":").map(Number);

@@ -11,8 +11,8 @@ const ChatRoom = ({ SelectedChat }: ChatRoomProps) => {
     // const [DayChatState, setDayChatState] = useState(false);
     const [InputValue, setInputValue] = useState('');
     const SelectedChatId = useAppSelector((state) => state.chatMessage.SelectedChatId)
-    const [, setAttechedFile] = useState(null);
-    const [, setAttechedAudio] = useState(null);
+    const [, setAttechedFile] = useState<File | null>(null);
+    const [, setAttechedAudio] = useState<File | null>(null);
     const dispatch = useDispatch()
     const audioPickerRef = useRef<HTMLInputElement>(null);
     const filePickerRef = useRef<HTMLInputElement>(null);
