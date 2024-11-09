@@ -4,10 +4,11 @@ import { RiArrowRightSLine } from "react-icons/ri";
 import { useAppSelector } from "../../redux/store";
 import { usePostVeifyCode } from "../../utils/api/auth/usePostVerifyCode";
 import { useNavigate } from "react-router-dom";
+import { useGetUserProfile } from "../../utils/api/User/useGetUserProfile";
 
 const OTPStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) => {
     const RegisterAs = useAppSelector((state) => state.register.RegisterAs)
-    const UserData = useAppSelector((state) => state.auth.user)
+    const { data: UserData } = useGetUserProfile();
     const [OTPValue, SetOTPValue] = useState('');
     const navigate = useNavigate()
     const { data, mutate, isError, isLoading, isSuccess } = usePostVeifyCode();
