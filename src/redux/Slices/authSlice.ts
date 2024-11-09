@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { IGetProfile } from "../../Types/api";
 
 export interface User {
@@ -58,10 +58,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    loginSuccess(
-      state,
-      action: PayloadAction<{ user: IGetProfile; token?: string }>
-    ) {
+    loginSuccess(state, action) {
       state.user = action.payload.user;
       if (action.payload.token) state.token = action.payload.token;
       state.isAuthenticated = true;

@@ -9,10 +9,11 @@ import { useDispatch } from "react-redux";
 import { changeRegisterAsState } from "../../redux/Slices/RegisterSlice";
 import useFetchCountries from "../../Hooks/useFetchAllCountreis";
 import { usePostLogin } from "../../utils/api/auth/usePostLogin";
-import { loginSuccess, User } from "../../redux/Slices/authSlice";
+import { loginSuccess } from "../../redux/Slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth'
 import { app } from '../../firebase'
+import { IGetProfile } from "../../Types/api";
 const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) => {
     const auth = getAuth(app);
     const RegisterAs = useAppSelector((state) => state.register.RegisterAs)
@@ -29,7 +30,7 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
     useEffect(() => {
         if (isSuccess) {
             Dispatch(loginSuccess({
-                user: data?.data.data as User,
+                user: data?.data.data as IGetProfile,
                 token: data?.data.token as string
             }))
             setStep(2)

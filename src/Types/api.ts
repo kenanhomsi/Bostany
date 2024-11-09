@@ -8,36 +8,7 @@ export interface LoginTypeInput {
 }
 export interface LoginTypeOutput {
   data: {
-    data: {
-      id: number;
-      name: string;
-      email: string;
-      phone: string;
-      phone_code: string;
-      birthdate: null | string;
-      bio: null | string;
-      gender: null | string;
-      type: string; //customer or consultant
-      avatar: string;
-      localed_type: string;
-      country: null | string;
-      city: null | string;
-      rating: {
-        avg: number;
-        count: number;
-        professionalism: null | string;
-      };
-      counts: {
-        cancelled_projects: number;
-        waiting_projects: number;
-        completed_projects: number;
-      };
-      unread_notifications_count: number;
-      completed_profile: boolean;
-      enable_2fa: boolean;
-      created_at: string;
-      created_at_formatted: string;
-    };
+    data: IGetProfile;
     token: string;
   };
 }

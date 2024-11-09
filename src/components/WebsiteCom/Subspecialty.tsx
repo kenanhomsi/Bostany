@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { changeQualificationData } from "../../redux/Slices/QualificationData";
 export interface SubspecialtyProps {
     index: number;
-    setCHangeHappend: (value: boolean) => void
+    setCHangeHappend?: (value: boolean) => void
 }
 const Subspecialty = ({ index, setCHangeHappend }: SubspecialtyProps) => {
     const dispatch = useDispatch()
@@ -23,7 +23,7 @@ const Subspecialty = ({ index, setCHangeHappend }: SubspecialtyProps) => {
             ...QualificationData,
             [e.target.name]: e.target.value
         })
-        setCHangeHappend(true);
+        if (setCHangeHappend) setCHangeHappend(true);
         dispatch(changeQualificationData({
             ...QualificationData,
             [e.target.name]: e.target.value

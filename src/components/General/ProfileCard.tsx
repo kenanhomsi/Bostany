@@ -85,7 +85,7 @@ const ProfileCard = ({ CardShap, data }: ProfileCardProps) => {
                     {/* Free time for booking */}
                     <div className=" flex flex-wrap h-16 gap-1 w-full">
                         {/* for now i make only top 3 will upper */}
-                        {data.settings.schedules.filter((ele, index) => index < 3).map((time, index) => (
+                        {data.settings.schedules.filter((ele, index) => { if (ele) return index < 3 }).map((time, index) => (
                             <button key={index} id={`${time.to_time!}-${time.from_time!}`} onClick={HandleFreetimeClick} className={`${index == 0 ? 'bg-GeneralSuccessContainer' : index == 1 ? 'bg-GeneralWarningContainer' : 'bg-BaserTertiary'}  h-fit p-2 rounded-full text-white text-xs font-medium`}><span>{time.to_time}</span>-<span>{time.from_time}</span></button>
                         ))}
                     </div>

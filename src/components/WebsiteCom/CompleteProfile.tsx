@@ -9,9 +9,10 @@ import Step3 from "./CompleteProfileComponents/Step3";
 import Step4 from "./CompleteProfileComponents/Step4";
 import Step5 from "./CompleteProfileComponents/Step5";
 import { useUpdateProfile } from "../../utils/api/User/usePutProfile";
-import { loginSuccess, User } from "../../redux/Slices/authSlice";
+import { loginSuccess } from "../../redux/Slices/authSlice";
 import { useDispatch } from "react-redux";
 import { EmptyQualificationData } from "../../redux/Slices/QualificationData";
+import { IGetProfile } from "../../Types/api";
 const CompleteProfile = () => {
     const navigate = useNavigate()
     const Dispatch = useDispatch()
@@ -80,14 +81,13 @@ const CompleteProfile = () => {
     useEffect(() => {
         if (isSuccess && RegisterAs == 'Baser') {
             Dispatch(loginSuccess({
-                user: data?.data.data as User,
+                user: data?.data as IGetProfile,
             }))
             navigate('/Baser');
         }
         else if (FinalSend && isSuccess && RegisterAs == 'Bostany' && CompleteProfileStep == 5) {
-            console.log('yess')
             Dispatch(loginSuccess({
-                user: data?.data.data as User,
+                user: data?.data as IGetProfile,
             }))
             Dispatch(EmptyQualificationData())
             navigate('/Bostany');
@@ -127,8 +127,8 @@ const CompleteProfile = () => {
         mutate({
             payload: {
                 bio: FormData.DefinitiveWords,
-                cetificates: FormData.qualification,
-                category: FormData.category,
+                certificates: FormData.qualification,
+                categories: FormData.category,
                 specialities: FormData.specialities,
                 name: FormData.FullName,
                 email: FormData.email,
