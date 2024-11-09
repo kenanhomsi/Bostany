@@ -46,11 +46,10 @@ const BookingTimePop = () => {
     const handleFromToTimeSelecet = (e: React.MouseEvent<HTMLButtonElement>) => {
         setFromToTimeSelected(e.currentTarget.id)
     }
-
     return (
         <div className="flex flex-col gap-8 overflow-x-hidden">
             <TimeBarProfile TimeSelected={TimeSelected} setTimeSelected={setTimeSelected} />
-            {DayScheduleArray.length > 0 ?
+            {DayScheduleArray && DayScheduleArray.length > 0 ?
                 <>
                     <div className=" flex gap-2">
                         {
