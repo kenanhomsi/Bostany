@@ -165,7 +165,7 @@ const ProfileMainInfo = ({ ProfileForm, SetProfileStep, setProfileForm, setCHang
                             <span>{ProfileForm.birthdate}</span>
                         </Label>
                         <Datepicker
-                            onChange={handleDateChange}
+                            onChange={() => handleDateChange}
                             name="ToDatePicker" id="ToDatePicker"
                             style={{ backgroundColor: '#faf5f9', width: '100%', border: '0', borderRadius: '30px', padding: '15px 40px', fontSize: '16px', fontWeight: 'normal' }}
                             theme={{
