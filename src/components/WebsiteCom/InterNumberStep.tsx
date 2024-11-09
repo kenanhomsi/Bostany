@@ -57,7 +57,7 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
         })[0]
         mutate({
             payload: {
-                username: RegisterData.phoneNumber.toString(),//or phone number
+                username: `${SelectedCountry.key}${RegisterData.phoneNumber.toString()}`,//or phone number
                 phone_code: SelectedCountry.code,
                 type: RegisterData.type == 'Baser' ? 'customer' : 'consultant',
             }
