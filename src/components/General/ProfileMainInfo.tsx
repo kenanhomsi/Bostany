@@ -188,7 +188,7 @@ const ProfileMainInfo = ({ ProfileForm, SetProfileStep, setProfileForm, setCHang
                         </button>
                     </div>
                 </div>
-                {data?.data.type == 'consultant' &&
+                {data?.data.type === 'consultant' &&
                     <>
                         <div className=" w-full ">
                             <p className=" font-medium text-base mb-1 text-[#191C1B]">كلمات تعريفية تشويقية عنك</p>
