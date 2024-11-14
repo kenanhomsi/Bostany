@@ -125,6 +125,7 @@ const CompleteProfile = () => {
                         gender: FormData.gender
                     }
                 })
+                Dispatch(EmptyQualificationData());
                 SetCompleteProfileStep((pre) => pre + 1)
             } else {
                 SetCompleteProfileStep((pre) => pre + 1)

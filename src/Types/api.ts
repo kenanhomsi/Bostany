@@ -284,7 +284,6 @@ export interface IGetProfile {
   };
 }
 export interface AuthUser {
-  data: {
     id: number;
     name: string;
     email: string;
@@ -374,7 +373,6 @@ export interface AuthUser {
     enable_2fa: boolean;
     created_at: string;
     created_at_formatted: string;
-  };
 }
 export interface updateProfileOutPut {
   data: IGetProfile;
