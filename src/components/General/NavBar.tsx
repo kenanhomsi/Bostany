@@ -16,7 +16,7 @@ const NavBar = ({ DashBoard }: { DashBoard: string }) => {
     let Title
     if (DashBoard == 'Baser') {
         if (pathname.split('/')[2] == 'bostanyProfile') {
-            Title = <p className="flex items-center gap-3"> <span className="text-xl font-semibold text-dark">الرئيسية</span><SlArrowLeft className="w-4 h-4" /> <span className="text-xl font-semibold text-dark">بستاني</span></p>
+            Title = <p className="flex items-center gap-3"> <span className="text-xl font-semibold text-BostanyOnSurface">الرئيسية</span><SlArrowLeft className="w-4 h-4" /> <span className="text-xl font-semibold text-dark">بستاني</span></p>
         }
         else {
             if (pathname.split('/')[2] == 'profile') {
@@ -27,7 +27,7 @@ const NavBar = ({ DashBoard }: { DashBoard: string }) => {
         }
     } else {
         if (pathname.split('/')[2] == 'profile') {
-            Title = <p className="flex items-center gap-3"> <span className="text-xl font-semibold text-dark">الرئيسية</span><SlArrowLeft className="w-4 h-4" /> <span className="text-xl font-semibold text-dark">بستاني</span></p>
+            Title = <p className="flex items-center gap-3"> <span className="text-xl font-semibold text-BostanyOnSurface">الرئيسية</span><SlArrowLeft className="w-4 h-4" /> <span className="text-xl font-semibold text-dark">بستاني</span></p>
         } else {
             if (pathname.split('/')[2] == 'bst10') {
                 Title = <span className="text-BostanyPrimary">بستن الآن</span>
@@ -40,8 +40,8 @@ const NavBar = ({ DashBoard }: { DashBoard: string }) => {
         dispatch(OpenBst10Time())
     }
     return (
-        <div className="px-10 py-6    fixed  top-0  z-[1000] pr-[280px]  w-full right-0  bg-BaserbodyLigh flex h-20 justify-between items-center">
-            <div className="text-xl font-semibold text-dark pr-5">{Title}</div>
+        <div className=" pl-24 py-6    fixed  top-0  z-[1000] pr-[280px]  w-full right-0  bg-BaserbodyLigh flex h-20 justify-between items-center">
+            <div className="text-[22px] font-semibold text-BostanyOnSurface pr-5">{Title}</div>
             <div className=" flex gap-6 items-center  text-2xl">
                 <Dropdown
                     inline

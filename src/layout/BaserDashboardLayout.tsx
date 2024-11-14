@@ -48,7 +48,7 @@ const BaserDashboardLayout: React.FC<LayoutProps> = ({ children }) => {
             <PopUpModal
                 title='شراء'
                 type="BuyingCoinsPop"
-                PopSize="lg"
+                PopSize="2xl"
                 closeAction={CloseBuyingCoinsPop}
             >
                 <BuyingCoinsPopUp />

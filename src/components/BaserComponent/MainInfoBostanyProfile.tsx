@@ -1,5 +1,6 @@
 import checkedIcon from '/Icons/Verification-Fill.png'
 import { PiHeart } from "react-icons/pi";
+import { PiHeartFill } from "react-icons/pi";
 import { PiChatCircleDots } from "react-icons/pi";
 import { PiDotsThreeOutlineVertical } from "react-icons/pi";
 import { PiFlowerFill } from "react-icons/pi";
@@ -28,16 +29,23 @@ const MainInfoBostanyProfile = ({ BostanyData }: { BostanyData: IGetProfile }) =
     return (
         <div className="flex flex-col gap-10 w-[650px]">
             <div className="flex gap-6 items-start">
-                <img src={BostanyData.data.avatar} alt={BostanyData.data.avatar} className=" min-w-[198px] h-[198px] rounded-full overflow-hidden" />
+                <img src={BostanyData.data.avatar} alt={BostanyData.data.avatar} className=" w-[265px]  h-[198px] rounded-full overflow-hidden" />
                 <div className=" flex flex-col   gap-6 h-full">
-                    <div className=" flex items-start gap-4">
-                        <p className="flex gap-1 items-start ">
+                    <div className=" flex items-center gap-4">
+                        <p className="flex gap-1 items-center ">
                             <span className="text-BaserOnSurfase text-[32px] font-semibold">{BostanyData.data.name}</span>
                             {/* {BostanyData.checkMark && */}
                             <img src={checkedIcon} alt={checkedIcon} className="w-5 h-5 " />
                             {/* } */}
                         </p>
-                        <PiHeart onClick={() => HandleLoveiconClick(BostanyData.data.id)} className={`${FollowingList?.data.filter((ele) => ele.id == BostanyData.data.id)[0] != undefined ? '  text-BaserPrimary' : ' text-black'} cursor-pointer w-7 h-7 my-0`} />
+                        <p onClick={() => HandleLoveiconClick(BostanyData.data.id)}
+                            className=''>
+                            {FollowingList?.data.filter((ele) => ele.id == BostanyData.data.id)[0] != undefined ?
+                                <PiHeart className={`  text-BaserOnSurfase  cursor-pointer w-7 h-7 my-0`} />
+                                :
+                                <PiHeartFill className={`  text-BaserPrimary  cursor-pointer w-7 h-7 my-0`} />
+                            }
+                        </p>
                         <PiChatCircleDots className="w-7 h-7" />
                         <PiDotsThreeOutlineVertical className="text-3xl" />
                     </div>

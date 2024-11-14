@@ -54,7 +54,6 @@ const ProfileInfo = () => {
     }, [QualificationDataArray])
     useEffect(() => {
         if (data) {
-            console.log(data)
             const gender = data.data.gender == 'ذكر' ? 'male' : "female"
             const specialities = data?.data.specialities?.map((ele) => {
                 return ele.id
@@ -65,9 +64,9 @@ const ProfileInfo = () => {
             setProfileForm({
                 ...ProfileForm,
                 name: data?.data.name,
-                avatar: data?.data.avatar,
+                avatar: data?.data.avatar != "" ? data?.data.avatar : ProfileForm.avatar,
                 birthdate: data?.data.birthdate.split('T')[0],
-                country: data?.data.country,
+                country: data?.data.country != null ? data?.data.country : ProfileForm.country,
                 email: data?.data.email,
                 phone: data?.data.phone,
                 XUrl: data?.data.twitter as string,
@@ -77,7 +76,9 @@ const ProfileInfo = () => {
                 category: categories as number[],
                 specialities: specialities as number[],
             })
-            setDropDownValue(+data?.data.country.id as number)
+            if (data.data.country) {
+                setDropDownValue(+data?.data.country.id as number)
+            }
             if (data.data.cetificates && data.data.cetificates?.length > 0) {
                 dispatch(SetQualificationData(data.data.cetificates))
             }
@@ -87,33 +88,53 @@ const ProfileInfo = () => {
             if (ProfileForm.country?.id == undefined) {
                 if (allCountries.length > 15) {
                     const country = allCountries.filter((ele) => ele.code == data?.data.phone_code)[0]
-                    setDropDownValue(+country.id)
-                    setProfileForm({
-                        ...ProfileForm,
-                        country: country,
-                    })
+                    if (country) {
+                        console.log('yes')
+
+                        console.log(country)
+                        setDropDownValue(+country.id)
+                        setProfileForm({
+                            ...ProfileForm,
+                            country: country,
+                        })
+                    }
                 }
             }
         }
     }, [allCountries, data])
     const handleSaveChange = () => {
-        mutate({
-            payload: {
-                name: ProfileForm.name,
-                birthdate: ProfileForm.birthdate,
-                country_id: ProfileForm.country?.id,
-                email: ProfileForm.email,
-                phone: ProfileForm.phone,
-                phone_code: ProfileForm.country?.code,
-                avatar: ProfileForm.avatarToken,
-                gender: ProfileForm.gender,
-                specialities: ProfileForm.specialities,
-                categories: ProfileForm.category,
-                bio: ProfileForm.DefinitiveWords,
-                certificates: ProfileForm.certificates,
-                experiences: ProfileForm.experiences
-            }
-        })
+        if (Dashboard == 'Baser') {
+            mutate({
+                payload: {
+                    name: ProfileForm.name,
+                    birthdate: ProfileForm.birthdate,
+                    country_id: ProfileForm.country?.id,
+                    email: ProfileForm.email,
+                    phone: ProfileForm.phone,
+                    phone_code: ProfileForm.country?.code,
+                    avatar: ProfileForm.avatarToken,
+                    gender: ProfileForm.gender,
+                }
+            })
+        } else {
+            mutate({
+                payload: {
+                    name: ProfileForm.name,
+                    birthdate: ProfileForm.birthdate,
+                    country_id: ProfileForm.country?.id,
+                    email: ProfileForm.email,
+                    phone: ProfileForm.phone,
+                    phone_code: ProfileForm.country?.code,
+                    avatar: ProfileForm.avatarToken,
+                    gender: ProfileForm.gender,
+                    specialities: ProfileForm.specialities,
+                    categories: ProfileForm.category,
+                    bio: ProfileForm.DefinitiveWords,
+                    certificates: ProfileForm.certificates,
+                    experiences: ProfileForm.experiences
+                }
+            })
+        }
 
     }
     return (

@@ -72,29 +72,27 @@ const Search = () => {
             categories: +e.target.value
         })
     }
-    const handleFilterBtns = () => {
-        // const arr = FormToSearch.FilterBy.map((ele) => {
-        //     if (ele.name == e.target.id) {
-        //         console.log(e.target.value)
-        //         return {
-        //             ...ele,
-        //             state: !ele.state
-        //         }
-        //     }
-        //     else {
-        //         return ele
-        //     }
+    const handleFilterBtns = (e: React.MouseEvent<HTMLButtonElement>) => {
+        const arr = FormToSearch.FilterBy.map((ele) => {
+            if (ele.name == e.currentTarget.id) {
+                return {
+                    ...ele,
+                    state: !ele.state
+                }
+            }
+            else {
+                return ele
+            }
 
-        // })
-        // console.log(arr)
-        // SetFormToSearch({
-        //     ...FormToSearch,
-        //     FilterBy: arr
-        // })
+        })
+        SetFormToSearch({
+            ...FormToSearch,
+            FilterBy: arr
+        })
     }
 
     return (
-        <div className="mt-section pt-14  pb-6 h-full flex gap-5 justify-between px-5 ">
+        <div className="mt-section pt-14  pr-10 pl-24 pb-6 h-full flex gap-5 justify-between  ">
             <div className=" h-full w-full flex flex-col gap-7">
                 <div className=" relative">
                     <input type="text" value={FormToSearch.text} onChange={(e) => SetFormToSearch({
@@ -106,13 +104,13 @@ const Search = () => {
                 <div className=" flex flex-wrap  gap-4   w-full  ">
                     {SpecialitiesList &&
                         SpecialitiesList.data.map((ele, index) => {
-                            return <button key={index} onClick={() => handleWorkSpaceClick && handleWorkSpaceClick(ele.id)} className='flex  rounded-full border-[2px] py-2  px-3  items-center gap-2 border-[#8E918F]'>
+                            return <button key={index} onClick={() => handleWorkSpaceClick && handleWorkSpaceClick(ele.id)} className='flex  rounded-full border-[2px] py-3  px-4  items-center gap-2 border-[#8E918F]'>
                                 <div className={` text-[24px] ${FormToSearch.specialization == ele.id && 'text-BaserPrimary'}  `}>
                                     {WorkSpaceData &&
                                         WorkSpaceData.filter((work) => work.name === ele.text)[0]?.icon
                                     }
                                 </div>
-                                <p className='text-xs font-medium text-dark'>{ele.text}</p>
+                                <p className='text-sm font-medium text-BaserOnSurfase'>{ele.text}</p>
                             </button>
                         }
                         )

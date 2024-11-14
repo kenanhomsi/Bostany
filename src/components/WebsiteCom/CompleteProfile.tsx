@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { RiArrowRightSLine } from "react-icons/ri"
+import { PiCaretRight } from "react-icons/pi";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../redux/store";
 import { CompleteProfileFormData } from "../../Types";
@@ -21,7 +21,7 @@ const CompleteProfile = () => {
     const [FinalSend, SetFinalSend] = useState(false)
     const [CompleteProfileStep, SetCompleteProfileStep] = useState(1)
     const [PassState, SetPassState] = useState(false)
-    const { mutate, isError, isLoading, isSuccess, data } = useUpdateProfile();
+    const { mutate, isError, error, isLoading, isSuccess, data } = useUpdateProfile();
     const [FormData, SetFormData] = useState<CompleteProfileFormData>({
         FullName: '',
         email: '',
@@ -36,7 +36,7 @@ const CompleteProfile = () => {
     });
     useEffect(() => {
         if (CompleteProfileStep == 1) {
-            if (FormData.FullName != '' && FormData.email != '' && FormData.checkOne && FormData.checkTwo) {
+            if (FormData.FullName != '' && FormData.email != '' && !FormData.checkOne) {
                 SetPassState(true)
             } else {
                 SetPassState(false)
@@ -70,6 +70,7 @@ const CompleteProfile = () => {
         }
     }, [CompleteProfileStep, FormData])
     const handleClickArrowBack = () => {
+        console.log(CompleteProfileStep)
         SetCompleteProfileStep((pre) => pre - 1);
     }
     useEffect(() => {
@@ -92,13 +93,20 @@ const CompleteProfile = () => {
             Dispatch(EmptyQualificationData())
             navigate('/Bostany');
         }
-        else if (isSuccess && RegisterAs == 'Bostany' && CompleteProfileStep == 2) {
-            SetCompleteProfileStep((pre) => pre + 1)
-        }
+        // else if (isSuccess && RegisterAs == 'Bostany' && CompleteProfileStep == 2) {
+        //     SetCompleteProfileStep((pre) => pre + 1)
+        // }
     }, [CompleteProfileStep, Dispatch, RegisterAs, data, isSuccess, navigate])
     const handleContinousBtn = () => {
         if (RegisterAs == 'Baser') {
             if (CompleteProfileStep < 2) return SetCompleteProfileStep((pre) => pre + 1)
+            console.log(
+                {
+                    name: FormData.FullName,
+                    email: FormData.email,
+                    birthdate: FormData.birthDate,
+                    gender: FormData.gender
+                })
             mutate({
                 payload: {
                     name: FormData.FullName,
@@ -117,6 +125,7 @@ const CompleteProfile = () => {
                         gender: FormData.gender
                     }
                 })
+                SetCompleteProfileStep((pre) => pre + 1)
             } else {
                 SetCompleteProfileStep((pre) => pre + 1)
             }
@@ -139,11 +148,11 @@ const CompleteProfile = () => {
         SetFinalSend(true)
     }
     return (
-        <div className="flex flex-col items-start mt-5 justify-start gap-5 w-full">
-            {CompleteProfileStep > 1 && <div className=" p-1 cursor-pointer bg-BaserSurface rounded-full  w-fit " onClick={handleClickArrowBack}>
-                <RiArrowRightSLine className="w-6 h-6" />
+        <div className="flex flex-col items-start  justify-start gap-6 w-full">
+            {<div className=" p-1 cursor-pointer bg-BaserSurface rounded-full  w-fit " onClick={handleClickArrowBack}>
+                <PiCaretRight className="w-6 h-6" />
             </div>}
-            <h2 className="text-BaserOnSurfase text-3xl font-semibold ">إكمال الملف الشخصي</h2>
+            <h2 className="text-BaserOnSurfase text-3xl my-4 font-semibold ">عرفنا بشخصك الكريم</h2>
             {
                 CompleteProfileStep == 1 && <Step1 FormData={FormData} SetFormData={SetFormData} />
             }
@@ -161,11 +170,19 @@ const CompleteProfile = () => {
             }
             {CompleteProfileStep < 5 &&
                 <>
-                    <button onClick={handleContinousBtn} disabled={!PassState} className={` ${!PassState ? " text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]" : `text-white cursor-pointer  ${RegisterAs == 'Baser' ? 'bg-BaserPrimary' : 'bg-BostanyPrimary'}`} w-full   rounded-full p-3  text-base font-medium`}> {CompleteProfileStep < 3 ? 'إتمام التسجيل' : isLoading ? '...loading' : 'التالي'}</button>
+                    <button onClick={handleContinousBtn} disabled={!PassState} className={` ${!PassState ? " text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]" : `text-white cursor-pointer  ${RegisterAs == 'Baser' ? 'bg-BaserPrimary' : 'bg-BostanyPrimary'}`} w-full   rounded-full py-4 px-5  text-base font-medium`}> {CompleteProfileStep == 5 || CompleteProfileStep == 2 ? 'إتمام التسجيل' : isLoading ? '...loading' : 'التالي'}</button>
                     {
-                        isError && <p className=" text-GeneralError">هنالك خطا حاول مرة اخرى</p>
+                        isError && <p className=" text-GeneralError">{error?.message}</p>
                     }
-                    <Link to={RegisterAs == 'Baser' ? '/Baser' : '/Bostany'} className="font-medium self-center mb-5">تخطي</Link>
+                    {
+                        RegisterAs == 'Baser' && CompleteProfileStep == 2 &&
+                        <Link to='/Baser' className="font-medium self-center mb-5">تخطي</Link>
+                    }
+                    {
+                        RegisterAs != 'Baser' && CompleteProfileStep == 5 &&
+                        <Link to='/Bostany' className="font-medium self-center mb-5">تخطي</Link>
+
+                    }
                 </>
             }
             {CompleteProfileStep == 5 &&

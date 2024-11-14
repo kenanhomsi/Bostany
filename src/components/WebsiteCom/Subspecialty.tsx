@@ -31,20 +31,20 @@ const Subspecialty = ({ index, setCHangeHappend }: SubspecialtyProps) => {
     }
     return (
         <div className="flex flex-col gap-4" key={index} >
-            <div className="flex flex-col gap-3">
-                <span className="font-medium text-base  text-[#191C1B]">اختيار المجال</span>
-                <input onChange={handleInputChange} value={QualificationData.issuer} type="text" name="issuer" className="w-full bg-BaserSurface text-dark  rounded-2xl border-none p-4" placeholder="اسم المؤسسة التعليمية" />
+            <div className="flex flex-col gap-2">
+                <span className="font-medium text-base  text-[#191C1B]">المؤهلات الاكاديمية</span>
+                <input onChange={handleInputChange} value={QualificationData.issuer} type="text" name="issuer" className="w-full bg-BaserSurface text-dark  rounded-2xl border-none py-4 px-6" placeholder="اسم المؤسسة التعليمية" />
             </div>
             <select name="Academic_degree" defaultValue='البكالوريوس'
                 // value={QualificationData.Academic_degree}
                 // onChange={handleInputChange}
-                id="Academic_degree" className="w-full bg-BaserSurface text-dark  rounded-2xl border-none p-4">
+                id="Academic_degree" className="w-full bg-BaserSurface text-dark  rounded-2xl border-none py-4 px-6">
                 <option value="البكالوريوس" >درجة البكالوريوس</option>
                 <option value="الماجستير">درجة الماجستير</option>
                 <option value="دكتوراه">درجة دكتوراه</option>
             </select>
-            <input onChange={handleInputChange} value={QualificationData.cartificate} type="text" name="cartificate" className="w-full bg-BaserSurface text-dark  rounded-2xl border-none p-4" placeholder="التخصص" />
-            <input onChange={handleInputChange} value={QualificationData.year} type="text" name="year" className="w-full bg-BaserSurface text-dark  rounded-2xl border-none p-4" placeholder="تاريخ التخرج" />
+            <input onChange={handleInputChange} value={QualificationData.cartificate} type="text" name="cartificate" className="w-full bg-BaserSurface text-dark  rounded-2xl border-none py-4 px-6" placeholder="التخصص" />
+            <input onChange={handleInputChange} value={QualificationData.year} type="text" name="year" className="w-full bg-BaserSurface text-dark  rounded-2xl border-none py-4 px-6" placeholder="تاريخ التخرج" />
         </div>
     )
 }

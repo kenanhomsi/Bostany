@@ -37,3 +37,7 @@ export function calculateEndTime(startTime: string, duration: number) {
   ).padStart(2, "0")}`;
   return endTime;
 }
+export function arabicTimeFormat(oldTime: string) {
+  const newText = oldTime.replace("AM", "ص").replace("PM", "م");
+  return newText;
+}

@@ -240,6 +240,7 @@ export interface FinancialTransactionCardProps {
 export interface SideBarListType {
   name: string;
   icone: JSX.Element;
+  ActiveIcon: JSX.Element;
   link: string;
 }
 export interface BAS10ChartType {

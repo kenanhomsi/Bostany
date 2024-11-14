@@ -1,5 +1,5 @@
 import avaterImage from '/Images/Avatars.png'
-import { PiUserCircleFill } from "react-icons/pi";
+import { PiCalendarDotsFill, PiChatCircleDotsFill, PiHeartFill, PiHouse, PiMagnifyingGlassFill, PiPlantFill, PiUserCircleFill, PiWalletFill } from "react-icons/pi";
 import { PiBellFill } from "react-icons/pi";
 import { PiLockFill } from "react-icons/pi";
 import { PiQuestionFill } from "react-icons/pi";
@@ -40,6 +40,8 @@ import { PiTreeFill } from "react-icons/pi";
 import { PiChartBar } from "react-icons/pi";
 import { PiCalendarDots } from "react-icons/pi";
 import { PiChatCircleDotsLight } from "react-icons/pi";
+import { PiTree } from "react-icons/pi";
+import { PiChartBarFill } from "react-icons/pi";
 export const WebsiteNavData = [
   {
     name: "الرئيسية",
@@ -236,54 +238,66 @@ export const AboutCardsData = [
 export const BaserSidbarData = [
   {
     name: 'الرئيسية',
-    icone: <PiHouseFill />,
+    icone: <PiHouse />,
+    ActiveIcon: <PiHouseFill />,
     link: '/Baser'
   },
   {
     name: 'البحث',
     icone: <PiMagnifyingGlass />,
+    ActiveIcon: <PiMagnifyingGlassFill />,
     link: '/Baser/search'
   },
   {
     name: 'بذوري',
     icone: <PiPlant />,
+    ActiveIcon: <PiPlantFill />,
     link: '/Baser/seeds'
   },
   {
     name: 'المفضلين',
     icone: <PiHeart />,
+    ActiveIcon: <PiHeartFill />,
     link: '/Baser/favorite'
   },
   {
     name: 'المحفظة',
     icone: <PiWallet />,
+    ActiveIcon: <PiWalletFill />,
     link: '/Baser/wallet'
   },
 ]
 export const BostanySidbarData = [
   {
     name: 'بستاني',
-    icone: <PiTreeFill />,
+    icone: <PiTree />,
+    ActiveIcon: <PiTreeFill />,
     link: '/Bostany'
   },
   {
     name: 'الاحصائيات',
     icone: <PiChartBar />,
+    ActiveIcon: <PiChartBarFill />,
     link: '/Bostany/statistics'
   },
   {
     name: 'الجدول',
     icone: <PiCalendarDots />,
+    ActiveIcon: <PiCalendarDotsFill />,
+
     link: '/Bostany/table'
   },
   {
     name: 'الرسائل',
     icone: <PiChatCircleDotsLight />,
+    ActiveIcon: <PiChatCircleDotsFill />,
+
     link: '/Bostany/messages'
   },
   {
     name: 'المحفظة',
     icone: <PiWallet />,
+    ActiveIcon: <PiWalletFill />,
     link: '/Bostany/wallet'
   },
 ]
@@ -397,196 +411,6 @@ export const StatisticsDataForMounth = {
   CancelRate: 44,
   BenefitAVg: 6700,
 }
-// const now = new Date();
-// import AppointmentChap from '../components/BostanyComponents/AppointmentChap';
-// export const events = [
-//   {
-//     id: 0,
-//     title: "All Day Event very long title",
-//     allDay: true,
-//     start: new Date(2024, 8, 0),
-//     end: new Date(2024, 8, 1),
-//   },
-//   {
-//     id: 1,
-//     title: "Long Event",
-//     start: new Date(2024, 8, 7),
-//     end: new Date(2024, 8, 10),
-//   },
-
-//   {
-//     id: 2,
-//     title: "DTS STARTS",
-//     start: new Date(2016, 2, 18, 0, 0, 0),
-//     end: new Date(2016, 2, 20, 0, 0, 0),
-//   },
-
-//   {
-//     id: 8,
-//     title: "DTS ENDS",
-//     start: new Date(2016, 10, 6, 0, 0, 0),
-//     end: new Date(2016, 10, 18, 0, 0, 0),
-//   },
-
-//   {
-//     id: 4,
-//     title: "Some Event",
-//     start: new Date(2024, 8, 9, 0, 0, 0),
-//     end: new Date(2024, 8, 10, 0, 0, 0),
-//   },
-//   {
-//     id: 5,
-//     title: "Conference",
-//     start: new Date(2024, 8, 11),
-//     end: new Date(2024, 8, 18),
-//     desc: "Big conference for important people",
-//   },
-//   {
-//     id: 6,
-//     title: "Meeting",
-//     start: new Date(2024, 8, 12, 10, 80, 0, 0),
-//     end: new Date(2024, 8, 12, 12, 80, 0, 0),
-//     desc: "Pre-meeting meeting, to prepare for the meeting",
-//   },
-//   {
-//     id: 7,
-//     title: "Lunch",
-//     start: new Date(2024, 8, 12, 12, 0, 0, 0),
-//     end: new Date(2024, 8, 12, 18, 0, 0, 0),
-//     desc: "Power lunch",
-//   },
-//   {
-//     id: 8,
-//     title: "Meeting",
-//     start: new Date(2024, 8, 12, 14, 0, 0, 0),
-//     end: new Date(2024, 8, 12, 15, 0, 0, 0),
-//   },
-//   {
-//     id: 9,
-//     title: "Happy Hour",
-//     start: new Date(2024, 8, 12, 17, 0, 0, 0),
-//     end: new Date(2024, 8, 12, 17, 80, 0, 0),
-//     desc: "Most important meal of the day",
-//   },
-//   {
-//     id: 10,
-//     title: "Dinner",
-//     start: new Date(2024, 8, 12, 20, 0, 0, 0),
-//     end: new Date(2024, 8, 12, 21, 0, 0, 0),
-//   },
-//   {
-//     id: 11,
-//     title: "Planning Meeting with Paige",
-//     start: new Date(2024, 8, 18, 8, 0, 0),
-//     end: new Date(2024, 8, 18, 10, 80, 0),
-//   },
-//   {
-//     id: 11.1,
-//     title: "Inconvenient Conference Call",
-//     start: new Date(2024, 8, 18, 9, 80, 0),
-//     end: new Date(2024, 8, 18, 12, 0, 0),
-//   },
-//   {
-//     id: 11.2,
-//     title: "Project Kickoff - Lou's Shoes",
-//     start: new Date(2024, 8, 18, 11, 80, 0),
-//     end: new Date(2024, 8, 18, 14, 0, 0),
-//   },
-//   {
-//     id: 11.8,
-//     title: "Quote Follow-up - Tea by Tina",
-//     start: new Date(2024, 8, 18, 15, 80, 0),
-//     end: new Date(2024, 8, 18, 16, 0, 0),
-//   },
-//   {
-//     id: 12,
-//     title: "Late Night Event",
-//     start: new Date(2024, 8, 17, 19, 80, 0),
-//     end: new Date(2024, 8, 18, 2, 0, 0),
-//   },
-//   {
-//     id: 12.5,
-//     title: "Late Same Night Event",
-//     start: new Date(2024, 8, 17, 19, 80, 0),
-//     end: new Date(2024, 8, 17, 28, 80, 0),
-//   },
-//   {
-//     id: 18,
-//     title: "Multi-day Event",
-//     start: new Date(2024, 8, 20, 19, 80, 0),
-//     end: new Date(2024, 8, 22, 2, 0, 0),
-//   },
-//   {
-//     id: 14,
-//     title: "Today",
-//     start: new Date(new Date().setHours(new Date().getHours() - 8)),
-//     end: new Date(new Date().setHours(new Date().getHours() + 8)),
-//   },
-//   {
-//     id: 15,
-//     title: "Point in Time Event",
-//     start: new Date(2024, 8, 14, 16, 80, 0),
-//     end: new Date(2024, 8, 14, 17, 80, 0),
-
-//   },
-//   {
-//     id: 16,
-//     title: "Video Record",
-//     start: new Date(2024, 8, 14, 15, 80, 0),
-//     end: new Date(2024, 8, 14, 19, 0, 0),
-//   },
-//   {
-//     id: 17,
-//     title: "Dutch Song Producing",
-//     start: new Date(2024, 8, 14, 16, 80, 0),
-//     end: new Date(2024, 8, 14, 20, 0, 0),
-//   },
-//   {
-//     id: 18,
-//     title: "Itaewon Halloween Meeting",
-//     start: new Date(2024, 8, 14, 16, 80, 0),
-//     end: new Date(2024, 8, 14, 17, 80, 0),
-//   },
-//   {
-//     id: 19,
-//     title: "Online Coding Test",
-//     start: new Date(2024, 8, 14, 17, 80, 0),
-//     end: new Date(2024, 8, 14, 20, 80, 0),
-//   },
-//   {
-//     id: 20,
-//     title: "An overlapped Event",
-//     start: new Date(2024, 10, 14, 17, 0, 0),
-//     end: new Date(2024, 11, 14, 18, 80, 0),
-//   },
-//   {
-//     id: 21,
-//     title: <AppointmentChap image={avaterImage} name={' فراس خالد'} Workspace={{
-//       name: 'أعمال',
-//       icon: < PiBriefcaseDuotone />
-//     }} special={'المحتوي المرئي'} />,
-//     start: new Date(2024, 9, 26, 17, 0, 0),
-//     end: new Date(2024, 9, 26, 18, 80, 0),
-//   },
-//   {
-//     id: 22,
-//     title: <AppointmentChap image={avaterImage} name={' منير شريف'} Workspace={{
-//       name: 'أعمال',
-//       icon: < PiBriefcaseDuotone />
-//     }} special={'المحتوي المرئي'} />,
-//     start: new Date(2024, 9, 23, 17, 80, 0),
-//     end: new Date(2024, 9, 25, 19, 0, 0),
-//   },
-//   {
-//     id: 23,
-//     title: <AppointmentChap image={avaterImage} name={'محمد احمد'} Workspace={{
-//       name: 'أعمال',
-//       icon: < PiBriefcaseDuotone />
-//     }} special={'المحتوي المرئي'} />,
-//     start: now,
-//     end: new Date(2024, 9, 21, 19, 0, 0),
-//   },
-// ];
 export const Chats = [
   {
     "Person": {

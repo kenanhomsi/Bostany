@@ -22,9 +22,9 @@ const Wallet = () => {
         dispatch(OpenBuycredit())
     }
     return (
-        <div className="mt-section py-14 px-16 ">
+        <div className="mt-section py-14  pr-10 pl-24 ">
             <div className="flex justify-between items-center py-4 px-6">
-                <div className="flex items-center gap-4">
+                <div className="flex items-center bg-BaserbodyLigh w-[44rem] py-6 px-4 rounded-2xl gap-4">
                     <img src={Dashboard == 'Baser' ? moneyBagImage : BostanyMoneyBagImage} alt={Dashboard == 'Baser' ? moneyBagImage : BostanyMoneyBagImage} className='w-24 h-24' />
                     <div className="flex flex-col">
                         <p className=' text-sm font-medium text-dark'>متوسط الرصيد</p>
@@ -32,7 +32,7 @@ const Wallet = () => {
                     </div>
                 </div>
                 <div className=" flex flex-col gap-2">
-                    <button onClick={handleBuycredit} className={`w-80 ${Dashboard == 'Baser' ? 'bg-BaserPrimary' : ' bg-BostanyPrimary'}  py-3 text-white rounded-full`}>شحن رصيد</button>
+                    <button onClick={handleBuycredit} className={`w-80 ${Dashboard == 'Baser' ? 'bg-BaserPrimary' : ' bg-BostanyPrimary'}  py-3 px-5 text-white rounded-full`}>شحن رصيد</button>
                     {
                         Dashboard == 'Bostany' &&
                         <button className=' py-3 border-[#8E918F] border bg-white rounded-full w-80 text-BostanyPrimary' >أخراج المال</button>
@@ -48,27 +48,27 @@ const Wallet = () => {
                     <div className="  mt-10">
                         <p className='text-xl font-medium'>التعاملات المالية</p>
                         {/* المعاملات اليوم */}
-                        <div className="flex flex-col  my-7">
+                        <div className="flex flex-col  my-8">
                             <p className='text-sm font-medium text-dark'>اليوم</p>
-                            <div className=" flex flex-col gap-7 my-7">
+                            <div className=" flex flex-col gap-8 my-6">
                                 {FinancialTransactionForToday.map((card) => (
                                     <FinancialTransactionCard data={card} />))
                                 }
                             </div>
                         </div>
                         {/* المعاملات الامس */}
-                        <div className="flex flex-col  my-7">
+                        <div className="flex flex-col  my-8">
                             <p className='text-sm font-medium text-dark'>أمس</p>
-                            <div className=" flex flex-col gap-7 my-7">
+                            <div className=" flex flex-col gap-8 my-6">
                                 {FinancialTransactionForYesterday.map((card) => (
                                     <FinancialTransactionCard data={card} />))
                                 }
                             </div>
                         </div>
                         {/* المعاملات القديمة */}
-                        <div className="flex flex-col  my-7">
+                        <div className="flex flex-col  my-8">
                             <p className='text-sm font-medium text-dark'>قبل ذالك</p>
-                            <div className=" flex flex-col gap-7 my-7">
+                            <div className=" flex flex-col gap-8 my-6">
                                 {FinancialTransactionForWeakAgo.map((card) => (
                                     <FinancialTransactionCard data={card} />))
                                 }

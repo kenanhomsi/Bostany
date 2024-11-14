@@ -29,12 +29,12 @@ const Step3 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
         <div className="flex flex-col gap-7  min-w-full">
             <div className="flex flex-col gap-2">
                 <span className="font-medium text-base  text-[#191C1B]">اختيار المجال</span>
-                <div className=" grid  grid-cols-5  gap-4   w-full  ">
+                <div className=" grid  grid-cols-5  gap-8   w-full  ">
                     {data &&
                         data.data.map((ele, index) => {
                             if (ele.id != 1) {
                                 return <button key={index} onClick={() => handleWorkSpaceClick && handleWorkSpaceClick(ele.id)} className='flex flex-col  items-center gap-3'>
-                                    <div className={` text-[46px] ${ele.id == SelectedCategory && 'text-BostanyPrimary'}  `}>
+                                    <div className={` text-[64px] text-BaserOnSurfaseVarient ${ele.id == SelectedCategory && 'text-BostanyPrimary'}  `}>
                                         {WorkSpaceData &&
                                             WorkSpaceData.filter((work) => work.name === ele.text)[0]?.icon
                                         }
@@ -55,7 +55,7 @@ const Step3 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
                             <div
                                 key={ele.id}
                                 onClick={() => handleWorkTypeClick && handleWorkTypeClick(ele.id)}
-                                className={` ${FormData.category.includes(ele.id) ? 'bg-BostanyPrimary text-white' : 'text-BaserOnSurfase bg-white'}   text-center text-sm font-medium  py-2 border-[2px] w-[115px] cursor-pointer border-BaserOutline  rounded-full`}
+                                className={` ${FormData.category.includes(ele.id) ? 'bg-BostanyPrimary text-white' : 'text-BaserOnSurfase bg-white border-[2px] border-BaserOutline'}   text-center text-sm font-medium  py-2  w-[115px] cursor-pointer   rounded-full`}
                             >
                                 {ele.text}
                             </div>

@@ -41,7 +41,7 @@ const Profile = () => {
         navigate('/');
     }
     return (
-        <div className="flex gap-20  mt-section py-20 px-8  bg-[#FFFBFF]">
+        <div className="flex gap-20  mt-section py-14 pr-10 pl-24  bg-[#FFFBFF]">
             {
                 !isLoading && data && <div className=" flex flex-col  w-[27rem]">
                     <div className="flex flex-col gap-8 items-center justify-center bg-BaserSurface rounded-3xl py-20 px-2  ">
@@ -69,7 +69,7 @@ const Profile = () => {
                     </div>
                     <div className="flex flex-col gap-3 my-10">
                         {ProfileSideBar.map((ele, index) => (
-                            <Link to={ele.link} key={index} className={` ${pathname == ele.link && 'bg-[#E6FFF5]'}  w-full rounded-3xl py-5 px-6 flex items-center gap-5 `}>
+                            <Link to={ele.link} key={index} className={` ${pathname == ele.link ? Dashboard == 'Baser' ? ' bg-[#F6EDFF]' : 'bg-[#E6FFF5]' : 'bg-white'}  w-full rounded-3xl py-5 px-6 flex items-center gap-5 `}>
                                 <p className=" text-dark text-[22px]">{ele.icon}</p>
                                 <p className="text-lg font-medium text-[#191C1B]">{ele.name}</p>
                             </Link>
