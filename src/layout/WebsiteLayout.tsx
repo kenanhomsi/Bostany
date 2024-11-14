@@ -5,7 +5,7 @@ import { LayoutProps } from "../Types";
 
 const WebsiteLayout: React.FC<LayoutProps> = ({ children }) => {
     return (
-        <div dir="rtl" className=" font-alexandria">
+        <div dir="rtl" className="font-alexandria">
             <Navbar />
             <main className="px-5 lg:px-lg">
                 {children}

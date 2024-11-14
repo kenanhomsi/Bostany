@@ -11,14 +11,14 @@ const Step4 = () => {
         dispatch(AddNewQualificationData())
     }
     return (
-        <div className="flex flex-col gap-5  min-w-full">
+        <div className="flex flex-col gap-6  min-w-full">
             {qualificationData && qualificationData.map((ele, index) => (
                 <div className="" key={index}>
                     <Subspecialty index={ele.id} />
                 </div>
             ))
             }
-            <button onClick={handleAnotherqualification} className=" flex-row-reverse gap-2 text-bas font-medium text-BaserOnSurfase flex  items-center justify-center">
+            <button onClick={handleAnotherqualification} className=" flex-row-reverse gap-2 text-bas font-medium text-BaserOnSurfase flex  my-4 items-center justify-center">
                 <p>أضافة مؤهل أخر</p> <FaPlus />
             </button>
         </div>

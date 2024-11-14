@@ -3,8 +3,6 @@ import MainInfoBostanyProfile from "../../components/BaserComponent/MainInfoBost
 import StickyScheduleComponent from "../../components/BaserComponent/StickyComponent"
 import { useEffect } from "react"
 import { useGetShowUser } from "../../utils/api/User/useGetShowUser"
-
-
 const BostanyProfile = () => {
     const BostanyId = useLocation().pathname.split('/')[3]
     const { data, isLoading, isError } = useGetShowUser({
@@ -17,7 +15,7 @@ const BostanyProfile = () => {
         });
     }, [])
     return (
-        <div className="mt-section flex gap-10 py-10 px-12 w-full relative">
+        <div className="mt-section flex gap-10 py-14 pr-10 pl-24 w-full relative">
             {
                 !isLoading && !isError && data &&
                 <>

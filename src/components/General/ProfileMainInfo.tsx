@@ -26,7 +26,7 @@ export interface ProfileMainInfoPrps {
 }
 const ProfileMainInfo = ({ ProfileForm, SetProfileStep, setProfileForm, setCHangeHappend, setDropDownValue, DropDownValue, allCountries, }: ProfileMainInfoPrps) => {
     const [SelectedSpecialities, setSelectedSpecialities] = useState(0)
-    const { mutate: MutateUploadMedia, data: uploadMediaData } = useUploadMedia();
+    const { mutate: MutateUploadMedia, data: uploadMediaData, isSuccess } = useUploadMedia();
     const { data } = useGetUserProfile();
     const { data: SpecialitiestListData } = useGetSpecialitiestList();
     const { data: categories, refetch } = useGetCategoriestList({
@@ -70,13 +70,13 @@ const ProfileMainInfo = ({ ProfileForm, SetProfileStep, setProfileForm, setCHang
         })
     }
     useEffect(() => {
-        if (uploadMediaData) {
+        if (uploadMediaData && isSuccess) {
             setProfileForm({
                 ...ProfileForm,
                 avatarToken: uploadMediaData.data.token
             })
         }
-    }, [uploadMediaData])
+    }, [uploadMediaData, isSuccess])
 
     const handleGenderClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         setCHangeHappend(true)
@@ -193,7 +193,7 @@ const ProfileMainInfo = ({ ProfileForm, SetProfileStep, setProfileForm, setCHang
                         <div className=" w-full ">
                             <p className=" font-medium text-base mb-1 text-[#191C1B]">كلمات تعريفية تشويقية عنك</p>
                             <textarea rows={5} onChange={handleChange} value={ProfileForm.DefinitiveWords} className=" resize-none w-full bg-BaserSurface text-dark font-medium focus:border-BostanyPrimary  rounded-3xl border-none p-4" />
-                            <p className=" text-dark text-sm"><span>{ProfileForm.DefinitiveWords.length}</span>/70</p>
+                            <p className=" text-dark text-sm"><span>{ProfileForm.DefinitiveWords && ProfileForm.DefinitiveWords.length}</span>/70</p>
                         </div>
                         <div className=" w-full ">
                             <p className=" font-medium text-base mb-1 text-[#191C1B]">مجالك</p>

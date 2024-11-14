@@ -1,7 +1,7 @@
 import CountrySelect from "./CountrySelect"
-import { PiAppleLogoFill } from "react-icons/pi";
+import AppleIcon from '../../../public/Icons/Apple.svg'
+import BosatnyIcon from '../../../public/Icons/BosatnyIcon.svg'
 import { FcGoogle } from "react-icons/fc";
-import { PiTreeFill } from "react-icons/pi";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useAppSelector } from "../../redux/store";
 import baserIcon from '/Icons/Baser.png'
@@ -75,27 +75,29 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
         }
     }
     return (
-        <div className="flex self-center flex-col gap-5 w-full">
-            <h2 className={`text-BaserOnSurfase text-3xl font-semibold ${RegisterAs == 'Bostany' ? 'pb-0' : 'pb-7'} `}>{RegisterAs == 'Baser' ? 'تسجيل حساب باذر' : 'تسجيل حساب بستاني'}</h2>
-            {RegisterAs == 'Bostany' && <p className="font-medium text-base my-2 text-[#191C1B]">البستاني عندنا هو الخبير أو المتخصص أو المستشار في مجاله</p>}
-            <div className="flex flex-col gap-4 w-full">
+        <div className="flex self-center flex-col gap-10 w-full">
+            <div className=" flex flex-col gap-6">
+                <h2 className={`text-BaserOnSurfase m-0 text-3xl font-semibold `}>{RegisterAs == 'Baser' ? 'تسجيل حساب باذر' : 'تسجيل حساب بستاني'}</h2>
+                <p className="font-medium text-base  text-dark" >{RegisterAs == 'Bostany' ? "البستاني عندنا هو الخبير أو المتخصص أو المستشار في مجاله " : "الباذر عندنا هو الطالب للاستشارة"}</p>
+            </div>
+            <div className="flex flex-col gap-6 w-full">
                 <div className="flex flex-col gap-1">
-                    <span className="font-medium text-base  text-[#191C1B]">الدولة</span>
                     {
                         allCountries.length > 0 &&
                         <CountrySelect data={allCountries} DropDownValue={DropDownValue}
                             setDropDownValue={setDropDownValue} />
                     }
                 </div>
-                <div className=" flex flex-col gap-1">
-                    <span className="font-medium text-base  text-[#191C1B]">رقم الهاتف</span>
-                    <input type="text" onChange={handleChange} value={RegisterData.phoneNumber == '' ? '' : RegisterData.phoneNumber} className="w-full bg-BaserSurface text-dark  rounded-2xl border-none p-4" placeholder="أدخل رقم الهاتف" />
+                <div className=" flex flex-col gap-2">
+                    <input type="text" onChange={handleChange} value={RegisterData.phoneNumber == '' ? '' : RegisterData.phoneNumber} className={`w-full bg-BaserSurface text-dark  rounded-2xl focus:outline-2  ${isError && ' !focus:outline-none !border-GeneralError !border  !text-GeneralError'}   ${!isError ? RegisterAs == 'Baser' ? '  focus:outline-BaserPrimary' : 'focus:outline-BostanyPrimary' : ''}  focus:ring-0  outline-none border-none  placeholder:text-dark  p-4`} placeholder="أدخل رقم الهاتف" />
                     <span className=" text-dark text-sm font-normal">سنرسل لك رمز تحقق عبر رسالة نصية</span>
                 </div>
-                <button onClick={handleSubmit} disabled={RegisterData.phoneNumber == ''} className={`  ${RegisterData.phoneNumber == '' ? ` text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]` : ` cursor-pointer  text-white ${RegisterAs == 'Baser' ? 'bg-BaserPrimary' : 'bg-BostanyPrimary'} `} w-full   rounded-full p-3  text-base font-medium`}>{isLoading ? '...loaging' : 'استمرار'}</button>
-                {
-                    isError && <p className=" text-GeneralError text-center my-3">هنالك خطا في البيانات الرجاء التاكد منها واعادة المحاولة</p>
-                }
+                <div className="">
+                    <button onClick={handleSubmit} disabled={RegisterData.phoneNumber == ''} className={`  ${RegisterData.phoneNumber == '' ? ` text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]` : ` cursor-pointer  text-white ${RegisterAs == 'Baser' ? 'bg-BaserPrimary' : 'bg-BostanyPrimary'} `} w-full   rounded-full px-[20px] py-4  text-base font-medium`}>{isLoading ? '...loaging' : 'استمرار'}</button>
+                    {
+                        isError && <p className=" text-GeneralError text-sm  font-normal  my-3">الرجاء ادخال رقم هاتف صالح</p>
+                    }
+                </div>
             </div>
             <div className="flex relative">
                 <p className=" border-BaserOutline border-b w-full h-1 " ></p>
@@ -103,18 +105,23 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
             </div>
             <div className=" flex  items-center justify-center gap-10 ">
                 <div className=" p-3 border border-BaserOutline rounded-full cursor-pointer">
-                    <PiAppleLogoFill className="text-3xl" />
+                    <img src={AppleIcon} alt={AppleIcon} className="w-[30px] h-[30px]" />
                 </div>
                 <div onClick={handleOuthClick} className=" p-3 border border-BaserOutline rounded-full cursor-pointer">
                     <FcGoogle className="text-3xl" />
                 </div>
             </div>
-            {RegisterAs == 'Baser' && <button onClick={handleRegisterChange} className={`flex  flex-row-reverse gap-2  justify-center  cursor-pointer  text-BostanyPrimary items-center `}>
-                تسجيل حساب بستاني <PiTreeFill />
-            </button>}
-            {RegisterAs == 'Bostany' && <button onClick={handleRegisterChange} className={`flex  flex-row-reverse gap-2  justify-center  cursor-pointer  text-BaserPrimary items-center `}>
-                تسجيل حساب باذر <img src={baserIcon} alt={baserIcon} className="w-[18px] h-[18px]" />
-            </button>}
+            {
+                RegisterAs == 'Baser' && <button onClick={handleRegisterChange} className={`flex  flex-row-reverse gap-2 font-medium  justify-center  cursor-pointer  text-BostanyPrimary items-center `}>
+                    تسجيل حساب  / دخول بستاني
+                    <img src={BosatnyIcon} alt={BosatnyIcon} className="w-[18px] h-[18px]" />
+                </button>
+            }
+            {
+                RegisterAs == 'Bostany' && <button onClick={handleRegisterChange} className={`flex  flex-row-reverse gap-2 font-medium  justify-center  cursor-pointer  text-BaserPrimary items-center `}>
+                    تسجيل حساب  / دخول باذر <img src={baserIcon} alt={baserIcon} className="w-[18px] h-[18px]" />
+                </button>
+            }
         </div >
     )
 }

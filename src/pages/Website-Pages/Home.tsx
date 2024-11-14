@@ -10,7 +10,7 @@ const Home = () => {
     const navigate = useNavigate()
     useEffect(() => {
         if (user.token && user.isAuthenticated) {
-            if (user.user?.type == 'consultant') {
+            if (user.user?.data.type == 'consultant') {
                 navigate('/Bostany')
             } else {
                 navigate('/Baser')

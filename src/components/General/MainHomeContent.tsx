@@ -56,7 +56,7 @@ const MainHomeContent = ({ place }: { place: string }) => {
     const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
     const { events } = useDraggable(ref);
     return (
-        <div className={`flex flex-col items-center  overflow-hidden ${place == 'website' ? 'py-24' : 'pt-40 pb-24'}  w-full  `}>
+        <div className={`flex flex-col items-center pr-6 pl-24  overflow-hidden ${place == 'website' ? 'py-24' : 'pt-40 pb-24'}  w-full  `}>
             {
                 place == 'website' &&
                 <div className='flex flex-col gap-8 items-center'>
@@ -79,14 +79,16 @@ const MainHomeContent = ({ place }: { place: string }) => {
             }
             {
                 place == 'BaserDashboard' &&
-                <div className=" flex items-center gap-2 text-xl  text-BaserOnSurfase font-medium">
-                    <img src={logosGroup} alt={logosGroup} className=' w-[53px] h-[25px]' />
+                <div className=" flex items-center gap-2 text-xl p-2 pl-2 rounded-full bg-BaserbodyLigh  text-BaserOnSurfase font-medium">
+                    <p className=' rounded-full p-3 bg-BaserSurface'>
+                        <img src={logosGroup} alt={logosGroup} className=' w-[53px] h-[25px]' />
+                    </p>
                     ماذا يمكنك أن تنمي في 10 دقائق؟!
                 </div>
             }
-            <div className=" flex  items-center  mt-8  w-full justify-around">
+            <div className=" flex  items-center  mt-8  w-full justify-evenly">
                 <button onClick={() => handleWorkSpaceClick({ id: 0, name: 'الكل' })} className='flex flex-col  items-center gap-3'>
-                    <div className={` text-[46px] ${SelectedSpecialities == 0 && 'text-BaserPrimary'}  `}>
+                    <div className={` text-[64px] ${SelectedSpecialities == 0 ? 'text-BaserPrimary' : 'text-dark'}  `}>
                         <PiSquaresFourDuotone />
                     </div>
                     <p className='text-xs font-medium text-dark'>الكل</p>
@@ -94,7 +96,7 @@ const MainHomeContent = ({ place }: { place: string }) => {
                 {SpecialitiesList &&
                     SpecialitiesList.data.map((ele, index) => {
                         return <button key={index} onClick={() => handleWorkSpaceClick({ id: ele.id, name: ele.text })} className='flex flex-col  items-center gap-3'>
-                            <div className={` text-[46px] ${ele.id == SelectedSpecialities && 'text-BaserPrimary'}  `}>
+                            <div className={` text-[64px] ${ele.id == SelectedSpecialities ? 'text-BaserPrimary' : 'text-dark'}  `}>
                                 {WorkSpaceData &&
                                     WorkSpaceData.filter((work) => work.name === ele.text)[0]?.icon
                                 }
@@ -114,7 +116,7 @@ const MainHomeContent = ({ place }: { place: string }) => {
                             <div
                                 key={ele.id}
                                 onClick={() => handleWorkTypeClick(ele.id)}
-                                className={` ${SelectedCategory.length > 0 && SelectedCategory.includes(ele.id) ? 'bg-BaserPrimary text-white' : 'text-BaserOnSurfase bg-white'}   text-center text-sm font-medium  py-2 border-[2px] w-[115px] cursor-pointer border-BaserOutline  rounded-full`}
+                                className={` ${SelectedCategory.length > 0 && SelectedCategory.includes(ele.id) ? 'bg-BaserPrimary text-white' : 'text-BaserOnSurfase border-[2px] border-BaserOutline bg-white'}   text-center text-sm font-medium  py-2  w-[115px] cursor-pointer   rounded-full`}
                             >
                                 {ele.text}
                             </div>

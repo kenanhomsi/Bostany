@@ -22,9 +22,8 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, roles }) => {
   if (!isAuthenticated) {
     return <Navigate to="/auth/register" />;
   }
-
-  if (roles && (!currentUser || !roles.includes(currentUser.type))) {
-    return <Navigate to="/unauthorized" />;
+  if (roles && (!currentUser || !roles.includes(currentUser.data.type))) {
+    return <Navigate to="/auth/register" />;
   }
 
   return <>{children}</>;

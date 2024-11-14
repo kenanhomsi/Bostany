@@ -13,7 +13,7 @@ const CountrySelect = ({ data, DropDownValue, setDropDownValue }: DropDownSelect
     })[0] || data[0]
     return (
         <div className=" relative">
-            <div className=" w-full bg-BaserSurface text-dark flex justify-between items-center  rounded-2xl border-none p-4"
+            <div className=" w-full bg-BaserSurface text-dark flex justify-between items-center  rounded-2xl border-none py-4 px-6"
                 onClick={() => setDropDownState((pre) => !pre)}>
                 <div className="flex items-center gap-3">
                     <div className=" rounded-full  overflow-hidden">

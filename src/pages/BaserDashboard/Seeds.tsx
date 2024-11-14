@@ -9,7 +9,7 @@ const Seeds = () => {
 
     console.log(userData)
     return (
-        <div className="mt-section py-14 px-16 w-full min-h-[70vh]">
+        <div className="mt-section py-14  pr-10 pl-24 w-full min-h-[70vh]">
             <Tabs aria-label="Tabs with underline" variant="underline"
                 theme={{
                     tablist: {
@@ -30,7 +30,7 @@ const Seeds = () => {
                     }
                 }}
             >
-                <Tabs.Item active title={`قادمة (${userData?.data.counts.waiting_projects})`} >
+                <Tabs.Item active title={`بذوري (${userData?.data.counts.waiting_projects})`} >
                     <ComingSeeds />
                 </Tabs.Item>
                 <Tabs.Item title={`ثماري (${userData?.data.counts.completed_projects})`}  >

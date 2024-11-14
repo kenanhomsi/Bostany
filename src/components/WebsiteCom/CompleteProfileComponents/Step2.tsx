@@ -22,23 +22,23 @@ const Step2 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
         })
     }
     return (
-        <div className="flex flex-col gap-7  min-w-full">
+        <div className="flex flex-col gap-6  min-w-full">
             <div className=" relative flex-col flex gap-1 w-full items-center">
                 {FormData.birthDate == '' && <Label htmlFor="ToDatePicker"
-                    className="w-full bg-BaserSurface text-dark  rounded-2xl border-none p-4  absolute top-0 z-10 left-0">
+                    className="w-full bg-BaserSurface text-dark text-base  rounded-2xl border-none py-4 px-6  absolute top-0 z-10 left-0">
                     <span>يوم / شهر / سنة</span>
                 </Label>}
                 <Datepicker
                     onChange={(val) => handleFromDateChange(val ?? new Date())}
                     name="ToDatePicker" id="ToDatePicker"
-                    style={{ backgroundColor: '#faf5f9', width: '100%', border: '0', borderRadius: '30px', padding: '15px 40px', fontSize: '16px', fontWeight: 'normal' }}
+                    style={{ backgroundColor: '#faf5f9', width: '100%', border: '0', borderRadius: '30px', padding: '16px 24px', fontSize: '16px', fontWeight: 'normal' }}
                     theme={{
                         root: {
                             base: "relative w-full"
                         }, popup: { root: { base: 'absolute top-0 min-w-full  left-0 z-50 block ' } }
                     }} />
             </div>
-            <div className="min-w-full flex  gap-3 " >
+            <div className="min-w-full flex  gap-6 " >
                 <button onClick={handleGenderClick} value='ذكر' className={` ${FormData.gender == 'ذكر' && `${RegisterAs == 'Baser' ? '!border-BaserPrimary' : '!border-BostanyPrimary'}`} border-2 border-BaserSurface flex-1 z-10 p-4 cursor-pointer bg-BaserSurface flex flex-col items-center gap-4 rounded-2xl`}>
                     <img src={RegisterAs == 'Baser' ? BaserManIcon : BostanyManIcon} alt={RegisterAs == 'Baser' ? BaserManIcon : BostanyManIcon} className="w-20 h-20  pointer-events-none" />
                     <p>ذكر</p>
