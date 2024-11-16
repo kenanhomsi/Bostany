@@ -83,11 +83,11 @@ const BookingTimePop = () => {
                 </div>
             }
             <div className="w-full flex gap-5 items-center px-4 border-t border-[#938F94] pt-5 ">
-                {DayScheduleArray.length > 0 ? <>
-                    <Button disabled={handleDisabled} onClick={HandleSubmit} className="bg-BaserPrimary text-white rounded-full hover:!bg-BaserFoshiy flex-1" >التالي</Button>
-                    <Button onClick={handleCancel} className="  text-base font-medium border-none rounded-full " color="light" >الغاء</Button>
+                {DayScheduleArray && DayScheduleArray.length > 0 ? <>
+                    <Button disabled={handleDisabled} onClick={HandleSubmit} className="bg-BaserPrimary flex items-center text-white rounded-full hover:!bg-BaserFoshiy flex-1" >التالي</Button>
+                    <Button onClick={handleCancel} className="  text-base font-medium border-none flex items-center rounded-full " color="light" >الغاء</Button>
                 </> :
-                    <Button onClick={handleCancel} className="text-BaserPrimary  text-base font-medium border w-full rounded-full " color="light" >الغاء</Button>
+                    <Button onClick={handleCancel} className="text-BaserPrimary flex items-center  text-base font-medium border w-full rounded-full " color="light" >الغاء</Button>
                 }
 
             </div>

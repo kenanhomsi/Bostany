@@ -26,14 +26,14 @@ const Step3 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
         })
     }
     return (
-        <div className="flex flex-col gap-7  min-w-full">
+        <div className="flex flex-col gap-7  w-full">
             <div className="flex flex-col gap-2">
                 <span className="font-medium text-base  text-[#191C1B]">اختيار المجال</span>
                 <div className=" grid  grid-cols-5  gap-8   w-full  ">
                     {data &&
                         data.data.map((ele, index) => {
                             if (ele.id != 1) {
-                                return <button key={index} onClick={() => handleWorkSpaceClick && handleWorkSpaceClick(ele.id)} className='flex flex-col  items-center gap-3'>
+                                return <button key={index} onClick={() => handleWorkSpaceClick && handleWorkSpaceClick(ele.id)} className='flex !h-fit flex-col  items-center gap-3'>
                                     <div className={` text-[64px] text-BaserOnSurfaseVarient ${ele.id == SelectedCategory && 'text-BostanyPrimary'}  `}>
                                         {WorkSpaceData &&
                                             WorkSpaceData.filter((work) => work.name === ele.text)[0]?.icon

@@ -6,7 +6,7 @@ import CompleteProfile from "./CompleteProfile";
 const RegisterPage = () => {
     const [stepNum, setstepNum] = useState(1);
     return (
-        <div className="flex flex-col items-center justify-start pt-20 w-[76%] h-full ">
+        <div className="flex flex-col items-center justify-start pt-[70px] w-[90%] h-full ">
             {
                 stepNum === 1 && <InterNumberStep setStep={setstepNum} />
             }

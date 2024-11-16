@@ -47,7 +47,7 @@ const BuyingCoinsPopUp = () => {
             <div className="  grid  gap-4  grid-cols-2">
                 {CoinsList.map((ele, index) => (
                     <button onClick={() => handleClick(ele.price)}
-                        className={`${chosenCoin === ele.price && ' !border-BaserPrimary'} flex border-2 border-BaserSurface cursor-pointer items-center justify-center  text-xl font-medium text-BaserOnSurfase gap-3 rounded-2xl  py-8 px-4  bg-BaserSurface`} key={index}>
+                        className={`${chosenCoin === ele.price && ' !border-BaserPrimary'} flex border-2 !h-[104px] border-BaserSurface cursor-pointer items-center justify-center  text-xl font-medium text-BaserOnSurfase gap-3 rounded-2xl  py-8 px-4  bg-BaserSurface`} key={index}>
                         <span className="text-BaserPrimary">{ele.icon}</span>
                         <p><span>{ele.price}</span> ر.س</p>
                     </button>

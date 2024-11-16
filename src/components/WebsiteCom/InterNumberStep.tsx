@@ -14,13 +14,15 @@ import { useNavigate } from "react-router-dom";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth'
 import { app } from '../../firebase'
 import { IGetProfile } from "../../Types/api";
+import { handleNumberValidation } from "../../utils/Functions";
 const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) => {
     const auth = getAuth(app);
     const RegisterAs = useAppSelector((state) => state.register.RegisterAs)
+    const [PhoneError, setPhoneError] = useState(false);
     const [RegisterData, setRegisterData] = useState({
         phoneNumber: '',
         type: RegisterAs,
-        phone_code: 'sy'
+        phone_code: 'sy',
     })
     const { data, isSuccess, isLoading, isError, mutate } = usePostLogin();
     const { allCountries } = useFetchCountries();
@@ -29,8 +31,9 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
     const navigate = useNavigate()
     useEffect(() => {
         if (isSuccess) {
+            const newData = { data: data?.data.data }
             Dispatch(loginSuccess({
-                user: data?.data.data as IGetProfile,
+                user: newData as IGetProfile,
                 token: data?.data.token as string
             }))
             setStep(2)
@@ -41,6 +44,7 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
             ...RegisterData,
             phoneNumber: e.target.value
         });
+        setPhoneError(false);
     };
     const handleRegisterChange = () => {
         if (RegisterAs == 'Baser') {
@@ -74,10 +78,21 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
             console.log(err)
         }
     }
+    useEffect(() => {
+        setRegisterData({
+            ...RegisterData,
+            type: RegisterAs
+        })
+    }, [RegisterAs])
+    useEffect(() => {
+        if (isError) {
+            setPhoneError(true)
+        }
+    }, [isError])
     return (
         <div className="flex self-center flex-col gap-10 w-full">
             <div className=" flex flex-col gap-6">
-                <h2 className={`text-BaserOnSurfase m-0 text-3xl font-semibold `}>{RegisterAs == 'Baser' ? 'تسجيل حساب باذر' : 'تسجيل حساب بستاني'}</h2>
+                <h2 className={`${RegisterAs == 'Baser' ? 'text-BaserOnSurfase' : 'text-BaserOnSurfase'}  m-0 text-3xl font-semibold `}>{RegisterAs == 'Baser' ? 'تسجيل حساب باذر' : 'تسجيل حساب بستاني'}</h2>
                 <p className="font-medium text-base  text-dark" >{RegisterAs == 'Bostany' ? "البستاني عندنا هو الخبير أو المتخصص أو المستشار في مجاله " : "الباذر عندنا هو الطالب للاستشارة"}</p>
             </div>
             <div className="flex flex-col gap-6 w-full">
@@ -89,13 +104,15 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
                     }
                 </div>
                 <div className=" flex flex-col gap-2">
-                    <input type="text" onChange={handleChange} value={RegisterData.phoneNumber == '' ? '' : RegisterData.phoneNumber} className={`w-full bg-BaserSurface text-dark  rounded-2xl focus:outline-2  ${isError && ' !focus:outline-none !border-GeneralError !border  !text-GeneralError'}   ${!isError ? RegisterAs == 'Baser' ? '  focus:outline-BaserPrimary' : 'focus:outline-BostanyPrimary' : ''}  focus:ring-0  outline-none border-none  placeholder:text-dark  p-4`} placeholder="أدخل رقم الهاتف" />
+                    <input type="text" onChange={handleChange} value={RegisterData.phoneNumber == '' ? '' : RegisterData.phoneNumber} className={`w-full ${RegisterAs == 'Baser' ? 'bg-BaserSurface text-BaserOnSurfase' : ' bg-BostanySurfaceContainer text-BostanyOnSurface'}  placeholder:text-dark  rounded-2xl focus:outline-2  ${PhoneError && ' focus:outline focus:outline-GeneralError outline outline-GeneralError !border-GeneralError !border  !text-GeneralError'}   ${!isError ? RegisterAs == 'Baser' ? '  focus:outline-BaserPrimary' : 'focus:outline-BostanyPrimary' : ''}  focus:ring-0  outline-none border-none  placeholder:text-dark  p-4`} placeholder="أدخل رقم الهاتف" />
                     <span className=" text-dark text-sm font-normal">سنرسل لك رمز تحقق عبر رسالة نصية</span>
                 </div>
                 <div className="">
-                    <button onClick={handleSubmit} disabled={RegisterData.phoneNumber == ''} className={`  ${RegisterData.phoneNumber == '' ? ` text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]` : ` cursor-pointer  text-white ${RegisterAs == 'Baser' ? 'bg-BaserPrimary' : 'bg-BostanyPrimary'} `} w-full   rounded-full px-[20px] py-4  text-base font-medium`}>{isLoading ? '...loaging' : 'استمرار'}</button>
+                    <button onClick={handleSubmit}
+                        disabled={handleNumberValidation(RegisterData.phoneNumber.toString(), RegisterData.phone_code.toUpperCase().toString()) != 200}
+                        className={`  ${handleNumberValidation(RegisterData.phoneNumber.toString(), RegisterData.phone_code.toUpperCase().toString()) != 200 ? ` text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]` : ` cursor-pointer  text-white ${RegisterAs == 'Baser' ? 'bg-BaserPrimary' : 'bg-BostanyPrimary'} `} w-full   rounded-full px-[20px] py-4  text-base font-medium`}>{isLoading ? '...loaging' : 'استمرار'}</button>
                     {
-                        isError && <p className=" text-GeneralError text-sm  font-normal  my-3">الرجاء ادخال رقم هاتف صالح</p>
+                        PhoneError && <p className=" text-GeneralError text-sm  font-normal  my-3">الرجاء ادخال رقم هاتف صالح</p>
                     }
                 </div>
             </div>

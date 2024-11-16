@@ -9,12 +9,12 @@ import { CloseBuycredit, OpenBuycredit } from '../../redux/Slices/PopUpSlice';
 import { useDispatch } from 'react-redux';
 import BuycreditPopUp from '../../components/BaserComponent/BuycreditPopUp';
 import { useLocation } from 'react-router-dom';
+import { useGetUserProfile } from '../../utils/api/User/useGetUserProfile';
 const Wallet = () => {
     const Dashboard = useLocation().pathname.split('/')[1]
     const [MonyAamount] = useState(0.01);
     const dispatch = useDispatch();
-    // let FinancialTransaction = []
-
+    const { data } = useGetUserProfile();
     const FinancialTransactionForToday = FinancialTransaction?.filter((chat) => +chat.fullDate.split('/')[1] == new Date().getDate());
     const FinancialTransactionForYesterday = FinancialTransaction?.filter((chat) => +chat.fullDate.split('/')[1] == new Date().getDate() - 1)
     const FinancialTransactionForWeakAgo = FinancialTransaction?.filter((chat) => +chat.fullDate.split('/')[1] < new Date().getDate() - 1)
@@ -24,11 +24,11 @@ const Wallet = () => {
     return (
         <div className="mt-section py-14  pr-10 pl-24 ">
             <div className="flex justify-between items-center py-4 px-6">
-                <div className="flex items-center bg-BaserbodyLigh w-[44rem] py-6 px-4 rounded-2xl gap-4">
+                <div className={`flex items-center ${data && data.data.type == 'customer' ? 'bg-BaserbodyLigh' : ' bg-BostanybodyLigh'}  w-[44rem] py-6 px-4 rounded-2xl gap-4`}>
                     <img src={Dashboard == 'Baser' ? moneyBagImage : BostanyMoneyBagImage} alt={Dashboard == 'Baser' ? moneyBagImage : BostanyMoneyBagImage} className='w-24 h-24' />
                     <div className="flex flex-col">
                         <p className=' text-sm font-medium text-dark'>متوسط الرصيد</p>
-                        <p className='font-bold text-[34px] text-BaserOnSurfase'><span>{MonyAamount}</span> ر.س</p>
+                        <p className={`font-bold text-[34px] ${data && data.data.type == 'customer' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'} `}><span>{MonyAamount}</span> ر.س</p>
                     </div>
                 </div>
                 <div className=" flex flex-col gap-2">

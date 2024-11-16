@@ -2,14 +2,12 @@ import { UseMutationResult, useMutation } from "@tanstack/react-query";
 import { Methods } from "../../constant";
 import { handleApiResponseErrors } from "../HandleAPIResponseErrors";
 import axiosInstance from "../axios";
-import { LoginTypeInput, LoginTypeOutput } from "../../../Types/api";
+import { LoginTypeInput, IloginOutput } from "../../../Types/api";
 import { EndPoints } from "../EndPoints";
 
-export const Login = async (
-  payload: LoginTypeInput
-): Promise<LoginTypeOutput> => {
+export const Login = async (payload: LoginTypeInput): Promise<IloginOutput> => {
   try {
-    const response = await axiosInstance<LoginTypeInput, LoginTypeOutput>({
+    const response = await axiosInstance<LoginTypeInput, IloginOutput>({
       method: Methods.POST,
       url: EndPoints.login,
       data: payload,
@@ -24,7 +22,7 @@ export const Login = async (
 
 export const usePostLogin = (options = {}) => {
   const mutation: UseMutationResult<
-    LoginTypeOutput,
+    IloginOutput,
     Error,
     { payload: LoginTypeInput }
   > = useMutation({

@@ -28,7 +28,7 @@ const SideBar = ({ DashBoard }: { DashBoard: string }) => {
             <div className="flex flex-col justify-between py-2  h-full">
                 <div className="flex flex-col gap-6">
                     {listData.map((ele, index) => (
-                        <Link to={ele.link} key={index} className={`flex items-center  ${pathname == ele.link ? DashBoard == 'Baser' ? ' !text-BaserPrimary' : '!text-BostanyPrimary' : 'text-dark'} justify-between w-full py-3 px-4 rounded-2xl ${pathname == ele.link && `${DashBoard == 'Baser' ? ' bg-BaserSurfaceDarker' : 'bg-[#E6FFF5]'}`} `}>
+                        <Link to={ele.link} key={index} className={`flex items-center  ${pathname == ele.link ? DashBoard == 'Baser' ? ' !text-BaserPrimary' : '!text-BostanyPrimary' : 'text-dark'} justify-between h-12 w-full py-3 px-4 rounded-2xl ${pathname == ele.link && `${DashBoard == 'Baser' ? ' bg-BaserSurfaceDarker' : 'bg-[#E6FFF5]'}`} `}>
                             <div className={`flex items-center  gap-2  `}>
                                 {
                                     pathname == ele.link ?

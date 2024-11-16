@@ -27,7 +27,6 @@ const BookingConfirmPop = () => {
         category: [],
     });
     const [BazerTitle, setBazerTitle] = useState('');
-    const [BazerDescription, setBazerDescription] = useState('');
     const [, setAttechedAudio] = useState<null | File>(null);
     const { mutate, isError, isLoading, isSuccess, data: DataFromBooking } = useCreateProject();
     const { mutate: MutateUploadMedia, data: uploadMediaData } = useUploadMedia();
@@ -37,9 +36,7 @@ const BookingConfirmPop = () => {
             setBazerTitle(e.target.value)
         }
     }
-    const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setBazerDescription(e.target.value)
-    }
+
     const audioPickerRef = useRef<HTMLInputElement>(null);
     const filePickerRef = useRef<HTMLInputElement>(null);
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,18 +68,11 @@ const BookingConfirmPop = () => {
             ...BookingData,
             Title: BazerTitle
         }))
-        console.log({
-            name: BazerTitle,
-            description: BazerDescription,
-            attachments: [FormData.FileAttchToken[0]],
-            consultants: [BostanyId],
-            start_at: `${BookingData.SelectTime.split('-')[1]}`,
-            specialities: FormData.specialities,
-        })
+
         mutate({
             payload: {
                 name: BazerTitle,
-                description: BazerDescription,
+                description: BazerTitle,
                 attachments: [FormData.FileAttchToken[0]],
                 consultants: [BostanyId],
                 start_at: `${BookingData.SelectTime.split('-')[1]}`,
@@ -141,12 +131,6 @@ const BookingConfirmPop = () => {
                     <p className="text-sm font-normal text-dark">150/{BazerTitle.length}</p>
                 </div>
             </div>
-            <div className="flex flex-col gap-3">
-                <p className=" text-xl font-medium text-BaserOnSurfase">توصيف بذرتك</p>
-                <div className="">
-                    <input type="text" value={BazerDescription} onChange={handleDescriptionChange} className=" w-full py-4 px-6 rounded-3xl text-base font-normal text-dark bg-BaserSurface border-none" placeholder="ضع هنا وصف لبذرتك" />
-                </div>
-            </div>
             <div className="flex items-center  gap-32 w-full" >
                 <p className="text-sm font-medium text-BaserOnSurfase">إرفاق ملفات</p>
                 <div className=" flex gap-2 self-center">
@@ -161,8 +145,8 @@ const BookingConfirmPop = () => {
                 </div>
             </div>
             <div className="w-full flex gap-5 items-center px-4 border-t border-[#938F94] pt-5 ">
-                <Button disabled={handleDisabled} onClick={HandleSubmit} className="bg-BaserPrimary text-white rounded-full hover:!bg-BaserFoshiy flex-1" >{isLoading ? '...Loading' : 'تاكيد'}</Button>
-                <Button onClick={handleCancel} className="  text-base font-medium border-none rounded-full " color="light" >الغاء</Button>
+                <Button disabled={handleDisabled} onClick={HandleSubmit} className="bg-BaserPrimary flex items-center text-white rounded-full hover:!bg-BaserFoshiy flex-1" >{isLoading ? '...Loading' : 'تاكيد'}</Button>
+                <Button onClick={handleCancel} className="  text-base flex items-center font-medium border-none rounded-full " color="light" >الغاء</Button>
             </div>
             {
                 isError && <p className=" text-GeneralError">there is an error with submit</p>

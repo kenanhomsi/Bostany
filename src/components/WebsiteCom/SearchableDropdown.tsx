@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { GoSearch } from "react-icons/go";
+import { useAppSelector } from "../../redux/store";
 
 interface optionsType {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,6 +21,7 @@ const SearchableDropdown = ({
     handleClick
 }: SearchableDropdownProps) => {
     const [query, setQuery] = useState("");
+    const RegisterAs = useAppSelector((state) => state.register.RegisterAs)
 
     const inputRef = useRef(null);
 
@@ -42,7 +44,7 @@ const SearchableDropdown = ({
             <div className="control mb-5">
                 <div className=" relative ">
                     <input
-                        className="bg-BaserSurface w-full !py-3 !rounded-2xl !px-10 !border-none"
+                        className={` ${RegisterAs == 'Baser' ? 'bg-BaserSurface' : ' bg-BostanySurfaceContainer'} !h-fit w-full !py-3 !rounded-2xl !px-10 !border-none`}
                         ref={inputRef}
                         type="text"
                         value={getDisplayValue()}
@@ -62,7 +64,7 @@ const SearchableDropdown = ({
                         <div
                             onClick={() => handleClick(option.id)}
                             key={`${id}-${index}`}
-                            className=" flex  bg-BaserSurface cursor-pointer p-4 rounded-xl   justify-between items-center">
+                            className={`flex ${RegisterAs == 'Baser' ? 'bg-BaserSurface' : ' bg-BostanySurfaceContainer'}  cursor-pointer p-4 rounded-xl   justify-between items-center`}>
                             <div className=" flex items-center gap-6">
                                 <img src={option.flag} alt={option.flag} className="w-6 h-6 rounded-full" />
                                 <span>{option.name}</span>
