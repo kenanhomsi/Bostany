@@ -190,7 +190,196 @@ export interface schedulesType {
   repeat: boolean;
   color?: number;
 }
+export interface IloginOutput {
+  data: {
+    data: {
+      id: number;
+      name: string;
+      email: string;
+      phone: string;
+      phone_code: string;
+      birthdate: string;
+      bio: string;
+      gender: string;
+      type: string;
+      avatar: string;
+      localed_type: string;
+      facebook?: string | null;
+      favoriters_count?: number;
+      followers_count?: number;
+      is_favorited?: boolean;
+      is_followed?: boolean;
+      is_online?: boolean;
+      linkedin?: string | null;
+      preferred_profile?: string;
+      twitter?: string | null;
+      online_until?: boolean;
+      country: {
+        id: number;
+        name: string;
+        code: string;
+        key: string;
+        is_default: boolean;
+        currency: string;
+        flag: string;
+      };
+      city: {
+        id: number;
+        name: string;
+      };
+      rating?: {
+        avg: number;
+        count: number;
+        professionalism: number | string | null;
+        communication: number;
+        experience: number;
+        quality: number;
+      };
+      counts?: {
+        invitations_count: number;
+        waiting_projects: number;
+        completed_projects: number;
+      };
+      settings?: {
+        accept_requests: null;
+        meeting_options: null;
+        poster_avatar: null;
+        poster_theme: null;
+        schedules: schedulesType[];
+        weekly_schedule: null;
+      };
+      projects?: {
+        completed: number;
+        extension_percentage: number;
+        waiting: number;
+      };
+      statistics?: {
+        completed_projects_count: number;
+        invitations_count: number;
+        projects_count: number;
+        waitings_count: number;
+      };
+      category?: {
+        id: number;
+        text: string;
+      }[];
+      specialities?: {
+        id: number;
+        text: string;
+      }[];
+      experiences?: {
+        year: string;
+        job_title: string;
+        issuer: string;
+      }[];
+      cetificates?: {
+        year: string;
+        issuer: string;
+        cartificate: string;
+      }[];
+      unread_notifications_count: number;
+      completed_profile: boolean;
+      enable_2fa: boolean;
+      created_at: string;
+      created_at_formatted: string;
+    };
+    token: string;
+  };
+}
 export interface IGetProfile {
+  data: {
+    id: number;
+    name: string;
+    email: string;
+    phone: string;
+    phone_code: string;
+    birthdate: string;
+    bio: string;
+    gender: string;
+    type: string;
+    avatar: string;
+    localed_type: string;
+    facebook?: string | null;
+    favoriters_count?: number;
+    followers_count?: number;
+    is_favorited?: boolean;
+    is_followed?: boolean;
+    is_online?: boolean;
+    linkedin?: string | null;
+    preferred_profile?: string;
+    twitter?: string | null;
+    online_until?: boolean;
+    country: {
+      id: number;
+      name: string;
+      code: string;
+      key: string;
+      is_default: boolean;
+      currency: string;
+      flag: string;
+    };
+    city: {
+      id: number;
+      name: string;
+    };
+    rating?: {
+      avg: number;
+      count: number;
+      professionalism: number | string | null;
+      communication: number;
+      experience: number;
+      quality: number;
+    };
+    counts?: {
+      invitations_count: number;
+      waiting_projects: number;
+      completed_projects: number;
+    };
+    settings?: {
+      accept_requests: null;
+      meeting_options: null;
+      poster_avatar: null;
+      poster_theme: null;
+      schedules: schedulesType[];
+      weekly_schedule: null;
+    };
+    projects?: {
+      completed: number;
+      extension_percentage: number;
+      waiting: number;
+    };
+    statistics?: {
+      completed_projects_count: number;
+      invitations_count: number;
+      projects_count: number;
+      waitings_count: number;
+    };
+    category?: {
+      id: number;
+      text: string;
+    }[];
+    specialities?: {
+      id: number;
+      text: string;
+    }[];
+    experiences?: {
+      year: string;
+      job_title: string;
+      issuer: string;
+    }[];
+    cetificates?: {
+      year: string;
+      issuer: string;
+      cartificate: string;
+    }[];
+    unread_notifications_count: number;
+    completed_profile: boolean;
+    enable_2fa: boolean;
+    created_at: string;
+    created_at_formatted: string;
+  };
+}
+export interface AuthUser {
   data: {
     id: number;
     name: string;
@@ -282,97 +471,6 @@ export interface IGetProfile {
     created_at: string;
     created_at_formatted: string;
   };
-}
-export interface AuthUser {
-  id: number;
-  name: string;
-  email: string;
-  phone: string;
-  phone_code: string;
-  birthdate: string;
-  bio: string;
-  gender: string;
-  type: string;
-  avatar: string;
-  localed_type: string;
-  facebook?: string | null;
-  favoriters_count?: number;
-  followers_count?: number;
-  is_favorited?: boolean;
-  is_followed?: boolean;
-  is_online?: boolean;
-  linkedin?: string | null;
-  preferred_profile?: string;
-  twitter?: string | null;
-  online_until?: boolean;
-  country: {
-    id: number;
-    name: string;
-    code: string;
-    key: string;
-    is_default: boolean;
-    currency: string;
-    flag: string;
-  };
-  city: {
-    id: number;
-    name: string;
-  };
-  rating?: {
-    avg: number;
-    count: number;
-    professionalism: number | string | null;
-    communication: number;
-    experience: number;
-    quality: number;
-  };
-  counts?: {
-    invitations_count: number;
-    waiting_projects: number;
-    completed_projects: number;
-  };
-  settings?: {
-    accept_requests: null;
-    meeting_options: null;
-    poster_avatar: null;
-    poster_theme: null;
-    schedules: schedulesType[];
-    weekly_schedule: null;
-  };
-  projects: {
-    completed: number;
-    extension_percentage: number;
-    waiting: number;
-  };
-  statistics?: {
-    completed_projects_count: number;
-    invitations_count: number;
-    projects_count: number;
-    waitings_count: number;
-  };
-  category?: {
-    id: number;
-    text: string;
-  }[];
-  specialities?: {
-    id: number;
-    text: string;
-  }[];
-  experiences?: {
-    year: string;
-    job_title: string;
-    issuer: string;
-  }[];
-  cetificates?: {
-    year: string;
-    issuer: string;
-    cartificate: string;
-  }[];
-  unread_notifications_count: number;
-  completed_profile: boolean;
-  enable_2fa: boolean;
-  created_at: string;
-  created_at_formatted: string;
 }
 export interface updateProfileOutPut {
   data: IGetProfile;

@@ -32,8 +32,8 @@ const PopUpModal: React.FC<PopUpParams> = ({
                 },
                 header: {
                     close: {
-                        base: `${closeIconState && ' !hidden'}   mr-auto inline-flex items-center rounded-full bg-transparent p-1.5 text-xl  text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white`,
-                        icon: "h-6 w-6"
+                        base: `${closeIconState && ' !hidden'} h-fit   mr-auto inline-flex items-center rounded-full bg-transparent p-1.5 text-xl  text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white`,
+                        icon: "h-6  w-6"
                     }
                 }
             }}

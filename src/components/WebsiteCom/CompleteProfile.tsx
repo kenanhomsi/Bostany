@@ -36,7 +36,7 @@ const CompleteProfile = () => {
     });
     useEffect(() => {
         if (CompleteProfileStep == 1) {
-            if (FormData.FullName != '' && FormData.email != '' && !FormData.checkOne) {
+            if (FormData.FullName != '' && FormData.email != '' && FormData.checkOne) {
                 SetPassState(true)
             } else {
                 SetPassState(false)
@@ -81,12 +81,15 @@ const CompleteProfile = () => {
     }, [QualificationDataArray])
     useEffect(() => {
         if (isSuccess && RegisterAs == 'Baser') {
+            console.log('yess')
+            console.log(data?.data)
             Dispatch(loginSuccess({
                 user: data?.data as IGetProfile,
             }))
             navigate('/Baser');
         }
         else if (FinalSend && isSuccess && RegisterAs == 'Bostany' && CompleteProfileStep == 5) {
+            console.log(data?.data.data)
             Dispatch(loginSuccess({
                 user: data?.data as IGetProfile,
             }))
@@ -153,7 +156,7 @@ const CompleteProfile = () => {
             {<div className=" p-1 cursor-pointer bg-BaserSurface rounded-full  w-fit " onClick={handleClickArrowBack}>
                 <PiCaretRight className="w-6 h-6" />
             </div>}
-            <h2 className="text-BaserOnSurfase text-3xl my-4 font-semibold ">عرفنا بشخصك الكريم</h2>
+            <h2 className={` ${RegisterAs == 'Baser' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'}  text-3xl my-4 font-semibold `}>عرفنا بشخصك الكريم</h2>
             {
                 CompleteProfileStep == 1 && <Step1 FormData={FormData} SetFormData={SetFormData} />
             }
@@ -171,7 +174,7 @@ const CompleteProfile = () => {
             }
             {CompleteProfileStep < 5 &&
                 <>
-                    <button onClick={handleContinousBtn} disabled={!PassState} className={` ${!PassState ? " text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]" : `text-white cursor-pointer  ${RegisterAs == 'Baser' ? 'bg-BaserPrimary' : 'bg-BostanyPrimary'}`} w-full   rounded-full py-4 px-5  text-base font-medium`}> {CompleteProfileStep == 5 || CompleteProfileStep == 2 ? 'إتمام التسجيل' : isLoading ? '...loading' : 'التالي'}</button>
+                    <button onClick={handleContinousBtn} disabled={!PassState} className={` ${!PassState ? " text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]" : `text-white cursor-pointer  ${RegisterAs == 'Baser' ? 'bg-BaserPrimary' : 'bg-BostanyPrimary'}`} w-full   rounded-full py-4 px-5  text-base font-medium`}> {CompleteProfileStep == 2 ? isLoading ? '...loading' : 'إتمام التسجيل' : isLoading ? '...loading' : 'التالي'}</button>
                     {
                         isError && <p className=" text-GeneralError">{error?.message}</p>
                     }
@@ -187,7 +190,7 @@ const CompleteProfile = () => {
                 </>
             }
             {CompleteProfileStep == 5 &&
-                <button onClick={handleSendAModelBtn} disabled={!PassState} className={` ${!PassState ? " text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]" : `text-white cursor-pointer  bg-BostanyPrimary `} w-full   rounded-full p-3  text-base font-medium`}> إرسال النموذج</button>
+                <button onClick={handleSendAModelBtn} disabled={!PassState} className={` ${!PassState ? " text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]" : `text-white cursor-pointer  bg-BostanyPrimary `} w-full   rounded-full p-3  text-base font-medium`}> {isLoading ? '...loading' : 'إرسال النموذج'} </button>
             }
         </div>
     )

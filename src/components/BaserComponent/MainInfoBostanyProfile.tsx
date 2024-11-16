@@ -29,7 +29,14 @@ const MainInfoBostanyProfile = ({ BostanyData }: { BostanyData: IGetProfile }) =
     return (
         <div className="flex flex-col gap-10 w-[650px]">
             <div className="flex gap-6 items-start">
-                <img src={BostanyData.data.avatar} alt={BostanyData.data.avatar} className=" w-[265px]  h-[198px] rounded-full overflow-hidden" />
+                <div className="w-[198px] h-[198px] rounded-full overflow-hidden">
+                    <img
+                        src={BostanyData.data.avatar}
+                        alt={BostanyData.data.avatar}
+                        className=" min-h-full min-w-full object-cover"
+                    />
+                </div>
+                {/* <img src={BostanyData.data.avatar} alt={BostanyData.data.avatar} className=" !w-[198px]   inset-0 object-cover  !h-[198px] rounded-full overflow-hidden" /> */}
                 <div className=" flex flex-col   gap-6 h-full">
                     <div className=" flex items-center gap-4">
                         <p className="flex gap-1 items-center ">
@@ -104,7 +111,7 @@ const MainInfoBostanyProfile = ({ BostanyData }: { BostanyData: IGetProfile }) =
                 <div className=" flex-1 flex flex-col gap-3 px-6 py-4 rounded-3xl bg-BaserSurface">
                     <PiLeafFill className=" text-[#808080] w-6 h-6" />
                     <p className="text-base font-normal text-dark">التمديد</p>
-                    <p className="text-[#808080] text-base font-normal">{BostanyData.data.projects.extension_percentage}%</p>
+                    <p className="text-[#808080] text-base font-normal">{BostanyData.data.projects?.extension_percentage}%</p>
                 </div>
 
             </div>

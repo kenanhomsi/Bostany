@@ -89,9 +89,6 @@ const ProfileInfo = () => {
                 if (allCountries.length > 15) {
                     const country = allCountries.filter((ele) => ele.code == data?.data.phone_code)[0]
                     if (country) {
-                        console.log('yes')
-
-                        console.log(country)
                         setDropDownValue(+country.id)
                         setProfileForm({
                             ...ProfileForm,
@@ -117,6 +114,7 @@ const ProfileInfo = () => {
                 }
             })
         } else {
+
             mutate({
                 payload: {
                     name: ProfileForm.name,

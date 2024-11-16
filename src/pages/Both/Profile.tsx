@@ -44,11 +44,11 @@ const Profile = () => {
         <div className="flex gap-20  mt-section py-14 pr-10 pl-24  bg-[#FFFBFF]">
             {
                 !isLoading && data && <div className=" flex flex-col  w-[27rem]">
-                    <div className="flex flex-col gap-8 items-center justify-center bg-BaserSurface rounded-3xl py-20 px-2  ">
+                    <div className={`flex flex-col gap-8 items-center justify-center ${data?.data.type == 'customer' ? 'bg-BaserSurface text-BaserOnSurfase' : ' bg-BostanySurfaceContainer text-BostanyOnSurface'}  rounded-3xl py-20 px-2  `}>
                         <img src={data?.data.avatar} alt={data?.data.avatar} className={`w-[113px] h-[113px] rounded-full border-4 ${Dashboard == 'Baser' ? 'border-BaserPrimary' : 'border-BostanyPrimary'}`} />
-                        <p className="text-[22px] font-medium text-[#191C1B]">{data?.data.name}</p>
+                        <p className="text-[22px] font-medium ">{data?.data.name}</p>
                         <div className="">
-                            {Dashboard == 'Baser' ? <p className={`text-BaserPrimary  text-xl font-medium`}>باذر</p> :
+                            {Dashboard == 'Baser' ? <p className={`!text-BaserPrimary  text-xl font-medium`}>باذر</p> :
                                 <p className="flex items-center gap-4 text-xl font-medium">
                                     <span>باذر</span>
 
@@ -69,9 +69,9 @@ const Profile = () => {
                     </div>
                     <div className="flex flex-col gap-3 my-10">
                         {ProfileSideBar.map((ele, index) => (
-                            <Link to={ele.link} key={index} className={` ${pathname == ele.link ? Dashboard == 'Baser' ? ' bg-[#F6EDFF]' : 'bg-[#E6FFF5]' : 'bg-white'}  w-full rounded-3xl py-5 px-6 flex items-center gap-5 `}>
-                                <p className=" text-dark text-[22px]">{ele.icon}</p>
-                                <p className="text-lg font-medium text-[#191C1B]">{ele.name}</p>
+                            <Link to={ele.link} key={index} className={` ${pathname == ele.link ? Dashboard == 'Baser' ? ' bg-[#F6EDFF] text-BaserOnSurfase' : 'bg-[#E6FFF5] text-BostanyOnSurface' : 'bg-transparent'}  w-full rounded-3xl py-5 px-6 flex items-center gap-5 `}>
+                                <p className=" !text-dark text-[22px]">{ele.icon}</p>
+                                <p className="text-lg font-medium ">{ele.name}</p>
                             </Link>
                         ))}
                     </div>

@@ -87,7 +87,7 @@ const MainHomeContent = ({ place }: { place: string }) => {
                 </div>
             }
             <div className=" flex  items-center  mt-8  w-full justify-evenly">
-                <button onClick={() => handleWorkSpaceClick({ id: 0, name: 'الكل' })} className='flex flex-col  items-center gap-3'>
+                <button onClick={() => handleWorkSpaceClick({ id: 0, name: 'الكل' })} className='flex h-fit flex-col  items-center gap-3'>
                     <div className={` text-[64px] ${SelectedSpecialities == 0 ? 'text-BaserPrimary' : 'text-dark'}  `}>
                         <PiSquaresFourDuotone />
                     </div>
@@ -95,7 +95,7 @@ const MainHomeContent = ({ place }: { place: string }) => {
                 </button>
                 {SpecialitiesList &&
                     SpecialitiesList.data.map((ele, index) => {
-                        return <button key={index} onClick={() => handleWorkSpaceClick({ id: ele.id, name: ele.text })} className='flex flex-col  items-center gap-3'>
+                        return <button key={index} onClick={() => handleWorkSpaceClick({ id: ele.id, name: ele.text })} className='flex flex-col h-fit  items-center gap-3'>
                             <div className={` text-[64px] ${ele.id == SelectedSpecialities ? 'text-BaserPrimary' : 'text-dark'}  `}>
                                 {WorkSpaceData &&
                                     WorkSpaceData.filter((work) => work.name === ele.text)[0]?.icon

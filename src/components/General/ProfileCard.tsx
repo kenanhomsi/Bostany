@@ -57,7 +57,7 @@ const ProfileCard = ({ CardShap, data }: ProfileCardProps) => {
             {/* <button className={`${CardShap == 'col' ? 'top-[0px] right-[0px]' : 'top-[0px] right-[0px]'} w-6 h-6 z-[10000] border border-white rounded-full ${data.online_until ? 'bg-GeneralWarningContainer' : ' bg-BaserTertiary'}  absolute `}></button> */}
             <div className={`${CardShap == 'col' ? '' : ' h-fit'} rounded-t-[32px] overflow-hidden`}>
                 <Link to={pathname != '/' ? `/Baser/bostanyProfile/${data.id}` : '/#'} className='bg-cover bg-center'>
-                    <img src={data.avatar} alt={data.avatar} className={` ${CardShap == 'col' ? 'xl:w-[22.6rem] xl:h-[18rem] h-[14rem]  w-[18rem]' : '!w-[250px] h-[205px] rounded-2xl'}  bg-cover bg-center `} />
+                    <img src={data.avatar} alt={data.avatar} className={` ${CardShap == 'col' ? 'xl:w-[22.7rem] xl:h-[18rem] h-[14rem]  w-[18rem]' : '!w-[250px] h-[205px] rounded-2xl'}  bg-cover bg-center `} />
                 </Link>
             </div>
             <div className={` flex w-full ${CardShap == 'col' ? 'flex-col ' : ' flex-row justify-between '}  px-4   `}>

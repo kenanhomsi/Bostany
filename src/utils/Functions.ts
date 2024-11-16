@@ -1,3 +1,6 @@
+import libphonenumber from "google-libphonenumber";
+const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
+
 export const formatTime = (time: number) => String(time).padStart(2, "0");
 export interface arabicDayType {
   arabicDay:
@@ -40,4 +43,19 @@ export function calculateEndTime(startTime: string, duration: number) {
 export function arabicTimeFormat(oldTime: string) {
   const newText = oldTime.replace("AM", "ص").replace("PM", "م");
   return newText;
+}
+export function handleNumberValidation(
+  phoneNumber: string,
+  countryCode: string
+) {
+  try {
+    const number = phoneUtil.parseAndKeepRawInput(phoneNumber, countryCode);
+    if (phoneUtil.isValidNumber(number)) {
+      return 200;
+    } else {
+      return 400;
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
