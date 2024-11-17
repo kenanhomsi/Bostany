@@ -6,6 +6,7 @@ import {
   selectIsAuthenticated,
 } from "../redux/authSelectors";
 import { ENABLE_AUTH } from "../utils/constant";
+// import { persistor } from "../redux/store";
 interface ProtectedRouteProps {
   children: React.ReactNode;
   roles?: string[];

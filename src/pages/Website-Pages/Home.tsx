@@ -10,10 +10,12 @@ const Home = () => {
     const navigate = useNavigate()
     useEffect(() => {
         if (user.token && user.isAuthenticated) {
-            if (user.user?.data.type == 'consultant') {
-                navigate('/Bostany')
-            } else {
-                navigate('/Baser')
+            if (user.user?.data) {
+                if (user.user?.data.type == 'consultant') {
+                    navigate('/Bostany')
+                } else {
+                    navigate('/Baser')
+                }
             }
         }
     }, [user])
