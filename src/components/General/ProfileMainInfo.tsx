@@ -66,13 +66,7 @@ const ProfileMainInfo = ({ ProfileForm, SetProfileStep, setProfileForm, setCHang
             });
         }
     };
-    // const handleDateChange = (date: Date) => {
-    //     setCHangeHappend(true)
-    //     setProfileForm({
-    //         ...ProfileForm,
-    //         birthdate: `${date.getMonth() + 1}/${date.getDate()}/${date.getUTCFullYear()}`
-    //     })
-    // };
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setCHangeHappend(true)
         setProfileForm({
