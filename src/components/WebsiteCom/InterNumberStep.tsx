@@ -22,7 +22,7 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
     const [RegisterData, setRegisterData] = useState({
         phoneNumber: '',
         type: RegisterAs,
-        phone_code: 'sy',
+        phone_code: 'eg',
     })
     const { data, isSuccess, isLoading, isError, mutate } = usePostLogin();
     const { allCountries } = useFetchCountries();
@@ -67,6 +67,20 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
             }
         })
     }
+    useEffect(() => {
+        const SelectedCountry = allCountries.filter((ele) => {
+            if (ele.id == DropDownValue) {
+                return ele.id
+            }
+        })[0]
+        if (SelectedCountry) {
+            console.log(SelectedCountry.code)
+            setRegisterData({
+                ...RegisterData,
+                phone_code: SelectedCountry.code
+            })
+        }
+    }, [DropDownValue])
     const handleOuthClick = async () => {
         // console.log('yess')
         const provider = new GoogleAuthProvider();
