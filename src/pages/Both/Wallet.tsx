@@ -32,7 +32,7 @@ const Wallet = () => {
                     </div>
                 </div>
                 <div className=" flex flex-col gap-2">
-                    <button onClick={handleBuycredit} className={`w-80 ${Dashboard == 'Baser' ? 'bg-BaserPrimary' : ' bg-BostanyPrimary'}  py-3 px-5 text-white rounded-full`}>شحن رصيد</button>
+                    <button onClick={handleBuycredit} className={`w-80 ${Dashboard == 'Baser' ? 'bg-BaserPrimary' : ' bg-BostanyPrimary'}  py-3 px-5  h-14 font-medium text-white rounded-full`}>شحن رصيد</button>
                     {
                         Dashboard == 'Bostany' &&
                         <button className=' py-3 border-[#8E918F] border bg-white rounded-full w-80 text-BostanyPrimary' >أخراج المال</button>
@@ -80,7 +80,7 @@ const Wallet = () => {
             <PopUpModal
                 title={<h2 className=' text-xl font-semibold text-dark text-center self-center mr-28'>أختيار طريقة الدفع</h2>}
                 type="Buycredit"
-                PopSize="lg"
+                PopSize="xl"
                 closeIconState={true}
                 closeAction={CloseBuycredit}
             >

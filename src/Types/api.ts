@@ -825,3 +825,10 @@ export interface RejectProjectType {
   message: string;
 }
 // export interface AcceptProjectType {}
+export interface ErrorType {
+  response: {
+    data: {
+      message: string;
+    };
+  };
+}

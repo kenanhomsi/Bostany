@@ -7,7 +7,11 @@ import { Methods } from "../../constant";
 import { EndPoints } from "../EndPoints";
 import { handleApiResponseErrors } from "../HandleAPIResponseErrors";
 import axiosInstance from "../axios";
-import { updateProfileInpust, updateProfileOutPut } from "../../../Types/api";
+import {
+  updateProfileInpust,
+  updateProfileOutPut,
+  ErrorType,
+} from "../../../Types/api";
 
 export const UpdateProfile = async (
   payload: updateProfileInpust
@@ -33,7 +37,7 @@ export const useUpdateProfile = (options = {}) => {
   const queryClient = useQueryClient();
   const mutation: UseMutationResult<
     updateProfileOutPut,
-    Error,
+    ErrorType,
     { payload: updateProfileInpust }
   > = useMutation({
     mutationFn: ({ payload }) => UpdateProfile(payload),

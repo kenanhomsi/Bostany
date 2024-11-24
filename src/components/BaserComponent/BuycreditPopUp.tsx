@@ -1,4 +1,3 @@
-import { Button } from "flowbite-react"
 import { useDispatch } from "react-redux";
 import { CloseBuycredit } from "../../redux/Slices/PopUpSlice";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -38,7 +37,7 @@ const BuycreditPopUp = () => {
                     validationSchema={BuyCreditSchema}
                     onSubmit={(value) => alert(value)}
                 >
-                    {({ isSubmitting }) => (
+                    {({ isSubmitting, isValid }) => (
                         <Form className="flex flex-col gap-3">
                             <div className="flex flex-col gap-2 relative">
                                 <label className="text-baser font-medium text-BaserOnSurfase" htmlFor="name">اسم صاحب البطاقة</label>
@@ -46,7 +45,7 @@ const BuycreditPopUp = () => {
                                     type='text'
                                     id="name"
                                     name="name"
-                                    className="w-full py-4  rounded-3xl px-6 border-none  bg-BaserSurface"
+                                    className={`w-full py-4  rounded-3xl px-6 border-none  bg-BaserSurface focus:ring-0 focus:outline ${Dashboard == 'Baser' ? 'focus:outline-BaserPrimary' : ' focus:outline-BostanyPrimary'}  `}
                                     placeholder="محمد احمد"
                                 />
                                 <ErrorMessage
@@ -55,16 +54,16 @@ const BuycreditPopUp = () => {
                                     className="text-red-500 text-sm"
                                 />
                             </div>
-                            <div className="flex flex-col gap-2 relative">
+                            <div className="flex flex-col  gap-2 relative">
                                 <label className="text-baser font-medium text-BaserOnSurfase" htmlFor="creditCardNumber">رقم البطاقة</label>
                                 <Field
                                     type='number'
                                     id="creditCardNumber"
                                     name="creditCardNumber"
-                                    className="w-full py-4 text-dark  rounded-3xl px-10 border-none  bg-BaserSurface"
+                                    className={`w-full py-4 text-dark  rounded-3xl px-10 border-none  bg-BaserSurface focus:ring-0 focus:outline ${Dashboard == 'Baser' ? 'focus:outline-BaserPrimary' : ' focus:outline-BostanyPrimary'}`}
                                     placeholder="0000 0000 0000 0000"
                                 />
-                                <PiCreditCard className="w-5 h-5 absolute top-[50px]  text-dark right-3" />
+                                <PiCreditCard className="w-5 h-5 absolute top-[60px]  text-dark right-3" />
                                 <ErrorMessage
                                     name="creditCardNumber"
                                     component="div"
@@ -77,7 +76,7 @@ const BuycreditPopUp = () => {
                                     type='text'
                                     id="ExpiryMount"
                                     name="ExpiryMount"
-                                    className="w-full py-4  text-dark rounded-3xl px-6 border-none  bg-BaserSurface"
+                                    className={`w-full py-4  text-dark rounded-3xl px-6 border-none  bg-BaserSurface focus:ring-0 focus:outline ${Dashboard == 'Baser' ? 'focus:outline-BaserPrimary' : ' focus:outline-BostanyPrimary'}`}
                                     placeholder="الشهر"
                                 />
                                 <ErrorMessage
@@ -89,7 +88,7 @@ const BuycreditPopUp = () => {
                                     type='text'
                                     id="ExpiryYear"
                                     name="ExpiryYear"
-                                    className="w-full py-4 text-dark  rounded-3xl px-6 border-none  bg-BaserSurface"
+                                    className={`w-full py-4 text-dark  rounded-3xl px-6 border-none  bg-BaserSurface focus:ring-0 focus:outline ${Dashboard == 'Baser' ? 'focus:outline-BaserPrimary' : ' focus:outline-BostanyPrimary'}`}
                                     placeholder="السنة"
                                 />
                                 <ErrorMessage
@@ -104,7 +103,7 @@ const BuycreditPopUp = () => {
                                     type='text'
                                     id="code"
                                     name="code"
-                                    className="w-full py-4 text-dark  rounded-3xl px-6 border-none  bg-BaserSurface"
+                                    className={`w-full py-4 text-dark  rounded-3xl px-6 border-none  bg-BaserSurface focus:ring-0 focus:outline ${Dashboard == 'Baser' ? 'focus:outline-BaserPrimary' : ' focus:outline-BostanyPrimary'}`}
                                     placeholder="CVC"
                                 />
                                 <PiInfo className="w-5 h-5 absolute top-[50px]  cursor-pointer    text-dark left-4" />
@@ -114,9 +113,9 @@ const BuycreditPopUp = () => {
                                     className="text-red-500 text-sm"
                                 />
                             </div>
-                            <div className="w-full flex gap-5 px-4 border-t border-[#938F94] pt-5 mt-5  ">
-                                <Button onClick={handleBuying} className={` ${Dashboard == 'Baser' ? 'bg-BaserPrimary hover:!bg-BaserFoshiy' : 'bg-BostanyPrimary hover:!bg-BostanyOnPrimaryContainer'} text-white rounded-full  w-full`} >{isSubmitting ? '..Loading' : 'تاكيد الدفع'}</Button>
-                                <Button onClick={HandleCancel} className={` ${Dashboard == 'Baser' ? 'text-BaserPrimary' : ' text-BostanyPrimary'} w-full rounded-full `} color="light">الغاء</Button>
+                            <div className="w-full flex gap-5 px-4 border-t border-[#938F94]/50 pt-5 mt-5  ">
+                                <button onClick={handleBuying} disabled={!isValid} className={` ${Dashboard == 'Baser' ? !isValid ? 'bg-BaserPrimary/50 hover:!bg-BaserPrimary/50' : 'bg-BaserPrimary hover:!bg-BaserPrimary' : !isValid ? 'bg-BostanyPrimary/50 hover:!bg-BostanyPrimary/50' : 'bg-BostanyPrimary hover:!bg-BostanyPrimary'} text-white rounded-full !h-14  w-full `} >{isSubmitting ? '..Loading' : 'تاكيد الدفع'}</button>
+                                <button onClick={HandleCancel} className={` ${Dashboard == 'Baser' ? 'text-BaserPrimary' : ' text-BostanyPrimary'} w-full rounded-full !h-14 border-[#938F94]/50 border `} >الغاء</button>
                             </div>
                         </Form>
                     )}

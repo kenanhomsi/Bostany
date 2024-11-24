@@ -47,7 +47,7 @@ const MainInfoBostanyProfile = ({ BostanyData }: { BostanyData: IGetProfile }) =
                         </p>
                         <p onClick={() => HandleLoveiconClick(BostanyData.data.id)}
                             className=''>
-                            {FollowingList?.data.filter((ele) => ele.id == BostanyData.data.id)[0] != undefined ?
+                            {FollowingList?.data.filter((ele) => ele.id == BostanyData.data.id)[0] == undefined ?
                                 <PiHeart className={`  text-BaserOnSurfase  cursor-pointer w-7 h-7 my-0`} />
                                 :
                                 <PiHeartFill className={`  text-BaserPrimary  cursor-pointer w-7 h-7 my-0`} />

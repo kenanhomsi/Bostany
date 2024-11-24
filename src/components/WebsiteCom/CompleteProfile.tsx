@@ -70,7 +70,6 @@ const CompleteProfile = () => {
         }
     }, [CompleteProfileStep, FormData])
     const handleClickArrowBack = () => {
-        console.log(CompleteProfileStep)
         SetCompleteProfileStep((pre) => pre - 1);
     }
     useEffect(() => {
@@ -81,15 +80,12 @@ const CompleteProfile = () => {
     }, [QualificationDataArray])
     useEffect(() => {
         if (isSuccess && RegisterAs == 'Baser') {
-            console.log('yess')
-            console.log(data?.data)
             Dispatch(loginSuccess({
                 user: data?.data as IGetProfile,
             }))
             navigate('/Baser');
         }
         else if (FinalSend && isSuccess && RegisterAs == 'Bostany' && CompleteProfileStep == 5) {
-            console.log(data?.data.data)
             Dispatch(loginSuccess({
                 user: data?.data as IGetProfile,
             }))
@@ -103,13 +99,7 @@ const CompleteProfile = () => {
     const handleContinousBtn = () => {
         if (RegisterAs == 'Baser') {
             if (CompleteProfileStep < 2) return SetCompleteProfileStep((pre) => pre + 1)
-            console.log(
-                {
-                    name: FormData.FullName,
-                    email: FormData.email,
-                    birthdate: FormData.birthDate,
-                    gender: FormData.gender
-                })
+
             mutate({
                 payload: {
                     name: FormData.FullName,
@@ -156,7 +146,7 @@ const CompleteProfile = () => {
             {<div className=" p-1 cursor-pointer bg-BaserSurface rounded-full  w-fit " onClick={handleClickArrowBack}>
                 <PiCaretRight className="w-6 h-6" />
             </div>}
-            <h2 className={` ${RegisterAs == 'Baser' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'}  text-3xl my-4 font-semibold `}>عرفنا بشخصك الكريم</h2>
+            <h2 className={` ${RegisterAs == 'Baser' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'}  text-3xl my-4 font-semibold `}> {RegisterAs == 'Baser' ? 'إكمال الملف الشخصي' : 'عرفنا بشخصك الكريم'}</h2>
             {
                 CompleteProfileStep == 1 && <Step1 FormData={FormData} SetFormData={SetFormData} />
             }
@@ -176,7 +166,10 @@ const CompleteProfile = () => {
                 <>
                     <button onClick={handleContinousBtn} disabled={!PassState} className={` ${!PassState ? " text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]" : `text-white cursor-pointer  ${RegisterAs == 'Baser' ? 'bg-BaserPrimary' : 'bg-BostanyPrimary'}`} w-full   rounded-full py-4 px-5  text-base font-medium`}> {CompleteProfileStep == 2 ? isLoading ? '...loading' : 'إتمام التسجيل' : isLoading ? '...loading' : 'التالي'}</button>
                     {
-                        isError && <p className=" text-GeneralError">{error?.message}</p>
+                        isError &&
+                        <>
+                            <p className=" text-GeneralError">{error?.response.data.message}</p>
+                        </>
                     }
                     {
                         RegisterAs == 'Baser' && CompleteProfileStep == 2 &&

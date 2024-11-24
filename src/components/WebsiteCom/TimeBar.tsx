@@ -28,7 +28,6 @@ const TimeBar = ({ TimeSelected, setTimeSelected }: TimeBarProps) => {
         });
     }
     const handleClick = (date: string) => {
-        console.log('yes')
         if (date == TimeSelected) {
             setTimeSelected('')
         } else {

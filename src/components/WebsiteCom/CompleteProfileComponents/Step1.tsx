@@ -23,7 +23,6 @@ const Step1 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
             [e.target.name]: e.target.value
         })
     }
-    console.log(FormData)
     return (
         <div className="flex flex-col gap-6  w-full">
             <div className="w-full flex flex-col gap-6">
@@ -35,8 +34,8 @@ const Step1 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
                     placeholder="أدخل بريدك الإلكتروني" />
             </div>
             <div className=" flex flex-col gap-2 items-start">
-                <button onClick={handleCheckOneClick} className="flex cursor-pointer flex-row-reverse items-center gap-3 text-sm font-normal "><span className=" flex">أوافق على <p className={` underline ${RegisterAs == 'Baser' ? 'text-BaserPrimary' : 'text-BostanyPrimary'}`}>الشروط والأحكام</p></span>{!FormData.checkOne ? <PiCheckCircle className={`text-2xl`} /> : <PiCheckCircleFill className={`text-2xl ${RegisterAs == 'Baser' ? 'text-BaserPrimary' : 'text-BostanyPrimary'} `} />}  </button>
-                <button onClick={handleCheckTwoClick} className="flex cursor-pointer flex-row-reverse items-center gap-3 text-sm font-normal "><span>توافق على تلقي رسائل تسويقية وعروض خاصة </span>{!FormData.checkTwo ? <PiCheckCircle className={`!text-2xl`} /> : <PiCheckCircleFill className={` !text-2xl  ${RegisterAs == 'Baser' ? 'text-BaserPrimary' : 'text-BostanyPrimary'} `} />}</button>
+                <button onClick={handleCheckOneClick} className="flex cursor-pointer flex-row-reverse h-fit items-center gap-3 text-sm font-normal "><span className=" flex">أوافق على <p className={` underline ${RegisterAs == 'Baser' ? 'text-BaserPrimary' : 'text-BostanyPrimary'}`}>الشروط والأحكام</p></span>{!FormData.checkOne ? <PiCheckCircle className={`text-2xl`} /> : <PiCheckCircleFill className={`text-2xl ${RegisterAs == 'Baser' ? 'text-BaserPrimary' : 'text-BostanyPrimary'} `} />}  </button>
+                <button onClick={handleCheckTwoClick} className="flex cursor-pointer flex-row-reverse h-fit items-center gap-3 text-sm font-normal "><span>توافق على تلقي رسائل تسويقية وعروض خاصة </span>{!FormData.checkTwo ? <PiCheckCircle className={`!text-2xl`} /> : <PiCheckCircleFill className={` !text-2xl  ${RegisterAs == 'Baser' ? 'text-BaserPrimary' : 'text-BostanyPrimary'} `} />}</button>
             </div>
         </div>
     )

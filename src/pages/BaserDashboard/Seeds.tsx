@@ -7,7 +7,6 @@ import { useGetUserBaserProfile } from "../../utils/api/User/useGetUserProfileBa
 const Seeds = () => {
     const { data: userData } = useGetUserBaserProfile();
 
-    console.log(userData)
     return (
         <div className="mt-section py-14  pr-10 pl-24 w-full min-h-[70vh]">
             <Tabs aria-label="Tabs with underline" variant="underline"
@@ -30,13 +29,13 @@ const Seeds = () => {
                     }
                 }}
             >
-                <Tabs.Item active title={`بذوري (${userData?.data.counts.waiting_projects})`} >
+                <Tabs.Item active title={`بذوري (${userData?.data.counts.waiting_projects || 0})`} >
                     <ComingSeeds />
                 </Tabs.Item>
-                <Tabs.Item title={`ثماري (${userData?.data.counts.completed_projects})`}  >
+                <Tabs.Item title={`ثماري (${userData?.data.counts.completed_projects || 0})`}  >
                     <FinishedSeeds />
                 </Tabs.Item>
-                <Tabs.Item title={`ملغية (${userData?.data.counts.cancelled_projects})`}  >
+                <Tabs.Item title={`ملغية (${userData?.data.counts.cancelled_projects || 0})`}  >
                     <CanceledSeeds />
                 </Tabs.Item>
             </Tabs>

@@ -6,7 +6,6 @@ const ComingSeeds = () => {
     const { data } = useGetProjects({
         queryKey: ["type", "waiting"]
     })
-    console.log(data)
     return (
         <div className="w-full h-full">
             {

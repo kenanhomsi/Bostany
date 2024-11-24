@@ -15,13 +15,21 @@ import { useGetSpecialitiestList } from '../../utils/api/select/useGetspecialiti
 import { useGetCategoriestList } from '../../utils/api/select/useGetCategories';
 
 const MainHomeContent = ({ place }: { place: string }) => {
-    const [TimeSelected, setTimeSelected] = useState('')
+    const [TimeSelected, setTimeSelected] = useState(``)
     const { data: SpecialitiesList } = useGetSpecialitiestList();
     const [SelectedSpecialities, setSelectedSpecialities] = useState(0)
     const [SelectedCategory, setSelectedCategory] = useState<number[]>([])
     const { data: categories, refetch } = useGetCategoriestList({
         queryKey: ["Categories", SelectedSpecialities]
     });
+    useEffect(() => {
+
+        if (place === 'website') {
+            setTimeSelected('')
+        } else {
+            setTimeSelected(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`)
+        }
+    }, [place])
     useEffect(() => {
         refetch()
     }, [SelectedSpecialities, refetch])
@@ -56,7 +64,8 @@ const MainHomeContent = ({ place }: { place: string }) => {
     const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
     const { events } = useDraggable(ref);
     return (
-        <div className={`flex flex-col items-center pr-6 pl-24  overflow-hidden ${place == 'website' ? 'py-24' : 'pt-40 pb-24'}  w-full  `}>
+        <div className={`flex flex-col items-center 
+          overflow-hidden ${place == 'website' ? '!pt-24' : 'pt-40 pb-24 pl-24 pr-10'}  w-full  `}>
             {
                 place == 'website' &&
                 <div className='flex flex-col gap-8 items-center'>
@@ -79,16 +88,16 @@ const MainHomeContent = ({ place }: { place: string }) => {
             }
             {
                 place == 'BaserDashboard' &&
-                <div className=" flex items-center gap-2 text-xl p-2 pl-2 rounded-full bg-BaserbodyLigh  text-BaserOnSurfase font-medium">
+                <div className=" flex items-center gap-2 text-sm bg-BaserbodyLigh p-2 pl-2 rounded-full   text-BaserOnSurfase font-medium">
                     <p className=' rounded-full p-3 bg-BaserSurface'>
-                        <img src={logosGroup} alt={logosGroup} className=' w-[53px] h-[25px]' />
+                        <img src={logosGroup} alt={logosGroup} className=' w-[53px] h-[25px] ' />
                     </p>
                     ماذا يمكنك أن تنمي في 10 دقائق؟!
                 </div>
             }
             <div className=" flex  items-center  mt-8  w-full justify-evenly">
                 <button onClick={() => handleWorkSpaceClick({ id: 0, name: 'الكل' })} className='flex h-fit flex-col  items-center gap-3'>
-                    <div className={` text-[64px] ${SelectedSpecialities == 0 ? 'text-BaserPrimary' : 'text-dark'}  `}>
+                    <div className={` text-[56px] ${SelectedSpecialities == 0 ? 'text-BaserPrimary' : 'text-dark'}  `}>
                         <PiSquaresFourDuotone />
                     </div>
                     <p className='text-xs font-medium text-dark'>الكل</p>
@@ -96,7 +105,7 @@ const MainHomeContent = ({ place }: { place: string }) => {
                 {SpecialitiesList &&
                     SpecialitiesList.data.map((ele, index) => {
                         return <button key={index} onClick={() => handleWorkSpaceClick({ id: ele.id, name: ele.text })} className='flex flex-col h-fit  items-center gap-3'>
-                            <div className={` text-[64px] ${ele.id == SelectedSpecialities ? 'text-BaserPrimary' : 'text-dark'}  `}>
+                            <div className={` text-[56px] ${ele.id == SelectedSpecialities ? 'text-BaserPrimary' : 'text-dark'}  `}>
                                 {WorkSpaceData &&
                                     WorkSpaceData.filter((work) => work.name === ele.text)[0]?.icon
                                 }
