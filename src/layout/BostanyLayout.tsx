@@ -9,7 +9,7 @@ import Bst10TablePop from "../components/BostanyComponents/Bst10TablePop"
 
 const BostanyLayout: React.FC<LayoutProps> = ({ children }) => {
     return (
-        <div dir="rtl" className="font-alexandria flex w-full min-h-screen">
+        <div dir="rtl" className="font-alexandria  bg-[#FAFFFE] flex w-full min-h-screen">
             <SideBar DashBoard='Bostany' />
             <div className="flex flex-col group w-full h-full pr-[264px] overflow-hidden">
                 <NavBar DashBoard='Bostany' />

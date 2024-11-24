@@ -15,7 +15,7 @@ const useFetchCountries = () => {
             }
             setPage((prevPage) => prevPage + 1);
         }
-    }, [data, isLoading, isError]);
+    }, [data, isLoading, isError, allCountries.length]);
 
     return { allCountries, isLoading, isError };
 };

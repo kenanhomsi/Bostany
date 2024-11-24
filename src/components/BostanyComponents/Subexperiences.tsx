@@ -29,10 +29,10 @@ const Subexperiences = ({ index, setCHangeHappend }: { index: number, setCHangeH
         <div className="flex flex-col gap-4" key={index} >
             <div className="flex flex-col gap-3">
                 <span className="font-medium text-base  text-[#191C1B]">الخبرات</span>
-                <input onChange={handleInputChange} value={experiencesData.job_title} type="text" name="job_title" className="w-full bg-BaserSurface text-dark  rounded-2xl border-none p-4" placeholder="المسمى الوظيفي" />
+                <input onChange={handleInputChange} value={experiencesData.job_title} type="text" name="job_title" className="w-full bg-BaserSurface text-dark  rounded-2xl border-none focus:ring-0 focus:outline-BostanyPrimary p-4" placeholder="المسمى الوظيفي" />
             </div>
-            <input onChange={handleInputChange} value={experiencesData.issuer} type="text" name="issuer" className="w-full bg-BaserSurface text-dark  rounded-2xl border-none p-4" placeholder="الجهة" />
-            <input onChange={handleInputChange} value={experiencesData.year} type="text" name="year" className="w-full bg-BaserSurface text-dark  rounded-2xl border-none p-4" placeholder="عدد السنوات " />
+            <input onChange={handleInputChange} value={experiencesData.issuer} type="text" name="issuer" className="w-full bg-BaserSurface text-dark  rounded-2xl focus:ring-0 focus:outline-BostanyPrimary border-none p-4" placeholder="الجهة" />
+            <input onChange={handleInputChange} value={experiencesData.year} type="text" name="year" className="w-full bg-BaserSurface text-dark  rounded-2xl focus:ring-0 focus:outline-BostanyPrimary border-none p-4" placeholder="عدد السنوات " />
         </div>
     )
 }

@@ -5,6 +5,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        Baser_primary_primary98: "#FEF7FF",
         BaserPrimary: "#9966FF",
         BostanyPrimary: "#00C1A1",
         BostanybodyLigh: "#FAFBF9",

@@ -132,3 +132,6 @@ button {
 .otp_container > div {
   flex-direction: row-reverse;
 }
+.react-datepicker-wrapper {
+  width: 100%;
+}

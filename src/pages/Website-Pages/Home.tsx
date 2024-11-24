@@ -19,7 +19,6 @@ const Home = () => {
             }
         }
     }, [user])
-    console.log(user.user)
     return (
         <div className="min-h-screen flex flex-col items-center gap-16 pb-24">
             <MainHomeContent place='website' />

@@ -2,7 +2,6 @@ import { PiPlusLight } from "react-icons/pi";
 import BostanyManIcon from '/Icons/BostanyMan.png'
 import BostanyfemaleIcon from '/Icons/Bostanyfemale.png'
 import CountrySelect from "../WebsiteCom/CountrySelect";
-import { Datepicker, Label } from "flowbite-react";
 import SpecialistList from "./SpecialistList";
 import { categorySelect, CountriesData, SpecialitiesType } from "../../Types/api";
 import CategoryList from "./CategoryList";
@@ -17,6 +16,7 @@ import { ProfileFormType } from "../../Types";
 import { useGetUserProfile } from "../../utils/api/User/useGetUserProfile";
 import BaserManIcon from '/Icons/Man.png'
 import BaserfemaleIcon from '/Icons/female.png'
+import DatePickerComponent from "./DatePicker";
 export interface ProfileMainInfoPrps {
     ProfileForm: ProfileFormType;
     setProfileForm: (value: ProfileFormType) => void;
@@ -145,7 +145,7 @@ const ProfileMainInfo = ({ ProfileForm, SetProfileStep, setProfileForm, setCHang
             <div className={`  flex flex-col gap-6 w-full items-center`}>
                 <div className="w-full ">
                     <p className={` text-base mb-2 font-medium ${data?.data.type == 'customer' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'} `}>الاسم الكامل</p>
-                    <input type="text" onChange={handleInputChange} name="name" placeholder="User name" value={ProfileForm.name} className={` ${data?.data.type == 'customer' ? 'bg-BaserSurface text-BaserOnSurfase' : ' bg-BostanySurfaceContainer text-BostanyOnSurface'} placeholder:text-dark border-none font-medium text-base   py-4 px-6 rounded-3xl w-full`} />
+                    <input type="text" onChange={handleInputChange} name="name" placeholder="User name" value={ProfileForm.name} className={` ${data?.data.type == 'customer' ? 'bg-BaserSurface text-BaserOnSurfase' : ' bg-BostanySurfaceContainer text-BostanyOnSurface'} placeholder:text-dark border-transparent focus:ring-0 focus:border-BaserPrimary focus:border-2 font-medium text-base   py-4 px-6 rounded-3xl w-full`} />
                 </div>
                 <div className="w-full ">
                     <p className={` text-base mb-2 font-medium ${data?.data.type == 'customer' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'}`}>الدولة</p>
@@ -157,16 +157,16 @@ const ProfileMainInfo = ({ ProfileForm, SetProfileStep, setProfileForm, setCHang
                 </div>
                 <div className="w-full ">
                     <p className={` text-base mb-2 font-medium ${data?.data.type == 'customer' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'}`}>رقم الهاتف</p>
-                    <input type="text" onChange={handleInputChange} name="phone" placeholder="000 000 000" value={ProfileForm.phone} className={` placeholder:text-dark border-none font-medium text-base ${data?.data.type == 'customer' ? 'bg-BaserSurface text-BaserOnSurfase' : ' bg-BostanySurfaceContainer text-BostanyOnSurface'} py-4 px-6 rounded-3xl w-full`} />
+                    <input type="text" onChange={handleInputChange} name="phone" placeholder="000 000 000" value={ProfileForm.phone} className={` placeholder:text-dark border-transparent focus:ring-0 focus:border-BaserPrimary focus:border-2 font-medium text-base ${data?.data.type == 'customer' ? 'bg-BaserSurface text-BaserOnSurfase' : ' bg-BostanySurfaceContainer text-BostanyOnSurface'} py-4 px-6 rounded-3xl w-full`} />
                 </div>
                 <div className="w-full ">
                     <p className={` text-base mb-2 font-medium ${data?.data.type == 'customer' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'}`}>البريد الالكتروني</p>
-                    <input type="email" onChange={handleInputChange} name="email" placeholder="ex@emil.com" value={ProfileForm.email} className={` placeholder:text-dark border-none font-medium text-base ${data?.data.type == 'customer' ? 'bg-BaserSurface text-BaserOnSurfase' : ' bg-BostanySurfaceContainer text-BostanyOnSurface'} py-4 px-6 rounded-3xl w-full`} />
+                    <input type="email" onChange={handleInputChange} name="email" placeholder="ex@emil.com" value={ProfileForm.email} className={` placeholder:text-dark border-transparent focus:ring-0 focus:border-BaserPrimary focus:border-2 font-medium text-base ${data?.data.type == 'customer' ? 'bg-BaserSurface text-BaserOnSurfase' : ' bg-BostanySurfaceContainer text-BostanyOnSurface'} py-4 px-6 rounded-3xl w-full`} />
                 </div>
                 <div className="w-full ">
                     <p className={`text-base mb-2 font-medium ${data?.data.type == 'customer' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'}`}>تاريخ الميلاد</p>
                     <div className=" relative flex-col flex gap-1 w-full items-center">
-                        <Label htmlFor="ToDatePicker"
+                        {/* <Label htmlFor="ToDatePicker"
                             className={`w-full ${data?.data.type == 'customer' ? 'bg-BaserSurface' : ' bg-BostanySurfaceContainer'}   h-20 text-dark text-base px-6 py-4  rounded-3xl border-none   absolute top-0 flex items-center z-10 left-0`}>
                             <span > {ProfileForm.birthdate == '' ? ' يوم / شهر / سنة ' : ProfileForm.birthdate} </span>
                         </Label>
@@ -178,13 +178,19 @@ const ProfileMainInfo = ({ ProfileForm, SetProfileStep, setProfileForm, setCHang
                                 root: {
                                     base: "relative w-full"
                                 }, popup: { root: { base: 'absolute top-0 min-w-full  left-0 z-50 block ' } }
-                            }} />
+                            }} /> */}
+                        <DatePickerComponent
+                            name="ToDatePicker"
+                            id="ToDatePicker"
+                            value={ProfileForm.birthdate!}
+                            onChange={handleDateChange}
+                        />
                     </div>
                 </div>
                 <div className=" w-full ">
                     <p className={` text-base mb-2 font-medium ${data?.data.type == 'customer' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'}`}>الجنس</p>
                     <div className="min-w-full flex  gap-3 " >
-                        <button onClick={handleGenderClick} value='ذكر' className={` ${ProfileForm.gender == 'male' ? data?.data.type == 'customer' ? '!border-BaserPrimary ' : `!border-BostanyPrimary` : ''} ${data?.data.type == 'customer' ? 'bg-BaserSurface' : 'bg-BostanySurfaceContainer'} border-2 border-transparent  !h-fit flex-1 z-10 p-4 cursor-pointer  flex flex-col items-center gap-4 rounded-2xl`}>
+                        <button onClick={handleGenderClick} value='ذكر' className={` ${ProfileForm.gender == 'male' ? data?.data.type == 'customer' ? '!border-BaserPrimary ' : `!border-BostanyPrimary` : ''} ${data?.data.type == 'customer' ? 'bg-BaserSurface' : 'bg-BostanySurfaceContainer'} border-2 border-transparent  !h-fit flex-1  p-4 cursor-pointer  flex flex-col items-center gap-4 rounded-2xl`}>
                             <img src={data?.data.type == 'customer' ? BaserManIcon : BostanyManIcon} alt={BostanyManIcon} className="w-20 h-20  pointer-events-none" />
                             <p>ذكر</p>
                         </button>
@@ -198,7 +204,7 @@ const ProfileMainInfo = ({ ProfileForm, SetProfileStep, setProfileForm, setCHang
                     <>
                         <div className=" w-full ">
                             <p className=" font-medium text-base mb-1 text-[#191C1B]">كلمات تعريفية تشويقية عنك</p>
-                            <textarea rows={5} onChange={handleChange} value={ProfileForm.DefinitiveWords} className=" resize-none w-full bg-BaserSurface text-dark font-medium focus:border-BostanyPrimary  rounded-3xl border-none p-4" />
+                            <textarea rows={5} onChange={handleChange} value={ProfileForm.DefinitiveWords} className=" resize-none w-full bg-BaserSurface text-dark font-medium focus:outline-BostanyPrimary focus:ring-0  rounded-3xl border-none p-4" />
                             <p className=" text-dark text-sm"><span>{ProfileForm.DefinitiveWords && ProfileForm.DefinitiveWords.length}</span>/70</p>
                         </div>
                         <div className=" w-full ">
@@ -213,11 +219,11 @@ const ProfileMainInfo = ({ ProfileForm, SetProfileStep, setProfileForm, setCHang
                             <p className=" font-medium text-base mb-1 text-[#191C1B]">الحسابات</p>
                             <div className=" flex gap-3 items-center my-5  w-full">
                                 <PiXLogo className="text-3xl text-BostanyOnSurface" />
-                                <input type="text" name="XUrl" onChange={HandleSocialMediaLiksInput} value={ProfileForm.XUrl} className="  border-none w-full  rounded-3xl bg-BostanySurfaceContainer text-dark text-xs font-medium p-4" placeholder="https://x.com/Bas10ar" />
+                                <input type="text" name="XUrl" onChange={HandleSocialMediaLiksInput} value={ProfileForm.XUrl} className="  border-none focus:outline-BostanyPrimary focus:ring-0 w-full  rounded-3xl bg-BostanySurfaceContainer text-dark text-xs font-medium p-4" placeholder="https://x.com/Bas10ar" />
                             </div>
                             <div className=" flex gap-3 items-center w-full">
                                 <BiLogoLinkedin className="text-3xl text-BostanyOnSurface" />
-                                <input type="text" name="LinkedInUrl" onChange={HandleSocialMediaLiksInput} value={ProfileForm.LinkedInUrl} className=" w-full border-none   rounded-3xl bg-BostanySurfaceContainer text-dark text-xs font-medium p-4" placeholder="https://www.linkedin.com/company/bas-10" />
+                                <input type="text" name="LinkedInUrl" onChange={HandleSocialMediaLiksInput} value={ProfileForm.LinkedInUrl} className=" w-full border-none focus:outline-BostanyPrimary focus:ring-0   rounded-3xl bg-BostanySurfaceContainer text-dark text-xs font-medium p-4" placeholder="https://www.linkedin.com/company/bas-10" />
                             </div>
                         </div>
                         <div className=" w-full h-[1px] bg-[#8E918F]"></div>

@@ -1,6 +1,6 @@
 import CountrySelect from "./CountrySelect"
-import AppleIcon from '../../../public/Icons/Apple.svg'
-import BosatnyIcon from '../../../public/Icons/BosatnyIcon.svg'
+import AppleIcon from '/Icons/Apple.svg'
+import BosatnyIcon from '/Icons/BosatnyIcon.svg'
 import { FcGoogle } from "react-icons/fc";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useAppSelector } from "../../redux/store";
@@ -74,7 +74,6 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
             }
         })[0]
         if (SelectedCountry) {
-            console.log(SelectedCountry.code)
             setRegisterData({
                 ...RegisterData,
                 phone_code: SelectedCountry.code

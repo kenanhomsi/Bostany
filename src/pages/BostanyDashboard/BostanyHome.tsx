@@ -28,13 +28,13 @@ const BostanyHome = () => {
                         }
                     }}
                 >
-                    <Tabs.Item active title={`البذور (${data?.data.counts?.waiting_projects})`} >
+                    <Tabs.Item active title={`البذور (${data?.data.counts?.waiting_projects || 0})`} >
                         <BostanyComingSeeds />
                     </Tabs.Item>
-                    <Tabs.Item title={`الطلبات (${data?.data.counts?.invitations_count})`}  >
+                    <Tabs.Item title={`الطلبات (${data?.data.counts?.invitations_count || 0})`}  >
                         <RequestsSeeds />
                     </Tabs.Item>
-                    <Tabs.Item title={`الأشجار (${data?.data.counts?.completed_projects})`}  >
+                    <Tabs.Item title={`الأشجار (${data?.data.counts?.completed_projects || 0})`}  >
                         <TreesSeeds />
                     </Tabs.Item>
                 </Tabs>

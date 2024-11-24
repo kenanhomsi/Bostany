@@ -16,8 +16,10 @@ import { useAppSelector } from '../../redux/store'
 import { usePostToggleFavorite } from '../../utils/api/Favorites/usePostToggleFavorite'
 import { useGetFollowingList } from '../../utils/api/Favorites/useGetListFollowings'
 import { arabicTimeFormat } from '../../utils/Functions'
+import { useState } from 'react'
 const ProfileCard = ({ CardShap, data }: ProfileCardProps) => {
     const pathname = useLocation().pathname
+    const [loveProfiles, setloveProfiles] = useState<number[]>([]);
     const dispatch = useDispatch()
     const BookingData = useAppSelector((state) => state.booking.BookingData)
     const BookingDayFromTimeBar = useAppSelector((state) => state.booking.BookingDayFromTimeBar)
@@ -48,6 +50,8 @@ const ProfileCard = ({ CardShap, data }: ProfileCardProps) => {
         dispatch(OpenBookingConfirmPop());
     }
     const HandleLoveiconClick = (id: number) => {
+        const newLoveArray = loveProfiles.includes(id) ? loveProfiles.filter((ele) => ele != id) : [...loveProfiles, id]
+        setloveProfiles(newLoveArray)
         mutate({
             payload: id
         })
@@ -57,7 +61,7 @@ const ProfileCard = ({ CardShap, data }: ProfileCardProps) => {
             {/* <button className={`${CardShap == 'col' ? 'top-[0px] right-[0px]' : 'top-[0px] right-[0px]'} w-6 h-6 z-[10000] border border-white rounded-full ${data.online_until ? 'bg-GeneralWarningContainer' : ' bg-BaserTertiary'}  absolute `}></button> */}
             <div className={`${CardShap == 'col' ? '' : ' h-fit'} rounded-t-[32px] overflow-hidden`}>
                 <Link to={pathname != '/' ? `/Baser/bostanyProfile/${data.id}` : '/#'} className='bg-cover bg-center'>
-                    <img src={data.avatar} alt={data.avatar} className={` ${CardShap == 'col' ? 'xl:w-[22.7rem] xl:h-[18rem] h-[14rem]  w-[18rem]' : '!w-[250px] h-[205px] rounded-2xl'}  bg-cover bg-center `} />
+                    <img src={data.avatar} alt={data.avatar} className={` ${CardShap == 'col' ? 'xl:w-[22.7rem] xl:h-[18rem] h-[14rem]  w-[18rem]' : '!w-[250px] h-[205px] rounded-2xl'} bg-cover bg-center  `} />
                 </Link>
             </div>
             <div className={` flex w-full ${CardShap == 'col' ? 'flex-col ' : ' flex-row justify-between '}  px-4   `}>
@@ -69,7 +73,7 @@ const ProfileCard = ({ CardShap, data }: ProfileCardProps) => {
                                 <span className="text-BaserOnSurfase text-xl font-semibold">{data.name}</span>
                                 <img src={checkedIcon} alt={checkedIcon} className="w-5 h-5 " />
                             </p>
-                            <span className="text-dark flex gap-2 flex-wrap text-sm font-medium">
+                            <span className="text-dark flex h-12 gap-2 flex-wrap text-sm font-medium">
                                 {data.specialities.map((ele, index) => (<span className='flex items-center gap-1'>{ele.text} {index < data.specialities.length - 1 && <p>-</p>}</span>))}
                             </span>
                         </div>
@@ -77,7 +81,7 @@ const ProfileCard = ({ CardShap, data }: ProfileCardProps) => {
                             <div onClick={() => HandleLoveiconClick(data.id)}
                                 className='text-BaserPrimary text-2xl my-0'>
                                 {
-                                    FollowingList?.data.filter((ele) => ele.id == data.id)[0] != undefined ?
+                                    FollowingList?.data.filter((ele) => ele.id == data.id)[0] != undefined || loveProfiles.includes(data.id) ?
                                         <PiHeartFill /> : <PiHeart />
                                 }
                             </div>

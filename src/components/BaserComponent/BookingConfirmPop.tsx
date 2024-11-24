@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { useAppSelector } from "../../redux/store"
 import { LiaPaperclipSolid } from "react-icons/lia";
 import { PiMicrophone } from "react-icons/pi";
-import { Button } from "flowbite-react";
 import { useDispatch } from "react-redux";
 import { CloseBookingConfirmPop, OpenBookingSuccessPop } from "../../redux/Slices/PopUpSlice";
 import { PutBookingData } from "../../redux/Slices/BookingSlice";
@@ -126,9 +125,9 @@ const BookingConfirmPop = () => {
             </div>
             <div className="flex flex-col gap-3">
                 <p className=" text-xl font-medium text-BaserOnSurfase">عنوان بذرتك</p>
-                <div className="">
-                    <input type="text" value={BazerTitle} onChange={handleTitleChange} className=" w-full py-4 px-6 rounded-3xl text-base font-normal text-dark bg-BaserSurface border-none" placeholder="ضع هنا عنوان لبذرتك" />
-                    <p className="text-sm font-normal text-dark">150/{BazerTitle.length}</p>
+                <div className=" px-1">
+                    <input type="text" value={BazerTitle} onChange={handleTitleChange} className=" w-full py-4 px-6 rounded-3xl text-base font-normal text-dark focus:ring-0 focus:outline-BaserPrimary bg-BaserSurface border-none" placeholder="ضع هنا عنوان لبذرتك" />
+                    <p className="text-sm mt-1 font-normal text-dark">150/{BazerTitle.length}</p>
                 </div>
             </div>
             <div className="flex items-center  gap-32 w-full" >
@@ -145,8 +144,8 @@ const BookingConfirmPop = () => {
                 </div>
             </div>
             <div className="w-full flex gap-5 items-center px-4 border-t border-[#938F94] pt-5 ">
-                <Button disabled={handleDisabled} onClick={HandleSubmit} className="bg-BaserPrimary flex items-center text-white rounded-full hover:!bg-BaserFoshiy flex-1" >{isLoading ? '...Loading' : 'تاكيد'}</Button>
-                <Button onClick={handleCancel} className="  text-base flex items-center font-medium border-none rounded-full " color="light" >الغاء</Button>
+                <button disabled={handleDisabled} onClick={HandleSubmit} className="bg-BaserPrimary  text-center  text-white rounded-full hover:!bg-BaserPrimary flex-1" >{isLoading ? '...Loading' : 'تاكيد'}</button>
+                <button onClick={handleCancel} className="  text-base flex items-center font-medium border-none rounded-full " color="light" >الغاء</button>
             </div>
             {
                 isError && <p className=" text-GeneralError">there is an error with submit</p>

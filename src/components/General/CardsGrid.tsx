@@ -9,8 +9,7 @@ const CardsGrid = ({ data }: { FromWhere: string, data: IGetConsultants }) => {
             {data.data.map((card, index) => (
                 <div className="" key={index}>
                     <ProfileCard CardShap={CardShap} data={card} />
-                </div>
-            ))
+                </div>))
             }
         </div >
     )

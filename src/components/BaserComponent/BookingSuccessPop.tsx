@@ -1,4 +1,3 @@
-import { Button } from 'flowbite-react'
 import checkedImage from '/Images/check_mark_color 1.png'
 import { useDispatch } from 'react-redux'
 import { CloseBookingSuccessPop } from '../../redux/Slices/PopUpSlice'
@@ -18,8 +17,8 @@ const BookingSuccessPop = () => {
                 <p className=' text-lg font-medium text-dark'>كن مستعدًا وجاهزًا قبل الجلسة بوقت كاف.</p>
             </div>
             <div className="w-full flex gap-5 items-center px-4 border-t border-[#938F94] pt-5 ">
-                <Button onClick={HandleSubmit} className="bg-BaserPrimary text-white rounded-full hover:!bg-BaserFoshiy  w-full" >أضف البذرة للتقويم</Button>
-                <Button onClick={handleCancel} className="  text-base font-medium border-[#938F94] text-BaserPrimary rounded-full w-full " color="light" >تم</Button>
+                <button onClick={HandleSubmit} className="bg-BaserPrimary text-white rounded-full h-14 hover:!bg-BaserPrimary  w-full" >أضف البذرة للتقويم</button>
+                <button onClick={handleCancel} className="  text-base font-medium border-[#938F94] border h-14 text-BaserPrimary rounded-full w-full "  >تم</button>
             </div>
         </div>
     )

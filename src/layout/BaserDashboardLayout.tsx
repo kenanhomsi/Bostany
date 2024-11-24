@@ -12,7 +12,7 @@ import { LayoutProps } from "../Types"
 const BaserDashboardLayout: React.FC<LayoutProps> = ({ children }) => {
 
     return (
-        <div dir="rtl" className="  font-alexandria flex w-full min-h-screen">
+        <div dir="rtl" className="  font-alexandria bg-[#FFFBFF] flex w-full min-h-screen">
             <SideBar DashBoard='Baser' />
             <div className="flex flex-col group w-full h-full pr-[264px] overflow-hidden">
                 <NavBar DashBoard='Baser' />

@@ -18,7 +18,6 @@ const SeedsCard = ({ data, index, From, Dashboard }: SeedsCardProps) => {
         })
     }
     const handleRejectProject = (id: number) => {
-        console.log(id)
         PejectMutate({
             payload: {
                 message: 'sorry'
@@ -26,7 +25,7 @@ const SeedsCard = ({ data, index, From, Dashboard }: SeedsCardProps) => {
             id: id
         })
     }
-    console.log(data)
+
     return (
         <>
 
@@ -101,7 +100,20 @@ const SeedsCard = ({ data, index, From, Dashboard }: SeedsCardProps) => {
                                 </>}
                         </div>
                         <div className=" flex flex-col mb-5  gap-3">
-                            <p className={`rounded-full p-3 ${From == 'Comming' ? `${Dashboard == 'Baser' ? 'bg-GeneralError' : '  bg-GeneralStable'}  ` : 'bg-GeneralSuccessContainer'} border-none text-white text-[10px]`}> باقي  ساعة </p>
+                            {
+                                data.accepted_request.start_at.split('T')[0] == `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}` &&
+                                <p className={`rounded-full p-3 ${From == 'Comming' ? `${Dashboard == 'Baser' ? 'bg-GeneralError' : '  bg-GeneralStable'}  ` : 'bg-GeneralSuccessContainer'} border-none text-white text-[10px]`}>
+                                    {
+                                        +data.invitation.start_at.split(':')[0] - new Date().getHours() > 0 ?
+                                            <p className=" flex gap-1">
+                                                باقي  <p>{+data.invitation.start_at.split(':')[0] - new Date().getHours() == 1 ? 'ساعة' : `${+data.invitation.start_at.split(':')[0] - new Date().getHours()} ساعة`}</p>
+                                            </p> :
+                                            <p className=" flex gap-1">
+                                                مر  <p>{+data.invitation.start_at.split(':')[0] - new Date().getHours() == -1 ? 'ساعة' : `${(+data.invitation.start_at.split(':')[0] - new Date().getHours()) * -1} ساعة`}</p>
+                                            </p>
+                                    }
+                                </p>
+                            }
                             <div className="">
                                 <div className={`border ${index == 0 ? ' border-white' : 'border-[#938F94]'}  text-center p-3 rounded-t-2xl`}>
                                     {data.created_at.split('-')[1]}

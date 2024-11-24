@@ -1,7 +1,6 @@
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { Methods } from "../../constant";
 import { EndPoints } from "../EndPoints";
-import { LongStaleTime } from "../../constant";
 import { handleApiResponseErrors } from "../HandleAPIResponseErrors";
 import axiosInstance from "../axios";
 import { IGetProjects } from "../../../Types/api";
@@ -28,9 +27,9 @@ export const useGetProjectsQuery = (options = {}) => {
   return useQuery({
     queryKey: ["Projects"],
     queryFn: GetProjects,
-    staleTime: LongStaleTime,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
+    staleTime: 2500,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
     refetchInterval: false,
     ...options,
   });

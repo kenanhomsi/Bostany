@@ -41,7 +41,7 @@ const Profile = () => {
         navigate('/');
     }
     return (
-        <div className="flex gap-20  mt-section py-14 pr-10 pl-24  bg-[#FFFBFF]">
+        <div className="flex gap-20  mt-section py-14 pr-10 pl-24  ">
             {
                 !isLoading && data && <div className=" flex flex-col  w-[27rem]">
                     <div className={`flex flex-col gap-8 items-center justify-center ${data?.data.type == 'customer' ? 'bg-BaserSurface text-BaserOnSurfase' : ' bg-BostanySurfaceContainer text-BostanyOnSurface'}  rounded-3xl py-20 px-2  `}>
