@@ -5,7 +5,7 @@ import { useGetFollowingList } from "../../utils/api/Favorites/useGetListFollowi
 const Favorite = () => {
     const { data } = useGetFollowingList()
     return (
-        <div className="mt-section pt-14  pr-10 pl-24 pb-24">
+        <div className="mt-section pt-14  2xl:pr-10 2xl:pl-24 md:pr-5 md:pl-14 pb-24">
             {
                 data?.data.length == 0 &&
                 <EmptyFavoritePage />

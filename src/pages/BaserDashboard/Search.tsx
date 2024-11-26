@@ -96,7 +96,7 @@ const Search = () => {
         setDropDownValue(categories?.data)
     }, [FormToSearch.specialization])
     return (
-        <div className="mt-section pt-14  pr-10 pl-24 pb-6 h-full flex gap-5 justify-between  ">
+        <div className="mt-section pt-14 2xl:pr-10 2xl:pl-24 md:pr-5 md:pl-14 pb-6 h-full flex gap-5 justify-between  ">
             <div className=" h-full w-full flex flex-col gap-7">
                 <div className=" relative border-none">
                     <input type="text" value={FormToSearch.text} onChange={(e) => SetFormToSearch({
@@ -120,7 +120,7 @@ const Search = () => {
                         )
                     }
                 </div>
-                <div className={` grid grid-cols-3 gap-2 my-4 w-full`}>
+                <div className={` grid 2xl:!grid-cols-3 md:!grid-cols-2 !grid-cols-1 gap-2 my-4 w-full`}>
                     {data?.data.map((card) => (
                         <ProfileCard CardShap='col' data={card} />
                     ))

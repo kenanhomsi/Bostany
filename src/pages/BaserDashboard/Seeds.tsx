@@ -8,7 +8,7 @@ const Seeds = () => {
     const { data: userData } = useGetUserBaserProfile();
 
     return (
-        <div className="mt-section py-14  pr-10 pl-24 w-full min-h-[70vh]">
+        <div className="mt-section py-14  2xl:pr-10 2xl:pl-24 md:pr-5 md:pl-14 w-full min-h-[70vh]">
             <Tabs aria-label="Tabs with underline" variant="underline"
                 theme={{
                     tablist: {

@@ -131,7 +131,7 @@ const ProfileMainInfo = ({ ProfileForm, SetProfileStep, setProfileForm, setCHang
     }
 
     return (
-        <div className="flex flex-col gap-10 w-[44rem] items-center py-8">
+        <div className="flex flex-col gap-10 xl:!w-[44rem] md:!w-[37rem] items-center py-8">
             <div className="  relative">
                 <div className="rounded-full overflow-hidden">
                     <img src={ProfileForm.avatar} alt={ProfileForm.avatar} className="w-[160px] h-[160px] rounded-full" />

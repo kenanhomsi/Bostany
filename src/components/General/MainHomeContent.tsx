@@ -65,7 +65,7 @@ const MainHomeContent = ({ place }: { place: string }) => {
     const { events } = useDraggable(ref);
     return (
         <div className={`flex flex-col items-center 
-          overflow-hidden ${place == 'website' ? '!pt-24' : 'pt-40 pb-24 pl-24 pr-10'}  w-full  `}>
+          overflow-hidden ${place == 'website' ? '!pt-24' : 'pt-40 pb-24 2xl:pl-24 2xl:pr-10 lg:pl-14 lg:pr-5'}  w-full  `}>
             {
                 place == 'website' &&
                 <div className='flex flex-col gap-8 items-center'>
@@ -97,7 +97,7 @@ const MainHomeContent = ({ place }: { place: string }) => {
             }
             <div className=" flex  items-center  mt-8  w-full justify-evenly">
                 <button onClick={() => handleWorkSpaceClick({ id: 0, name: 'الكل' })} className='flex h-fit flex-col  items-center gap-3'>
-                    <div className={` text-[56px] ${SelectedSpecialities == 0 ? 'text-BaserPrimary' : 'text-dark'}  `}>
+                    <div className={` 2xl:text-[56px] lg:text-[48px] ${SelectedSpecialities == 0 ? 'text-BaserPrimary' : 'text-dark'}  `}>
                         <PiSquaresFourDuotone />
                     </div>
                     <p className='text-xs font-medium text-dark'>الكل</p>
@@ -105,7 +105,7 @@ const MainHomeContent = ({ place }: { place: string }) => {
                 {SpecialitiesList &&
                     SpecialitiesList.data.map((ele, index) => {
                         return <button key={index} onClick={() => handleWorkSpaceClick({ id: ele.id, name: ele.text })} className='flex flex-col h-fit  items-center gap-3'>
-                            <div className={` text-[56px] ${ele.id == SelectedSpecialities ? 'text-BaserPrimary' : 'text-dark'}  `}>
+                            <div className={` 2xl:text-[56px] lg:text-[48px] ${ele.id == SelectedSpecialities ? 'text-BaserPrimary' : 'text-dark'}  `}>
                                 {WorkSpaceData &&
                                     WorkSpaceData.filter((work) => work.name === ele.text)[0]?.icon
                                 }

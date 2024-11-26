@@ -33,7 +33,7 @@ const ProfileNotification = () => {
         })
     }
     return (
-        <div className="flex flex-col gap-10 w-[44rem] py-8">
+        <div className="flex flex-col gap-10 xl:!w-[44rem] md:!w-[37rem] py-8">
             <div className="flex flex-col gap-10  p-4">
                 <p className={` text-[22px] font-semibold  text-BaserOnSurfase`}>الإشعارات العامة</p>
                 <div className=" flex flex-col gap-10 bg-white p-4 rounded-3xl">

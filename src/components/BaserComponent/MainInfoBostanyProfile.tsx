@@ -17,6 +17,7 @@ import { WorkSpaceData } from '../../utils/data';
 import { IGetProfile } from '../../Types/api';
 import { usePostToggleFavorite } from '../../utils/api/Favorites/usePostToggleFavorite';
 import { useGetFollowingList } from '../../utils/api/Favorites/useGetListFollowings';
+import BookingFromBostanyProfile from './BookingFromBostanyProfile';
 
 const MainInfoBostanyProfile = ({ BostanyData }: { BostanyData: IGetProfile }) => {
     const { mutate } = usePostToggleFavorite();
@@ -27,7 +28,7 @@ const MainInfoBostanyProfile = ({ BostanyData }: { BostanyData: IGetProfile }) =
         })
     }
     return (
-        <div className="flex flex-col gap-10 w-[650px]">
+        <div className="flex flex-col gap-10 2xl:w-[650px] md:w-full">
             <div className="flex gap-6 items-start">
                 <div className="w-[198px] h-[198px] rounded-full overflow-hidden">
                     <img
@@ -113,7 +114,9 @@ const MainInfoBostanyProfile = ({ BostanyData }: { BostanyData: IGetProfile }) =
                     <p className="text-base font-normal text-dark">التمديد</p>
                     <p className="text-[#808080] text-base font-normal">{BostanyData.data.projects?.extension_percentage}%</p>
                 </div>
-
+            </div>
+            <div className=" 2xl:!hidden !flex">
+                <BookingFromBostanyProfile BostanyData={BostanyData} />
             </div>
             <div className="flex flex-col gap-4 text-BaserOnSurfase">
                 <span className="text-[22px] font-semibold ">نبذة عني</span>

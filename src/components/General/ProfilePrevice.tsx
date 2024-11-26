@@ -1,7 +1,7 @@
 
 const ProfilePrevice = () => {
     return (
-        <div className=" w-[44rem]  flex flex-col gap-3" >
+        <div className=" xl:!w-[44rem] md:!w-[37rem]  flex flex-col gap-3" >
             <h2 className=" text-2xl font-medium text-BostanyOnSurface">الخصوصية</h2>
             <p className=" text-lg font-medium text-BostanyOnSurface">مرحبًا بكم في بستن | Bas10، منصة مبتكرة تهدف إلى ربط الخبراء في مختلف المجالات بالمستخدمين الباحثين عن نصائح وحلول فورية وفعّالة عبر جلسات فيديو أو صوت مدتها 10 دقائق. نحن ملتزمون بحماية خصوصيتك وضمان حماية جميع المعلومات التي يتم جمعها منك أو التي تقدمها لنا. المعلومات التي نجمعها عند استخدامك لمنصة بستن، قد نقوم بجمع المعلومات التالية:</p>
             <h3 className=" text-xl font-medium text-BostanyOnSurface">المعلومات الشخصية</h3>

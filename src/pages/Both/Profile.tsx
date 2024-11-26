@@ -41,9 +41,9 @@ const Profile = () => {
         navigate('/');
     }
     return (
-        <div className="flex gap-20  mt-section py-14 pr-10 pl-24  ">
+        <div className="flex gap-20  mt-section  py-14  2xl:pr-10 2xl:pl-24 md:pr-5 md:pl-14   ">
             {
-                !isLoading && data && <div className=" flex flex-col  w-[27rem]">
+                !isLoading && data && <div className=" flex flex-col 2xl:!w-[27rem] md:!w-[15rem]">
                     <div className={`flex flex-col gap-8 items-center justify-center ${data?.data.type == 'customer' ? 'bg-BaserSurface text-BaserOnSurfase' : ' bg-BostanySurfaceContainer text-BostanyOnSurface'}  rounded-3xl py-20 px-2  `}>
                         <img src={data?.data.avatar} alt={data?.data.avatar} className={`w-[113px] h-[113px] rounded-full border-4 ${Dashboard == 'Baser' ? 'border-BaserPrimary' : 'border-BostanyPrimary'}`} />
                         <p className="text-[22px] font-medium ">{data?.data.name}</p>

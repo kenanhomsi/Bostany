@@ -57,7 +57,7 @@ const ProfileCard = ({ CardShap, data }: ProfileCardProps) => {
         })
     }
     return (
-        <div className={`flex  relative pb-4  bg-BaserSurface ${CardShap == 'col' ? 'flex-col 2xl:max-w-[22.8rem] max-w-[18.1rem]  flex-1' : ' flex-row w-full px-6 py-4'}  rounded-[32px]  `}>
+        <div className={`flex  relative pb-4  bg-BaserSurface ${CardShap == 'col' ? 'flex-col 2xl:!max-w-[22.8rem] !max-w-[18.1rem]  flex-1' : ' flex-row w-full px-6 py-4'}  rounded-[32px]  `}>
             {/* <button className={`${CardShap == 'col' ? 'top-[0px] right-[0px]' : 'top-[0px] right-[0px]'} w-6 h-6 z-[10000] border border-white rounded-full ${data.online_until ? 'bg-GeneralWarningContainer' : ' bg-BaserTertiary'}  absolute `}></button> */}
             <div className={`${CardShap == 'col' ? '' : ' h-fit'} rounded-t-[32px] overflow-hidden`}>
                 <Link to={pathname != '/' ? `/Baser/bostanyProfile/${data.id}` : '/#'} className='bg-cover bg-center'>
@@ -107,7 +107,7 @@ const ProfileCard = ({ CardShap, data }: ProfileCardProps) => {
                     <div className={` flex flex-wrap ${CardShap == 'col' ? 'h-[84px]' : ' '}   gap-1 w-full`}>
                         {/* for now i make only top 3 will upper */}
                         {data.settings.schedules.filter((ele, index) => { if (ele) return index < 3 }).map((time, index) => {
-                            return <button key={index} id={`${time.to_time!}-${time.from_time!}`} onClick={HandleFreetimeClick} className={`${index == 0 ? 'bg-GeneralSuccessContainer' : index == 1 ? 'bg-GeneralWarningContainer' : 'bg-BaserTertiary'}   px-4 py-3 h-fit rounded-full text-white text-xs font-medium`}><span>{arabicTimeFormat(time.to_time)}</span>-<span>{arabicTimeFormat(time.from_time)}</span></button>
+                            return <button key={index} id={`${time.to_time!}-${time.from_time!}`} onClick={HandleFreetimeClick} className={`${index == 0 ? 'bg-GeneralSuccessContainer' : index == 1 ? 'bg-GeneralWarningContainer' : 'bg-BaserTertiary'}  ${index == 2 && ' xl:block !hidden'}  px-4 py-3 h-fit rounded-full text-white text-xs font-medium`}><span>{arabicTimeFormat(time.to_time)}</span>-<span>{arabicTimeFormat(time.from_time)}</span></button>
                         })}
                     </div>
                 </div>
