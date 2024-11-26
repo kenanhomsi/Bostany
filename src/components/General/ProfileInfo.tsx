@@ -139,7 +139,7 @@ const ProfileInfo = () => {
         <>
             {
                 !isLoading && data &&
-                <div className="w-[44rem]">
+                <div className="xl:!w-[44rem] md:!w-[37rem]">
                     {
                         ProfileStep == 1 && <ProfileMainInfo SetProfileStep={SetProfileStep} ProfileForm={ProfileForm} setProfileForm={setProfileForm} setCHangeHappend={setCHangeHappend} setDropDownValue={setDropDownValue} DropDownValue={DropDownValue} allCountries={allCountries} />
                     }

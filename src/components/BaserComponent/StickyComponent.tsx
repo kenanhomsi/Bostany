@@ -1,21 +1,22 @@
-import { Button } from 'flowbite-react';
+// import { Button } from 'flowbite-react';
 import { useState, useEffect } from 'react';
-import TimeBarProfile from './TimeBarProfile';
-import StopWatch from '/Icons/stopwatch_high_contrast 1.png'
-import { useDispatch } from 'react-redux';
-import { PutBookingBostanyId, PutBookingData } from '../../redux/Slices/BookingSlice';
-import { OpenBookingConfirmPop } from '../../redux/Slices/PopUpSlice';
-import { useAppSelector } from '../../redux/store';
-import { IGetProfile, schedulesType } from '../../Types/api';
+// import TimeBarProfile from './TimeBarProfile';
+// import StopWatch from '/Icons/stopwatch_high_contrast 1.png'
+// import { useDispatch } from 'react-redux';
+// import { PutBookingBostanyId, PutBookingData } from '../../redux/Slices/BookingSlice';
+// import { OpenBookingConfirmPop } from '../../redux/Slices/PopUpSlice';
+// import { useAppSelector } from '../../redux/store';
+import { IGetProfile } from '../../Types/api';
+import BookingFromBostanyProfile from './BookingFromBostanyProfile';
 const StickyScheduleComponent = ({ BostanyData }: { BostanyData: IGetProfile }) => {
-    const BookingData = useAppSelector((state) => state.booking.BookingData)
-    const [TimeSelected, setTimeSelected] = useState(``)
-    const [DayScheduleArray, setDayScheduleArray] = useState<schedulesType[]>([]);
-    const [startOfMeeting, setstartOfMeeting] = useState(9)
-    const [TimeGetSelect, setTimeGetSelect] = useState(false);
-    const [DurationOfMeeting, setDurationOfMeeting] = useState(10)
+    // const BookingData = useAppSelector((state) => state.booking.BookingData)
+    // const [TimeSelected, setTimeSelected] = useState(``)
+    // const [DayScheduleArray, setDayScheduleArray] = useState<schedulesType[]>([]);
+    // const [startOfMeeting, setstartOfMeeting] = useState(9)
+    // const [TimeGetSelect, setTimeGetSelect] = useState(false);
+    // const [DurationOfMeeting, setDurationOfMeeting] = useState(10)
     const [isFixed, setIsFixed] = useState(false);
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const handleScroll = () => {
         const scrollY = window.scrollY;
         const windowHeight = window.innerHeight;
@@ -27,19 +28,19 @@ const StickyScheduleComponent = ({ BostanyData }: { BostanyData: IGetProfile }) 
             setIsFixed(false);
         }
     };
-    const HandleFreetimeClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        dispatch(PutBookingBostanyId(BostanyData.data.id))
-        dispatch(PutBookingData({
-            ...BookingData,
-            SelectedDay: TimeSelected,
-            SelectTime: e.currentTarget.id
-        }))
-        setstartOfMeeting(+BookingData.SelectTime.split('-')[0].split(':')[0])
-        setTimeGetSelect(true);
-    }
-    const handleSubmit = () => {
-        dispatch(OpenBookingConfirmPop())
-    }
+    // const HandleFreetimeClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    //     dispatch(PutBookingBostanyId(BostanyData.data.id))
+    //     dispatch(PutBookingData({
+    //         ...BookingData,
+    //         SelectedDay: TimeSelected,
+    //         SelectTime: e.currentTarget.id
+    //     }))
+    //     setstartOfMeeting(+BookingData.SelectTime.split('-')[0].split(':')[0])
+    //     setTimeGetSelect(true);
+    // }
+    // const handleSubmit = () => {
+    //     dispatch(OpenBookingConfirmPop())
+    // }
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         return () => {
@@ -47,10 +48,10 @@ const StickyScheduleComponent = ({ BostanyData }: { BostanyData: IGetProfile }) 
         };
     }, []);
 
-    useEffect(() => {
-        const ScheduleArray = BostanyData.data.settings?.schedules.filter((ele) => ele.date == TimeSelected)
-        setDayScheduleArray(ScheduleArray!);
-    }, [TimeSelected])
+    // useEffect(() => {
+    //     const ScheduleArray = BostanyData.data.settings?.schedules.filter((ele) => ele.date == TimeSelected)
+    //     setDayScheduleArray(ScheduleArray!);
+    // }, [TimeSelected])
     return (
         <div
             style={{
@@ -61,7 +62,8 @@ const StickyScheduleComponent = ({ BostanyData }: { BostanyData: IGetProfile }) 
                 zIndex: 30,
             }}
         >
-            <div className="flex flex-col h-fit max-w-[576px]     bg-BaserSurface p-8 rounded-[32px] gap-8">
+            <BookingFromBostanyProfile BostanyData={BostanyData} />
+            {/* <div className=" flex flex-col h-fit max-w-[576px]     bg-BaserSurface p-8 rounded-[32px] gap-8">
                 <p className=" text-[22px] font-semibold text-BaserOnSurfase">جدول المواعيد</p>
                 <TimeBarProfile TimeSelected={TimeSelected} setTimeSelected={setTimeSelected} />
                 {DayScheduleArray.length > 0 ?
@@ -102,7 +104,7 @@ const StickyScheduleComponent = ({ BostanyData }: { BostanyData: IGetProfile }) 
                     <Button onClick={handleSubmit} disabled={DayScheduleArray.length == 0 || !TimeGetSelect} className={` ${!TimeGetSelect || DayScheduleArray.length == 0 && 'opacity-35'} bg-BaserPrimary text-white rounded-full  hover:!bg-BaserPrimary px-5 py-3 h-fit w-[80%]`} >طلب موعد</Button>
                     <p className=" flex gap-2">10 ر.س</p>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

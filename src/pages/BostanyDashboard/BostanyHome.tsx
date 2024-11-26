@@ -7,7 +7,7 @@ const BostanyHome = () => {
     const { data } = useGetUserProfile();
     return (
         <div className="mt-section">
-            <div className="mt-section py-14 px-16 w-full min-h-[70vh]">
+            <div className="mt-section  py-14 2xl:!pr-10 2xl:!pl-24 md:!pr-5 md:!pl-10  w-full min-h-[70vh]">
                 <Tabs aria-label="Tabs with underline" variant="underline"
                     theme={{
                         tablist: {
@@ -15,7 +15,7 @@ const BostanyHome = () => {
                                 underline: "-mb-px flex-wrap  dark:border-gray-700",
                             },
                             tabitem: {
-                                base: 'flex items-center  w-[200px] justify-center  p-4 text-base text-[#48464A] font-medium first:ml-0 focus:outline-none  disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500',
+                                base: 'flex items-center  xl:w-[200px] w-[150px] justify-center  p-4 text-base text-[#48464A] font-medium first:ml-0 focus:outline-none  disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500',
                                 variant: {
                                     underline: {
                                         active: {

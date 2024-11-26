@@ -54,14 +54,14 @@ const GeneralFooter = ({ path }: { path: string }) => {
                 </div>
                 <div className=" flex flex-col gap-3">
                     <h3>تحميل التطبيق</h3>
-                    <Link to='/' className='flex gap-4 border-2 px-3 py-3 border-BaserOutline rounded-md    items-center'>
+                    <Link to='/' className='flex gap-4 border-2 p-2 xl:!px-3 xl:!py-3 border-BaserOutline rounded-md    items-center'>
                         <img src={appleLogo} alt={appleLogo} className=' w-5 h-6' />
                         <div className="flex flex-col">
                             <span className=' text-[9px] font-medium'>متوفر على</span>
                             <p>App Store</p>
                         </div>
                     </Link>
-                    <Link to='/' className='flex gap-4 border-2 border-BaserOutline rounded-md px-3 py-3  items-center'>
+                    <Link to='/' className='flex gap-1 xl:gap-4 border-2 border-BaserOutline rounded-md p-2 xl:!px-3 xl:!py-3  items-center'>
                         <img src={Playstore} alt={Playstore} className=' w-5 h-6' />
                         <div className="flex flex-col">
                             <span className=' text-[9px] font-medium'>متوفر على</span>

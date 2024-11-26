@@ -4,7 +4,7 @@ const ProfileAboutBostany = () => {
     const Dashboard = useLocation().pathname.split('/')[1]
 
     return (
-        <div className=" w-[44rem]  flex flex-col gap-5" >
+        <div className=" xl:w-[44rem] md:!w-[37rem]  flex flex-col gap-5" >
             <h2 className={`text-2xl font-bold ${Dashboard == 'Baser' ? 'text-BaserPrimary' : 'text-BostanyPrimary'} `}>عن بستن</h2>
             <p className=" text-lg font-medium text-BostanyOnSurface">جلسات استشارية عصفية فورية مختصرة لتطوير وتنمية الأفكار!</p>
             <h3 className=" text-xl font-medium text-BostanyOnSurface">الأهداف</h3>

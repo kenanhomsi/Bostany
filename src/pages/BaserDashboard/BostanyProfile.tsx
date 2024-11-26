@@ -20,7 +20,9 @@ const BostanyProfile = () => {
                 !isLoading && !isError && data &&
                 <>
                     <MainInfoBostanyProfile BostanyData={data} />
-                    <StickyScheduleComponent BostanyData={data} />
+                    <div className=" 2xl:!flex hidden">
+                        <StickyScheduleComponent BostanyData={data} />
+                    </div>
                 </>
             }
         </div>
