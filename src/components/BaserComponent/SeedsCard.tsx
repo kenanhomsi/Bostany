@@ -100,7 +100,7 @@ const SeedsCard = ({ data, index, From, Dashboard }: SeedsCardProps) => {
                                 </>}
                         </div>
                         <div className=" flex flex-col mb-5  gap-3">
-                            {
+                            {data.accepted_request != null &&
                                 data.accepted_request.start_at.split('T')[0] == `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}` &&
                                 <p className={`rounded-full p-3 ${From == 'Comming' ? `${Dashboard == 'Baser' ? 'bg-GeneralError' : '  bg-GeneralStable'}  ` : 'bg-GeneralSuccessContainer'} border-none text-white text-[10px]`}>
                                     {

@@ -7,7 +7,7 @@ const Statistics = () => {
     const { data } = useGetMyStatistics();
     return (
         <div className="mt-section">
-            <div className="mt-section py-14 px-16 w-full min-h-[70vh]">
+            <div className="mt-section py-14 2xl:!pr-10 2xl:!pl-24 md:!pr-5 md:!pl-10 w-full min-h-[70vh]">
                 <Tabs aria-label="Tabs with underline" variant="underline"
                     theme={{
                         tablist: {

@@ -164,7 +164,7 @@ const CompleteProfile = () => {
             }
             {CompleteProfileStep < 5 &&
                 <>
-                    <button onClick={handleContinousBtn} disabled={!PassState} className={` ${!PassState ? " text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]" : `text-white cursor-pointer  ${RegisterAs == 'Baser' ? 'bg-BaserPrimary' : 'bg-BostanyPrimary'}`} w-full   rounded-full py-4 px-5  text-base font-medium`}> {CompleteProfileStep == 2 ? isLoading ? '...loading' : 'إتمام التسجيل' : isLoading ? '...loading' : 'التالي'}</button>
+                    <button onClick={handleContinousBtn} disabled={!PassState} className={` ${!PassState ? " text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]" : `text-white cursor-pointer  ${RegisterAs == 'Baser' ? 'bg-BaserPrimary' : 'bg-BostanyPrimary'}`} w-full   rounded-full py-4 px-5  text-base font-medium`}> {RegisterAs == 'Baser' && CompleteProfileStep == 2 ? isLoading ? '...loading' : 'إتمام التسجيل' : isLoading ? '...loading' : 'التالي'}</button>
                     {
                         isError &&
                         <>

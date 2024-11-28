@@ -145,7 +145,7 @@ const ProfileMainInfo = ({ ProfileForm, SetProfileStep, setProfileForm, setCHang
             <div className={`  flex flex-col gap-6 w-full items-center`}>
                 <div className="w-full ">
                     <p className={` text-base mb-2 font-medium ${data?.data.type == 'customer' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'} `}>الاسم الكامل</p>
-                    <input type="text" onChange={handleInputChange} name="name" placeholder="User name" value={ProfileForm.name} className={` ${data?.data.type == 'customer' ? 'bg-BaserSurface text-BaserOnSurfase' : ' bg-BostanySurfaceContainer text-BostanyOnSurface'} placeholder:text-dark border-transparent focus:ring-0 focus:border-BaserPrimary focus:border-2 font-medium text-base   py-4 px-6 rounded-3xl w-full`} />
+                    <input type="text" onChange={handleInputChange} name="name" placeholder="User name" value={ProfileForm.name} className={` ${data?.data.type == 'customer' ? 'bg-BaserSurface text-BaserOnSurfase focus:border-BaserPrimary' : ' bg-BostanySurfaceContainer text-BostanyOnSurface focus:border-BostanyPrimary'} placeholder:text-dark border-transparent focus:ring-0  focus:border-2 font-medium text-base   py-4 px-6 rounded-3xl w-full`} />
                 </div>
                 <div className="w-full ">
                     <p className={` text-base mb-2 font-medium ${data?.data.type == 'customer' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'}`}>الدولة</p>
@@ -157,11 +157,11 @@ const ProfileMainInfo = ({ ProfileForm, SetProfileStep, setProfileForm, setCHang
                 </div>
                 <div className="w-full ">
                     <p className={` text-base mb-2 font-medium ${data?.data.type == 'customer' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'}`}>رقم الهاتف</p>
-                    <input type="text" onChange={handleInputChange} name="phone" placeholder="000 000 000" value={ProfileForm.phone} className={` placeholder:text-dark border-transparent focus:ring-0 focus:border-BaserPrimary focus:border-2 font-medium text-base ${data?.data.type == 'customer' ? 'bg-BaserSurface text-BaserOnSurfase' : ' bg-BostanySurfaceContainer text-BostanyOnSurface'} py-4 px-6 rounded-3xl w-full`} />
+                    <input type="text" onChange={handleInputChange} name="phone" placeholder="000 000 000" value={ProfileForm.phone} className={` placeholder:text-dark border-transparent focus:ring-0  focus:border-2 font-medium text-base ${data?.data.type == 'customer' ? 'bg-BaserSurface text-BaserOnSurfase focus:border-BaserPrimary' : ' bg-BostanySurfaceContainer text-BostanyOnSurface focus:border-BostanyPrimary'} py-4 px-6 rounded-3xl w-full`} />
                 </div>
                 <div className="w-full ">
                     <p className={` text-base mb-2 font-medium ${data?.data.type == 'customer' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'}`}>البريد الالكتروني</p>
-                    <input type="email" onChange={handleInputChange} name="email" placeholder="ex@emil.com" value={ProfileForm.email} className={` placeholder:text-dark border-transparent focus:ring-0 focus:border-BaserPrimary focus:border-2 font-medium text-base ${data?.data.type == 'customer' ? 'bg-BaserSurface text-BaserOnSurfase' : ' bg-BostanySurfaceContainer text-BostanyOnSurface'} py-4 px-6 rounded-3xl w-full`} />
+                    <input type="email" onChange={handleInputChange} name="email" placeholder="ex@emil.com" value={ProfileForm.email} className={` placeholder:text-dark border-transparent focus:ring-0  focus:border-2 font-medium text-base ${data?.data.type == 'customer' ? 'bg-BaserSurface text-BaserOnSurfase focus:border-BaserPrimary' : ' bg-BostanySurfaceContainer text-BostanyOnSurface focus:border-BostanyPrimary'} py-4 px-6 rounded-3xl w-full`} />
                 </div>
                 <div className="w-full ">
                     <p className={`text-base mb-2 font-medium ${data?.data.type == 'customer' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'}`}>تاريخ الميلاد</p>
@@ -204,7 +204,7 @@ const ProfileMainInfo = ({ ProfileForm, SetProfileStep, setProfileForm, setCHang
                     <>
                         <div className=" w-full ">
                             <p className=" font-medium text-base mb-1 text-[#191C1B]">كلمات تعريفية تشويقية عنك</p>
-                            <textarea rows={5} onChange={handleChange} value={ProfileForm.DefinitiveWords} className=" resize-none w-full bg-BaserSurface text-dark font-medium focus:outline-BostanyPrimary focus:ring-0  rounded-3xl border-none p-4" />
+                            <textarea rows={5} onChange={handleChange} value={ProfileForm.DefinitiveWords} className=" resize-none w-full bg-BostanySurfaceContainer text-dark font-medium focus:outline-BostanyPrimary focus:ring-0  rounded-3xl border-none p-4" />
                             <p className=" text-dark text-sm"><span>{ProfileForm.DefinitiveWords && ProfileForm.DefinitiveWords.length}</span>/70</p>
                         </div>
                         <div className=" w-full ">

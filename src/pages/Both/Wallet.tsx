@@ -23,7 +23,7 @@ const Wallet = () => {
     }
     return (
         <div className="mt-section py-14   2xl:pr-10 2xl:pl-24 md:pr-5 md:pl-14 ">
-            <div className="flex justify-between items-center py-4 px-6">
+            <div className="flex justify-between items-center py-4 ">
                 <div className={`flex items-center ${data && data.data.type == 'customer' ? 'bg-BaserbodyLigh' : ' bg-BostanybodyLigh'}  xl:!w-[44rem] md:!w-[25rem] py-6 px-4 rounded-2xl gap-4`}>
                     <img src={Dashboard == 'Baser' ? moneyBagImage : BostanyMoneyBagImage} alt={Dashboard == 'Baser' ? moneyBagImage : BostanyMoneyBagImage} className='w-24 h-24' />
                     <div className="flex flex-col">

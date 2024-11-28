@@ -5,7 +5,7 @@ import { useGetSpecialitiestList } from "../../../utils/api/select/useGetspecial
 import { useGetCategoriestList } from "../../../utils/api/select/useGetCategories"
 const Step3 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
     const { data } = useGetSpecialitiestList();
-    const [SelectedCategory, setSelectedCategory] = useState(data?.data[0].id)
+    const [SelectedCategory, setSelectedCategory] = useState<number>()
     const { data: categories, refetch } = useGetCategoriestList({
         queryKey: ["Categories", SelectedCategory]
     });
@@ -55,7 +55,7 @@ const Step3 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
                             <div
                                 key={ele.id}
                                 onClick={() => handleWorkTypeClick && handleWorkTypeClick(ele.id)}
-                                className={` ${FormData.category.includes(ele.id) ? 'bg-BostanyPrimary text-white' : 'text-BaserOnSurfase bg-white border-[2px] border-BaserOutline'}   text-center text-sm font-medium  py-2  w-[115px] cursor-pointer   rounded-full`}
+                                className={` ${FormData.category.includes(ele.id) ? 'bg-BostanyPrimary text-white' : 'text-BaserOnSurfase bg-transparent border-[2px] border-BaserOutline'}   text-center text-sm font-medium  py-2  w-[115px] cursor-pointer   rounded-full`}
                             >
                                 {ele.text}
                             </div>

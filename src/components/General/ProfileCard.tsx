@@ -32,7 +32,11 @@ const ProfileCard = ({ CardShap, data }: ProfileCardProps) => {
             SelectedDay: BookingDayFromTimeBar,
             SelectTime: e.currentTarget.id
         }))
-        dispatch(OpenBookingConfirmPop());
+        if (pathname != '/') {
+            dispatch(OpenBookingTimePop());
+            dispatch(PutBookingBostanyId(data.id))
+        }
+        // dispatch(OpenBookingConfirmPop());
     }
     const HandleBookingIconClick = () => {
         if (pathname != '/') {
@@ -107,7 +111,7 @@ const ProfileCard = ({ CardShap, data }: ProfileCardProps) => {
                     <div className={` flex flex-wrap ${CardShap == 'col' ? 'h-[84px]' : ' '}   gap-1 w-full`}>
                         {/* for now i make only top 3 will upper */}
                         {data.settings.schedules.filter((ele, index) => { if (ele) return index < 3 }).map((time, index) => {
-                            return <button key={index} id={`${time.to_time!}-${time.from_time!}`} onClick={HandleFreetimeClick} className={`${index == 0 ? 'bg-GeneralSuccessContainer' : index == 1 ? 'bg-GeneralWarningContainer' : 'bg-BaserTertiary'}  ${index == 2 && ' xl:block !hidden'}  px-4 py-3 h-fit rounded-full text-white text-xs font-medium`}><span>{arabicTimeFormat(time.to_time)}</span>-<span>{arabicTimeFormat(time.from_time)}</span></button>
+                            return <button key={index} id={`${time.to_time!}-${time.from_time!}`} onClick={HandleFreetimeClick} className={`${index == 0 ? 'bg-GeneralSuccessContainer' : index == 1 ? 'bg-GeneralWarningContainer' : 'bg-BaserTertiary'}  ${index == 2 && ' xl:!block !hidden'}  px-4 py-3 h-fit rounded-full text-white text-xs font-medium`}><span>{arabicTimeFormat(time.to_time)}</span>-<span>{arabicTimeFormat(time.from_time)}</span></button>
                         })}
                     </div>
                 </div>

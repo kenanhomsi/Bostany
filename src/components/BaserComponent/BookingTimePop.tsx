@@ -27,6 +27,8 @@ const BookingTimePop = () => {
     const handleCancel = () => {
         dispatch(CloseBookingTimePop())
     }
+    console.log(data?.data.settings?.schedules)
+    console.log(TimeSelected)
     useEffect(() => {
         const ScheduleArray = data?.data.settings?.schedules.filter((ele) => ele.date == TimeSelected)
         setDayScheduleArray(ScheduleArray!);
@@ -51,10 +53,10 @@ const BookingTimePop = () => {
             <TimeBarProfile TimeSelected={TimeSelected} setTimeSelected={setTimeSelected} />
             {DayScheduleArray && DayScheduleArray.length > 0 ?
                 <>
-                    <div className=" flex gap-2">
+                    <div className=" flex gap-2 px-2">
                         {
                             DayScheduleArray.map((ele, index) => (
-                                <Button id={`${ele.to_time!}-${ele.from_time!}`} key={index} onClick={handleFromToTimeSelecet} className={`${index == 0 ? 'bg-GeneralSuccessContainer text-white border-2 hover:!bg-GeneralSuccessContainer  border-GeneralSuccessContainer' : 'bg-transparent text-black border-2 border-BaserPrimary hover:!bg-transparent'}  rounded-full  w-full`} ><span>{ele.from_time}</span>-<span>{ele.to_time}</span> </Button>
+                                <Button id={`${ele.to_time!}-${ele.from_time!}`} key={index} onClick={handleFromToTimeSelecet} className={`${index == 0 ? 'bg-GeneralSuccessContainer text-white border-2 hover:!bg-GeneralSuccessContainer focus:outline-GeneralSuccessContainer   border-GeneralSuccessContainer' : 'bg-transparent text-black border-2 border-BaserPrimary focus:outline-BaserPrimary hover:!bg-transparent'}  rounded-full flex items-center justify-center focus:ring-0 focus:outline-[2px] z-10  w-full`} ><span>{ele.from_time}</span>-<span>{ele.to_time}</span> </Button>
                             ))
                         }
                     </div>
@@ -84,7 +86,7 @@ const BookingTimePop = () => {
             }
             <div className="w-full flex gap-5 items-center px-4 border-t border-[#938F94] pt-5 ">
                 {DayScheduleArray && DayScheduleArray.length > 0 ? <>
-                    <Button disabled={handleDisabled} onClick={HandleSubmit} className="bg-BaserPrimary flex items-center text-white rounded-full hover:!bg-BaserFoshiy flex-1" >التالي</Button>
+                    <Button disabled={handleDisabled} onClick={HandleSubmit} className="bg-BaserPrimary flex items-center text-white rounded-full  hover:!bg-BaserPrimary flex-1" >التالي</Button>
                     <Button onClick={handleCancel} className="  text-base font-medium border-none flex items-center rounded-full " color="light" >الغاء</Button>
                 </> :
                     <Button onClick={handleCancel} className="text-BaserPrimary flex items-center  text-base font-medium border w-full rounded-full " color="light" >الغاء</Button>

@@ -17,6 +17,7 @@ const Profile = () => {
     const { data, isLoading } = useGetUserProfile();
     const Dashboard = pathname.split('/')[1]
     const [switchToBaser, setswitchToBaser] = useState(false);
+    console.log(data);
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -49,10 +50,11 @@ const Profile = () => {
                         <p className="text-[22px] font-medium ">{data?.data.name}</p>
                         <div className="">
                             {Dashboard == 'Baser' ? <p className={`!text-BaserPrimary  text-xl font-medium`}>باذر</p> :
-                                <p className="flex items-center gap-4 text-xl font-medium">
+                                <div className="flex !items-center justify-center gap-4 text-xl font-medium">
                                     <span>باذر</span>
 
                                     <ToggleSwitch sizing="md"
+                                        className="h-fit"
                                         theme={{
                                             toggle: {
                                                 checked: {
@@ -63,7 +65,7 @@ const Profile = () => {
                                         checked={switchToBaser}
                                         onChange={setswitchToBaser} />
                                     <span className="text-BostanyPrimary ">بستاني</span>
-                                </p>
+                                </div>
                             }
                         </div>
                     </div>
@@ -82,7 +84,7 @@ const Profile = () => {
             <PopUpModal
                 title=''
                 type="SwitchToBaser"
-                PopSize="lg"
+                PopSize="xl"
                 closeIconState={true}
                 closeAction={CloseSwitchToBaser}
             >

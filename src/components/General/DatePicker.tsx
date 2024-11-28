@@ -28,7 +28,7 @@ const DatePickerComponent: React.FC<DatePickerComponentProps> = ({ value, onChan
         = (
             <input
                 type="text"
-                className={`bg-BaserSurface h-20 !w-full placeholder:text-dark  !border-none text-BostanyOnSurface text-base px-6 py-4 rounded-3xl ${RegisterAs == 'Baser' ? 'focus:outline-BaserPrimary' : 'focus:outline-BostanyPrimary'}   `}
+                className={` h-20 !w-full placeholder:text-dark  !border-none text-BostanyOnSurface text-base px-6 py-4 rounded-3xl ${RegisterAs == 'Baser' ? 'bg-BaserSurface text-BaserOnSurfase focus:outline-BaserPrimary' : ' bg-BostanySurfaceContainer text-BostanyOnSurface focus:outline-BostanyPrimary'}    `}
                 placeholder="يوم / شهر / سنة"
             />
         );

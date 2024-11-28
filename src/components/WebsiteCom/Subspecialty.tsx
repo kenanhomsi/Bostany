@@ -1,15 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppSelector } from "../../redux/store";
 import { useDispatch } from "react-redux";
 import { changeQualificationData } from "../../redux/Slices/QualificationData";
 export interface SubspecialtyProps {
-    index: number;
+    index: string;
     setCHangeHappend?: (value: boolean) => void
 }
 const Subspecialty = ({ index, setCHangeHappend }: SubspecialtyProps) => {
     const dispatch = useDispatch()
     const RegisterAs = useAppSelector((state) => state.register.RegisterAs)
-
     const qualificationDataArry = useAppSelector((state) => state.qualificationData.QualificationDataArray)
     const thisqualificationData = qualificationDataArry.filter((ele) => ele.id == index)[0]
     const [QualificationData, setQualificationData] = useState({
@@ -19,7 +18,15 @@ const Subspecialty = ({ index, setCHangeHappend }: SubspecialtyProps) => {
         cartificate: thisqualificationData.cartificate,
         year: thisqualificationData.year,
     });
-
+    useEffect(() => {
+        setQualificationData({
+            id: thisqualificationData.id,
+            issuer: thisqualificationData.issuer,
+            // Academic_degree: 'البكالوريوس',
+            cartificate: thisqualificationData.cartificate,
+            year: thisqualificationData.year,
+        })
+    }, [thisqualificationData, index])
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setQualificationData({
             ...QualificationData,

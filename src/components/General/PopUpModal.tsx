@@ -25,20 +25,20 @@ const PopUpModal: React.FC<PopUpParams> = ({
             size={PopSize}
             popup
             dir="rtl"
-            className="self-center   !px-8 !py-5 z-[100000] "
+            className="self-center !font-alexandria   !px-8 !py-5 z-[100000] "
             theme={{
                 content: {
-                    inner: ' rounded-[40px] relative flex  flex-col bg-white shadow dark:bg-gray-700'
+                    inner: ' rounded-[40px] relative !font-alexandria flex  flex-col bg-white shadow dark:bg-gray-700'
                 },
                 header: {
                     close: {
-                        base: `${closeIconState && ' !hidden'} h-fit   mr-auto inline-flex items-center rounded-full bg-[#CAC5CA] text-[#1D1B1E] p-[8px] text-[15px]  text-gray-400 hover:bg- hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white`,
+                        base: `${closeIconState && ' !hidden'} h-fit   mr-auto inline-flex items-center rounded-full bg-[#CAC5CA] text-[#1D1B1E] p-[8px] text-[15px]    dark:hover:bg-gray-600 dark:hover:text-white`,
                         icon: "h-6  w-6"
                     }
                 }
             }}
         >
-            <Modal.Header className="!px-10 !pt-10 pb-6  ">
+            <Modal.Header className="!px-6 !pt-10 pb-6  ">
                 <h1 className="text-center  font-semibold text-xl text-dark mb-8">
                     {title}
                 </h1>

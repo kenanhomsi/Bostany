@@ -22,11 +22,11 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
     const [RegisterData, setRegisterData] = useState({
         phoneNumber: '',
         type: RegisterAs,
-        phone_code: 'eg',
+        phone_code: 'sa',
     })
     const { data, isSuccess, isLoading, isError, mutate } = usePostLogin();
     const { allCountries } = useFetchCountries();
-    const [DropDownValue, setDropDownValue] = useState(1)
+    const [DropDownValue, setDropDownValue] = useState(2)
     const Dispatch = useDispatch();
     const navigate = useNavigate()
     useEffect(() => {
