@@ -47,7 +47,7 @@ const OTPStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) => 
                     onChange={SetOTPValue}
                     numInputs={4}
                     renderSeparator={<span></span>}
-                    renderInput={(props) => <input {...props} className={` ${RegisterAs == 'Baser' ? ' bg-BaserSurface text-BaserOnSurfase' : ' bg-BostanySurfaceContainer text-BostanyOnSurface'}  flex-1 mx-1 h-20 rounded-lg p-6 font-semibold border-none text-[22px]`} placeholder="|" />}
+                    renderInput={(props) => <input {...props} className={` ${RegisterAs == 'Baser' ? ' bg-BaserSurface text-BaserOnSurfase focus:outline-BaserPrimary' : ' bg-BostanySurfaceContainer text-BostanyOnSurface focus:outline-BostanyPrimary'}  focus:ring-0    flex-1 mx-1 h-20 rounded-lg p-6 font-semibold border-none text-[22px]`} placeholder="|" />}
                 />
                 <span className="text-dark text-xs font-normal">تأكد من صحة رقم الهاتف أو تحقق من وجود تغطية شبكة جيدة.</span>
                 <button onClick={handleClickSubmit} disabled={+OTPValue.length != 4} className={` mt-6 ${OTPValue.length != 4 ? " text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]" : `text-white   cursor-pointer ${RegisterAs == 'Baser' ? 'bg-BaserPrimary' : 'bg-BostanyPrimary'}`} w-full   rounded-full py-4 px-5  text-base font-medium`}>{isLoading ? '...loading' : 'التالي'}</button>

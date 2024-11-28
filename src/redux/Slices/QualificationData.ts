@@ -8,7 +8,7 @@ interface intitstate {
 const initialState: intitstate = {
   QualificationDataArray: [
     {
-      id: 1,
+      id: "0",
       issuer: "",
       // Academic_degree: "البكالوريوس",
       cartificate: "",
@@ -23,12 +23,18 @@ const QualificationSlice = createSlice({
   reducers: {
     AddNewQualificationData(state) {
       state.QualificationDataArray.push({
-        id: state.QualificationDataArray.length,
+        id: Math.random().toString(16).slice(2),
         issuer: "",
         // Academic_degree: "",
         cartificate: "",
         year: "",
       });
+    },
+    DeleteQualificationData(state, action) {
+      const newArray = state.QualificationDataArray.filter(
+        (ele) => ele.id != action.payload
+      );
+      state.QualificationDataArray = newArray;
     },
     changeQualificationData(state, action) {
       state.QualificationDataArray = state.QualificationDataArray.map((ele) => {
@@ -45,7 +51,7 @@ const QualificationSlice = createSlice({
     EmptyQualificationData(state) {
       state.QualificationDataArray = [
         {
-          id: 0,
+          id: "0",
           issuer: "",
           // Academic_degree: "البكالوريوس",
           cartificate: "",
@@ -59,6 +65,7 @@ const QualificationSlice = createSlice({
 export const {
   AddNewQualificationData,
   changeQualificationData,
+  DeleteQualificationData,
   EmptyQualificationData,
   SetQualificationData,
 } = QualificationSlice.actions;

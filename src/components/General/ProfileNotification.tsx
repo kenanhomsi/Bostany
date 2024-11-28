@@ -44,8 +44,10 @@ const ProfileNotification = () => {
                                 <ToggleSwitch sizing="md"
                                     name={notif.name}
                                     id={notif.name}
+                                    className=" "
                                     theme={{
                                         toggle: {
+                                            base: "relative rounded-full border after:absolute after:rounded-full after:bg-white after:transition-all group-focus:ring-0 ",
                                             checked: {
                                                 on: `after:translate-x-full after:border-white rtl:after:-translate-x-full  ${Dashboard == 'Baser' ? '!bg-BaserPrimary' : '!bg-BostanyPrimary'}`
                                             }

@@ -89,6 +89,7 @@ export interface updateProfileInpust {
   code?: string;
   avatar?: string;
   bio?: string;
+  type?: string;
   gender?: string;
   phone_code?: string;
   birthdate?: string; //format: YYYY-MM-DD

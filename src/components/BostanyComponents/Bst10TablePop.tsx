@@ -39,6 +39,7 @@ const Bst10TablePop = () => {
     };
     useEffect(() => {
         if (SubmitTime && TimeSelected) {
+            console.log(TimeSelected)
             mutate({
                 payload: {
                     schedules: TimeSelected
@@ -88,7 +89,7 @@ const Bst10TablePop = () => {
         const yearNumber = date.getFullYear();
         DateArray.push({
             dayNumber: dayNumber,
-            Fulldate: `${yearNumber}-${monthNumber + 1}-${dayNumber}`,
+            Fulldate: `${yearNumber}-${monthNumber}-${dayNumber}`,
             dayName: dayName
         });
     }

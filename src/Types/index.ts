@@ -1,3 +1,4 @@
+import React from "react";
 import { categorySelect, IGetBostany, SpecialitiesType } from "./api";
 
 export interface TimeBarProps {
@@ -68,7 +69,7 @@ export interface ExperiencesType {
   year: string;
 }
 export interface qualificationType {
-  id: number;
+  id: string;
   issuer: string;
   Academic_degree?: string;
   cartificate: string;
@@ -349,7 +350,7 @@ export interface timeToSelect {
 }
 export interface eventsDataType {
   id: string;
-  title: string;
+  title: React.ReactNode;
   allDay: boolean;
   start: Date;
   end: Date;

@@ -149,7 +149,9 @@ const ProfileInfo = () => {
                     {
                         ProfileStep == 3 && <ProfileExperianceSection SetProfileStep={SetProfileStep} setCHangeHappend={setCHangeHappend} />
                     }
-                    <button disabled={!CHangeHappend} onClick={handleSaveChange} className={`  ${Dashboard == 'Baser' ? !CHangeHappend ? 'bg-BaserPrimary/35 !text-dark/35' : `bg-BaserPrimary` : !CHangeHappend ? 'bg-BaserPrimary/35 !text-dark/35' : ' bg-BostanyPrimary'}  text-white w-full font-medium text-base py-4 px-5 rounded-full h-14`}>{UpdataIsLoading ? '...loading' : 'حفظ التغيرات'}</button>
+                    <button disabled={!CHangeHappend} onClick={handleSaveChange} className={`  ${Dashboard == 'Baser' ? !CHangeHappend ?
+                        'bg-[#d6dad9]  text-BaserOnSurfase/35' : `bg-BaserPrimary`
+                        : !CHangeHappend ? 'bg-[#d6dad9] !text-dark/35' : ' bg-BostanyPrimary'}  text-white w-full font-medium text-base py-4 px-5 rounded-full h-14`}>{UpdataIsLoading ? '...loading' : 'حفظ التغيرات'}</button>
                 </div>
             }
 

@@ -126,7 +126,7 @@ const BookingConfirmPop = () => {
             <div className="flex flex-col gap-3">
                 <p className=" text-xl font-medium text-BaserOnSurfase">عنوان بذرتك</p>
                 <div className=" px-1">
-                    <input type="text" value={BazerTitle} onChange={handleTitleChange} className=" w-full py-4 px-6 rounded-3xl text-base font-normal text-dark focus:ring-0 focus:outline-BaserPrimary bg-BaserSurface border-none" placeholder="ضع هنا عنوان لبذرتك" />
+                    <input type="text" value={BazerTitle} onChange={handleTitleChange} className=" w-full py-4 px-6 rounded-3xl text-base font-normal text-BaserOnSurfase  placeholder:text-dark focus:ring-0 focus:outline-BaserPrimary bg-BaserSurface border-none" placeholder="ضع هنا عنوان لبذرتك" />
                     <p className="text-sm mt-1 font-normal text-dark">150/{BazerTitle.length}</p>
                 </div>
             </div>

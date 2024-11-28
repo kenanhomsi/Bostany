@@ -71,8 +71,8 @@ const Step2 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
                     onClick={handleGenderClick}
                     value="ذكر"
                     className={` ${FormData.gender == 'ذكر' &&
-                        `${RegisterAs == 'Baser' ? '!border-BaserPrimary' : '!border-BostanyPrimary'}`
-                        } border-2 border-BaserSurface !h-fit w-1/2 z-0 p-4 cursor-pointer bg-BaserSurface flex flex-col items-center gap-4 rounded-2xl`}
+                        `${RegisterAs == 'Baser' ? '!border-BaserPrimary ' : '!border-BostanyPrimary '}`
+                        } border-2 border-BaserSurface !h-fit w-1/2 z-0 p-4 cursor-pointer  flex flex-col items-center gap-4 rounded-2xl ${RegisterAs == 'Baser' ? ' bg-BaserSurface' : ' bg-BostanySurfaceContainer'}`}
                 >
                     <img
                         src={RegisterAs == 'Baser' ? BaserManIcon : BostanyManIcon}
@@ -85,8 +85,8 @@ const Step2 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
                     onClick={handleGenderClick}
                     value="أنثي"
                     className={`${FormData.gender == 'أنثي' &&
-                        `${RegisterAs == 'Baser' ? '!border-BaserPrimary' : '!border-BostanyPrimary'}`
-                        } border-2 border-BaserSurface !h-fit w-1/2 p-4 cursor-pointer bg-BaserSurface flex flex-col items-center gap-4 rounded-2xl`}
+                        `${RegisterAs == 'Baser' ? '!border-BaserPrimary !bg-BaserSurface' : '!border-BostanyPrimary bg-BostanySurfaceContainer'}`
+                        } border-2 border-BaserSurface !h-fit w-1/2 p-4 cursor-pointer  flex flex-col items-center gap-4 rounded-2xl ${RegisterAs == 'Baser' ? ' bg-BaserSurface' : ' bg-BostanySurfaceContainer'}`}
                 >
                     <img
                         src={RegisterAs == 'Baser' ? BaserfemaleIcon : BostanyfemaleIcon}

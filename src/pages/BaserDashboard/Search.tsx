@@ -9,6 +9,13 @@ import { PiCheckCircleLight } from "react-icons/pi";
 import { useGetConsultantsList } from "../../utils/api/select/useGetConsultants";
 import { useGetCategoriestList } from "../../utils/api/select/useGetCategories";
 import { useGetSpecialitiestList } from "../../utils/api/select/useGetspecialities";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 
 const Search = () => {
     const [FormToSearch, SetFormToSearch] = useState({
@@ -67,10 +74,10 @@ const Search = () => {
             gender: 'أنثي'
         })
     }
-    const HandleSpecialChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const HandleSpecialChange = (e: string) => {
         SetFormToSearch({
             ...FormToSearch,
-            categories: +e.target.value
+            categories: +e
         })
     }
     const handleFilterBtns = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -131,21 +138,27 @@ const Search = () => {
                 <div className="flex flex-col gap-4">
                     <p className="text-sm font-normal">فرز بواسطة</p>
                     <div className="flex gap-4 text-xs font-medium text-dark flex-wrap">
-                        <button onClick={handleFilterBtns} id='متاح الآن' className={` ${FormToSearch.FilterBy[0].state && 'bg-BaserPrimary text-white'} flex gap-1 flex-row-reverse p-3 h-10 border border-[#938F94] rounded-full items-center`}>متاح الآن {FormToSearch.FilterBy[0].state ? <PiX className="  w-4 h-4" /> : <PiPlus className=" w-4 h-4" />}</button>
-                        <button onClick={handleFilterBtns} id='متاح لاحقاً' className={` ${FormToSearch.FilterBy[1].state && 'bg-BaserPrimary text-white'} flex gap-1 flex-row-reverse p-3 h-10 border border-[#938F94] rounded-full items-center`}>متاح لاحقاً {FormToSearch.FilterBy[1].state ? <PiX className="  w-4 h-4" /> : <PiPlus className=" w-4 h-4" />}</button>
-                        <button onClick={handleFilterBtns} id='محتوي مرئي' className={` ${FormToSearch.FilterBy[2].state && 'bg-BaserPrimary text-white'} flex gap-1 flex-row-reverse p-3 h-10 border border-[#938F94] rounded-full items-center`}>محتوي مرئي {FormToSearch.FilterBy[2].state ? <PiX className="  w-4 h-4" /> : <PiPlus className=" w-4 h-4" />}</button>
-                        <button onClick={handleFilterBtns} id='إعلام مرئي' className={` ${FormToSearch.FilterBy[3].state && 'bg-BaserPrimary text-white'} flex gap-1 flex-row-reverse p-3 h-10 border border-[#938F94] rounded-full items-center`}>إعلام مرئي {FormToSearch.FilterBy[3].state ? <PiX className="  w-4 h-4" /> : <PiPlus className=" w-4 h-4" />}</button>
+                        <button onClick={handleFilterBtns} id='متاح الآن' className={` ${FormToSearch.FilterBy[0].state && 'bg-BaserPrimary border-BaserPrimary text-white'} flex gap-1 flex-row-reverse p-3 h-10 border border-[#938F94] rounded-full items-center`}>متاح الآن {FormToSearch.FilterBy[0].state ? <PiX className="  w-4 h-4" /> : <PiPlus className=" w-4 h-4" />}</button>
+                        <button onClick={handleFilterBtns} id='متاح لاحقاً' className={` ${FormToSearch.FilterBy[1].state && 'bg-BaserPrimary border-BaserPrimary text-white'} flex gap-1 flex-row-reverse p-3 h-10 border border-[#938F94] rounded-full items-center`}>متاح لاحقاً {FormToSearch.FilterBy[1].state ? <PiX className="  w-4 h-4" /> : <PiPlus className=" w-4 h-4" />}</button>
+                        <button onClick={handleFilterBtns} id='محتوي مرئي' className={` ${FormToSearch.FilterBy[2].state && 'bg-BaserPrimary border-BaserPrimary text-white'} flex gap-1 flex-row-reverse p-3 h-10 border border-[#938F94] rounded-full items-center`}>محتوي مرئي {FormToSearch.FilterBy[2].state ? <PiX className="  w-4 h-4" /> : <PiPlus className=" w-4 h-4" />}</button>
+                        <button onClick={handleFilterBtns} id='إعلام مرئي' className={` ${FormToSearch.FilterBy[3].state && 'bg-BaserPrimary border-BaserPrimary text-white'} flex gap-1 flex-row-reverse p-3 h-10 border border-[#938F94] rounded-full items-center`}>إعلام مرئي {FormToSearch.FilterBy[3].state ? <PiX className="  w-4 h-4" /> : <PiPlus className=" w-4 h-4" />}</button>
                     </div>
                 </div>
                 <div className="flex flex-col gap-4">
                     <p className="text-sm font-normal">اختار التخصص</p>
-                    <select onChange={HandleSpecialChange} className=" focus:border-BaserPrimary focus:ring-BaserPrimary focus:ring-2 focus:ring-offset-2    bg-BaserSurface  rounded-3xl  h-16 !border-none py-4 pr-6 pl-3 text-sm font-normal text-dark">
-                        {DropDownData &&
-                            DropDownData.map((ele) => (
-                                <option value={ele.id} className="m-0 p-0"  >{ele.text}</option>
-                            ))
-                        }
-                    </select>
+                    <Select onValueChange={HandleSpecialChange} >
+                        <SelectTrigger dir="rtl" className="!w-[90%] !bg-BaserSurface focus:!ring-0 !rounded-3xl !h-fit  !py-4 !pl-3 !pr-6">
+                            <SelectValue placeholder="ابحث عن تخصصك" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {
+                                DropDownData &&
+                                DropDownData.map((ele) => (
+                                    <SelectItem value={String(ele.id)} className=" hover:!bg-BaserSurface">{ele.text}</SelectItem>
+                                ))
+                            }
+                        </SelectContent>
+                    </Select>
                 </div>
                 <div className="flex flex-col gap-4">
                     <p className="text-sm font-normal" > اختار الجنس</p>

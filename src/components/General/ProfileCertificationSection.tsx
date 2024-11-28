@@ -22,7 +22,7 @@ const ProfileCertificationSection = ({ SetProfileStep, setCHangeHappend }: { Set
 
     return (
         <div className=" w-full flex flex-col gap-6 mt-3 mb-7">
-            <div className=" p-1 cursor-pointer bg-BaserSurface rounded-full  w-fit " onClick={() => SetProfileStep(1)}>
+            <div className=" p-1 cursor-pointer bg-BostanySurfaceContainer rounded-full  w-fit " onClick={() => SetProfileStep(1)}>
                 <RiArrowRightSLine className="w-6 h-6" />
             </div>
             <div className="flex flex-col gap-5  min-w-full">
