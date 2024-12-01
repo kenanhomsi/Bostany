@@ -9,26 +9,26 @@ import { CloseBuycredit, OpenBuycredit } from '../../redux/Slices/PopUpSlice';
 import { useDispatch } from 'react-redux';
 import BuycreditPopUp from '../../components/BaserComponent/BuycreditPopUp';
 import { useLocation } from 'react-router-dom';
-import { useGetUserProfile } from '../../utils/api/User/useGetUserProfile';
+import { useAppSelector } from '@/redux/store';
 const Wallet = () => {
     const Dashboard = useLocation().pathname.split('/')[1]
+    const RegisterAs = useAppSelector((state) => state.register.RegisterAs)
     const [MonyAamount] = useState(0.01);
     const dispatch = useDispatch();
-    const { data } = useGetUserProfile();
     const FinancialTransactionForToday = FinancialTransaction?.filter((chat) => +chat.fullDate.split('/')[1] == new Date().getDate());
     const FinancialTransactionForYesterday = FinancialTransaction?.filter((chat) => +chat.fullDate.split('/')[1] == new Date().getDate() - 1)
-    const FinancialTransactionForWeakAgo = FinancialTransaction?.filter((chat) => +chat.fullDate.split('/')[1] < new Date().getDate() - 1)
+    const FinancialTransactionForWeakAgo = FinancialTransaction?.filter((chat) => +chat.fullDate.split('/')[1] < new Date().getDate() - 1 || +chat.fullDate.split('/')[0] < new Date().getMonth() + 1)
     const handleBuycredit = () => {
         dispatch(OpenBuycredit())
     }
     return (
         <div className="mt-section py-14   2xl:pr-10 2xl:pl-24 md:pr-5 md:pl-14 ">
             <div className="flex justify-between items-center py-4 ">
-                <div className={`flex items-center ${data && data.data.type == 'customer' ? 'bg-BaserbodyLigh' : ' bg-BostanybodyLigh'}  xl:!w-[44rem] md:!w-[25rem] py-6 px-4 rounded-2xl gap-4`}>
+                <div className={`flex items-center ${RegisterAs == 'Baser' ? 'bg-BaserbodyLigh' : ' bg-BostanybodyLigh'}  xl:!w-[44rem] md:!w-[25rem] py-6 px-4 rounded-2xl gap-4`}>
                     <img src={Dashboard == 'Baser' ? moneyBagImage : BostanyMoneyBagImage} alt={Dashboard == 'Baser' ? moneyBagImage : BostanyMoneyBagImage} className='w-24 h-24' />
                     <div className="flex flex-col">
                         <p className=' text-sm font-medium text-dark'>متوسط الرصيد</p>
-                        <p className={`font-bold text-[34px] ${data && data.data.type == 'customer' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'} `}><span>{MonyAamount}</span> ر.س</p>
+                        <p className={`font-bold text-[34px] ${RegisterAs == 'Baser' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'} `}><span>{MonyAamount}</span> ر.س</p>
                     </div>
                 </div>
                 <div className=" flex flex-col gap-2">

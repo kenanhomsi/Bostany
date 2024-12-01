@@ -14,8 +14,8 @@ const RequestsSeeds = () => {
             {
                 data?.data && data?.data.length > 0 &&
                 <div className={`flex flex-col gap-5 my-2 w-full`}>
-                    {data.data.map((card) => (
-                        <SeedsCard Dashboard="Bostany" data={card} index={-1} From='Requests' />
+                    {data.data.map((card, index) => (
+                        <SeedsCard Dashboard="Bostany" key={index} data={card} index={-1} From='Requests' />
                     ))
                     }
                 </div >
