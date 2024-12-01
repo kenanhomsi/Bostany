@@ -44,7 +44,7 @@ const NavBar = ({ DashBoard }: { DashBoard: string }) => {
     useEffect(() => {
         notifRefetch()
         refetch()
-    }, [])
+    }, [notifRefetch, refetch])
     const NewNotification = Notification?.data.filter((ele) => !ele.is_read)
     return (
         <div className={` pl-24 py-6    fixed  top-0  z-[1000] pr-[280px]  w-full right-0 ${DashBoard == 'Baser' ? 'bg-BaserbodyLigh' : ' bg-BostanybodyLigh'}   flex h-20 justify-between items-center`}>

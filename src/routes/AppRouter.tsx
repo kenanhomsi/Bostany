@@ -35,7 +35,7 @@ const AppRoutes: React.FC = () => {
                     path="/Baser/*"
                     element={
                         <BaserDashboardLayout>
-                            <ProtectedRoute roles={['customer']}>
+                            <ProtectedRoute roles={['Baser']}>
                                 <BaserRoutes />
                             </ProtectedRoute>
                         </BaserDashboardLayout>
@@ -45,7 +45,7 @@ const AppRoutes: React.FC = () => {
                     path="/Bostany/*"
                     element={
                         <BostanyLayout>
-                            <ProtectedRoute roles={['consultant']}>
+                            <ProtectedRoute roles={['Bostany']}>
                                 <BostanyRoutes />
                             </ProtectedRoute>
                         </BostanyLayout>

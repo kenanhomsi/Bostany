@@ -10,7 +10,6 @@ import { CloseBookingConfirmPop, CloseBookingSuccessPop, CloseBookingTimePop, Cl
 import { LayoutProps } from "../Types"
 
 const BaserDashboardLayout: React.FC<LayoutProps> = ({ children }) => {
-
     return (
         <div dir="rtl" className="  font-alexandria bg-[#FFFBFF] flex w-full min-h-screen">
             <SideBar DashBoard='Baser' />
