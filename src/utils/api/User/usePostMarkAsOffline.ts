@@ -3,21 +3,17 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { Methods } from "../../../constant";
-import { handleApiResponseErrors } from "../../HandleAPIResponseErrors";
-import axiosInstance from "../../axios";
-import { MessageRespone } from "../../../../Types/api";
-import { EndPoints } from "../../EndPoints";
+import { Methods } from "../../constant";
+import { handleApiResponseErrors } from "../HandleAPIResponseErrors";
+import axiosInstance from "../axios";
+import { MessageRespone } from "../../../Types/api";
+import { EndPoints } from "../EndPoints";
 
-export const RejectProject = async (
-  payload: MessageRespone,
-  pojectId: number
-): Promise<MessageRespone> => {
+export const MarkAsOffline = async (): Promise<MessageRespone> => {
   try {
     const response = await axiosInstance<MessageRespone, MessageRespone>({
       method: Methods.POST,
-      url: EndPoints.RejectProject.replace(":id", String(pojectId)),
-      data: payload,
+      url: EndPoints.MarkAsOffline,
     });
     handleApiResponseErrors(response, "validation_error");
     return response;
@@ -27,19 +23,15 @@ export const RejectProject = async (
   }
 };
 
-export const useRejectProject = (options = {}) => {
+export const useMarkAsOffline = (options = {}) => {
   const queryClient = useQueryClient();
 
-  const mutation: UseMutationResult<
-    MessageRespone,
-    Error,
-    { payload: MessageRespone; id: number }
-  > = useMutation({
-    mutationFn: ({ payload, id }) => RejectProject(payload, id),
+  const mutation: UseMutationResult<MessageRespone, Error> = useMutation({
+    mutationFn: MarkAsOffline,
     ...options,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["Projects"],
+        queryKey: ["User"],
       });
     },
   });

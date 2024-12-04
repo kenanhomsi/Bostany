@@ -1,7 +1,6 @@
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { Methods } from "../../constant";
 import { EndPoints } from "../EndPoints";
-import { LongStaleTime } from "../../constant";
 import { handleApiResponseErrors } from "../HandleAPIResponseErrors";
 import axiosInstance from "../axios";
 import { IGetProfile } from "../../../Types/api";
@@ -23,7 +22,7 @@ export const useGetUserProfileQuery = (options = {}) => {
   return useQuery({
     queryKey: ["User"],
     queryFn: GetUserProfile,
-    staleTime: LongStaleTime,
+    // staleTime: 1500,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     refetchInterval: false,

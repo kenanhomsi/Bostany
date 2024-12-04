@@ -9,6 +9,7 @@ import { MdCancel } from "react-icons/md";
 import { PiFlagBannerFill } from "react-icons/pi";
 import { useAcceptProject } from "../../utils/api/Projects/Invitations/usePostAcceptInitation";
 import { useRejectProject } from "../../utils/api/Projects/Rejections/usePostRejectProject";
+import { convertTo12HourFormat } from "@/utils/Functions";
 const SeedsCard = ({ data, index, From, Dashboard }: SeedsCardProps) => {
     const { mutate } = useAcceptProject();
     const { mutate: PejectMutate, } = useRejectProject();
@@ -41,17 +42,17 @@ const SeedsCard = ({ data, index, From, Dashboard }: SeedsCardProps) => {
                             <div className="flex flex-col gap-4">
                                 <span className={` ${index == 0 ? 'text-white' : 'text-dark'} text-xl  font-medium`}>{Dashboard == 'Baser' ? data.name : data.description}</span>
                                 <p className={`flex gap-2 items-center  ${index == 0 ? 'text-white' : 'text-dark'}  text-xl font-semibold `}>
-                                    <span>{data.invitation.start_at}</span>
+                                    <span>{convertTo12HourFormat(data.invitation.start_at, 'ar')}</span>
                                     -
-                                    <span >{data.invitation.end_at}</span>
+                                    <span >{convertTo12HourFormat(data.invitation.end_at, 'ar')}</span>
                                 </p>
                             </div>
                         </div>
                         <div className={` ${index == 0 ? ' text-white' : `${Dashboard == 'Baser' ? ' text-BaserPrimary' : 'text-BostanyPrimary'}`} flex gap-3 text-sm font-normal items-center`}>
                             {data.specialities.length > 0 && data.specialities.map((ele) => (
-                                <div className={` ${index == 0 ? '' : `${Dashboard == 'Baser' ? ' border-BaserPrimary' : 'border-BostanyPrimary'}`} flex gap-1 items-center border  rounded-full p-3`}>
-                                    {WorkSpaceData.filter((work) => work.name == ele.text)[0].icon}
-                                    <p className="">{ele.text}</p>
+                                <div className={` ${index == 0 ? '' : `${Dashboard == 'Baser' ? ' border-BaserPrimary' : 'border-BostanyPrimary'}`} flex gap-1 items-center border  rounded-full p-2 pl-3`}>
+                                    <p className=" text-2xl">{WorkSpaceData.filter((work) => work.name == ele.text)[0].icon}</p>
+                                    <p className="  text-sm font-medium">{ele.text}</p>
                                 </div>
                             ))}
                             {
@@ -114,7 +115,7 @@ const SeedsCard = ({ data, index, From, Dashboard }: SeedsCardProps) => {
                                     }
                                 </p>
                             }
-                            <div className="">
+                            <div className=" w-20">
                                 <div className={`border ${index == 0 ? ' border-white' : 'border-[#938F94]'}  text-center p-3 rounded-t-2xl`}>
                                     {data.created_at.split('-')[1]}
                                 </div>

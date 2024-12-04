@@ -1,32 +1,78 @@
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../../redux/store"
 import StopWatch from '/Icons/stopwatch_Bostany.png'
 import { useDispatch } from "react-redux";
-import { CloseBst10Table, OpenBst10Table, OpenBst10Time } from "../../redux/Slices/PopUpSlice";
+import { CloseBst10Table, OpenBst10Time } from "../../redux/Slices/PopUpSlice";
 import { ToggleSwitch } from "flowbite-react";
-import { PiTrash } from "react-icons/pi";
-import { addNewSelectedTime, SetSelectedTimeFromApi } from "../../redux/Slices/Bst10Slice";
 import { useUpdateProfileSettings } from "../../utils/api/User/usePatchProfileSettings";
 import { useGetUserProfile } from "../../utils/api/User/useGetUserProfile";
-import { DeleteSubNewSelectedTime, EmptyAllSubNewSelectedTime } from "../../redux/Slices/Bst10SubSlice";
-import { arabicDayType, translateDayToEnglish } from "../../utils/Functions";
+import { convertArabicDayToEnglish, convertDayToArabic, convertTo12HourFormat, convertTo24HourFormat, getNextDayDate } from "../../utils/Functions";
 import { daysOfWeek } from "../../utils/data";
-import { timeToSelect } from "../../Types";
+import {
+    timeToSelect,
+    WeeklyScheduleType
+} from "../../Types";
+import { PiTrash } from "react-icons/pi";
+import { PiPlusCircle } from "react-icons/pi";
+import { schedulesType } from "@/Types/api";
+
 
 const Bst10TablePop = () => {
     const dispatch = useDispatch()
-    const [SubmitTime, setSubmitTime] = useState(false)
     const { data } = useGetUserProfile();
-    useEffect(() => {
-        if (data?.data) {
-            dispatch(SetSelectedTimeFromApi(data.data.settings?.schedules))
-        }
-    }, [data])
-    const { mutate, isLoading } = useUpdateProfileSettings();
+    const [WeeklySchedal, setWeeklySchedal] = useState<WeeklyScheduleType>({
+        Saturday: [
+            {
+                id: Math.random().toString(16).slice(4),
+                From: '',
+                To: '',
+            }
+        ],
+        Sunday: [
+            {
+                id: Math.random().toString(16).slice(4),
+                From: '',
+                To: '',
+            }
+        ],
+        Monday: [
+            {
+                id: Math.random().toString(16).slice(4),
+                From: '',
+                To: '',
+            }
+        ],
+        Tuesday: [
+            {
+                id: Math.random().toString(16).slice(4),
+                From: '',
+                To: '',
+            }
+        ],
+        Wednesday: [
+            {
+                id: Math.random().toString(16).slice(4),
+                From: '',
+                To: '',
+            }
+        ],
+        Thursday: [
+            {
+                id: Math.random().toString(16).slice(4),
+                From: '',
+                To: '',
+            }
+        ],
+        Friday: [
+            {
+                id: Math.random().toString(16).slice(4),
+                From: '',
+                To: ''
+            }
+        ],
+    });
+    const { mutate, isLoading, isSuccess } = useUpdateProfileSettings();
     const [switchToRepetWeekly, setswitchToRepetWeekly] = useState(['']);
     const [DaySelect, setDaySelect] = useState<timeToSelect[]>([]);
-    const TimeSelected = useAppSelector((state) => state.Bst10.SelectedTime)
-    const SubTimeSelected = useAppSelector((state) => state.BstSub10.SubNewSelectedTime)
     const handleDaySelectClick = (date: timeToSelect) => {
         const existingIndex = DaySelect.findIndex(ele => ele.Fulldate === date.Fulldate);
         let updatedDays;
@@ -38,35 +84,53 @@ const Bst10TablePop = () => {
         setDaySelect(updatedDays);
     };
     useEffect(() => {
-        if (SubmitTime && TimeSelected) {
-            console.log(TimeSelected)
-            mutate({
-                payload: {
-                    schedules: TimeSelected
+        console.log(data?.data.settings?.schedules)
+        data?.data.settings?.schedules.map((ele) => {
+            if (WeeklySchedal[ele.day_name as keyof typeof WeeklySchedal].filter((week) => week.From == convertTo24HourFormat(ele.from_time) && week.To == convertTo24HourFormat(ele.to_time))[0] == undefined) {
+                if (WeeklySchedal[ele.day_name as keyof typeof WeeklySchedal][0].From == '') {
+                    WeeklySchedal[ele.day_name as keyof typeof WeeklySchedal] = []
+                }
+                WeeklySchedal[ele.day_name as keyof typeof WeeklySchedal].push({
+                    id: ele.id!,
+                    From: convertTo24HourFormat(ele.from_time),
+                    To: convertTo24HourFormat(ele.to_time)
+                })
+            }
+
+            if (ele.repeat && !switchToRepetWeekly.includes(convertDayToArabic(ele.day_name))) {
+                setswitchToRepetWeekly((pre) => [...pre, convertDayToArabic(ele.day_name)])
+            }
+        })
+    }, [data])
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(CloseBst10Table());
+        }
+    }, [isSuccess])
+    const handleSubmit = () => {
+        console.log(WeeklySchedal)
+        const keysOFWeeklySchedal = Object.keys(WeeklySchedal)
+        const schedulesTime: schedulesType[] = []
+        keysOFWeeklySchedal.map((day) => {
+            WeeklySchedal[day as keyof typeof WeeklySchedal].map((ele) => {
+                if (ele.From !== '') {
+                    const isRepet = switchToRepetWeekly.includes(convertDayToArabic(day))
+                    const schedalObj = {
+                        from_time: convertTo12HourFormat(ele.From, 'en'),
+                        to_time: convertTo12HourFormat(ele.To, 'en'),
+                        date: getNextDayDate(day),
+                        day_name: day,
+                        repeat: isRepet,
+                    }
+                    schedulesTime.push(schedalObj)
                 }
             })
-            setSubmitTime(false);
-            dispatch(OpenBst10Table());
-            dispatch(CloseBst10Table());
-
-        }
-
-    }, [TimeSelected, SubmitTime])
-    const handleSubmit = () => {
-        SubTimeSelected.map((ele) => (
-            DaySelect.map((day) => {
-                const repeatValue = switchToRepetWeekly.includes(day.dayName)
-                dispatch(addNewSelectedTime({
-                    from_time: ele.from_time, //"2:00 PM"
-                    to_time: ele.to_time,  ///"2:00 PM"
-                    date: day.Fulldate, //"2024-11-08"
-                    day_name: translateDayToEnglish(day.dayName as unknown as arabicDayType),// "monday"
-                    repeat: repeatValue,
-                }))
-            })
-        ))
-        setSubmitTime(true);
-        dispatch(EmptyAllSubNewSelectedTime());
+        })
+        mutate({
+            payload: {
+                schedules: schedulesTime
+            }
+        })
     }
     const handleCancel = () => {
         dispatch(OpenBst10Time())
@@ -75,9 +139,14 @@ const Bst10TablePop = () => {
     const HandleWeeklySwitch = (day: string) => {
         const newArry = switchToRepetWeekly.includes(day) ? switchToRepetWeekly.filter((ele) => ele != day) : [...switchToRepetWeekly, day]
         setswitchToRepetWeekly(newArry)
+
     }
-    const handleDeleteThisTime = (id: string) => {
-        dispatch(DeleteSubNewSelectedTime(id))
+    const handleDeleteThisTime = (id: string, dayName: string) => {
+        const dayArray = WeeklySchedal[dayName as keyof typeof WeeklySchedal].filter((ele) => ele.id != id)
+        setWeeklySchedal((prev) => ({
+            ...prev,
+            [dayName]: dayArray,
+        }));
     }
     const DateArray = [];
     for (let i = 0; i < 7; i++) {
@@ -92,6 +161,37 @@ const Bst10TablePop = () => {
             Fulldate: `${yearNumber}-${monthNumber}-${dayNumber}`,
             dayName: dayName
         });
+    }
+    const handleChange = (day: string, field: string, value: string, id: string) => {
+        const dayArray = WeeklySchedal[day as keyof typeof WeeklySchedal].map((ele) => {
+            if (ele.id == id) {
+                return {
+                    ...ele, [field]: value
+                }
+            } else {
+                return ele
+            }
+        })
+        setWeeklySchedal((prev) => ({
+            ...prev,
+            [day]: dayArray,
+        }));
+    };
+    const handleAddNewTime = (dayName: string) => {
+        const dayArray = WeeklySchedal[dayName as keyof typeof WeeklySchedal]
+        if (dayArray.length < 3) {
+            dayArray.push({
+                id: Math.random().toString(16).slice(4),
+                From: '',
+                To: ''
+            })
+            setWeeklySchedal((prev) => ({
+                ...prev,
+                [dayName]: dayArray,
+            }));
+        } else {
+            return 0
+        }
     }
     return (
         <div className=" max-h-[80vh] overflow-y-scroll  scrollbar-hide">
@@ -116,7 +216,7 @@ const Bst10TablePop = () => {
             }
             {
                 DaySelect.length > 0 &&
-                <div className="flex flex-col gap-3 my-3">
+                <div className="flex flex-col max-h-[400px] min-h-[250px] overflow-y-scroll scrollbar-hide gap-3 my-3">
                     {
                         DaySelect.map((day, index) => (
                             <div className="flex flex-col gap-2 px-3" key={index}>
@@ -125,8 +225,11 @@ const Bst10TablePop = () => {
                                     <div className='flex   gap-4'>
                                         <p className='font-medium text-sm text-dark'>تكرار اسبوعي</p>
                                         <ToggleSwitch sizing="md"
+                                            className="h-fit"
                                             theme={{
                                                 toggle: {
+                                                    base: "relative rounded-full  border after:absolute after:rounded-full after:bg-white after:transition-all group-focus:ring-0 ",
+
                                                     checked: {
                                                         on: "after:translate-x-full after:border-white rtl:after:-translate-x-full  !bg-BostanyPrimary"
                                                     }
@@ -138,18 +241,41 @@ const Bst10TablePop = () => {
                                     </div>
                                 </div>
                                 <div className=" my-3 flex flex-col gap-3">
-                                    {SubTimeSelected &&
-                                        SubTimeSelected.map((ele, index) => (
+
+                                    {WeeklySchedal &&
+                                        WeeklySchedal[convertArabicDayToEnglish(day.dayName)].map((ele, index) => (
                                             <div className="flex gap-4 items-center " key={index}>
-                                                <div className="flex-1 flex  justify-center  gap-3 rounded-2xl py-4  bg-BostanySurfaceContainer">
+                                                <div className="flex-1 flex  justify-center items-center  rounded-2xl py-4  bg-BostanySurfaceContainer">
                                                     <p className=" text-dark font-medium">من</p>
-                                                    <p className=" text-BostanyPrimary text-xl font-medium">{`${ele.from_time.split(' ')[0]} ${ele.from_time.split(' ')[1] == 'AM' ? 'ص' : 'م'}`}</p>
+                                                    <div className=" text-BostanyPrimary text-xl cursor-pointer font-medium flex">
+                                                        <input
+                                                            type="time"
+                                                            placeholder="00:00:00"
+                                                            value={ele.From}
+                                                            onChange={(e) => handleChange(convertArabicDayToEnglish(day.dayName), 'From', e.target.value, ele.id)}
+                                                            className="h-fit w-fit bg-transparent m-0 p-0  border-none focus:ring-0"
+                                                        />
+                                                    </div>
                                                 </div>
                                                 <div className="flex-1 flex gap-3  justify-center rounded-2xl py-4  bg-BostanySurfaceContainer">
                                                     <p className=" text-dark font-medium">الى</p>
-                                                    <p className=" text-BostanyPrimary text-xl font-medium">{`${ele.to_time.split(' ')[0]} ${ele.to_time.split(' ')[1] == 'AM' ? 'ص' : 'م'}`}</p>
+                                                    <div className=" text-BostanyPrimary text-xl cursor-pointer font-medium flex">
+                                                        <input
+                                                            type="time"
+                                                            placeholder="00:00:00"
+                                                            value={ele.To}
+                                                            onChange={(e) => handleChange(convertArabicDayToEnglish(day.dayName), 'To', e.target.value, ele.id)}
+                                                            className="h-fit w-fit bg-transparent m-0 p-0  border-none focus:ring-0"
+                                                        />
+                                                    </div>
                                                 </div>
-                                                <PiTrash className=" text-GeneralError text-3xl cursor-pointer" onClick={() => handleDeleteThisTime(ele.id)} />
+                                                {
+                                                    index == 0 ?
+                                                        <PiPlusCircle className="  text-3xl cursor-pointer" onClick={() => handleAddNewTime(convertArabicDayToEnglish(day.dayName))} />
+                                                        :
+                                                        <PiTrash className=" text-GeneralError text-3xl cursor-pointer" onClick={() => handleDeleteThisTime(ele.id, convertArabicDayToEnglish(day.dayName))} />
+
+                                                }
                                             </div>
                                         ))
                                     }

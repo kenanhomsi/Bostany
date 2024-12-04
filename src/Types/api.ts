@@ -214,7 +214,7 @@ export interface IloginOutput {
       linkedin?: string | null;
       preferred_profile?: string;
       twitter?: string | null;
-      online_until?: boolean;
+      online_until?: string;
       country: {
         id: number;
         name: string;
@@ -283,6 +283,7 @@ export interface IloginOutput {
       enable_2fa: boolean;
       created_at: string;
       created_at_formatted: string;
+      online_until_minutes: number;
     };
     token: string;
   };
@@ -309,7 +310,6 @@ export interface IGetProfile {
     linkedin?: string | null;
     preferred_profile?: string;
     twitter?: string | null;
-    online_until?: boolean;
     country: {
       id: number;
       name: string;
@@ -378,6 +378,8 @@ export interface IGetProfile {
     enable_2fa: boolean;
     created_at: string;
     created_at_formatted: string;
+    online_until_minutes: number;
+    online_until: string;
   };
 }
 export interface AuthUser {
@@ -402,7 +404,7 @@ export interface AuthUser {
     linkedin?: string | null;
     preferred_profile?: string;
     twitter?: string | null;
-    online_until?: boolean;
+    online_until?: string;
     country: {
       id: number;
       name: string;
@@ -467,6 +469,7 @@ export interface AuthUser {
       cartificate: string;
     }[];
     unread_notifications_count: number;
+    online_until_minutes: number;
     completed_profile: boolean;
     enable_2fa: boolean;
     created_at: string;
@@ -622,7 +625,7 @@ export interface specialitiesSelect {
   };
 }
 export interface schedulesType {
-  id: string;
+  id?: string;
   from_time: string;
   to_time: string;
   date: string;
@@ -822,9 +825,10 @@ export interface IGetStatistics {
   average_income: number;
   average_rating: number;
 }
-export interface RejectProjectType {
+export interface MessageRespone {
   message: string;
 }
+
 // export interface AcceptProjectType {}
 export interface ErrorType {
   response: {
@@ -832,4 +836,7 @@ export interface ErrorType {
       message: string;
     };
   };
+}
+export interface MarkAsOnlineInput {
+  online_until: number;
 }
