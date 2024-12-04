@@ -8,7 +8,7 @@ import { PiMinus } from "react-icons/pi";
 import { useDispatch } from "react-redux"
 import { CloseBookingTimePop, OpenBookingConfirmPop } from "../../redux/Slices/PopUpSlice"
 import { PutBookingData } from "../../redux/Slices/BookingSlice"
-import { calculateEndTime, formatTime } from "../../utils/Functions"
+import { arabicTimeFormat, calculateEndTime, formatTime } from "../../utils/Functions"
 import { useGetShowUser } from "../../utils/api/User/useGetShowUser"
 import { schedulesType } from "../../Types/api"
 
@@ -27,8 +27,7 @@ const BookingTimePop = () => {
     const handleCancel = () => {
         dispatch(CloseBookingTimePop())
     }
-    console.log(data?.data.settings?.schedules)
-    console.log(TimeSelected)
+
     useEffect(() => {
         const ScheduleArray = data?.data.settings?.schedules.filter((ele) => ele.date == TimeSelected)
         setDayScheduleArray(ScheduleArray!);
@@ -47,7 +46,10 @@ const BookingTimePop = () => {
     const handleDisabled = TimeSelected == '' ? true : false
     const handleFromToTimeSelecet = (e: React.MouseEvent<HTMLButtonElement>) => {
         setFromToTimeSelected(e.currentTarget.id)
+        setstartOfMeeting(+e.currentTarget.id.split('-')[1].split(':')[0])
+
     }
+
     return (
         <div className="flex flex-col gap-8 overflow-x-hidden">
             <TimeBarProfile TimeSelected={TimeSelected} setTimeSelected={setTimeSelected} />
@@ -56,23 +58,23 @@ const BookingTimePop = () => {
                     <div className=" flex gap-2 px-2">
                         {
                             DayScheduleArray.map((ele, index) => (
-                                <Button id={`${ele.to_time!}-${ele.from_time!}`} key={index} onClick={handleFromToTimeSelecet} className={`${index == 0 ? 'bg-GeneralSuccessContainer text-white border-2 hover:!bg-GeneralSuccessContainer focus:outline-GeneralSuccessContainer   border-GeneralSuccessContainer' : 'bg-transparent text-black border-2 border-BaserPrimary focus:outline-BaserPrimary hover:!bg-transparent'}  rounded-full flex items-center justify-center focus:ring-0 focus:outline-[2px] z-10  w-full`} ><span>{ele.from_time}</span>-<span>{ele.to_time}</span> </Button>
+                                <Button id={`${ele.to_time!}-${ele.from_time!}`} key={index} onClick={handleFromToTimeSelecet} className={`${FromToTimeSelected == `${ele.to_time!}-${ele.from_time!}` ? 'bg-GeneralSuccessContainer text-white border-2 hover:!bg-GeneralSuccessContainer focus:outline-0   border-GeneralSuccessContainer' : 'bg-transparent text-black border-2 border-BaserPrimary focus:outline-0 hover:!bg-transparent'}  rounded-full flex items-center justify-center focus:ring-0 focus:outline-[2px] z-10  w-full`} ><span>{arabicTimeFormat(ele.from_time)}</span>-<span>{arabicTimeFormat(ele.to_time)}</span> </Button>
                             ))
                         }
                     </div>
-                    <div className="flex flex-col gap-4 mr-20">
-                        <div className="flex  items-center gap-8">
+                    <div className="flex mr-20 flex-col gap-8">
+                        <div className="flex  items-center gap-12">
                             <p className="text-sm font-medium text-dark">البداية</p>
-                            <div className="flex items-center gap-8">
-                                <button onClick={() => setstartOfMeeting((pre) => pre + 1)} className="w-6 h-6 border  flex items-center  justify-center border-BaserPrimary rounded-full text-lg text-BaserPrimary"><PiPlus /></button>
+                            <div className="flex items-center gap-10">
+                                <button disabled={startOfMeeting == +FromToTimeSelected.split('-')[0].split(':')[0]} onClick={() => setstartOfMeeting((pre) => pre + 1)} className="w-6 h-6 border  flex items-center  justify-center border-BaserPrimary rounded-full text-lg text-BaserPrimary"><PiPlus /></button>
                                 <p className="flex items-center flex-row-reverse gap-2"> <p><span>{startOfMeeting}</span>:00</p></p>
-                                <button onClick={() => setstartOfMeeting((pre) => pre - 1)} className="w-6 h-6 border  flex items-center  justify-center border-BaserPrimary rounded-full text-lg text-BaserPrimary"><PiMinus /></button>
+                                <button disabled={startOfMeeting == +FromToTimeSelected.split('-')[1].split(':')[0]} onClick={() => setstartOfMeeting((pre) => pre - 1)} className="w-6 h-6 border  flex items-center  justify-center border-BaserPrimary rounded-full text-lg text-BaserPrimary"><PiMinus /></button>
                             </div>
                         </div>
-                        <div className="flex  items-center gap-8">
+                        <div className="flex  items-center gap-12">
                             <p className="text-sm font-medium text-dark">المدة</p>
                             <div className="flex items-center gap-8">
-                                <button onClick={() => setDurationOfMeeting((pre) => pre + 10)} className="w-6 h-6 border  flex items-center  justify-center  border-BaserPrimary rounded-full text-lg text-BaserPrimary text-center"><PiPlus /></button>
+                                <button onClick={() => setDurationOfMeeting((pre) => pre + 10)} className="w-6 h-6 border  flex items-center  justify-center border-BaserPrimary rounded-full text-lg text-BaserPrimary"><PiPlus /></button>
                                 <p><p><span>{DurationOfMeeting}</span></p></p>
                                 <button onClick={() => setDurationOfMeeting((pre) => pre - 10)} className="w-6 h-6 border  flex items-center  justify-center border-BaserPrimary rounded-full text-lg text-BaserPrimary"><PiMinus /></button>
                             </div>

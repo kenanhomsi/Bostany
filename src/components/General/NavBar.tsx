@@ -9,6 +9,7 @@ import { useGetUserProfile } from "../../utils/api/User/useGetUserProfile";
 import { useDispatch } from "react-redux";
 import { OpenBst10Time } from "../../redux/Slices/PopUpSlice";
 import { useEffect } from "react";
+import CountdownTimer from "./CountdownTimer";
 const NavBar = ({ DashBoard }: { DashBoard: string }) => {
     const pathname = useLocation().pathname
     const dispatch = useDispatch()
@@ -104,11 +105,15 @@ const NavBar = ({ DashBoard }: { DashBoard: string }) => {
                 </Link>
             </div>
             {
+                !data?.data.is_online &&
                 DashBoard == 'Bostany' &&
                 <button onClick={handleClick} className="flex absolute cursor-pointer left-[37%] items-center gap-3 bg-BostanyPrimary rounded-full border-none py-3  px-5">
                     <img src={Bas10Image} alt={Bas10Image} className=" w-6 h-6" />
                     <p className="text-base font-medium text-white">بستن</p>
                 </button>
+            }
+            {data?.data.is_online &&
+                <CountdownTimer timeFromApi={data.data.online_until_minutes * 60} />
             }
         </div>
     )

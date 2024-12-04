@@ -22,7 +22,7 @@ export const useGetNotificationsQuery = (options = {}) => {
   return useQuery({
     queryKey: ["notifications"],
     queryFn: GetNotifications,
-    staleTime: 2500,
+    staleTime: 500,
     refetchOnWindowFocus: true,
     refetchOnReconnect: true,
     refetchInterval: false,

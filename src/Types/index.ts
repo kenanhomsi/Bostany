@@ -355,3 +355,13 @@ export interface eventsDataType {
   start: Date;
   end: Date;
 }
+
+export interface WeeklyScheduleType {
+  Saturday: { id: string; From: string; To: string }[];
+  Sunday: { id: string; From: string; To: string }[];
+  Monday: { id: string; From: string; To: string }[];
+  Tuesday: { id: string; From: string; To: string }[];
+  Wednesday: { id: string; From: string; To: string }[];
+  Thursday: { id: string; From: string; To: string }[];
+  Friday: { id: string; From: string; To: string }[];
+}

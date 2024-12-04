@@ -3,20 +3,19 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { Methods } from "../../../constant";
-import { handleApiResponseErrors } from "../../HandleAPIResponseErrors";
-import axiosInstance from "../../axios";
-import { MessageRespone } from "../../../../Types/api";
-import { EndPoints } from "../../EndPoints";
+import { Methods } from "../../constant";
+import { handleApiResponseErrors } from "../HandleAPIResponseErrors";
+import axiosInstance from "../axios";
+import { MarkAsOnlineInput, MessageRespone } from "../../../Types/api";
+import { EndPoints } from "../EndPoints";
 
-export const RejectProject = async (
-  payload: MessageRespone,
-  pojectId: number
+export const MarkAsOnline = async (
+  payload: MarkAsOnlineInput
 ): Promise<MessageRespone> => {
   try {
-    const response = await axiosInstance<MessageRespone, MessageRespone>({
+    const response = await axiosInstance<MarkAsOnlineInput, MessageRespone>({
       method: Methods.POST,
-      url: EndPoints.RejectProject.replace(":id", String(pojectId)),
+      url: EndPoints.MarkAsOnline,
       data: payload,
     });
     handleApiResponseErrors(response, "validation_error");
@@ -27,19 +26,19 @@ export const RejectProject = async (
   }
 };
 
-export const useRejectProject = (options = {}) => {
+export const useMarkAsOnline = (options = {}) => {
   const queryClient = useQueryClient();
 
   const mutation: UseMutationResult<
     MessageRespone,
     Error,
-    { payload: MessageRespone; id: number }
+    { payload: MarkAsOnlineInput }
   > = useMutation({
-    mutationFn: ({ payload, id }) => RejectProject(payload, id),
+    mutationFn: ({ payload }) => MarkAsOnline(payload),
     ...options,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["Projects"],
+        queryKey: ["User"],
       });
     },
   });

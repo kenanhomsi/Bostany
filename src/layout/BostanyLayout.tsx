@@ -21,7 +21,7 @@ const BostanyLayout: React.FC<LayoutProps> = ({ children }) => {
             <PopUpModal
                 title={<p className=" text-dark text-xl font-semibold">بستن الآن</p>}
                 type="Bst10Time"
-                PopSize="lg"
+                PopSize="xl"
                 closeAction={CloseBst10Time}
             >
                 <Bst10TimePop />

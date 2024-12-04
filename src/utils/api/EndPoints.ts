@@ -3,6 +3,8 @@ export const EndPoints = {
   Countries: "/countries/?page=1",
   VerifyCode: "/verification/verify",
   Profile: "/profile",
+  MarkAsOnline: "/profile/online",
+  MarkAsOffline: "/profile/offline",
   UpdateProfileSettings: "/profile/settings",
   Statistics: "/profile/statistics",
   Specialities: "/select/specialities?page=1",
