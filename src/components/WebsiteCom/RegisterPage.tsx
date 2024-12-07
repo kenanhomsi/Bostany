@@ -14,7 +14,7 @@ const RegisterPage = () => {
                 stepNum === 2 && <OTPStep setStep={setstepNum} />
             }
             {
-                stepNum === 3 && <CompleteProfile />
+                stepNum === 3 && <CompleteProfile setStep={setstepNum} />
             }
 
         </div>

@@ -82,7 +82,6 @@ const Bst10TimePop = () => {
             }
             const hoursFrom = new Date().getHours() * 60 + new Date().getMinutes()
             const online_until = hoursTo - hoursFrom
-            console.log(online_until)
             mutate({
                 payload: {
                     online_until: online_until
@@ -95,11 +94,10 @@ const Bst10TimePop = () => {
         dispatch(CloseBst10Time());
     }
     useEffect(() => {
-        if (isSuccess && IsSuccessAsOffline) {
-            alert('success')
+        if (isSuccess || IsSuccessAsOffline) {
             dispatch(CloseBst10Time());
         }
-    }, [isSuccess, IsSuccessAsOffline])
+    }, [isSuccess, IsSuccessAsOffline, dispatch])
     useEffect(() => {
         if (data?.data.is_online) {
             if (!switchToFreeNow) {
@@ -108,13 +106,13 @@ const Bst10TimePop = () => {
                 setBtnDisable(false)
             }
         } else {
-            if (SelectedTimeFormated && switchToFreeNow) {
+            if (switchToFreeNow && SelectedTimeFormated) {
                 setBtnDisable(true)
             } else {
                 setBtnDisable(false)
             }
         }
-    }, [data, switchToFreeNow])
+    }, [data, switchToFreeNow, SelectedTimeFormated])
     return (
         <div className="flex flex-col gap-6 ">
             <div className='flex  items-center  justify-between w-full'>

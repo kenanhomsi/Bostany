@@ -79,7 +79,7 @@ const Step2 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
                         alt={RegisterAs == 'Baser' ? BaserManIcon : BostanyManIcon}
                         className="w-20 h-20 pointer-events-none"
                     />
-                    <p>ذكر</p>
+                    <p className={`${FormData.gender == 'ذكر' ? RegisterAs == 'Baser' ? '!text-BaserPrimary ' : '!text-BostanyPrimary ' : ' text-BaserOnSurfase'}`}>ذكر</p>
                 </button>
                 <button
                     onClick={handleGenderClick}
@@ -93,7 +93,7 @@ const Step2 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
                         alt={RegisterAs == 'Baser' ? BaserfemaleIcon : BostanyfemaleIcon}
                         className="w-20 h-20 pointer-events-none "
                     />
-                    <p>أنثي</p>
+                    <p className={`${FormData.gender == 'أنثي' ? RegisterAs == 'Baser' ? '!text-BaserPrimary ' : '!text-BostanyPrimary ' : 'text-BaserOnSurfase'}`}>أنثي</p>
                 </button>
             </div>
         </div>

@@ -29,9 +29,10 @@ const BaserDashboardLayout: React.FC<LayoutProps> = ({ children }) => {
                 <BookingTimePop />
             </PopUpModal>
             <PopUpModal
-                title='بستن'
+                title='بستن!'
                 type="BookingConfirmPop"
                 PopSize="xl"
+                IsBstn={true}
                 closeAction={CloseBookingConfirmPop}
             >
                 <BookingConfirmPop />

@@ -37,7 +37,7 @@ const OTPStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) => 
             <div className={`p-1 cursor-pointer ${RegisterAs == 'Baser' ? ' bg-BaserSurface' : ' bg-BostanySurfaceContainer'} rounded-full  w-fit `} onClick={handleClickArrowBack}>
                 <PiCaretRight className="w-6 h-6" />
             </div>
-            <div className=" flex flex-col gap-5">
+            <div className=" flex flex-col gap-6">
                 <h2 className={` ${RegisterAs == 'Baser' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'} text-3xl font-semibold `}>إدخال رمز التحقق</h2>
                 <p className=" text-base font-medium text-dark">لقد أرسلنا رمز تحقق مكون من 4 أرقام إلى رقم هاتفك {UserData?.data.phone} الرجاء إدخال الرمز في الحقل أدناه لتأكيد رقم هاتفك.</p>
             </div>
@@ -49,8 +49,8 @@ const OTPStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) => 
                     renderSeparator={<span></span>}
                     renderInput={(props) => <input {...props} className={` ${RegisterAs == 'Baser' ? ' bg-BaserSurface text-BaserOnSurfase focus:outline-BaserPrimary' : ' bg-BostanySurfaceContainer text-BostanyOnSurface focus:outline-BostanyPrimary'}  focus:ring-0    flex-1 mx-1 h-20 rounded-lg p-6 font-semibold border-none text-[22px]`} placeholder="|" />}
                 />
-                <span className="text-dark text-xs font-normal">تأكد من صحة رقم الهاتف أو تحقق من وجود تغطية شبكة جيدة.</span>
-                <button onClick={handleClickSubmit} disabled={+OTPValue.length != 4} className={` mt-6 ${OTPValue.length != 4 ? " text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]" : `text-white   cursor-pointer ${RegisterAs == 'Baser' ? 'bg-BaserPrimary' : 'bg-BostanyPrimary'}`} w-full   rounded-full py-4 px-5  text-base font-medium`}>{isLoading ? '...loading' : 'التالي'}</button>
+                <div className="text-dark !mt-4 text-xs font-normal">تأكد من صحة رقم الهاتف أو تحقق من وجود تغطية شبكة جيدة.</div>
+                <button onClick={handleClickSubmit} disabled={+OTPValue.length != 4} className={` mt-6 ${OTPValue.length != 4 ? " text-[#A9A6A9] bg-[#DAD7DA]  opacity-[38]" : `text-white   cursor-pointer ${RegisterAs == 'Baser' ? 'bg-BaserPrimary' : 'bg-BostanyPrimary'}`} w-full   rounded-full  px-5  text-base font-medium`}>{isLoading ? '...loading' : 'التالي'}</button>
             </div>
             {
                 isError && <p className=" text-GeneralError text-center">رمز التحقق خطا</p>

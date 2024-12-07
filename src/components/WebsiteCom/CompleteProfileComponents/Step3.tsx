@@ -34,7 +34,7 @@ const Step3 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
                         data.data.map((ele, index) => {
                             if (ele.id != 1) {
                                 return <button key={index} onClick={() => handleWorkSpaceClick && handleWorkSpaceClick(ele.id)} className='flex !h-fit flex-col  items-center gap-3'>
-                                    <div className={` text-[64px] text-BaserOnSurfaseVarient ${ele.id == SelectedCategory && 'text-BostanyPrimary'}  `}>
+                                    <div className={` text-[64px] text-BaserOnSurfaseVarient ${FormData.specialities.includes(ele.id) && 'text-BostanyPrimary'}  `}>
                                         {WorkSpaceData &&
                                             WorkSpaceData.filter((work) => work.name === ele.text)[0]?.icon
                                         }
@@ -55,7 +55,7 @@ const Step3 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
                             <div
                                 key={ele.id}
                                 onClick={() => handleWorkTypeClick && handleWorkTypeClick(ele.id)}
-                                className={` ${FormData.category.includes(ele.id) ? 'bg-BostanyPrimary text-white' : 'text-BaserOnSurfase bg-transparent border-[2px] border-BaserOutline'}   text-center text-sm font-medium  py-2  w-[115px] cursor-pointer   rounded-full`}
+                                className={` ${FormData.category.includes(ele.id) ? 'bg-BostanyPrimary text-white' : 'text-BaserOnSurfase bg-transparent border-[2px] border-BaserOutline'}   text-center text-sm font-medium  py-[10px] px-5  cursor-pointer   rounded-full`}
                             >
                                 {ele.text}
                             </div>

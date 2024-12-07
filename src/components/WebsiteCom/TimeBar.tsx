@@ -39,7 +39,7 @@ const TimeBar = ({ TimeSelected, setTimeSelected }: TimeBarProps) => {
             {pathname == '/' ? <div
                 ref={ref}
                 {...events}
-                className={` gap-5 flex w-full space-x-3 overflow-x-scroll scrollbar-hide  `}
+                className={` gap-5 flex w-full   space-x-3 overflow-x-scroll scrollbar-hide  `}
             >
                 {DateArray.map((dateItem, index) => (
                     <div
@@ -55,7 +55,7 @@ const TimeBar = ({ TimeSelected, setTimeSelected }: TimeBarProps) => {
                 <div
                     ref={ref}
                     {...events}
-                    className={` gap-5 flex w-full space-x-3 overflow-x-scroll scrollbar-hide  `}
+                    className={` gap-5 flex w-full !mt-6 space-x-3 overflow-x-scroll scrollbar-hide  `}
                 >
                     {DateArray.map((dateItem, index) => (
                         <div

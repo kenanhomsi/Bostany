@@ -146,11 +146,11 @@ const Search = () => {
                 </div>
                 <div className="flex flex-col gap-4">
                     <p className="text-sm font-normal">اختار التخصص</p>
-                    <Select onValueChange={HandleSpecialChange} >
-                        <SelectTrigger dir="rtl" className="!w-[90%] !bg-BaserSurface focus:!ring-0 !rounded-3xl !h-fit  !py-4 !pl-3 !pr-6">
+                    <Select onValueChange={HandleSpecialChange}  >
+                        <SelectTrigger dir="rtl" className="!w-[90%] !bg-BaserSurface focus:!ring-0 !rounded-3xl !h-fit shadow-none  !py-4 !pl-3 !pr-6">
                             <SelectValue placeholder="ابحث عن تخصصك" />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className=" shadow-none">
                             {
                                 DropDownData &&
                                 DropDownData.map((ele) => (

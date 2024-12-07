@@ -102,6 +102,7 @@ export interface PopUpParams {
   closeAction?: any;
   children: React.ReactNode;
   closeIconState?: boolean;
+  IsBstn?: boolean;
   type:
     | "BuyingCoinsPop"
     | "Buycredit"

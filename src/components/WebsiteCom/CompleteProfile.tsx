@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { PiCaretRight } from "react-icons/pi";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../redux/store";
@@ -13,7 +13,8 @@ import { loginSuccess } from "../../redux/Slices/authSlice";
 import { useDispatch } from "react-redux";
 import { EmptyQualificationData } from "../../redux/Slices/QualificationData";
 import { IGetProfile } from "../../Types/api";
-const CompleteProfile = () => {
+import { isValidEmail } from "@/utils/Functions";
+const CompleteProfile = ({ setStep }: { setStep: Dispatch<SetStateAction<number>> }) => {
     const navigate = useNavigate()
     const Dispatch = useDispatch()
     const RegisterAs = useAppSelector((state) => state.register.RegisterAs)
@@ -36,7 +37,7 @@ const CompleteProfile = () => {
     });
     useEffect(() => {
         if (CompleteProfileStep == 1) {
-            if (FormData.FullName != '' && FormData.email != '' && FormData.checkOne) {
+            if (FormData.FullName != '' && isValidEmail(FormData.email) && FormData.checkOne) {
                 SetPassState(true)
             } else {
                 SetPassState(false)
@@ -70,7 +71,11 @@ const CompleteProfile = () => {
         }
     }, [CompleteProfileStep, FormData])
     const handleClickArrowBack = () => {
-        SetCompleteProfileStep((pre) => pre - 1);
+        if (CompleteProfileStep == 1) {
+            setStep(2)
+        } else {
+            SetCompleteProfileStep((pre) => pre - 1);
+        }
     }
     useEffect(() => {
         SetFormData({
@@ -143,7 +148,7 @@ const CompleteProfile = () => {
     }
     return (
         <div className="flex flex-col items-start  justify-start gap-6 w-full">
-            {<div className=" p-1 cursor-pointer bg-BaserSurface rounded-full  w-fit " onClick={handleClickArrowBack}>
+            {<div className={` p-1 cursor-pointer ${RegisterAs == 'Baser' ? "bg-BaserSurface text-BaserOnSurfase" : " bg-BostanySurfaceContainer text-BostanyOnSurface"}  rounded-full  w-fit `} onClick={handleClickArrowBack}>
                 <PiCaretRight className="w-6 h-6" />
             </div>}
             <h2 className={` ${RegisterAs == 'Baser' ? 'text-BaserOnSurfase' : ' text-BostanyOnSurface'}  text-3xl my-4 font-semibold `}> {RegisterAs == 'Baser' ? 'إكمال الملف الشخصي' : 'عرفنا بشخصك الكريم'}</h2>
