@@ -111,8 +111,8 @@ const BookingConfirmPop = () => {
     }
     const handleDisabled = BazerTitle == '' ? true : false
     return (
-        <div className="flex flex-col max-h-[76vh] overflow-y-scroll scrollbar-hide gap-5">
-            <div className=" flex flex-col gap-4 p-4 rounded-2xl bg-BaserSurface">
+        <div className="flex flex-col max-h-[76vh] overflow-y-scroll scrollbar-hide gap-10">
+            <div className=" flex flex-col gap-4 p-4 rounded-2xl bg-BaserbodyLigh">
                 <p className="flex  text-base flex-row-reverse w-full justify-between items-center"><span className="  font-medium text-BaserPrimary">{data?.data?.name}</span> <span className="font-normal text-dark">مع</span></p>
                 <p className="flex  text-base flex-row-reverse w-full justify-between items-center"><span className="  font-medium text-BaserPrimary">{BookingData.SelectedDay}</span> <span className="font-normal text-dark">التاريخ</span></p>
                 <p className="flex  text-base flex-row-reverse w-full justify-between items-center"><span className="  font-medium text-BaserPrimary">{BookingData.SelectTime}</span> <span className="font-normal text-dark">الوقت</span></p>
@@ -123,29 +123,31 @@ const BookingConfirmPop = () => {
                 <SpecialistList From="Baser" data={data?.data?.specialities as SpecialitiesType[]} handleWorkSpaceClick={handleSpecialitiesClick} SelectedSpecialitiest={FormData.specialities} />
                 <CategoryList From='Baser' CategoryList={FormData.category} handleCategoryClick={handleCategoryClick} Data={data?.data?.category as categorySelect[]} />
             </div>
-            <div className="flex flex-col gap-3">
-                <p className=" text-xl font-medium text-BaserOnSurfase">عنوان بذرتك</p>
-                <div className=" px-1">
-                    <input type="text" value={BazerTitle} onChange={handleTitleChange} className=" w-full py-4 px-6 rounded-3xl text-base font-normal text-BaserOnSurfase  placeholder:text-dark focus:ring-0 focus:outline-BaserPrimary bg-BaserSurface border-none" placeholder="ضع هنا عنوان لبذرتك" />
-                    <p className="text-sm mt-1 font-normal text-dark">150/{BazerTitle.length}</p>
+            <div className="flex flex-col gap-10">
+                <div className="flex flex-col gap-3">
+                    <p className=" text-xl font-medium text-BaserOnSurfase">عنوان بذرتك</p>
+                    <div className=" px-1">
+                        <input type="text" value={BazerTitle} onChange={handleTitleChange} className=" w-full py-4 px-6 rounded-3xl text-base font-normal text-BaserOnSurfase  placeholder:text-dark focus:ring-0 focus:outline-BaserPrimary bg-BaserSurface border-none" placeholder="اشكالية في تحديد نسبة الشركة" />
+                        <p className="text-sm mt-1 font-normal text-dark">150/{BazerTitle.length}</p>
+                    </div>
+                </div>
+                <div className="flex items-center  gap-32 w-full" >
+                    <p className="text-sm font-medium text-BaserOnSurfase">إرفاق ملفات</p>
+                    <div className=" flex gap-2 self-center">
+                        <input className=' hidden' type='file' ref={filePickerRef} onChange={handleFileChange} />
+                        <button className="rounded-full flex items-center justify-center bg-white text-2xl   w-10 h-10" onClick={() => filePickerRef.current?.click()}>
+                            <LiaPaperclipSolid />
+                        </button>
+                        <input className=' hidden' type='file' accept="audio/*" ref={audioPickerRef} onChange={handleAudioChange} />
+                        <button className="rounded-full flex items-center justify-center bg-white text-2xl   w-10 h-10" onClick={() => audioPickerRef.current?.click()}>
+                            <PiMicrophone />
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div className="flex items-center  gap-32 w-full" >
-                <p className="text-sm font-medium text-BaserOnSurfase">إرفاق ملفات</p>
-                <div className=" flex gap-2 self-center">
-                    <input className=' hidden' type='file' ref={filePickerRef} onChange={handleFileChange} />
-                    <button className="rounded-full flex items-center justify-center bg-white text-2xl   w-10 h-10" onClick={() => filePickerRef.current?.click()}>
-                        <LiaPaperclipSolid />
-                    </button>
-                    <input className=' hidden' type='file' accept="audio/*" ref={audioPickerRef} onChange={handleAudioChange} />
-                    <button className="rounded-full flex items-center justify-center bg-white text-2xl   w-10 h-10" onClick={() => audioPickerRef.current?.click()}>
-                        <PiMicrophone />
-                    </button>
-                </div>
-            </div>
-            <div className="w-full flex gap-5 items-center px-4 border-t border-[#938F94] pt-5 ">
-                <button disabled={handleDisabled} onClick={HandleSubmit} className="bg-BaserPrimary  text-center  text-white rounded-full hover:!bg-BaserPrimary flex-1" >{isLoading ? '...Loading' : 'تاكيد'}</button>
-                <button onClick={handleCancel} className="  text-base flex items-center font-medium border-none rounded-full " color="light" >الغاء</button>
+            <div className="w-full flex gap-5 items-center justify-start  border-t border-[#938F94] pb-6 pt-4 ">
+                <button disabled={handleDisabled} onClick={HandleSubmit} className={` ${handleDisabled ? 'bg-BaserPrimary/35 text-BaserOnSurfase/35 hover:!bg-BaserPrimary/35' : 'bg-BaserPrimary text-white hover:!bg-BaserPrimary'}  text-center h-14   rounded-full  flex-1`} >{isLoading ? '...Loading' : 'تاكيد'}</button>
+                <button onClick={handleCancel} className="  text-base w-[15%] flex items-center font-medium border-none rounded-full " color="light" >الغاء</button>
             </div>
             {
                 isError && <p className=" text-GeneralError">there is an error with submit</p>

@@ -130,7 +130,7 @@ export function convertDayToArabic(day: string): string {
 
 //   return `${year}-${month}-${date}`;
 // }
-function formatDate(date: Date): string {
+export function formatDate(date: Date): string {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
   const day = String(date.getDate()).padStart(2, "0");
@@ -172,18 +172,20 @@ export function getNextDayDate(dayName: string): string {
 }
 export function convertTo24HourFormat(time: string): string {
   const [timePart, modifier] = time.split(" "); // Split time and AM/PM
-  let [hours] = timePart.split(":").map(Number); // Extract hours and minutes
-  const minutes = timePart.split(":").map(Number);
+  // eslint-disable-next-line prefer-const
+  let [hours, minutes] = timePart.split(":").map(Number);
   if (modifier === "PM" && hours < 12) {
     hours += 12; // Convert PM hours
   } else if (modifier === "AM" && hours === 12) {
     hours = 0; // Convert 12 AM to 0 hours
   }
-
-  // Format hours and minutes to ensure two digits
   const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
     .toString()
     .padStart(2, "0")}`;
 
   return formattedTime;
+}
+export function isValidEmail(email: string) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
 }

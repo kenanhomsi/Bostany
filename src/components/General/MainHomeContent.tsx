@@ -63,9 +63,10 @@ const MainHomeContent = ({ place }: { place: string }) => {
     }
     const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
     const { events } = useDraggable(ref);
+
     return (
         <div className={`flex flex-col items-center 
-          overflow-hidden ${place == 'website' ? '!pt-24' : 'pt-40 pb-24 2xl:pl-24 2xl:pr-10 lg:pl-14 lg:pr-5'}  w-full  `}>
+          overflow-hidden ${place == 'website' ? '!pt-24' : 'pt-[136px] pb-24 2xl:pl-24 2xl:pr-10 lg:pl-14 lg:pr-5'}  w-full  `}>
             {
                 place == 'website' &&
                 <div className='flex flex-col gap-8 items-center'>
@@ -84,11 +85,10 @@ const MainHomeContent = ({ place }: { place: string }) => {
                     </div>
                     <p className=' text-center w-[50%] font-medium text-base text-dark'>هل لديك فكرة وتحتاج إلى توجيه متخصص لتنميتها؟ في بستن، البستانيون مستعدون لمساعدتك في زراعة أفكارك وتطويرها. احصل على جلسات استشارية عصفية، فورية ومختصرة، لتحويل بذور أفكارك إلى إبداعات ناجحة</p>
                 </div>
-
             }
             {
                 place == 'BaserDashboard' &&
-                <div className=" flex items-center gap-2 text-sm bg-BaserbodyLigh p-2 pl-2 rounded-full   text-BaserOnSurfase font-medium">
+                <div className=" flex items-center gap-2 text-sm bg-BaserbodyLigh p-1 pl-2 rounded-full   text-BaserOnSurfase font-medium">
                     <p className=' rounded-full p-3 bg-BaserSurface'>
                         <img src={logosGroup} alt={logosGroup} className=' w-[53px] h-[25px] ' />
                     </p>
@@ -117,21 +117,24 @@ const MainHomeContent = ({ place }: { place: string }) => {
                 }
             </div>
             <div ref={ref}    {...events}
-                className="flex w-full space-x-3  my-6 overflow-x-scroll scrollbar-hide"
+                className="flex w-full space-x-3   overflow-x-scroll scrollbar-hide"
             >
-                <div className=" flex w-fit  gap-2">
-                    {SelectedSpecialities != 0 &&
-                        categories && categories.data.map((ele) => (
-                            <div
-                                key={ele.id}
-                                onClick={() => handleWorkTypeClick(ele.id)}
-                                className={` ${SelectedCategory.length > 0 && SelectedCategory.includes(ele.id) ? 'bg-BaserPrimary text-white' : 'text-BaserOnSurfase border-[2px] border-BaserOutline bg-white'}   text-center text-sm font-medium  py-2  w-[115px] cursor-pointer   rounded-full`}
-                            >
-                                {ele.text}
-                            </div>
-                        ))
-                    }
-                </div>
+                {SelectedSpecialities != 0 &&
+                    categories && categories.data.length > 0 &&
+                    <div className=" flex w-fit  mt-6  gap-2">
+                        {SelectedSpecialities != 0 &&
+                            categories && categories.data.map((ele) => (
+                                <div
+                                    key={ele.id}
+                                    onClick={() => handleWorkTypeClick(ele.id)}
+                                    className={` ${SelectedCategory.length > 0 && SelectedCategory.includes(ele.id) ? 'bg-BaserPrimary text-white' : 'text-BaserOnSurfase border-[2px] border-BaserOutline bg-white'}   text-center text-sm font-medium  py-2  w-[115px] cursor-pointer   rounded-full`}
+                                >
+                                    {ele.text}
+                                </div>
+                            ))
+                        }
+                    </div>
+                }
             </div>
             <TimeBar TimeSelected={TimeSelected} setTimeSelected={setTimeSelected} />
             {

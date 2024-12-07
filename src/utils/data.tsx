@@ -22,14 +22,19 @@ import SketchLogoImage from "/Icons/SketchLogo.png";
 import MagnifyingGlassImage from "/Icons/MagnifyingGlass.png";
 import SquaresFourImage from "/Icons/SquaresFour.png";
 import { PiScalesDuotone } from "react-icons/pi";
-import { PiPillDuotone } from "react-icons/pi";
-import { PiGraphDuotone } from "react-icons/pi";
+import { PiCodeDuotone } from "react-icons/pi";
+import { PiSmileyDuotone } from "react-icons/pi";
+import { PiBuildingsDuotone } from "react-icons/pi";
+import { PiMegaphoneDuotone } from "react-icons/pi";
+import { PiFirstAidKitDuotone } from "react-icons/pi";
+import { PiCrownDuotone } from "react-icons/pi";
+import { PiHandshakeDuotone } from "react-icons/pi";
+import { PiGameControllerDuotone } from "react-icons/pi";
+import { PiAirplaneDuotone } from "react-icons/pi";
+import { PiVideoDuotone } from "react-icons/pi";
 import { PiBriefcaseDuotone } from "react-icons/pi";
-import { PiPencilRulerDuotone } from "react-icons/pi";
 import { PiPenNibStraightDuotone } from "react-icons/pi";
-import { PiCrownSimpleDuotone } from "react-icons/pi";
 import { PiStudentDuotone } from "react-icons/pi";
-import { PiHandHeartDuotone } from "react-icons/pi";
 import { WorlSpaceDataType } from "../Types";
 import { PiHouseFill } from "react-icons/pi";
 import { PiMagnifyingGlass } from "react-icons/pi";
@@ -116,29 +121,12 @@ export const socialIconsForBostany = [
     path: "/",
   },
 ];
+
+
 export const WorkSpaceData: WorlSpaceDataType[] = [
-  // {
-  //   id: 1,
-  //   name: "الكل",
-  //   icon: <PiSquaresFourDuotone />,
-  //   types: [
-  //     "محتوى مرئي",
-  //     "قيادة إعلامية",
-  //     "رقمي إداري",
-  //     "إعلام مرئي",
-  //     "برمجة",
-  //     "رقمي",
-  //     "كتابة إبداعية",
-  //     "تصميم",
-  //     "2محتوى مرئي",
-  //     "2قيادة إعلامية",
-  //     "2رقمي إداري",
-  //     "2إعلام مرئي",
-  //   ],
-  // },
   {
     id: 2,
-    name: "أعمال",
+    name: "وظيفة",
     icon: < PiBriefcaseDuotone />,
     types: ["محتوى مرئي", "قيادة إعلامية", "رقمي إداري", "إعلام مرئي"],
   },
@@ -150,52 +138,73 @@ export const WorkSpaceData: WorlSpaceDataType[] = [
   },
   {
     id: 4,
-    name: "التقنية",
-    icon: < PiGraphDuotone />,
+    name: "تقنية",
+    icon: < PiCodeDuotone />,
     types: ["برمجة", "رقمي", "كتابة إبداعية", "تصميم"],
   },
   {
     id: 5,
-    name: "التطوع",
-    icon: < PiHandHeartDuotone />,
+    name: "علاقات",
+    icon: < PiSmileyDuotone />,
     types: ["تصميم", "محتوى مرئي", "قيادة إعلامية", "رقمي إداري", "إعلام مرئي"],
   },
   {
     id: 6,
-    name: "التعليم",
+    name: "تطوير",
     icon: < PiStudentDuotone />,
     types: ["قيادة إعلامية", "رقمي إداري"],
   },
   {
     id: 7,
-    name: "القانون",
+    name: "قانون",
     icon: < PiScalesDuotone />,
     types: ["قيادة إعلامية"],
   },
   {
     id: 8,
-    name: "الطب",
-    icon: < PiPillDuotone />,
+    name: "محتوى",
+    icon: < PiVideoDuotone />,
     types: ["قيادة إعلامية", "رقمي إداري"],
   },
   {
     id: 9,
-    name: "التسويق",
-    icon: < PiGraphDuotone />,
+    name: "تسويق",
+    icon: < PiMegaphoneDuotone />,
     types: ["تصميم", "محتوى مرئي", "قيادة إعلامية", "رقمي إداري", "إعلام مرئي"],
   },
   {
     id: 10,
-    name: "الهندسة",
-    icon: < PiPencilRulerDuotone />,
+    name: "صحة",
+    icon: < PiFirstAidKitDuotone />,
     types: ["برمجة", "رقمي", "كتابة إبداعية", "تصميم"],
   },
   {
     id: 11,
-    name: "القيادة",
-    icon: < PiCrownSimpleDuotone />,
+    name: "قيادة",
+    icon: < PiCrownDuotone />,
     types: ["برمجة", "رقمي", "كتابة إبداعية", " 22تصميم"],
   },
+  {
+    id: 12,
+    name: "قطاع 3",
+    icon: < PiHandshakeDuotone />,
+    types: ["برمجة", "رقمي", "كتابة إبداعية", " 22تصميم"],
+  }, {
+    id: 13,
+    name: "هوايات",
+    icon: < PiGameControllerDuotone />,
+    types: ["برمجة", "رقمي", "كتابة إبداعية", " 22تصميم"],
+  }, {
+    id: 14,
+    name: "سياحة",
+    icon: < PiAirplaneDuotone />,
+    types: ["برمجة", "رقمي", "كتابة إبداعية", " 22تصميم"],
+  }, {
+    id: 15,
+    name: "اعمال",
+    icon: < PiBuildingsDuotone />,
+    types: ["برمجة", "رقمي", "كتابة إبداعية", " 22تصميم"],
+  }
 ];
 export const daysOfWeek = [
   "الأحد",

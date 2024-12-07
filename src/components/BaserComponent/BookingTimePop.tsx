@@ -49,26 +49,25 @@ const BookingTimePop = () => {
         setstartOfMeeting(+e.currentTarget.id.split('-')[1].split(':')[0])
 
     }
-
+    console.log(FromToTimeSelected)
     return (
         <div className="flex flex-col gap-8 overflow-x-hidden">
             <TimeBarProfile TimeSelected={TimeSelected} setTimeSelected={setTimeSelected} />
             {DayScheduleArray && DayScheduleArray.length > 0 ?
                 <>
                     <div className=" flex gap-2 px-2">
-                        {
-                            DayScheduleArray.map((ele, index) => (
-                                <Button id={`${ele.to_time!}-${ele.from_time!}`} key={index} onClick={handleFromToTimeSelecet} className={`${FromToTimeSelected == `${ele.to_time!}-${ele.from_time!}` ? 'bg-GeneralSuccessContainer text-white border-2 hover:!bg-GeneralSuccessContainer focus:outline-0   border-GeneralSuccessContainer' : 'bg-transparent text-black border-2 border-BaserPrimary focus:outline-0 hover:!bg-transparent'}  rounded-full flex items-center justify-center focus:ring-0 focus:outline-[2px] z-10  w-full`} ><span>{arabicTimeFormat(ele.from_time)}</span>-<span>{arabicTimeFormat(ele.to_time)}</span> </Button>
-                            ))
+                        {DayScheduleArray.filter((ele, index) => ele.id != '' && index < 3).map((ele, index) => (
+                            <Button id={`${ele.to_time!}-${ele.from_time!}`} key={index} onClick={handleFromToTimeSelecet} className={`${FromToTimeSelected == `${ele.to_time!}-${ele.from_time!}` ? 'bg-GeneralSuccessContainer text-white border-2 hover:!bg-GeneralSuccessContainer focus:outline-0   border-GeneralSuccessContainer' : 'bg-transparent text-black border-2 border-BaserPrimary focus:outline-0 hover:!bg-transparent'}  rounded-full  truncate flex items-center justify-center focus:ring-0 focus:outline-[2px] z-10  max-w-[180px]`} ><span>{arabicTimeFormat(ele.from_time)}</span>-<span>{arabicTimeFormat(ele.to_time)}</span> </Button>
+                        ))
                         }
                     </div>
                     <div className="flex mr-20 flex-col gap-8">
                         <div className="flex  items-center gap-12">
                             <p className="text-sm font-medium text-dark">البداية</p>
                             <div className="flex items-center gap-10">
-                                <button disabled={startOfMeeting == +FromToTimeSelected.split('-')[0].split(':')[0]} onClick={() => setstartOfMeeting((pre) => pre + 1)} className="w-6 h-6 border  flex items-center  justify-center border-BaserPrimary rounded-full text-lg text-BaserPrimary"><PiPlus /></button>
+                                <button disabled={FromToTimeSelected != '' && startOfMeeting == +FromToTimeSelected.split('-')[0].split(':')[0]} onClick={() => setstartOfMeeting((pre) => pre + 1)} className="w-6 h-6 border  flex items-center  justify-center border-BaserPrimary rounded-full text-lg text-BaserPrimary"><PiPlus /></button>
                                 <p className="flex items-center flex-row-reverse gap-2"> <p><span>{startOfMeeting}</span>:00</p></p>
-                                <button disabled={startOfMeeting == +FromToTimeSelected.split('-')[1].split(':')[0]} onClick={() => setstartOfMeeting((pre) => pre - 1)} className="w-6 h-6 border  flex items-center  justify-center border-BaserPrimary rounded-full text-lg text-BaserPrimary"><PiMinus /></button>
+                                <button disabled={FromToTimeSelected != '' && startOfMeeting == +FromToTimeSelected.split('-')[1].split(':')[0]} onClick={() => setstartOfMeeting((pre) => pre - 1)} className="w-6 h-6 border  flex items-center  justify-center border-BaserPrimary rounded-full text-lg text-BaserPrimary"><PiMinus /></button>
                             </div>
                         </div>
                         <div className="flex  items-center gap-12">

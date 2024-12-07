@@ -86,7 +86,7 @@ const Bst10TablePop = () => {
     useEffect(() => {
         console.log(data?.data.settings?.schedules)
         data?.data.settings?.schedules.map((ele) => {
-            if (WeeklySchedal[ele.day_name as keyof typeof WeeklySchedal].filter((week) => week.From == convertTo24HourFormat(ele.from_time) && week.To == convertTo24HourFormat(ele.to_time))[0] == undefined) {
+            if (WeeklySchedal[ele.day_name as keyof typeof WeeklySchedal] && WeeklySchedal[ele.day_name as keyof typeof WeeklySchedal].filter((week) => week.From == convertTo24HourFormat(ele.from_time) && week.To == convertTo24HourFormat(ele.to_time))[0] == undefined) {
                 if (WeeklySchedal[ele.day_name as keyof typeof WeeklySchedal][0].From == '') {
                     WeeklySchedal[ele.day_name as keyof typeof WeeklySchedal] = []
                 }
@@ -96,7 +96,6 @@ const Bst10TablePop = () => {
                     To: convertTo24HourFormat(ele.to_time)
                 })
             }
-
             if (ele.repeat && !switchToRepetWeekly.includes(convertDayToArabic(ele.day_name))) {
                 setswitchToRepetWeekly((pre) => [...pre, convertDayToArabic(ele.day_name)])
             }

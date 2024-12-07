@@ -28,9 +28,9 @@ const MainInfoBostanyProfile = ({ BostanyData }: { BostanyData: IGetProfile }) =
         })
     }
     return (
-        <div className="flex flex-col gap-10 2xl:w-[650px] md:w-full">
-            <div className="flex gap-6 items-start">
-                <div className="w-[198px] h-[198px] rounded-full overflow-hidden">
+        <div className="flex flex-col gap-6 2xl:w-[650px] md:w-full">
+            <div className="flex gap-8 items-start">
+                <div className="min-w-[198px] min-h-[198px] max-w-[200px] max-h-[200px] rounded-full overflow-hidden">
                     <img
                         src={BostanyData.data.avatar}
                         alt={BostanyData.data.avatar}
@@ -38,66 +38,70 @@ const MainInfoBostanyProfile = ({ BostanyData }: { BostanyData: IGetProfile }) =
                     />
                 </div>
                 {/* <img src={BostanyData.data.avatar} alt={BostanyData.data.avatar} className=" !w-[198px]   inset-0 object-cover  !h-[198px] rounded-full overflow-hidden" /> */}
-                <div className=" flex flex-col   gap-6 h-full">
-                    <div className=" flex items-center gap-4">
+                <div className=" flex flex-col w-full   gap-6 h-full">
+                    <div className=" flex items-center justify-between gap-4">
                         <p className="flex gap-1 items-center ">
                             <span className="text-BaserOnSurfase text-[32px] font-semibold">{BostanyData.data.name}</span>
                             {/* {BostanyData.checkMark && */}
                             <img src={checkedIcon} alt={checkedIcon} className="w-5 h-5 " />
                             {/* } */}
                         </p>
-                        <p onClick={() => HandleLoveiconClick(BostanyData.data.id)}
-                            className=''>
-                            {FollowingList?.data.filter((ele) => ele.id == BostanyData.data.id)[0] == undefined ?
-                                <PiHeart className={`  text-BaserOnSurfase  cursor-pointer w-7 h-7 my-0`} />
-                                :
-                                <PiHeartFill className={`  text-BaserPrimary  cursor-pointer w-7 h-7 my-0`} />
+                        <div className=" flex items-center justify-between gap-8 ml-2">
+                            <p onClick={() => HandleLoveiconClick(BostanyData.data.id)}
+                                className=''>
+                                {FollowingList?.data.filter((ele) => ele.id == BostanyData.data.id)[0] == undefined ?
+                                    <PiHeart className={`  text-BaserOnSurfase  cursor-pointer w-8 h-8 my-0`} />
+                                    :
+                                    <PiHeartFill className={`  text-BaserPrimary  cursor-pointer w-8 h-8 my-0`} />
+                                }
+                            </p>
+                            <PiChatCircleDots className="w-8 h-8" />
+                            <PiDotsThreeOutlineVertical className="text-3xl" />
+                        </div>
+                    </div>
+                    <div className="flex flex-col gap-4">
+                        <div className=" flex flex-wrap gap-4">
+                            {
+                                BostanyData.data.specialities &&
+                                BostanyData.data.specialities.map((ele, index) => (
+                                    <p key={index} className="flex w-fit  rounded-full border-[2px] py-2  px-4  items-center gap-2 border-[#8E918F]">
+                                        <span className="text-xl text-BaserPrimary">{WorkSpaceData.filter((space) => space.name == ele.text)[0].icon}</span>
+                                        <span className="text-sm font-medium text-BaserOnSurfase" >{ele.text}</span>
+                                    </p>
+                                ))
                             }
-                        </p>
-                        <PiChatCircleDots className="w-7 h-7" />
-                        <PiDotsThreeOutlineVertical className="text-3xl" />
-                    </div>
-                    <div className=" flex flex-wrap gap-4">
-                        {
-                            BostanyData.data.specialities &&
-                            BostanyData.data.specialities.map((ele, index) => (
-                                <p key={index} className="flex w-fit  rounded-full border-[2px] py-2  px-4  items-center gap-2 border-[#8E918F]">
-                                    <span className="text-xl text-BaserPrimary">{WorkSpaceData.filter((space) => space.name == ele.text)[0].icon}</span>
-                                    <span className="text-sm font-medium text-BaserOnSurfase" >{ele.text}</span>
-                                </p>
-                            ))
-                        }
-                    </div>
-                    <div className=" flex flex-wrap text-base w-[400px] font-medium text-dark">
-                        {BostanyData.data.category &&
-                            BostanyData.data.category.map((category, index) => (
-                                <span>{category.text} {BostanyData.data.category && BostanyData.data.category.length - 1 != index && <span> - </span>}</span>
-                            ))
-                        }
-                    </div>
-                    <div className="flex gap-4">
-                        {
-                            BostanyData.data.linkedin &&
-                            <Link to={BostanyData.data.linkedin} className=" w-[54px] h-[54px] border rounded-full border-[#938F94] flex items-center justify-center">
-                                <img src={LinkedIn} alt={LinkedIn} className=" w-[30px] h-[30px] text-BaserPrimary" />
-                            </Link>
-                        }
-                        {
-                            BostanyData.data.twitter &&
-                            <Link to={BostanyData.data.twitter} className=" w-[54px] h-[54px] border rounded-full border-[#938F94] flex items-center justify-center">
-                                <img src={x} alt={x} className=" w-[30px] h-[30px] text-BaserPrimary" />
-                            </Link>
-                        }
-                        {
-                            BostanyData.data.facebook &&
-                            <Link to={BostanyData.data.facebook} className=" w-[54px] h-[54px] border rounded-full border-[#938F94] flex items-center justify-center">
-                                <img src={facebook} alt={facebook} className=" w-[30px] h-[30px] text-BaserPrimary" />
-                            </Link>
-                        }
+                        </div>
+                        <div className=" flex flex-wrap text-base w-[400px] font-medium text-dark">
+                            {BostanyData.data.category &&
+                                BostanyData.data.category.map((category, index) => (
+                                    <span>{category.text} {BostanyData.data.category && BostanyData.data.category.length - 1 != index && <span> - </span>}</span>
+                                ))
+                            }
+                        </div>
+                        <div className="flex gap-4">
+                            {
+                                BostanyData.data.linkedin &&
+                                <Link to={BostanyData.data.linkedin} className=" w-[54px] h-[54px] border rounded-full border-[#938F94] flex items-center justify-center">
+                                    <img src={LinkedIn} alt={LinkedIn} className=" w-[30px] h-[30px] text-BaserPrimary" />
+                                </Link>
+                            }
+                            {
+                                BostanyData.data.twitter &&
+                                <Link to={BostanyData.data.twitter} className=" w-[54px] h-[54px] border rounded-full border-[#938F94] flex items-center justify-center">
+                                    <img src={x} alt={x} className=" w-[30px] h-[30px] text-BaserPrimary" />
+                                </Link>
+                            }
+                            {
+                                BostanyData.data.facebook &&
+                                <Link to={BostanyData.data.facebook} className=" w-[54px] h-[54px] border rounded-full border-[#938F94] flex items-center justify-center">
+                                    <img src={facebook} alt={facebook} className=" w-[30px] h-[30px] text-BaserPrimary" />
+                                </Link>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className="flex gap-6">
+            <div className="flex gap-10">
                 <div className=" flex-1 flex flex-col gap-3 px-6 py-4 rounded-3xl bg-BaserSurface">
                     <PiTreeFill className=" text-BostanyPrimary w-6 h-6" />
                     <p className="text-base font-normal text-dark">الاشجار</p>
