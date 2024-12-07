@@ -49,7 +49,6 @@ const BookingTimePop = () => {
         setstartOfMeeting(+e.currentTarget.id.split('-')[1].split(':')[0])
 
     }
-    console.log(FromToTimeSelected)
     return (
         <div className="flex flex-col gap-8 overflow-x-hidden">
             <TimeBarProfile TimeSelected={TimeSelected} setTimeSelected={setTimeSelected} />

@@ -82,7 +82,6 @@ const Bst10TimePop = () => {
             }
             const hoursFrom = new Date().getHours() * 60 + new Date().getMinutes()
             const online_until = hoursTo - hoursFrom
-            console.log(online_until)
             mutate({
                 payload: {
                     online_until: online_until

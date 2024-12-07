@@ -60,7 +60,6 @@ const ProfileCard = ({ CardShap, data }: ProfileCardProps) => {
             payload: id
         })
     }
-    console.log(formatDate(new Date()))
     return (
         <div className={`flex  relative  bg-BaserSurface ${CardShap == 'col' ? 'flex-col gap-2  2xl:!max-w-[22.8rem] !max-w-[18.1rem]  flex-1' : ' flex-row gap-10 w-full !px-6 !py-4'}  rounded-[32px]  `}>
             {/* <button className={`${CardShap == 'col' ? 'top-[0px] right-[0px]' : 'top-[0px] right-[0px]'} w-6 h-6 z-[10000] border border-white rounded-full ${data.online_until ? 'bg-GeneralWarningContainer' : ' bg-BaserTertiary'}  absolute `}></button> */}

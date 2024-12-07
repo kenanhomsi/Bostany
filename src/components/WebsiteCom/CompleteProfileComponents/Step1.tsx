@@ -24,7 +24,6 @@ const Step1 = ({ FormData, SetFormData }: CompleteProfileStepProps) => {
             [e.target.name]: e.target.value
         })
     }
-    console.log(!isValidEmail(FormData.email))
     return (
         <div className="flex flex-col gap-6  w-full">
             <div className="w-full flex flex-col gap-6">

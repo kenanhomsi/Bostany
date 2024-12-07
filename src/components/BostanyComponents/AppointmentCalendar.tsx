@@ -16,7 +16,6 @@ const AppointmentCalendar = () => {
     const { data } = useGetProjects({
         queryKey: ["type", "seeding"]
     })
-    console.log(data)
     useEffect(() => {
         if (data?.data) {
             const events: eventsDataType[] = []

@@ -81,7 +81,6 @@ const InterNumberStep = ({ setStep }: { setStep: Dispatch<SetStateAction<number>
         }
     }, [DropDownValue])
     const handleOuthClick = async () => {
-        // console.log('yess')
         const provider = new GoogleAuthProvider();
         provider.setCustomParameters({ prompt: 'select_account' })
         try {
