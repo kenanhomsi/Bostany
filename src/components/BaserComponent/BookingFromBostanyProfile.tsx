@@ -21,12 +21,12 @@ const BookingFromBostanyProfile = ({ BostanyData }: { BostanyData: IGetProfile }
 
     const HandleFreetimeClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         dispatch(PutBookingBostanyId(BostanyData.data.id))
+        setstartOfMeeting(+e.currentTarget.id.split('-')[0].split(':')[0])
         dispatch(PutBookingData({
             ...BookingData,
             SelectedDay: TimeSelected,
             SelectTime: e.currentTarget.id
         }))
-        setstartOfMeeting(+BookingData.SelectTime.split('-')[0].split(':')[0])
         setTimeGetSelect(true);
     }
     const handleSubmit = () => {
@@ -51,9 +51,9 @@ const BookingFromBostanyProfile = ({ BostanyData }: { BostanyData: IGetProfile }
                         <div className="flex  items-center gap-12">
                             <p className="text-sm font-medium text-dark">البداية</p>
                             <div className="flex items-center gap-10">
-                                <button disabled={startOfMeeting == +BookingData.SelectTime.split('-')[1].split(':')[0]} onClick={() => setstartOfMeeting((pre) => pre + 1)} className="w-6 h-6 border  flex items-center  justify-center border-BaserPrimary rounded-full text-2xl text-BaserPrimary"><PiPlus /></button>
+                                <button disabled={startOfMeeting == (BookingData.SelectTime ? +BookingData.SelectTime.split('-')[1].split(':')[0] : 0)} onClick={() => setstartOfMeeting((pre) => pre + 1)} className="w-6 h-6 border  flex items-center  justify-center border-BaserPrimary rounded-full text-2xl text-BaserPrimary"><PiPlus /></button>
                                 <p className="flex items-center flex-row-reverse gap-2"> <p><span>{startOfMeeting}</span>:00</p></p>
-                                <button disabled={startOfMeeting < +BookingData.SelectTime.split('-')[0].split(':')[0]} onClick={() => setstartOfMeeting((pre) => pre - 1)} className="w-6 h-6 border  flex items-center  justify-center border-BaserPrimary rounded-full text-2xl text-BaserPrimary"><PiMinus /></button>
+                                <button disabled={startOfMeeting < (BookingData.SelectTime ? +BookingData.SelectTime.split('-')[0].split(':')[0] + 1 : 0)} onClick={() => setstartOfMeeting((pre) => pre - 1)} className="w-6 h-6 border  flex items-center  justify-center border-BaserPrimary rounded-full text-2xl text-BaserPrimary"><PiMinus /></button>
                             </div>
                         </div>
                         <div className="flex  items-center gap-12">
@@ -61,7 +61,7 @@ const BookingFromBostanyProfile = ({ BostanyData }: { BostanyData: IGetProfile }
                             <div className="flex items-center gap-10">
                                 <button onClick={() => setDurationOfMeeting((pre) => pre + 10)} className="w-6 h-6 border  flex items-center  justify-center border-BaserPrimary rounded-full text-2xl text-BaserPrimary"><PiPlus /></button>
                                 <p><p><span>{DurationOfMeeting}</span></p></p>
-                                <button onClick={() => setDurationOfMeeting((pre) => pre - 10)} className="w-6 h-6 border  flex items-center  justify-center border-BaserPrimary rounded-full text-2xl text-BaserPrimary"><PiMinus /></button>
+                                <button disabled={DurationOfMeeting == 0} onClick={() => setDurationOfMeeting((pre) => pre - 10)} className="w-6 h-6 border  flex items-center  justify-center border-BaserPrimary rounded-full text-2xl text-BaserPrimary"><PiMinus /></button>
                             </div>
                         </div>
                     </div>
